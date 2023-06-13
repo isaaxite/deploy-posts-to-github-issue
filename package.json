@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -24,11 +24,15 @@
   },
   "homepage": "https://github.com/isaaxite/deploy-posts-to-github-issue#readme",
   "dependencies": {
+    "jest": "^29.5.0",
     "js-yaml": "^4.1.0",
     "octokit": "^2.0.19",
     "remark-frontmatter": "^4.0.1",
     "remark-parse": "^10.0.2",
     "remark-stringify": "^10.0.3",
     "unified": "^10.1.2"
+  },
+  "devDependencies": {
+    "@jest/globals": "^29.5.0"
   }
 }
