@@ -5,6 +5,7 @@ import remarkFrontmatter from 'remark-frontmatter'
 import { readFileSync, writeFileSync } from 'fs';
 import path from 'path';
 import { load as loadYaml } from 'js-yaml';
+import { PostParse } from '../lib/post_parse.js';
 
 // Transform the AST back into Markdown text
 // const markdownOutput = unified().use(stringify).stringify(ast);
@@ -45,7 +46,7 @@ function getFrontmatterBy({ ast }) {
   return data;
 }
 
-(function main() {
+function main() {
   const markdownText = readFileSync(testdir('post1.md'));
 
   // Parse the Markdown text into an AST
@@ -90,4 +91,19 @@ function getFrontmatterBy({ ast }) {
   }}).stringify(ast);
 
   writeFileSync(testdir('post1_formated.md'), markdownOutput);
-})();
+}
+
+function main2() {
+  const post = new PostParse({
+    path: testdir('post1.md'),
+    conf
+  });
+
+  const frontmatter = post.getFrontmatter();
+  console.info(frontmatter);
+  const markdownOutput = post.getFormatedMarkdown();
+  writeFileSync(testdir('post1_formated.md'), markdownOutput);
+}
+
+
+main2();
