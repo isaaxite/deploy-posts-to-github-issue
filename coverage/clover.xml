@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1686665436428" clover="3.2.0">
-  <project timestamp="1686665436428" name="All files">
+<coverage generated="1686668519066" clover="3.2.0">
+  <project timestamp="1686668519066" name="All files">
     <metrics statements="50" coveredstatements="48" conditionals="12" coveredconditionals="11" methods="3" coveredmethods="2" elements="65" coveredelements="61" complexity="0" loc="50" ncloc="50" packages="1" files="1" classes="1"/>
     <file name="post_parse.js" path="/home/isaac/workspace/deploy-posts-to-github-issue/lib/post_parse.js">
       <metrics statements="50" coveredstatements="48" conditionals="12" coveredconditionals="11" methods="3" coveredmethods="2"/>

@@ -26,6 +26,7 @@
   "homepage": "https://github.com/isaaxite/deploy-posts-to-github-issue#readme",
   "dependencies": {
     "jest": "^29.5.0",
+    "jest-html-reporter": "^3.10.0",
     "js-yaml": "^4.1.0",
     "octokit": "^2.0.19",
     "remark-frontmatter": "^4.0.1",
