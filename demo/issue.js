@@ -8,7 +8,6 @@ import { IssueBro } from '../lib/issue_bro.js';
     token: process.env.GITHUB_TOKEN
   });
 
-
   // issue.create({
   //   title: 
   // })

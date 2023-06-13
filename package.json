@@ -24,7 +24,9 @@
   },
   "homepage": "https://github.com/isaaxite/deploy-posts-to-github-issue#readme",
   "dependencies": {
+    "js-yaml": "^4.1.0",
     "octokit": "^2.0.19",
+    "remark-frontmatter": "^4.0.1",
     "remark-parse": "^10.0.2",
     "remark-stringify": "^10.0.3",
     "unified": "^10.1.2"

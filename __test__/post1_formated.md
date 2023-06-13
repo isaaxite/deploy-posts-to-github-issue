@@ -1,13 +1,10 @@
-***
-
+---
 title: LICENSE的选择与生成
 date: 2023-05-30 16:50:28
 tags:
-
-*   开发标准
-*   LICENSE
-
-***
+- 开发标准
+- LICENSE
+---
 
 # 前言
 
@@ -111,8 +108,8 @@ license [license] -n <COPYRIGHT HOLDER> -y <YEAR>
 
 ## 参考
 
-*   [LICENSE WIKI](https://zh.wikipedia.org/zh-cn/%E6%8E%88%E6%AC%8A_\(%E6%B3%95%E5%BE%8B\))
-*   [Open Source License](https://opensource.org/licenses/)
-*   [开源授权 WIKI](https://zh.wikipedia.org/wiki/%E9%96%8B%E6%BA%90%E6%8E%88%E6%AC%8A)
-*   [description-of-popular-software-licenses](https://web.archive.org/web/20110503183702/http://pbagwl.com/post/5078147450/description-of-popular-software-licenses)
-*   [What should be written in MIT license (year, full name)?](https://opensource.stackexchange.com/questions/1522/what-should-be-written-in-mit-license-year-full-name)
+-   [LICENSE WIKI](https://zh.wikipedia.org/zh-cn/%E6%8E%88%E6%AC%8A_\(%E6%B3%95%E5%BE%8B\))
+-   [Open Source License](https://opensource.org/licenses/)
+-   [开源授权 WIKI](https://zh.wikipedia.org/wiki/%E9%96%8B%E6%BA%90%E6%8E%88%E6%AC%8A)
+-   [description-of-popular-software-licenses](https://web.archive.org/web/20110503183702/http://pbagwl.com/post/5078147450/description-of-popular-software-licenses)
+-   [What should be written in MIT license (year, full name)?](https://opensource.stackexchange.com/questions/1522/what-should-be-written-in-mit-license-year-full-name)

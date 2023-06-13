@@ -1,0 +1,2246 @@
+{
+  "type": "root",
+  "children": [
+    {
+      "type": "yaml_frontmatter",
+      "value": "title: LICENSE的选择与生成\ndate: 2023-05-30 16:50:28\ntags:\n- 开发标准\n- LICENSE",
+      "position": {
+        "start": {
+          "line": 1,
+          "column": 1,
+          "offset": 0
+        },
+        "end": {
+          "line": 7,
+          "column": 4,
+          "offset": 77
+        }
+      }
+    },
+    {
+      "type": "heading",
+      "depth": 1,
+      "children": [
+        {
+          "type": "text",
+          "value": "前言",
+          "position": {
+            "start": {
+              "line": 9,
+              "column": 3,
+              "offset": 81
+            },
+            "end": {
+              "line": 9,
+              "column": 5,
+              "offset": 83
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 9,
+          "column": 1,
+          "offset": 79
+        },
+        "end": {
+          "line": 9,
+          "column": 5,
+          "offset": 83
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "本文旨在介绍何为license，如何选择license，以及开发常用的MIT license如何使用。",
+          "position": {
+            "start": {
+              "line": 11,
+              "column": 1,
+              "offset": 85
+            },
+            "end": {
+              "line": 11,
+              "column": 52,
+              "offset": 136
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 11,
+          "column": 1,
+          "offset": 85
+        },
+        "end": {
+          "line": 11,
+          "column": 52,
+          "offset": 136
+        }
+      }
+    },
+    {
+      "type": "html",
+      "value": "<!-- more -->",
+      "position": {
+        "start": {
+          "line": 13,
+          "column": 1,
+          "offset": 138
+        },
+        "end": {
+          "line": 13,
+          "column": 14,
+          "offset": 151
+        }
+      }
+    },
+    {
+      "type": "heading",
+      "depth": 1,
+      "children": [
+        {
+          "type": "text",
+          "value": "LICENSE",
+          "position": {
+            "start": {
+              "line": 15,
+              "column": 3,
+              "offset": 155
+            },
+            "end": {
+              "line": 15,
+              "column": 10,
+              "offset": 162
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 15,
+          "column": 1,
+          "offset": 153
+        },
+        "end": {
+          "line": 15,
+          "column": 10,
+          "offset": 162
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "LICENCE 是软件的授权许可，详细说明了获得代码后拥有的权利，哪些操作是允许的，哪些操作是禁止的。软件的版权许可证可有很多方式，本文仅限于讨论开源软件协议 Open Source License。",
+          "position": {
+            "start": {
+              "line": 17,
+              "column": 1,
+              "offset": 164
+            },
+            "end": {
+              "line": 17,
+              "column": 101,
+              "offset": 264
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 17,
+          "column": 1,
+          "offset": 164
+        },
+        "end": {
+          "line": 17,
+          "column": 101,
+          "offset": 264
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "Open Source License 是指符合开源定义的许可证——简而言之，它们允许软件自由使用、修改和共享。要获得开源计划（也称为OSI）的批准，许可证必须经过开源计划的许可证审查过程。",
+          "position": {
+            "start": {
+              "line": 19,
+              "column": 1,
+              "offset": 266
+            },
+            "end": {
+              "line": 19,
+              "column": 96,
+              "offset": 361
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 19,
+          "column": 1,
+          "offset": 266
+        },
+        "end": {
+          "line": 19,
+          "column": 96,
+          "offset": 361
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "对于大多数人来说，没必要花大把时间去写许可协议，选择一种比较流行的开源协议就足够了，省时省力，更便于自己作品的传播，于人于己都有利。",
+          "position": {
+            "start": {
+              "line": 21,
+              "column": 1,
+              "offset": 363
+            },
+            "end": {
+              "line": 21,
+              "column": 67,
+              "offset": 429
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 21,
+          "column": 1,
+          "offset": 363
+        },
+        "end": {
+          "line": 21,
+          "column": 67,
+          "offset": 429
+        }
+      }
+    },
+    {
+      "type": "heading",
+      "depth": 1,
+      "children": [
+        {
+          "type": "text",
+          "value": "常见的LICENSE",
+          "position": {
+            "start": {
+              "line": 24,
+              "column": 3,
+              "offset": 434
+            },
+            "end": {
+              "line": 24,
+              "column": 13,
+              "offset": 444
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 24,
+          "column": 1,
+          "offset": 432
+        },
+        "end": {
+          "line": 24,
+          "column": 13,
+          "offset": 444
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "世界上的开源许可证（Open Source License）大概有上百种，今天我们来介绍下几种我们常见的开源协议。大致有GPL、BSD、MIT、Mozilla、Apache和LGPL等。",
+          "position": {
+            "start": {
+              "line": 26,
+              "column": 1,
+              "offset": 446
+            },
+            "end": {
+              "line": 26,
+              "column": 94,
+              "offset": 539
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 26,
+          "column": 1,
+          "offset": 446
+        },
+        "end": {
+          "line": 26,
+          "column": 94,
+          "offset": 539
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "image",
+          "title": null,
+          "url": "license/da68b98e404578126b87c5afd9ba9bc3.png",
+          "alt": "常见的开源许可证",
+          "position": {
+            "start": {
+              "line": 28,
+              "column": 1,
+              "offset": 541
+            },
+            "end": {
+              "line": 28,
+              "column": 58,
+              "offset": 598
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 28,
+          "column": 1,
+          "offset": 541
+        },
+        "end": {
+          "line": 28,
+          "column": 58,
+          "offset": 598
+        }
+      }
+    },
+    {
+      "type": "heading",
+      "depth": 1,
+      "children": [
+        {
+          "type": "text",
+          "value": "选择LICENSE",
+          "position": {
+            "start": {
+              "line": 31,
+              "column": 3,
+              "offset": 603
+            },
+            "end": {
+              "line": 31,
+              "column": 12,
+              "offset": 612
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 31,
+          "column": 1,
+          "offset": 601
+        },
+        "end": {
+          "line": 31,
+          "column": 12,
+          "offset": 612
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "下面是来自 Paul Bagwell 整理的许可证选择流程：",
+          "position": {
+            "start": {
+              "line": 33,
+              "column": 1,
+              "offset": 614
+            },
+            "end": {
+              "line": 33,
+              "column": 31,
+              "offset": 644
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 33,
+          "column": 1,
+          "offset": 614
+        },
+        "end": {
+          "line": 33,
+          "column": 31,
+          "offset": 644
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "image",
+          "title": null,
+          "url": "./license/tumblr_lkhe2jxnXS1qguzn1o1_r7_1280.png",
+          "alt": "来自Paul Bagwell整理",
+          "position": {
+            "start": {
+              "line": 35,
+              "column": 1,
+              "offset": 646
+            },
+            "end": {
+              "line": 35,
+              "column": 70,
+              "offset": 715
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 35,
+          "column": 1,
+          "offset": 646
+        },
+        "end": {
+          "line": 35,
+          "column": 70,
+          "offset": 715
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "下面是 阮一峰整理的选择流程，图已经略过时，但仍然有一定的参考价值，英文好的同学建议看 Paul Bagwell 整理的选择。",
+          "position": {
+            "start": {
+              "line": 37,
+              "column": 1,
+              "offset": 717
+            },
+            "end": {
+              "line": 37,
+              "column": 64,
+              "offset": 780
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 37,
+          "column": 1,
+          "offset": 717
+        },
+        "end": {
+          "line": 37,
+          "column": 64,
+          "offset": 780
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "|",
+          "position": {
+            "start": {
+              "line": 39,
+              "column": 1,
+              "offset": 782
+            },
+            "end": {
+              "line": 39,
+              "column": 2,
+              "offset": 783
+            }
+          }
+        },
+        {
+          "type": "image",
+          "title": null,
+          "url": "./license/9720a0afdb60d23b31b3a667ad6e70a2.png",
+          "alt": "来自阮一峰整理",
+          "position": {
+            "start": {
+              "line": 39,
+              "column": 2,
+              "offset": 783
+            },
+            "end": {
+              "line": 39,
+              "column": 60,
+              "offset": 841
+            }
+          }
+        },
+        {
+          "type": "text",
+          "value": "|\n|:--:|",
+          "position": {
+            "start": {
+              "line": 39,
+              "column": 60,
+              "offset": 841
+            },
+            "end": {
+              "line": 40,
+              "column": 7,
+              "offset": 849
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 39,
+          "column": 1,
+          "offset": 782
+        },
+        "end": {
+          "line": 40,
+          "column": 7,
+          "offset": 849
+        }
+      }
+    },
+    {
+      "type": "heading",
+      "depth": 1,
+      "children": [
+        {
+          "type": "text",
+          "value": "MIT LICENSE",
+          "position": {
+            "start": {
+              "line": 42,
+              "column": 3,
+              "offset": 853
+            },
+            "end": {
+              "line": 42,
+              "column": 14,
+              "offset": 864
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 42,
+          "column": 1,
+          "offset": 851
+        },
+        "end": {
+          "line": 42,
+          "column": 14,
+          "offset": 864
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "MIT许可协议之名源自麻省理工学院（Massachusetts Institute of Technology, MIT），又称“X许可协议”（X License）或“X11许可协议”（X11 License）",
+          "position": {
+            "start": {
+              "line": 44,
+              "column": 1,
+              "offset": 866
+            },
+            "end": {
+              "line": 44,
+              "column": 106,
+              "offset": 971
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 44,
+          "column": 1,
+          "offset": 866
+        },
+        "end": {
+          "line": 44,
+          "column": 106,
+          "offset": 971
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "MIT内容与三条款BSD许可协议（3-clause BSD license）内容颇为近似，但是赋予软件被许可人更大的权利与更少的限制。",
+          "position": {
+            "start": {
+              "line": 46,
+              "column": 1,
+              "offset": 973
+            },
+            "end": {
+              "line": 46,
+              "column": 68,
+              "offset": 1040
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 46,
+          "column": 1,
+          "offset": 973
+        },
+        "end": {
+          "line": 46,
+          "column": 68,
+          "offset": 1040
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "有许多团体均采用MIT许可证。例如著名的SSH连线软件PuTTY与X窗口系统。Expat、Mono开发平台库、Ruby on Rails、Lua、微软的Visual Studio Code源代码等等也都采用MIT许可协议。",
+          "position": {
+            "start": {
+              "line": 48,
+              "column": 1,
+              "offset": 1042
+            },
+            "end": {
+              "line": 48,
+              "column": 112,
+              "offset": 1153
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 48,
+          "column": 1,
+          "offset": 1042
+        },
+        "end": {
+          "line": 48,
+          "column": 112,
+          "offset": 1153
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "以下是 ",
+          "position": {
+            "start": {
+              "line": 51,
+              "column": 1,
+              "offset": 1156
+            },
+            "end": {
+              "line": 51,
+              "column": 5,
+              "offset": 1160
+            }
+          }
+        },
+        {
+          "type": "link",
+          "title": null,
+          "url": "https://www.mit-license.org/",
+          "children": [
+            {
+              "type": "text",
+              "value": "MIT LICENSE的原本",
+              "position": {
+                "start": {
+                  "line": 51,
+                  "column": 6,
+                  "offset": 1161
+                },
+                "end": {
+                  "line": 51,
+                  "column": 20,
+                  "offset": 1175
+                }
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 51,
+              "column": 5,
+              "offset": 1160
+            },
+            "end": {
+              "line": 51,
+              "column": 51,
+              "offset": 1206
+            }
+          }
+        },
+        {
+          "type": "text",
+          "value": " 的内容：",
+          "position": {
+            "start": {
+              "line": 51,
+              "column": 51,
+              "offset": 1206
+            },
+            "end": {
+              "line": 51,
+              "column": 56,
+              "offset": 1211
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 51,
+          "column": 1,
+          "offset": 1156
+        },
+        "end": {
+          "line": 51,
+          "column": 56,
+          "offset": 1211
+        }
+      }
+    },
+    {
+      "type": "blockquote",
+      "children": [
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "text",
+              "value": "Copyright <YEAR> <COPYRIGHT HOLDER>",
+              "position": {
+                "start": {
+                  "line": 53,
+                  "column": 3,
+                  "offset": 1215
+                },
+                "end": {
+                  "line": 53,
+                  "column": 42,
+                  "offset": 1254
+                }
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 53,
+              "column": 3,
+              "offset": 1215
+            },
+            "end": {
+              "line": 53,
+              "column": 42,
+              "offset": 1254
+            }
+          }
+        },
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "text",
+              "value": "Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:",
+              "position": {
+                "start": {
+                  "line": 55,
+                  "column": 2,
+                  "offset": 1258
+                },
+                "end": {
+                  "line": 55,
+                  "column": 434,
+                  "offset": 1690
+                }
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 55,
+              "column": 2,
+              "offset": 1258
+            },
+            "end": {
+              "line": 55,
+              "column": 434,
+              "offset": 1690
+            }
+          }
+        },
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "text",
+              "value": "The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.",
+              "position": {
+                "start": {
+                  "line": 57,
+                  "column": 2,
+                  "offset": 1694
+                },
+                "end": {
+                  "line": 57,
+                  "column": 128,
+                  "offset": 1820
+                }
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 57,
+              "column": 2,
+              "offset": 1694
+            },
+            "end": {
+              "line": 57,
+              "column": 128,
+              "offset": 1820
+            }
+          }
+        },
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "text",
+              "value": "THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.",
+              "position": {
+                "start": {
+                  "line": 59,
+                  "column": 2,
+                  "offset": 1824
+                },
+                "end": {
+                  "line": 59,
+                  "column": 462,
+                  "offset": 2284
+                }
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 59,
+              "column": 2,
+              "offset": 1824
+            },
+            "end": {
+              "line": 59,
+              "column": 462,
+              "offset": 2284
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 53,
+          "column": 1,
+          "offset": 1213
+        },
+        "end": {
+          "line": 59,
+          "column": 462,
+          "offset": 2284
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "对于个人开发者来说，可能没有太关注许可，最初注重的只是代码的合法与传播。所以如果不想管或不知道该选那个许可，可直接使用MIT许可。",
+          "position": {
+            "start": {
+              "line": 62,
+              "column": 1,
+              "offset": 2287
+            },
+            "end": {
+              "line": 62,
+              "column": 66,
+              "offset": 2352
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 62,
+          "column": 1,
+          "offset": 2287
+        },
+        "end": {
+          "line": 62,
+          "column": 66,
+          "offset": 2352
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "以上引用的即是 MIT 的模板。需要修改的只有两个位置：",
+          "position": {
+            "start": {
+              "line": 64,
+              "column": 1,
+              "offset": 2354
+            },
+            "end": {
+              "line": 64,
+              "column": 29,
+              "offset": 2382
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 64,
+          "column": 1,
+          "offset": 2354
+        },
+        "end": {
+          "line": 64,
+          "column": 29,
+          "offset": 2382
+        }
+      }
+    },
+    {
+      "type": "list",
+      "ordered": true,
+      "start": 1,
+      "spread": false,
+      "children": [
+        {
+          "type": "listItem",
+          "spread": false,
+          "checked": null,
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "strong",
+                  "children": [
+                    {
+                      "type": "text",
+                      "value": "YEAR",
+                      "position": {
+                        "start": {
+                          "line": 66,
+                          "column": 6,
+                          "offset": 2389
+                        },
+                        "end": {
+                          "line": 66,
+                          "column": 10,
+                          "offset": 2393
+                        }
+                      }
+                    }
+                  ],
+                  "position": {
+                    "start": {
+                      "line": 66,
+                      "column": 4,
+                      "offset": 2387
+                    },
+                    "end": {
+                      "line": 66,
+                      "column": 12,
+                      "offset": 2395
+                    }
+                  }
+                },
+                {
+                  "type": "text",
+                  "value": "：是版权使用的年份。如果你在2015年申请版权（当你写作品时会自动发生），请在2015年提交。有些人喜欢设定一系列年份（即2015-2020年）——这没有必要。",
+                  "position": {
+                    "start": {
+                      "line": 66,
+                      "column": 12,
+                      "offset": 2395
+                    },
+                    "end": {
+                      "line": 66,
+                      "column": 92,
+                      "offset": 2475
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 66,
+                  "column": 4,
+                  "offset": 2387
+                },
+                "end": {
+                  "line": 66,
+                  "column": 92,
+                  "offset": 2475
+                }
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 66,
+              "column": 1,
+              "offset": 2384
+            },
+            "end": {
+              "line": 66,
+              "column": 92,
+              "offset": 2475
+            }
+          }
+        },
+        {
+          "type": "listItem",
+          "spread": false,
+          "checked": null,
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "strong",
+                  "children": [
+                    {
+                      "type": "text",
+                      "value": "COPYRIGHT HOLDER",
+                      "position": {
+                        "start": {
+                          "line": 67,
+                          "column": 6,
+                          "offset": 2481
+                        },
+                        "end": {
+                          "line": 67,
+                          "column": 22,
+                          "offset": 2497
+                        }
+                      }
+                    }
+                  ],
+                  "position": {
+                    "start": {
+                      "line": 67,
+                      "column": 4,
+                      "offset": 2479
+                    },
+                    "end": {
+                      "line": 67,
+                      "column": 24,
+                      "offset": 2499
+                    }
+                  }
+                },
+                {
+                  "type": "text",
+                  "value": "：是拥有版权的实体的全名。如果拥有实体是私人则写上自己的名字即可。",
+                  "position": {
+                    "start": {
+                      "line": 67,
+                      "column": 24,
+                      "offset": 2499
+                    },
+                    "end": {
+                      "line": 67,
+                      "column": 57,
+                      "offset": 2532
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 67,
+                  "column": 4,
+                  "offset": 2479
+                },
+                "end": {
+                  "line": 67,
+                  "column": 57,
+                  "offset": 2532
+                }
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 67,
+              "column": 1,
+              "offset": 2476
+            },
+            "end": {
+              "line": 67,
+              "column": 57,
+              "offset": 2532
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 66,
+          "column": 1,
+          "offset": 2384
+        },
+        "end": {
+          "line": 67,
+          "column": 57,
+          "offset": 2532
+        }
+      }
+    },
+    {
+      "type": "heading",
+      "depth": 2,
+      "children": [
+        {
+          "type": "text",
+          "value": "生成 MIT",
+          "position": {
+            "start": {
+              "line": 69,
+              "column": 4,
+              "offset": 2537
+            },
+            "end": {
+              "line": 69,
+              "column": 10,
+              "offset": 2543
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 69,
+          "column": 1,
+          "offset": 2534
+        },
+        "end": {
+          "line": 69,
+          "column": 10,
+          "offset": 2543
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "比较流程化的操作是手动在项目目录下新建 LICENSE 文件，复制 MIT LICENSE 模板，修改 YEAR 和 COPYRIGHT HOLDER 即可。",
+          "position": {
+            "start": {
+              "line": 71,
+              "column": 1,
+              "offset": 2545
+            },
+            "end": {
+              "line": 71,
+              "column": 80,
+              "offset": 2624
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 71,
+          "column": 1,
+          "offset": 2545
+        },
+        "end": {
+          "line": 71,
+          "column": 80,
+          "offset": 2624
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "另外，还可以在 Github 上直接创建 LICENSE 文件并选择MIT协议；",
+          "position": {
+            "start": {
+              "line": 73,
+              "column": 1,
+              "offset": 2626
+            },
+            "end": {
+              "line": 73,
+              "column": 41,
+              "offset": 2666
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 73,
+          "column": 1,
+          "offset": 2626
+        },
+        "end": {
+          "line": 73,
+          "column": 41,
+          "offset": 2666
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "或者使用npm cli生成。",
+          "position": {
+            "start": {
+              "line": 75,
+              "column": 1,
+              "offset": 2668
+            },
+            "end": {
+              "line": 75,
+              "column": 15,
+              "offset": 2682
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 75,
+          "column": 1,
+          "offset": 2668
+        },
+        "end": {
+          "line": 75,
+          "column": 15,
+          "offset": 2682
+        }
+      }
+    },
+    {
+      "type": "heading",
+      "depth": 3,
+      "children": [
+        {
+          "type": "text",
+          "value": "Github",
+          "position": {
+            "start": {
+              "line": 77,
+              "column": 5,
+              "offset": 2688
+            },
+            "end": {
+              "line": 77,
+              "column": 11,
+              "offset": 2694
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 77,
+          "column": 1,
+          "offset": 2684
+        },
+        "end": {
+          "line": 77,
+          "column": 11,
+          "offset": 2694
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "Github是支持半自动化的方式创建LICENSE的。",
+          "position": {
+            "start": {
+              "line": 79,
+              "column": 1,
+              "offset": 2696
+            },
+            "end": {
+              "line": 79,
+              "column": 28,
+              "offset": 2723
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 79,
+          "column": 1,
+          "offset": 2696
+        },
+        "end": {
+          "line": 79,
+          "column": 28,
+          "offset": 2723
+        }
+      }
+    },
+    {
+      "type": "heading",
+      "depth": 4,
+      "children": [
+        {
+          "type": "text",
+          "value": "创建LICESE文件",
+          "position": {
+            "start": {
+              "line": 81,
+              "column": 6,
+              "offset": 2730
+            },
+            "end": {
+              "line": 81,
+              "column": 16,
+              "offset": 2740
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 81,
+          "column": 1,
+          "offset": 2725
+        },
+        "end": {
+          "line": 81,
+          "column": 16,
+          "offset": 2740
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "创建LICESE文件，会自动出现选择LICENSE协议的按钮（“Choose a license template”）",
+          "position": {
+            "start": {
+              "line": 83,
+              "column": 1,
+              "offset": 2742
+            },
+            "end": {
+              "line": 83,
+              "column": 60,
+              "offset": 2801
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 83,
+          "column": 1,
+          "offset": 2742
+        },
+        "end": {
+          "line": 83,
+          "column": 60,
+          "offset": 2801
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "image",
+          "title": null,
+          "url": "./license/Snipaste_2023-05-30_17-44-00.png",
+          "alt": "创建LICESE文件",
+          "position": {
+            "start": {
+              "line": 85,
+              "column": 1,
+              "offset": 2803
+            },
+            "end": {
+              "line": 85,
+              "column": 58,
+              "offset": 2860
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 85,
+          "column": 1,
+          "offset": 2803
+        },
+        "end": {
+          "line": 85,
+          "column": 58,
+          "offset": 2860
+        }
+      }
+    },
+    {
+      "type": "heading",
+      "depth": 4,
+      "children": [
+        {
+          "type": "text",
+          "value": "选择MIT协议",
+          "position": {
+            "start": {
+              "line": 87,
+              "column": 6,
+              "offset": 2867
+            },
+            "end": {
+              "line": 87,
+              "column": 13,
+              "offset": 2874
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 87,
+          "column": 1,
+          "offset": 2862
+        },
+        "end": {
+          "line": 87,
+          "column": 13,
+          "offset": 2874
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "image",
+          "title": null,
+          "url": "./license/Snipaste_2023-05-30_17-47-09.png",
+          "alt": "选择MIT协议",
+          "position": {
+            "start": {
+              "line": 89,
+              "column": 1,
+              "offset": 2876
+            },
+            "end": {
+              "line": 89,
+              "column": 55,
+              "offset": 2930
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 89,
+          "column": 1,
+          "offset": 2876
+        },
+        "end": {
+          "line": 89,
+          "column": 55,
+          "offset": 2930
+        }
+      }
+    },
+    {
+      "type": "heading",
+      "depth": 3,
+      "children": [
+        {
+          "type": "text",
+          "value": "Npm Lib",
+          "position": {
+            "start": {
+              "line": 93,
+              "column": 5,
+              "offset": 2938
+            },
+            "end": {
+              "line": 93,
+              "column": 12,
+              "offset": 2945
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 93,
+          "column": 1,
+          "offset": 2934
+        },
+        "end": {
+          "line": 93,
+          "column": 12,
+          "offset": 2945
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "link",
+          "title": null,
+          "url": "https://github.com/Ovyerus",
+          "children": [
+            {
+              "type": "text",
+              "value": "Ovyerus",
+              "position": {
+                "start": {
+                  "line": 95,
+                  "column": 2,
+                  "offset": 2948
+                },
+                "end": {
+                  "line": 95,
+                  "column": 9,
+                  "offset": 2955
+                }
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 95,
+              "column": 1,
+              "offset": 2947
+            },
+            "end": {
+              "line": 95,
+              "column": 38,
+              "offset": 2984
+            }
+          }
+        },
+        {
+          "type": "text",
+          "value": " 提供了一个很方便生成LICESE的Npm Lib：",
+          "position": {
+            "start": {
+              "line": 95,
+              "column": 38,
+              "offset": 2984
+            },
+            "end": {
+              "line": 95,
+              "column": 64,
+              "offset": 3010
+            }
+          }
+        },
+        {
+          "type": "link",
+          "title": null,
+          "url": "https://www.npmjs.com/package/license",
+          "children": [
+            {
+              "type": "text",
+              "value": "license",
+              "position": {
+                "start": {
+                  "line": 95,
+                  "column": 65,
+                  "offset": 3011
+                },
+                "end": {
+                  "line": 95,
+                  "column": 72,
+                  "offset": 3018
+                }
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 95,
+              "column": 64,
+              "offset": 3010
+            },
+            "end": {
+              "line": 95,
+              "column": 112,
+              "offset": 3058
+            }
+          }
+        },
+        {
+          "type": "text",
+          "value": "。",
+          "position": {
+            "start": {
+              "line": 95,
+              "column": 112,
+              "offset": 3058
+            },
+            "end": {
+              "line": 95,
+              "column": 113,
+              "offset": 3059
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 95,
+          "column": 1,
+          "offset": 2947
+        },
+        "end": {
+          "line": 95,
+          "column": 113,
+          "offset": 3059
+        }
+      }
+    },
+    {
+      "type": "heading",
+      "depth": 4,
+      "children": [
+        {
+          "type": "text",
+          "value": "安装",
+          "position": {
+            "start": {
+              "line": 97,
+              "column": 6,
+              "offset": 3066
+            },
+            "end": {
+              "line": 97,
+              "column": 8,
+              "offset": 3068
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 97,
+          "column": 1,
+          "offset": 3061
+        },
+        "end": {
+          "line": 97,
+          "column": 8,
+          "offset": 3068
+        }
+      }
+    },
+    {
+      "type": "code",
+      "lang": "shell",
+      "meta": null,
+      "value": "npm i -g license",
+      "position": {
+        "start": {
+          "line": 99,
+          "column": 1,
+          "offset": 3070
+        },
+        "end": {
+          "line": 101,
+          "column": 4,
+          "offset": 3099
+        }
+      }
+    },
+    {
+      "type": "heading",
+      "depth": 3,
+      "children": [
+        {
+          "type": "text",
+          "value": "使用",
+          "position": {
+            "start": {
+              "line": 103,
+              "column": 5,
+              "offset": 3105
+            },
+            "end": {
+              "line": 103,
+              "column": 7,
+              "offset": 3107
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 103,
+          "column": 1,
+          "offset": 3101
+        },
+        "end": {
+          "line": 103,
+          "column": 7,
+          "offset": 3107
+        }
+      }
+    },
+    {
+      "type": "code",
+      "lang": "shell",
+      "meta": null,
+      "value": "license [license]\n\n# 指定 YEAR 和 COPYRIGHT HOLDER\n\nlicense [license] -n <COPYRIGHT HOLDER> -y <YEAR>",
+      "position": {
+        "start": {
+          "line": 105,
+          "column": 1,
+          "offset": 3109
+        },
+        "end": {
+          "line": 111,
+          "column": 4,
+          "offset": 3220
+        }
+      }
+    },
+    {
+      "type": "heading",
+      "depth": 1,
+      "children": [
+        {
+          "type": "text",
+          "value": "附录",
+          "position": {
+            "start": {
+              "line": 113,
+              "column": 3,
+              "offset": 3224
+            },
+            "end": {
+              "line": 113,
+              "column": 5,
+              "offset": 3226
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 113,
+          "column": 1,
+          "offset": 3222
+        },
+        "end": {
+          "line": 113,
+          "column": 5,
+          "offset": 3226
+        }
+      }
+    },
+    {
+      "type": "heading",
+      "depth": 2,
+      "children": [
+        {
+          "type": "text",
+          "value": "参考",
+          "position": {
+            "start": {
+              "line": 115,
+              "column": 4,
+              "offset": 3231
+            },
+            "end": {
+              "line": 115,
+              "column": 6,
+              "offset": 3233
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 115,
+          "column": 1,
+          "offset": 3228
+        },
+        "end": {
+          "line": 115,
+          "column": 6,
+          "offset": 3233
+        }
+      }
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "start": null,
+      "spread": false,
+      "children": [
+        {
+          "type": "listItem",
+          "spread": false,
+          "checked": null,
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "link",
+                  "title": null,
+                  "url": "https://zh.wikipedia.org/zh-cn/%E6%8E%88%E6%AC%8A_(%E6%B3%95%E5%BE%8B)",
+                  "children": [
+                    {
+                      "type": "text",
+                      "value": "LICENSE WIKI",
+                      "position": {
+                        "start": {
+                          "line": 117,
+                          "column": 4,
+                          "offset": 3238
+                        },
+                        "end": {
+                          "line": 117,
+                          "column": 16,
+                          "offset": 3250
+                        }
+                      }
+                    }
+                  ],
+                  "position": {
+                    "start": {
+                      "line": 117,
+                      "column": 3,
+                      "offset": 3237
+                    },
+                    "end": {
+                      "line": 117,
+                      "column": 89,
+                      "offset": 3323
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 117,
+                  "column": 3,
+                  "offset": 3237
+                },
+                "end": {
+                  "line": 117,
+                  "column": 89,
+                  "offset": 3323
+                }
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 117,
+              "column": 1,
+              "offset": 3235
+            },
+            "end": {
+              "line": 117,
+              "column": 89,
+              "offset": 3323
+            }
+          }
+        },
+        {
+          "type": "listItem",
+          "spread": false,
+          "checked": null,
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "link",
+                  "title": null,
+                  "url": "https://opensource.org/licenses/",
+                  "children": [
+                    {
+                      "type": "text",
+                      "value": "Open Source License",
+                      "position": {
+                        "start": {
+                          "line": 118,
+                          "column": 4,
+                          "offset": 3327
+                        },
+                        "end": {
+                          "line": 118,
+                          "column": 23,
+                          "offset": 3346
+                        }
+                      }
+                    }
+                  ],
+                  "position": {
+                    "start": {
+                      "line": 118,
+                      "column": 3,
+                      "offset": 3326
+                    },
+                    "end": {
+                      "line": 118,
+                      "column": 58,
+                      "offset": 3381
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 118,
+                  "column": 3,
+                  "offset": 3326
+                },
+                "end": {
+                  "line": 118,
+                  "column": 58,
+                  "offset": 3381
+                }
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 118,
+              "column": 1,
+              "offset": 3324
+            },
+            "end": {
+              "line": 118,
+              "column": 58,
+              "offset": 3381
+            }
+          }
+        },
+        {
+          "type": "listItem",
+          "spread": false,
+          "checked": null,
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "link",
+                  "title": null,
+                  "url": "https://zh.wikipedia.org/wiki/%E9%96%8B%E6%BA%90%E6%8E%88%E6%AC%8A",
+                  "children": [
+                    {
+                      "type": "text",
+                      "value": "开源授权 WIKI",
+                      "position": {
+                        "start": {
+                          "line": 119,
+                          "column": 4,
+                          "offset": 3385
+                        },
+                        "end": {
+                          "line": 119,
+                          "column": 13,
+                          "offset": 3394
+                        }
+                      }
+                    }
+                  ],
+                  "position": {
+                    "start": {
+                      "line": 119,
+                      "column": 3,
+                      "offset": 3384
+                    },
+                    "end": {
+                      "line": 119,
+                      "column": 82,
+                      "offset": 3463
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 119,
+                  "column": 3,
+                  "offset": 3384
+                },
+                "end": {
+                  "line": 119,
+                  "column": 82,
+                  "offset": 3463
+                }
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 119,
+              "column": 1,
+              "offset": 3382
+            },
+            "end": {
+              "line": 119,
+              "column": 82,
+              "offset": 3463
+            }
+          }
+        },
+        {
+          "type": "listItem",
+          "spread": false,
+          "checked": null,
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "link",
+                  "title": null,
+                  "url": "https://web.archive.org/web/20110503183702/http://pbagwl.com/post/5078147450/description-of-popular-software-licenses",
+                  "children": [
+                    {
+                      "type": "text",
+                      "value": "description-of-popular-software-licenses",
+                      "position": {
+                        "start": {
+                          "line": 120,
+                          "column": 4,
+                          "offset": 3467
+                        },
+                        "end": {
+                          "line": 120,
+                          "column": 44,
+                          "offset": 3507
+                        }
+                      }
+                    }
+                  ],
+                  "position": {
+                    "start": {
+                      "line": 120,
+                      "column": 3,
+                      "offset": 3466
+                    },
+                    "end": {
+                      "line": 120,
+                      "column": 164,
+                      "offset": 3627
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 120,
+                  "column": 3,
+                  "offset": 3466
+                },
+                "end": {
+                  "line": 120,
+                  "column": 164,
+                  "offset": 3627
+                }
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 120,
+              "column": 1,
+              "offset": 3464
+            },
+            "end": {
+              "line": 120,
+              "column": 164,
+              "offset": 3627
+            }
+          }
+        },
+        {
+          "type": "listItem",
+          "spread": false,
+          "checked": null,
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "link",
+                  "title": null,
+                  "url": "https://opensource.stackexchange.com/questions/1522/what-should-be-written-in-mit-license-year-full-name",
+                  "children": [
+                    {
+                      "type": "text",
+                      "value": "What should be written in MIT license (year, full name)?",
+                      "position": {
+                        "start": {
+                          "line": 121,
+                          "column": 4,
+                          "offset": 3631
+                        },
+                        "end": {
+                          "line": 121,
+                          "column": 60,
+                          "offset": 3687
+                        }
+                      }
+                    }
+                  ],
+                  "position": {
+                    "start": {
+                      "line": 121,
+                      "column": 3,
+                      "offset": 3630
+                    },
+                    "end": {
+                      "line": 121,
+                      "column": 167,
+                      "offset": 3794
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 121,
+                  "column": 3,
+                  "offset": 3630
+                },
+                "end": {
+                  "line": 121,
+                  "column": 167,
+                  "offset": 3794
+                }
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 121,
+              "column": 1,
+              "offset": 3628
+            },
+            "end": {
+              "line": 121,
+              "column": 167,
+              "offset": 3794
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 117,
+          "column": 1,
+          "offset": 3235
+        },
+        "end": {
+          "line": 121,
+          "column": 167,
+          "offset": 3794
+        }
+      }
+    }
+  ],
+  "position": {
+    "start": {
+      "line": 1,
+      "column": 1,
+      "offset": 0
+    },
+    "end": {
+      "line": 122,
+      "column": 1,
+      "offset": 3795
+    }
+  }
+}
