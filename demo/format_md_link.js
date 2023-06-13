@@ -6,6 +6,7 @@ import { readFileSync, writeFileSync } from 'fs';
 import path from 'path';
 import { load as loadYaml } from 'js-yaml';
 import { PostParse } from '../lib/post_parse.js';
+import { URL } from 'url';
 
 // Transform the AST back into Markdown text
 // const markdownOutput = unified().use(stringify).stringify(ast);
@@ -46,7 +47,7 @@ function getFrontmatterBy({ ast }) {
   return data;
 }
 
-function main() {
+function main1() {
   const markdownText = readFileSync(testdir('post1.md'));
 
   // Parse the Markdown text into an AST
@@ -72,7 +73,10 @@ function main() {
       newUrl = url.replace(`${conf.dir}/`, '');;
     }
   
-    newUrl = path.join(conf.prefix, newUrl);
+    newUrl = new URL(newUrl, conf.prefix).href;
+    // newUrl = path.join(conf.prefix, newUrl);
+
+    console.info(111, newUrl)
   
     ast.url = newUrl;
     // console.log({
