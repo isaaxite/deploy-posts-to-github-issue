@@ -1,0 +1,31 @@
+{
+  "name": "deploy-posts-to-github-issue",
+  "version": "1.0.0",
+  "description": "deploy posts are written in markdown to github issue",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isaaxite/deploy-posts-to-github-issue.git"
+  },
+  "keywords": [
+    "markdown",
+    "deploy",
+    "issue",
+    "issue-blog"
+  ],
+  "author": "isaaxite",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/isaaxite/deploy-posts-to-github-issue/issues"
+  },
+  "homepage": "https://github.com/isaaxite/deploy-posts-to-github-issue#readme",
+  "dependencies": {
+    "remark-parse": "^10.0.2",
+    "remark-stringify": "^10.0.3",
+    "unified": "^10.1.2"
+  }
+}
