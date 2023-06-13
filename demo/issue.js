@@ -1,16 +1,19 @@
-import { Octokit } from 'octokit'
-
-console.info(process.env.GITHUB_TOKEN)
-
-const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
+import { IssueBro } from '../lib/issue_bro.js';
 
 (async function main() {
 
-  const resp = await octokit.rest.issues.get({
+  const issue = new IssueBro({
     owner: 'isaaxite',
     repo: 'blog',
-    issue_number: '305'
+    token: process.env.GITHUB_TOKEN
   });
 
-  console.info(resp.data)
+
+  // issue.create({
+  //   title: 
+  // })
+
+  const data = await issue.get({ issue_number: '305' })
+
+  console.info(data)
 })()
