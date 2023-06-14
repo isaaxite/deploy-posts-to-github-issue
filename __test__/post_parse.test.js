@@ -39,7 +39,7 @@ describe('post_parse', () => {
   };
   test('use path to get frontmatter:all props:', testFrontmatterAllProps(postFromPath));
 
-  test('input marddown to get get frontmatter:all props:', testFrontmatterAllProps(new PostParse({
+  test('input marddown text to get frontmatter:all props:', testFrontmatterAllProps(new PostParse({
     markdownText: TEST_CASE_MARKDOWN,
     conf: getConf()
   })))
