@@ -17,20 +17,20 @@ const TEST_CASE_MARKDOWN_EN_PIC = TEST_CASE_FRONTMATTER + `
 const TEST_CASE_MARKDOWN_CN_PIC = TEST_CASE_FRONTMATTER + `
 # Overview
 
-![image](./许可证/图片.png)
+![image](./license/图片.png)
 `;
 
 const TEST_CASE_MARKDOWN_CN_ENCODE_PIC = TEST_CASE_FRONTMATTER + `
 # Overview
 
-![image](./许可证/%E5%9B%BE%E7%89%87.png)
+![image](./license/%E5%9B%BE%E7%89%87.png)
 `;
 
 const DEF_TEST_INPUT_MD_PATH = '__test__/post1.md';
 
 const getConf = ({ dir, prefix, types } = {}) => ({
   dir: dir || 'license',
-  prefix: prefix || 'https://isaaxite.github.io/blog/resources/license/',
+  prefix: prefix || 'https://isaaxite.github.io/blog/resources/',
   types: types || ['image']
 });
 
