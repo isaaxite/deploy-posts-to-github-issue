@@ -47,8 +47,13 @@ const getIssueBroIns = () => new IssueBro({
 });
 
 describe('issue_pro', () => {
+  const expextBaseResp = (ret) => {
+    expect(ret).not.toBeUndefined();
+    expect(ret.status).toBeGreaterThanOrEqual(200);
+    expect(ret.status).toBeLessThan(300);
+  };
 
-  test('force crate a issue', async () => {
+  test('force crate a issue and then update it', async () => {
     const tempFile = new TempFile({ dest: 'post1-force_create_a_issue.md' });
     const mdtext = tempFile.getContent();
     const {
@@ -62,14 +67,22 @@ describe('issue_pro', () => {
       labels: tags
     });
 
-    expect(ret).not.toBeUndefined();
-    expect(ret.status).toBeGreaterThanOrEqual(200);
-    expect(ret.status).toBeLessThan(300);
+    expextBaseResp(ret);
     expect(ret).toHaveProperty('data');
     expect(ret.data).toHaveProperty('number');
     expect(ret.data.number).toBeGreaterThan(0);
 
-    tempFile.destory();
-  });
+    const updateTitle = title + String(Date.now()).slice(2);
+    const updateRet = await issuebro.update({
+      title: updateTitle,
+      body: mdtext,
+      labels: tags,
+      issue_number: ret.data.number
+    });
 
+    expextBaseResp(updateRet);
+    expect(updateRet).toHaveProperty('data');
+    expect(updateRet.data).toHaveProperty('title');
+    expect(updateRet.data.title).toStrictEqual(updateTitle);
+  });
 });
