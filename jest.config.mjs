@@ -23,7 +23,7 @@ export default {
   // collectCoverageFrom: undefined,
 
   // The directory where Jest should output its coverage files
-  coverageDirectory: "coverage",
+  coverageDirectory: "__test__/coverage",
 
   // An array of regexp pattern strings used to skip coverage collection
   // coveragePathIgnorePatterns: [
@@ -110,7 +110,8 @@ export default {
   reporters: [
     "default",
     ["./node_modules/jest-html-reporter", {
-      "pageTitle": "Test Report"
+      "pageTitle": "Test Report",
+      "outputPath": "__test__/test-report/index.html"
     }]
   ],
 

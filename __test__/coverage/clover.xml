@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1686760261010" clover="3.2.0">
-  <project timestamp="1686760261010" name="All files">
+<coverage generated="1686760824465" clover="3.2.0">
+  <project timestamp="1686760824465" name="All files">
     <metrics statements="81" coveredstatements="79" conditionals="20" coveredconditionals="17" methods="9" coveredmethods="9" elements="110" coveredelements="105" complexity="0" loc="81" ncloc="81" packages="1" files="3" classes="3"/>
     <file name="link_formater.js" path="/home/isaac/workspace/deploy-posts-to-github-issue/lib/link_formater.js">
       <metrics statements="23" coveredstatements="21" conditionals="8" coveredconditionals="6" methods="2" coveredmethods="2"/>
