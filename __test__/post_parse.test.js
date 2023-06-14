@@ -155,4 +155,8 @@ describe('post_parse', () => {
     expectedLink: 'https://isaaxite.github.io/blog/resources/license/图片.png',
     conf: getConf({ dir: '许可证' })
   }));
+
+  test('empty parse conf', () => {});
+
+  test('parse conf: if exist sep', () => {});
 });
