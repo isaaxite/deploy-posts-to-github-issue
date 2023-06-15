@@ -2,9 +2,7 @@ import { describe, test, expect } from '@jest/globals';
 import { PostParse } from '../lib/post_parse.js';
 import { ConfReader } from '../lib/conf_reader.js';
 import { PostFinder } from '../lib/post_finder.js';
-import { copySync, removeSync } from 'fs-extra/esm';
-import path from 'path';
-import fg from 'fast-glob';
+import { copyTempPost, removeTempPost } from './utils.js';
 
 const TEST_CASE_FRONTMATTER = `---
 title: LICENSE的选择与生成
@@ -45,32 +43,6 @@ const getPostIns = ({ path, markdownText, conf } = {}) => new PostParse({
   markdownText,
   conf: conf || getConf()
 });
-
-const destSourcePathPrefix = '__test__/temp/source_';
-const removeTempPost = (postpath = '') => {
-  if (postpath) {
-    removeSync(path.parse(postpath).dir);
-    return;
-  }
-  fg.sync([`${destSourcePathPrefix}*/*.md`]).forEach(itPath => {
-    removeSync(path.parse(itPath).dir);
-  });
-}
-const copyTempPost = (src) => {
-  const destSourcePathPrefix = '__test__/temp/source_';
-  const srcPathDetail = path.parse(src);
-  const srcPostAssetPath = path.join(srcPathDetail.dir, srcPathDetail.name);
-  const timeStr = String(Date.now()).slice(2);
-  const destSourceDir = `${destSourcePathPrefix}${timeStr}`;
-  const destPostAssetPath = path.join(destSourceDir, srcPathDetail.name);
-  const destPostFilepath = path.join(destSourceDir, srcPathDetail.base);
-
-  removeTempPost();
-  copySync(src, destPostFilepath)
-  copySync(srcPostAssetPath, destPostAssetPath);
-
-  return destPostFilepath;
-};
 
 describe('post_parse', () => {
   test.each([
@@ -197,7 +169,7 @@ describe('post_parse', () => {
 
   test('parse conf: if exist sep', () => {});
 
-  test.skip('debug:inject frontmatter to src markdown', () => {
+  test.only('debug:inject frontmatter to src markdown', () => {
     const postpath = copyTempPost('__test__/temp/source/_posts/license.md');
     const getPostParseIns = () => new PostParse({
       path: postpath,
