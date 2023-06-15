@@ -1,5 +1,8 @@
 import { describe, test, expect } from '@jest/globals';
 import { PostParse } from '../lib/post_parse.js';
+import { ConfReader } from '../lib/conf_reader.js';
+import { PostFinder } from '../lib/post_finder.js';
+
 const TEST_CASE_FRONTMATTER = `---
 title: LICENSE的选择与生成
 date: 2023-05-30 16:50:28
@@ -159,4 +162,32 @@ describe('post_parse', () => {
   test('empty parse conf', () => {});
 
   test('parse conf: if exist sep', () => {});
+
+  test.only('debug', () => {
+    const confReader = new ConfReader({ path: '__test__/conf.yml' });
+    const conf = confReader.get();
+    const finder = new PostFinder({ patterns: [conf.post_dir] });
+    const filepaths = finder.getFilepaths();
+
+    for (const filepath of filepaths.slice(0, 1)) {
+      let postParse = new PostParse({
+        path: filepath,
+        conf: {
+          dir: '',
+          prefix: conf.prefix,
+          types: conf.types
+        }
+      });
+      const imputMarkdown = postParse.getInputMarkdown();
+      const frontmatter = postParse.getFrontmatter();
+      const formatedMarkdown = postParse.getFormatedMarkdown();
+
+      console.info(frontmatter)
+
+      
+
+      postParse = null;
+    }
+    // console.info(filepaths);
+  });
 });
