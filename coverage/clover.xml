@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1686826163284" clover="3.2.0">
-  <project timestamp="1686826163285" name="All files">
+<coverage generated="1686826828114" clover="3.2.0">
+  <project timestamp="1686826828114" name="All files">
     <metrics statements="122" coveredstatements="95" conditionals="41" coveredconditionals="23" methods="15" coveredmethods="8" elements="178" coveredelements="126" complexity="0" loc="122" ncloc="122" packages="1" files="3" classes="3"/>
     <file name="issue_bro.js" path="/home/isaac/workspace/deploy-posts-to-github-issue/lib/issue_bro.js">
       <metrics statements="37" coveredstatements="24" conditionals="21" coveredconditionals="10" methods="7" coveredmethods="3"/>
