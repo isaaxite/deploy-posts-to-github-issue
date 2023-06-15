@@ -85,4 +85,8 @@ describe('issue_pro', () => {
     expect(updateRet.data).toHaveProperty('title');
     expect(updateRet.data.title).toStrictEqual(updateTitle);
   });
+
+  test('update fail', () => {
+
+  });
 });
