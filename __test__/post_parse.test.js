@@ -2,6 +2,9 @@ import { describe, test, expect } from '@jest/globals';
 import { PostParse } from '../lib/post_parse.js';
 import { ConfReader } from '../lib/conf_reader.js';
 import { PostFinder } from '../lib/post_finder.js';
+import { copySync, removeSync } from 'fs-extra/esm';
+import path from 'path';
+import fg from 'fast-glob';
 
 const TEST_CASE_FRONTMATTER = `---
 title: LICENSE的选择与生成
@@ -42,6 +45,32 @@ const getPostIns = ({ path, markdownText, conf } = {}) => new PostParse({
   markdownText,
   conf: conf || getConf()
 });
+
+const destSourcePathPrefix = '__test__/temp/source_';
+const removeTempPost = (postpath = '') => {
+  if (postpath) {
+    removeSync(path.parse(postpath).dir);
+    return;
+  }
+  fg.sync([`${destSourcePathPrefix}*/*.md`]).forEach(itPath => {
+    removeSync(path.parse(itPath).dir);
+  });
+}
+const copyTempPost = (src) => {
+  const destSourcePathPrefix = '__test__/temp/source_';
+  const srcPathDetail = path.parse(src);
+  const srcPostAssetPath = path.join(srcPathDetail.dir, srcPathDetail.name);
+  const timeStr = String(Date.now()).slice(2);
+  const destSourceDir = `${destSourcePathPrefix}${timeStr}`;
+  const destPostAssetPath = path.join(destSourceDir, srcPathDetail.name);
+  const destPostFilepath = path.join(destSourceDir, srcPathDetail.base);
+
+  removeTempPost();
+  copySync(src, destPostFilepath)
+  copySync(srcPostAssetPath, destPostAssetPath);
+
+  return destPostFilepath;
+};
 
 describe('post_parse', () => {
 
@@ -162,6 +191,29 @@ describe('post_parse', () => {
   test('empty parse conf', () => {});
 
   test('parse conf: if exist sep', () => {});
+
+  test('debug:inject frontmatter to src markdown', () => {
+    const postpath = copyTempPost('__test__/temp/source/_posts/license.md');
+    const getPostParseIns = () => new PostParse({
+      path: postpath,
+      conf: {
+        prefix: 'https://isaaxite.github.io/blog/resources/',
+        types: ['image']
+      }
+    });
+
+    const postParse1 = getPostParseIns();
+    const issue_number = Math.ceil(Math.random() * 100);
+    
+    postParse1.injectFrontmatter({ issue_number });
+
+    const postParse2 = getPostParseIns();
+    const lastFrontmatter = postParse2.getFrontmatter();
+
+    expect(lastFrontmatter.issue_number).toEqual(issue_number);
+
+    removeTempPost();
+  });
 
   // test.only('debug', () => {
   //   const confReader = new ConfReader({ path: '__test__/conf.yml' });
