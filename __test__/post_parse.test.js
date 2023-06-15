@@ -163,31 +163,31 @@ describe('post_parse', () => {
 
   test('parse conf: if exist sep', () => {});
 
-  test.only('debug', () => {
-    const confReader = new ConfReader({ path: '__test__/conf.yml' });
-    const conf = confReader.get();
-    const finder = new PostFinder({ patterns: [conf.post_dir] });
-    const filepaths = finder.getFilepaths();
+  // test.only('debug', () => {
+  //   const confReader = new ConfReader({ path: '__test__/conf.yml' });
+  //   const conf = confReader.get();
+  //   const finder = new PostFinder({ patterns: [conf.post_dir] });
+  //   const filepaths = finder.getFilepaths();
 
-    for (const filepath of filepaths.slice(0, 1)) {
-      let postParse = new PostParse({
-        path: filepath,
-        conf: {
-          dir: '',
-          prefix: conf.prefix,
-          types: conf.types
-        }
-      });
-      const imputMarkdown = postParse.getInputMarkdown();
-      const frontmatter = postParse.getFrontmatter();
-      const formatedMarkdown = postParse.getFormatedMarkdown();
+  //   for (const filepath of filepaths.slice(0, 1)) {
+  //     let postParse = new PostParse({
+  //       path: filepath,
+  //       conf: {
+  //         dir: '',
+  //         prefix: conf.prefix,
+  //         types: conf.types
+  //       }
+  //     });
+  //     const imputMarkdown = postParse.getInputMarkdown();
+  //     const frontmatter = postParse.getFrontmatter();
+  //     const formatedMarkdown = postParse.getFormatedMarkdown();
 
-      console.info(frontmatter)
+  //     console.info(frontmatter)
 
-      
 
-      postParse = null;
-    }
-    // console.info(filepaths);
-  });
+
+  //     postParse = null;
+  //   }
+  //   // console.info(filepaths);
+  // });
 });

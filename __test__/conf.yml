@@ -1,4 +1,5 @@
 post_dir: __test__/temp/source/**/*.md
 prefix: https://isaaxite.github.io/blog/resources/
+asset_dir: '{filename}'
 types: 
   - image

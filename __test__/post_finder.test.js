@@ -5,7 +5,7 @@ import { PostFinder } from '../lib/post_finder.js';
 describe('post_finder', () => {
   test('glob all matched fileoath', () => {
     const finder = new PostFinder({
-      patterns: ['/home/isaac/workspace/blog/source/_posts/**/*.md']
+      patterns: ['__test__/temp/source/_posts/**/*.md']
     });
 
     const ret = finder.getFilepaths();
@@ -16,23 +16,23 @@ describe('post_finder', () => {
   test.each([
     {
       name: 'postDir, filename and ext', 
-      params: { postDir: '/home/isaac/workspace/blog/source/', filename: 'NexT添加文章置顶feat', ext: 'md' }
+      params: { postDir: '__test__/temp/source/', filename: 'NexT添加文章置顶feat', ext: 'md' }
     },
     { 
       name: 'postDir and filename', 
-      params: { postDir: '/home/isaac/workspace/blog/source/', filename: 'NexT添加文章置顶feat' }
+      params: { postDir: '__test__/temp/source/', filename: 'NexT添加文章置顶feat' }
     },
     {
       name: 'filename include multiple path',
-      params: { postDir: '/home/isaac/workspace/blog/source/', filename: '/source/_posts/NexT添加文章置顶feat' }
+      params: { postDir: '__test__/temp/source/', filename: '/source/_posts/NexT添加文章置顶feat' }
     },
     {
       name: 'filename include multiple path and ext',
-      params: { postDir: '/home/isaac/workspace/blog/source/', filename: '/source/_posts/NexT添加文章置顶feat.html' }
+      params: { postDir: '__test__/temp/source/', filename: '/source/_posts/NexT添加文章置顶feat.html' }
     },
     {
       name: 'only postDir',
-      params: { postDir: '/home/isaac/workspace/blog/source/' }
+      params: { postDir: '__test__/temp/source/' }
     },
   ])('glob a matched file whit $name', ({ params }) => {
     const finder = new PostFinder({
@@ -45,10 +45,10 @@ describe('post_finder', () => {
       const readFilename = ext
         ? path.basename(params.filename).replace(ext, '')
         : path.basename(params.filename);
-      expect(filepath).toEqual(`/home/isaac/workspace/blog/source/_posts/${readFilename}.md`)
+      expect(filepath).toEqual(`__test__/temp/source/_posts/${readFilename}.md`)
     } else {
       const filepaths = finder.getFilepaths();
-      const isDescendant = filepaths.every(it => it.startsWith('/home/isaac/workspace/blog/source/'));
+      const isDescendant = filepaths.every(it => it.startsWith('__test__/temp/source/'));
       const isValidExt = filepaths.every(it => path.extname(it) === '.md');
 
       expect(isDescendant).toBeTruthy();
