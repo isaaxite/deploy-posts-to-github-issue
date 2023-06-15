@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.66% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/12</span>
+                <span class='fraction'>0/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/4</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.66% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>11/12</span>
+                <span class='fraction'>0/12</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -99,64 +99,64 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { existsSync, readFileSync } from 'fs';
 import { load as loadYaml } from 'js-yaml';
 &nbsp;
 export class ConfReader {
-  #confPath = '';
-  #conf = null;
+  #confPath = <span class="cstat-no" title="statement not covered" >'';</span>
+  #conf = <span class="cstat-no" title="statement not covered" >null;</span>
 &nbsp;
-  constructor({ path }) {
-    this.#confPath = path;
+<span class="fstat-no" title="function not covered" >  co</span>nstructor({ path }) {
+<span class="cstat-no" title="statement not covered" >    this.#confPath = path;</span>
   }
 &nbsp;
   #read() {
-    const confPath = this.#confPath;
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (!existsSync(confPath)) {
+    const confPath = <span class="cstat-no" title="statement not covered" >this.#confPath;</span>
+<span class="cstat-no" title="statement not covered" >    if (!existsSync(confPath)) {</span>
 <span class="cstat-no" title="statement not covered" >      throw new Error(`Cannot find conf in ${confPath}`);</span>
     }
 &nbsp;
-    const yamlConfStr = readFileSync(confPath, 'utf8');
-    const yamlConf = loadYaml(yamlConfStr);
+    const yamlConfStr = <span class="cstat-no" title="statement not covered" >readFileSync(confPath, 'utf8');</span>
+    const yamlConf = <span class="cstat-no" title="statement not covered" >loadYaml(yamlConfStr);</span>
 &nbsp;
-    return yamlConf;
+<span class="cstat-no" title="statement not covered" >    return yamlConf;</span>
 &nbsp;
   }
 &nbsp;
-  get() {
-    <span class="missing-if-branch" title="else path not taken" >E</span>if (!this.#conf) {
-      this.#conf = this.#read();
+<span class="fstat-no" title="function not covered" >  ge</span>t() {
+<span class="cstat-no" title="statement not covered" >    if (!this.#conf) {</span>
+<span class="cstat-no" title="statement not covered" >      this.#conf = this.#read();</span>
     }
 &nbsp;
-    return this.#conf;
+<span class="cstat-no" title="statement not covered" >    return this.#conf;</span>
   } 
 }
 &nbsp;</pre></td></tr></table></pre>
@@ -166,7 +166,7 @@ export class ConfReader {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-06-15T08:05:26.722Z
+                at 2023-06-15T10:36:12.902Z
             </div>
         <script src="prettify.js"></script>
         <script>

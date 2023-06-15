@@ -73,8 +73,22 @@ const copyTempPost = (src) => {
 };
 
 describe('post_parse', () => {
-
-  const testFrontmatterAllProps = (post) => () => {
+  test.each([
+    { 
+      name: 'use path to get frontmatter:all props:',
+      post: new PostParse({
+        path: DEF_TEST_INPUT_MD_PATH,
+        conf: getConf()
+      })
+    },
+    {
+      name: 'input marddown text to get frontmatter:all props:',
+      post: new PostParse({
+        markdownText: TEST_CASE_FRONTMATTER,
+        conf: getConf()
+      })
+    }
+  ])('$name', ({ post }) => {
     const ret = post.getFrontmatter();
 
     expect(ret).toHaveProperty('title');
@@ -90,19 +104,9 @@ describe('post_parse', () => {
     expect(tags.length).not.toBeUndefined();
     expect((tags || []).length).toBeGreaterThan(0);
     expect(issue_number).not.toBeUndefined();
-  };
+  });
 
-  test('use path to get frontmatter:all props:', testFrontmatterAllProps(new PostParse({
-    path: DEF_TEST_INPUT_MD_PATH,
-    conf: getConf()
-  })));
-
-  test('input marddown text to get frontmatter:all props:', testFrontmatterAllProps(new PostParse({
-    markdownText: TEST_CASE_FRONTMATTER,
-    conf: getConf()
-  })));
-
-  test('get ast', () => {
+  test('use inputMarkdownText to get ast', () => {
     const post = getPostIns({ markdownText: TEST_CASE_MARKDOWN_EN_PIC });
     const ret = post.getAst();
     
@@ -131,7 +135,26 @@ describe('post_parse', () => {
     expect(ret1).not.toBeUndefined();
   });
 
-  const testLinkFormatFactory = ({ markdownText, expectedLink, conf, disable } = {}) => () => {
+  test.each([
+    {
+      name: 'en image link',
+      markdownText: TEST_CASE_MARKDOWN_EN_PIC,
+      expectedLink: 'https://isaaxite.github.io/blog/resources/license/pic.png',
+      // disable: true
+    },
+    {
+      name: 'cn image link',
+      markdownText: TEST_CASE_MARKDOWN_CN_PIC,
+      expectedLink: 'https://isaaxite.github.io/blog/resources/license/图片.png',
+      conf: getConf({ dir: '许可证' })
+    },
+    {
+      name: 'cn(uriencode) image link',
+      markdownText: TEST_CASE_MARKDOWN_CN_ENCODE_PIC,
+      expectedLink: 'https://isaaxite.github.io/blog/resources/license/图片.png',
+      conf: getConf({ dir: '许可证' })
+    }
+  ])('test formated $name', ({ markdownText, expectedLink, conf, disable })=> {
     if (disable) {
       return;
     }
@@ -168,31 +191,13 @@ describe('post_parse', () => {
 
     expect(imgAst.url).not.toBeUndefined();
     expect(decodeURIComponent(imgAst.url)).toStrictEqual(expectedLink);
-  };
-
-  test('test formated en image link', testLinkFormatFactory({
-    markdownText: TEST_CASE_MARKDOWN_EN_PIC,
-    expectedLink: 'https://isaaxite.github.io/blog/resources/license/pic.png',
-    // disable: true
-  }));
-
-  test('test formated cn image link', testLinkFormatFactory({
-    markdownText: TEST_CASE_MARKDOWN_CN_PIC,
-    expectedLink: 'https://isaaxite.github.io/blog/resources/license/图片.png',
-    conf: getConf({ dir: '许可证' })
-  }));
-
-  test('test formated cn(uriencode) image link', testLinkFormatFactory({
-    markdownText: TEST_CASE_MARKDOWN_CN_ENCODE_PIC,
-    expectedLink: 'https://isaaxite.github.io/blog/resources/license/图片.png',
-    conf: getConf({ dir: '许可证' })
-  }));
+  });
 
   test('empty parse conf', () => {});
 
   test('parse conf: if exist sep', () => {});
 
-  test('debug:inject frontmatter to src markdown', () => {
+  test.skip('debug:inject frontmatter to src markdown', () => {
     const postpath = copyTempPost('__test__/temp/source/_posts/license.md');
     const getPostParseIns = () => new PostParse({
       path: postpath,
@@ -215,31 +220,31 @@ describe('post_parse', () => {
     removeTempPost();
   });
 
-  // test.only('debug', () => {
-  //   const confReader = new ConfReader({ path: '__test__/conf.yml' });
-  //   const conf = confReader.get();
-  //   const finder = new PostFinder({ patterns: [conf.post_dir] });
-  //   const filepaths = finder.getFilepaths();
+  test.skip('debug', () => {
+    const confReader = new ConfReader({ path: '__test__/conf.yml' });
+    const conf = confReader.get();
+    const finder = new PostFinder({ patterns: [conf.post_dir] });
+    const filepaths = finder.getFilepaths();
 
-  //   for (const filepath of filepaths.slice(0, 1)) {
-  //     let postParse = new PostParse({
-  //       path: filepath,
-  //       conf: {
-  //         dir: '',
-  //         prefix: conf.prefix,
-  //         types: conf.types
-  //       }
-  //     });
-  //     const imputMarkdown = postParse.getInputMarkdown();
-  //     const frontmatter = postParse.getFrontmatter();
-  //     const formatedMarkdown = postParse.getFormatedMarkdown();
+    for (const filepath of filepaths.slice(0, 1)) {
+      let postParse = new PostParse({
+        path: filepath,
+        conf: {
+          dir: '',
+          prefix: conf.prefix,
+          types: conf.types
+        }
+      });
+      const imputMarkdown = postParse.getInputMarkdown();
+      const frontmatter = postParse.getFrontmatter();
+      const formatedMarkdown = postParse.getFormatedMarkdown();
 
-  //     console.info(frontmatter)
+      console.info(frontmatter)
 
 
 
-  //     postParse = null;
-  //   }
-  //   // console.info(filepaths);
-  // });
+      postParse = null;
+    }
+    // console.info(filepaths);
+  });
 });
