@@ -1,4 +1,4 @@
-import { IssueBro } from '../lib/issue_bro.js';
+import { PostManager } from '../lib/issue_bro.js';
 import { readFileSync } from 'fs';
 import { PostParse } from '../lib/post_parse.js';
 
@@ -6,7 +6,7 @@ import { PostParse } from '../lib/post_parse.js';
 
 (async function main() {
 
-  const issue = new IssueBro({
+  const issue = new PostManager({
     owner: 'isaaxite',
     repo: 'deploy-posts-to-github-issue',
     token: process.env.GITHUB_TOKEN
