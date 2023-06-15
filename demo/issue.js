@@ -1,4 +1,4 @@
-import { PostManager } from '../lib/issue_bro.js';
+import { PostManager } from '../lib/post_manager.js';
 import { readFileSync } from 'fs';
 import { PostParse } from '../lib/post_parse.js';
 
