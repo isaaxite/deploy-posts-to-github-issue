@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1686827017390" clover="3.2.0">
-  <project timestamp="1686827017390" name="All files">
+<coverage generated="1686827171642" clover="3.2.0">
+  <project timestamp="1686827171643" name="All files">
     <metrics statements="166" coveredstatements="141" conditionals="62" coveredconditionals="43" methods="19" coveredmethods="14" elements="247" coveredelements="198" complexity="0" loc="166" ncloc="166" packages="1" files="5" classes="5"/>
     <file name="conf_reader.js" path="/home/isaac/workspace/deploy-posts-to-github-issue/lib/conf_reader.js">
       <metrics statements="12" coveredstatements="11" conditionals="4" coveredconditionals="2" methods="2" coveredmethods="2"/>
