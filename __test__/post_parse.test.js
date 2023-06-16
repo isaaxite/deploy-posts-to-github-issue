@@ -168,8 +168,8 @@ describe('post_parse', () => {
 
   test('parse conf: if exist sep', () => {});
 
-  test.only('debug:inject frontmatter to src markdown', () => {
-    const postpath = copyTempPost('__test__/temp/source/_posts/license.md');
+  test.skip('debug:inject frontmatter to src markdown', () => {
+    const { filepath: postpath } = copyTempPost('__test__/temp/source/_posts/license.md');
     const getPostParseIns = () => new PostParse({
       path: postpath,
       conf: {
