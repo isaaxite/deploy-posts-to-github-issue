@@ -32,8 +32,7 @@ const TEST_CASE_MARKDOWN_CN_ENCODE_PIC = TEST_CASE_FRONTMATTER + `
 
 const DEF_TEST_INPUT_MD_PATH = '__test__/post1.md';
 
-const getConf = ({ dir, prefix, types } = {}) => ({
-  dir: dir || 'license',
+const getConf = ({ prefix, types } = {}) => ({
   prefix: prefix || 'https://isaaxite.github.io/blog/resources/',
   types: types || ['image']
 });
@@ -118,13 +117,13 @@ describe('post_parse', () => {
       name: 'cn image link',
       markdownText: TEST_CASE_MARKDOWN_CN_PIC,
       expectedLink: 'https://isaaxite.github.io/blog/resources/license/图片.png',
-      conf: getConf({ dir: '许可证' })
+      conf: getConf()
     },
     {
       name: 'cn(uriencode) image link',
       markdownText: TEST_CASE_MARKDOWN_CN_ENCODE_PIC,
       expectedLink: 'https://isaaxite.github.io/blog/resources/license/图片.png',
-      conf: getConf({ dir: '许可证' })
+      conf: getConf()
     }
   ])('test formated $name', ({ markdownText, expectedLink, conf, disable })=> {
     if (disable) {

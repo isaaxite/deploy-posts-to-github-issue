@@ -14,7 +14,6 @@ export function isubo({
       let postParse = new PostParse({
         path: filepath,
         conf: {
-          dir: '',
           prefix: conf.prefix,
           types: conf.types
         }
