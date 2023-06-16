@@ -10,5 +10,8 @@ describe('conf reader', () => {
     expect(conf).toHaveProperty('post_dir');
     expect(conf).toHaveProperty('prefix');
     expect(conf).toHaveProperty('types');
+    expect(conf).toHaveProperty('owner');
+    expect(conf).toHaveProperty('repo');
+    expect(conf).toHaveProperty('token', process.env.GITHUB_TOKEN);
   })
 });

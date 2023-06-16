@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1686905735520" clover="3.2.0">
-  <project timestamp="1686905735520" name="All files">
-    <metrics statements="261" coveredstatements="203" conditionals="80" coveredconditionals="46" methods="31" coveredmethods="21" elements="372" coveredelements="270" complexity="0" loc="261" ncloc="261" packages="3" files="7" classes="7"/>
+<coverage generated="1686907117344" clover="3.2.0">
+  <project timestamp="1686907117344" name="All files">
+    <metrics statements="268" coveredstatements="211" conditionals="84" coveredconditionals="50" methods="32" coveredmethods="21" elements="384" coveredelements="282" complexity="0" loc="268" ncloc="268" packages="3" files="7" classes="7"/>
     <package name="deploy-posts-to-github-issue">
       <metrics statements="68" coveredstatements="37" conditionals="15" coveredconditionals="3" methods="4" coveredmethods="2"/>
       <file name="index.js" path="/home/isaac/workspace/deploy-posts-to-github-issue/index.js">
@@ -77,14 +77,14 @@
       </file>
     </package>
     <package name="deploy-posts-to-github-issue.__test__">
-      <metrics statements="28" coveredstatements="20" conditionals="3" coveredconditionals="0" methods="8" coveredmethods="4"/>
+      <metrics statements="31" coveredstatements="24" conditionals="3" coveredconditionals="1" methods="9" coveredmethods="4"/>
       <file name="utils.js" path="/home/isaac/workspace/deploy-posts-to-github-issue/__test__/utils.js">
-        <metrics statements="28" coveredstatements="20" conditionals="3" coveredconditionals="0" methods="8" coveredmethods="4"/>
+        <metrics statements="31" coveredstatements="24" conditionals="3" coveredconditionals="1" methods="9" coveredmethods="4"/>
         <line num="6" count="3" type="stmt"/>
         <line num="8" count="3" type="cond" truecount="0" falsecount="1"/>
-        <line num="9" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="11" count="0" type="stmt"/>
+        <line num="9" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
         <line num="13" count="0" type="stmt"/>
         <line num="14" count="0" type="stmt"/>
         <line num="18" count="3" type="stmt"/>
@@ -94,38 +94,45 @@
         <line num="22" count="2" type="stmt"/>
         <line num="23" count="2" type="stmt"/>
         <line num="24" count="2" type="stmt"/>
+        <line num="26" count="2" type="stmt"/>
         <line num="27" count="2" type="stmt"/>
-        <line num="28" count="2" type="stmt"/>
-        <line num="30" count="2" type="stmt"/>
-        <line num="37" count="3" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
+        <line num="36" count="3" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
         <line num="40" count="0" type="stmt"/>
-        <line num="41" count="0" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
         <line num="46" count="1" type="stmt"/>
-        <line num="47" count="1" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
         <line num="49" count="1" type="stmt"/>
-        <line num="50" count="1" type="stmt"/>
-        <line num="52" count="1" type="stmt"/>
-        <line num="58" count="1" type="stmt"/>
-        <line num="61" count="1" type="stmt"/>
-        <line num="64" count="0" type="stmt"/>
+        <line num="51" count="1" type="stmt"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="60" count="0" type="stmt"/>
+        <line num="63" count="1" type="stmt"/>
+        <line num="67" count="1" type="stmt"/>
+        <line num="68" count="1" type="stmt"/>
+        <line num="72" count="0" type="stmt"/>
       </file>
     </package>
     <package name="deploy-posts-to-github-issue.lib">
-      <metrics statements="165" coveredstatements="146" conditionals="62" coveredconditionals="43" methods="19" coveredmethods="15"/>
+      <metrics statements="169" coveredstatements="150" conditionals="66" coveredconditionals="46" methods="19" coveredmethods="15"/>
       <file name="conf_reader.js" path="/home/isaac/workspace/deploy-posts-to-github-issue/lib/conf_reader.js">
-        <metrics statements="12" coveredstatements="11" conditionals="4" coveredconditionals="2" methods="2" coveredmethods="2"/>
+        <metrics statements="16" coveredstatements="15" conditionals="8" coveredconditionals="5" methods="2" coveredmethods="2"/>
         <line num="5" count="2" type="stmt"/>
         <line num="6" count="2" type="stmt"/>
         <line num="9" count="2" type="stmt"/>
         <line num="13" count="2" type="stmt"/>
-        <line num="14" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="15" count="0" type="stmt"/>
+        <line num="15" count="2" type="cond" truecount="3" falsecount="1"/>
+        <line num="16" count="2" type="stmt"/>
         <line num="18" count="2" type="stmt"/>
-        <line num="19" count="2" type="stmt"/>
-        <line num="23" count="2" type="stmt"/>
-        <line num="28" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="29" count="2" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="23" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="28" count="2" type="stmt"/>
         <line num="32" count="2" type="stmt"/>
+        <line num="37" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="38" count="2" type="stmt"/>
+        <line num="41" count="2" type="stmt"/>
       </file>
       <file name="link_formater.js" path="/home/isaac/workspace/deploy-posts-to-github-issue/lib/link_formater.js">
         <metrics statements="23" coveredstatements="21" conditionals="8" coveredconditionals="6" methods="2" coveredmethods="2"/>
