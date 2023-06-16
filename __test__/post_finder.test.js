@@ -56,5 +56,17 @@ describe('post_finder', () => {
     }
   });
 
+  test('find with serveral filenames', () => {
+    const filename = ['NexT添加文章置顶feat', 'nvm安装与基本使用'];
+    const finder = new PostFinder({
+      postDir: '__test__/temp/source/_posts',
+      filename
+    });
+    const destFilepaths = finder.getFilepaths();
+    expect(destFilepaths).toEqual(
+      expect.arrayContaining(filename.map(it => `__test__/temp/source/_posts/${it}.md`))
+    );
+  });
+
   test('todo: check PostFinder params', () => {})
 });

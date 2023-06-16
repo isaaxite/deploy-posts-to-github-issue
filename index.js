@@ -129,10 +129,19 @@ export class Isubo {
     // todo: check forceCreate success or not
 
     postParse.injectFrontmatter({
-      issue_number: ret.data.issue_number
+      issue_number: ret.data.number
     });
 
     return ret;
+  }
+
+  async #publishOneBy({ filepath }) {
+    const { frontmatter } = this.#getPostDetailBy({ filepath });
+    if (frontmatter.issue_number) {
+      return await this.#updateOneBy({ filepath });
+    } else {
+      return await this.#createOneBy({ filepath });
+    }
   }
 
   #getPostPaths(params) {
@@ -208,6 +217,16 @@ export class Isubo {
     const filepathArr = this.#finder.getFilepaths();
     for (const filepath of filepathArr) {
       retArr.push(await this.#updateOneBy({ filepath }));
+    }
+
+    return retArr;
+  }
+
+  async publish() {
+    const retArr = []
+    const filepathArr = this.#finder.getFilepaths();
+    for (const filepath of filepathArr) {
+      retArr.push(await this.#publishOneBy({ filepath }));
     }
 
     return retArr;
