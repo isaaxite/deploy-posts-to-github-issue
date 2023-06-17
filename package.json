@@ -4,6 +4,9 @@
   "description": "deploy posts are written in markdown to github issue",
   "main": "index.js",
   "type": "module",
+  "bin": {
+    "isubo": "bin/index.js"
+  },
   "scripts": {
     "test": "jest",
     "estest": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
@@ -12,6 +15,11 @@
     "type": "git",
     "url": "git+https://github.com/isaaxite/deploy-posts-to-github-issue.git"
   },
+  "lib": [
+    "index.js",
+    "bin/index.js",
+    "lib/"
+  ],
   "keywords": [
     "markdown",
     "deploy",
@@ -34,7 +42,8 @@
     "remark-frontmatter": "^4.0.1",
     "remark-parse": "^10.0.2",
     "remark-stringify": "^10.0.3",
-    "unified": "^10.1.2"
+    "unified": "^10.1.2",
+    "yargs": "^17.7.2"
   },
   "devDependencies": {
     "@jest/globals": "^29.5.0"

@@ -35,6 +35,9 @@ dependencies:
   unified:
     specifier: ^10.1.2
     version: 10.1.2
+  yargs:
+    specifier: ^17.7.2
+    version: 17.7.2
 
 devDependencies:
   '@jest/globals':
