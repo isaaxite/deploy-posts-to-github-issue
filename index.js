@@ -49,13 +49,6 @@ export class Isubo {
     this.#finder = new PostFinder(params);
   }
 
-  // #setConfPath(confPath) {
-  //   let isValid = false;
-  //   this.#confPath = confPath;
-  //   isValid = true;
-  //   return isValid;
-  // }
-
   #setCliParams(cliParams) {
     this.#cliParams = cliParams
   }
@@ -142,64 +135,6 @@ export class Isubo {
     } else {
       return await this.#createOneBy({ filepath });
     }
-  }
-
-  #getPostPaths(params) {
-    // 
-    const conf = this.#conf;
-    const finder = new PostFinder(params);
-    const filepaths = finder.getFilepaths();
-    return filepaths;
-  }
-
-  #deploy({
-    type
-  } = {
-    type: DeployType.IDLE
-  }) {
-    const conf = this.#conf;
-    const finder = new PostFinder({ patterns: [conf.post_dir] });
-    const filepaths = finder.getFilepaths();
-
-    for (const filepath of filepaths.slice(0, 1)) {
-      let postParse = new PostParse({
-        path: filepath,
-        conf: {
-          prefix: conf.prefix,
-          types: conf.types
-        }
-      });
-      const inputMarkdown = postParse.getInputMarkdown();
-      const frontmatter = postParse.getFrontmatter();
-      const formatedMarkdown = postParse.getFormatedMarkdown();
-
-      if (frontmatter.issue_number) {
-
-        switch(type) {
-          case DeployType.CREATE:
-            // create
-            break;
-          case DeployType.IDLE:
-          default:
-            // update
-        }
-        // update issue
-      } else {
-        switch (type) {
-          case DeployType.UPDATE:
-            // err
-            break;
-          case DeployType.CREATE:
-          default:
-            // create
-        }
-      }
-      postParse = null;
-    }
-  }
-
-  publish() {
-    this.#deploy();
   }
 
   async create() {
