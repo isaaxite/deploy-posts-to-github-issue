@@ -37,4 +37,17 @@ describe('conf reader', () => {
 
     removeSync(destPath);
   });
+
+  test('default link_prefix', () => {
+    const destPath = `__test__/temp/conf.${String(Date.now()).slice(2)}.yml`;
+    copySync('__test__/conf.yml', destPath);
+    const preConf = loadYaml(readFileSync(destPath));
+    preConf.link_prefix = '';
+    writeFileSync(destPath, yamlDump(preConf));
+    const confReader = new ConfReader({ path: destPath });
+    const conf = confReader.get();
+    expect(conf.link_prefix).toEqual('https://raw.githubusercontent.com/isaaxite/test-repo_deploy-posts-to-github-issue/main/source/')
+
+    removeSync(destPath);
+  });
 });
