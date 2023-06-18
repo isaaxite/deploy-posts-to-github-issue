@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1687103986262" clover="3.2.0">
-  <project timestamp="1687103986262" name="All files">
+<coverage generated="1687104481362" clover="3.2.0">
+  <project timestamp="1687104481362" name="All files">
     <metrics statements="276" coveredstatements="246" conditionals="94" coveredconditionals="66" methods="33" coveredmethods="24" elements="403" coveredelements="336" complexity="0" loc="276" ncloc="276" packages="3" files="7" classes="7"/>
     <package name="deploy-posts-to-github-issue">
       <metrics statements="58" coveredstatements="54" conditionals="8" coveredconditionals="5" methods="4" coveredmethods="4"/>

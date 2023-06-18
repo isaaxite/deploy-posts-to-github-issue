@@ -3,7 +3,7 @@ import { LinkFormater } from '../lib/link_formater.js';
 
 describe('link formater', () => {
   const expextUrl = 'https://isaaxite.github.io/blog/resources/license/pic.png';
-  test('add url prefix for relative src', () => {
+  test('add url link_prefix for relative src', () => {
     const formater1 = new LinkFormater('./license/pic.png', {
       url_prefix: 'https://isaaxite.github.io/blog/resources'
     });
@@ -16,7 +16,7 @@ describe('link formater', () => {
     expect(formater2.dest).toStrictEqual(expextUrl);
   });
 
-  test('add url prefix(without schema) for relative src', () => {
+  test('add url link_prefix(without schema) for relative src', () => {
     const formater = new LinkFormater('./license/pic.png', {
       url_prefix: 'isaaxite.github.io/blog/resources/'
     });

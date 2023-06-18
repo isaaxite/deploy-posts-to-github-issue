@@ -54,17 +54,17 @@ source_dir: source/
 ## it can take a string or plain object, as the blew example
 ##
 ## string: 
-##  prefix: https://raw.githubusercontent.com/<owner>/<repo>/<branch>/<post_dir>/
+##  link_prefix: https://raw.githubusercontent.com/<owner>/<repo>/<branch>/<post_dir>/
 ##
 ## object:
-##  prefix:
+##  link_prefix:
 ##    owner: <owner>, default, global owner
 ##    repo: <repo>, default, global repo
 ##    branch: <branch>, default global branch
 ##    dir: '<dir>', default default global post_dir
 ##
-# Default, prefix: https://raw.githubusercontent.com/<owner>/<repo>/<branch>/<post_dir>/
-# prefix: 
+# Default, link_prefix: https://raw.githubusercontent.com/<owner>/<repo>/<branch>/<post_dir>/
+# link_prefix: 
 
 ## [optional]
 ## types, Which link type show be formated

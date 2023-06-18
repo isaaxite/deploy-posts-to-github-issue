@@ -32,8 +32,8 @@ const TEST_CASE_MARKDOWN_CN_ENCODE_PIC = TEST_CASE_FRONTMATTER + `
 
 const DEF_TEST_INPUT_MD_PATH = '__test__/post1.md';
 
-const getConf = ({ prefix, types } = {}) => ({
-  prefix: prefix || 'https://isaaxite.github.io/blog/resources/',
+const getConf = ({ link_prefix, types } = {}) => ({
+  link_prefix: link_prefix || 'https://isaaxite.github.io/blog/resources/',
   types: types || ['image']
 });
 
@@ -173,7 +173,7 @@ describe('post_parse', () => {
     const getPostParseIns = () => new PostParse({
       path: postpath,
       conf: {
-        prefix: 'https://isaaxite.github.io/blog/resources/',
+        link_prefix: 'https://isaaxite.github.io/blog/resources/',
         types: ['image']
       }
     });
@@ -202,7 +202,7 @@ describe('post_parse', () => {
         path: filepath,
         conf: {
           dir: '',
-          prefix: conf.prefix,
+          link_prefix: conf.link_prefix,
           types: conf.types
         }
       });

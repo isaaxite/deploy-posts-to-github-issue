@@ -80,7 +80,7 @@ export class Isubo {
     const postParse = new PostParse({
       path: filepath,
       conf: {
-        prefix: conf.prefix,
+        link_prefix: conf.link_prefix,
         types: conf.types
       }
     });

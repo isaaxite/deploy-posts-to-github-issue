@@ -11,18 +11,18 @@ describe('conf reader', () => {
 
     expect(conf).not.toBeUndefined();
     expect(conf).toHaveProperty('source_dir');
-    expect(conf).toHaveProperty('prefix');
+    expect(conf).toHaveProperty('link_prefix');
     expect(conf).toHaveProperty('types');
     expect(conf).toHaveProperty('owner');
     expect(conf).toHaveProperty('repo');
     expect(conf).toHaveProperty('token', process.env.GITHUB_TOKEN); 
   });
 
-  test('read object prefix conf', () => {
+  test('read object link_prefix conf', () => {
     const destPath = `__test__/temp/conf.${String(Date.now()).slice(2)}.yml`;
     copySync('__test__/conf.yml', destPath);
     const preConf = loadYaml(readFileSync(destPath));
-    preConf.prefix = {
+    preConf.link_prefix = {
       owner: preConf.owner,
       repo: preConf.repo,
       branch: 'master',
@@ -33,7 +33,7 @@ describe('conf reader', () => {
 
     const confReader = new ConfReader({ path: destPath });
     const conf = confReader.get();
-    expect(conf.prefix).toEqual('https://raw.githubusercontent.com/isaaxite/test-repo_deploy-posts-to-github-issue/master/posts/')
+    expect(conf.link_prefix).toEqual('https://raw.githubusercontent.com/isaaxite/test-repo_deploy-posts-to-github-issue/master/posts/')
 
     removeSync(destPath);
   });
