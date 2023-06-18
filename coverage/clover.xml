@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1687017740494" clover="3.2.0">
-  <project timestamp="1687017740494" name="All files">
-    <metrics statements="277" coveredstatements="247" conditionals="96" coveredconditionals="68" methods="33" coveredmethods="24" elements="406" coveredelements="339" complexity="0" loc="277" ncloc="277" packages="3" files="7" classes="7"/>
+<coverage generated="1687103986262" clover="3.2.0">
+  <project timestamp="1687103986262" name="All files">
+    <metrics statements="276" coveredstatements="246" conditionals="94" coveredconditionals="66" methods="33" coveredmethods="24" elements="403" coveredelements="336" complexity="0" loc="276" ncloc="276" packages="3" files="7" classes="7"/>
     <package name="deploy-posts-to-github-issue">
       <metrics statements="58" coveredstatements="54" conditionals="8" coveredconditionals="5" methods="4" coveredmethods="4"/>
       <file name="index.js" path="/home/isaac/workspace/deploy-posts-to-github-issue/index.js">
@@ -110,7 +110,7 @@
       </file>
     </package>
     <package name="deploy-posts-to-github-issue.lib">
-      <metrics statements="182" coveredstatements="163" conditionals="81" coveredconditionals="58" methods="20" coveredmethods="16"/>
+      <metrics statements="181" coveredstatements="162" conditionals="79" coveredconditionals="56" methods="20" coveredmethods="16"/>
       <file name="conf_reader.js" path="/home/isaac/workspace/deploy-posts-to-github-issue/lib/conf_reader.js">
         <metrics statements="22" coveredstatements="21" conditionals="16" coveredconditionals="10" methods="2" coveredmethods="2"/>
         <line num="5" count="5" type="stmt"/>
@@ -163,7 +163,7 @@
         <line num="53" count="95" type="stmt"/>
       </file>
       <file name="post_finder.js" path="/home/isaac/workspace/deploy-posts-to-github-issue/lib/post_finder.js">
-        <metrics statements="38" coveredstatements="35" conditionals="21" coveredconditionals="18" methods="3" coveredmethods="3"/>
+        <metrics statements="37" coveredstatements="34" conditionals="19" coveredconditionals="16" methods="3" coveredmethods="3"/>
         <line num="6" count="10" type="stmt"/>
         <line num="7" count="10" type="stmt"/>
         <line num="8" count="10" type="stmt"/>
@@ -197,11 +197,10 @@
         <line num="72" count="9" type="stmt"/>
         <line num="76" count="1" type="stmt"/>
         <line num="80" count="9" type="cond" truecount="2" falsecount="0"/>
-        <line num="81" count="9" type="cond" truecount="2" falsecount="0"/>
-        <line num="82" count="10" type="stmt"/>
-        <line num="84" count="1" type="stmt"/>
-        <line num="89" count="10" type="stmt"/>
-        <line num="91" count="10" type="stmt"/>
+        <line num="81" count="10" type="stmt"/>
+        <line num="83" count="1" type="stmt"/>
+        <line num="88" count="10" type="stmt"/>
+        <line num="90" count="10" type="stmt"/>
       </file>
       <file name="post_manager.js" path="/home/isaac/workspace/deploy-posts-to-github-issue/lib/post_manager.js">
         <metrics statements="37" coveredstatements="24" conditionals="21" coveredconditionals="10" methods="7" coveredmethods="3"/>

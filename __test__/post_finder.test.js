@@ -15,24 +15,24 @@ describe('post_finder', () => {
 
   test.each([
     {
-      name: 'postDir, filename and ext', 
-      params: { postDir: '__test__/temp/source/', filename: 'NexT添加文章置顶feat', ext: 'md' }
+      name: 'sourceDir, filename and ext', 
+      params: { sourceDir: '__test__/temp/source/', filename: 'NexT添加文章置顶feat', ext: 'md' }
     },
     { 
-      name: 'postDir and filename', 
-      params: { postDir: '__test__/temp/source/', filename: 'NexT添加文章置顶feat' }
+      name: 'sourceDir and filename', 
+      params: { sourceDir: '__test__/temp/source/', filename: 'NexT添加文章置顶feat' }
     },
     {
       name: 'filename include multiple path',
-      params: { postDir: '__test__/temp/source/', filename: '/source/_posts/NexT添加文章置顶feat' }
+      params: { sourceDir: '__test__/temp/source/', filename: '/source/_posts/NexT添加文章置顶feat' }
     },
     {
       name: 'filename include multiple path and ext',
-      params: { postDir: '__test__/temp/source/', filename: '/source/_posts/NexT添加文章置顶feat.html' }
+      params: { sourceDir: '__test__/temp/source/', filename: '/source/_posts/NexT添加文章置顶feat.html' }
     },
     {
-      name: 'only postDir',
-      params: { postDir: '__test__/temp/source/' }
+      name: 'only sourceDir',
+      params: { sourceDir: '__test__/temp/source/' }
     },
   ])('glob a matched file whit $name', ({ params }) => {
     const finder = new PostFinder({
@@ -59,7 +59,7 @@ describe('post_finder', () => {
   test('find with serveral filenames', () => {
     const filename = ['NexT添加文章置顶feat', 'nvm安装与基本使用'];
     const finder = new PostFinder({
-      postDir: '__test__/temp/source/_posts',
+      sourceDir: '__test__/temp/source/_posts',
       filename
     });
     const destFilepaths = finder.getFilepaths();

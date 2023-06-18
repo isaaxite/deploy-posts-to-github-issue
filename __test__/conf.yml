@@ -1,7 +1,7 @@
 owner: isaaxite
 repo: test-repo_deploy-posts-to-github-issue
 token: $GITHUB_TOKEN
-post_dir: __test__/temp/source/**/*.md
+source_dir: __test__/temp/source/**/*.md
 prefix: https://isaaxite.github.io/blog/resources/
 asset_dir: '{filename}'
 types: 

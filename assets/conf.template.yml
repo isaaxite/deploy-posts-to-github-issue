@@ -43,8 +43,8 @@ token: ''
 ## Post dir, The top-level directory where articles are stored, and isubo will look for.
 ## Default "source/"
 ## e.g.
-## post_dir: "source/"
-post_dir: source/
+## source_dir: "source/"
+source_dir: source/
 
 
 # Link Format

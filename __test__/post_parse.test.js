@@ -194,7 +194,7 @@ describe('post_parse', () => {
   test.skip('debug', () => {
     const confReader = new ConfReader({ path: '__test__/conf.yml' });
     const conf = confReader.get();
-    const finder = new PostFinder({ patterns: [conf.post_dir] });
+    const finder = new PostFinder({ patterns: [conf.source_dir] });
     const filepaths = finder.getFilepaths();
 
     for (const filepath of filepaths.slice(0, 1)) {

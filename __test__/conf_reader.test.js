@@ -10,7 +10,7 @@ describe('conf reader', () => {
     const conf = confReader.get();
 
     expect(conf).not.toBeUndefined();
-    expect(conf).toHaveProperty('post_dir');
+    expect(conf).toHaveProperty('source_dir');
     expect(conf).toHaveProperty('prefix');
     expect(conf).toHaveProperty('types');
     expect(conf).toHaveProperty('owner');

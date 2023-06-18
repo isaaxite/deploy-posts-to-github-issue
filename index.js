@@ -42,7 +42,7 @@ export class Isubo {
     } else if (pattern) {
       params.patterns = [pattern];
     } else {
-      params.postDir = conf.post_dir;
+      params.sourceDir = conf.source_dir;
       params.filename = filename;
     }
 
