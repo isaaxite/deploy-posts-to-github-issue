@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="assets/logo.png" />
+</div>
+
 # deploy-posts-to-github-issue
 deploy posts are written in markdown  to github issue
 
