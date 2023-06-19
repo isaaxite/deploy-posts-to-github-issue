@@ -1,6 +1,7 @@
 <div align="center">
   <img src="assets/logo.png" />
 </div>
+<br/>
 <div align="center">
   <a href="https://github.com/isaaxite/deploy-posts-to-github-issue/blob/main/LICENSE"><img src="https://img.shields.io/bower/l/MI" alt="license"></a>
   <img src="https://img.shields.io/github/languages/top/isaaxite/deploy-posts-to-github-issue" alt="languages-top">
