@@ -67,6 +67,6 @@ source_dir: source/
 # link_prefix: 
 
 ## [optional]
-## types, Which link type show be formated
+## types, Which link type should be formated
 types: 
   - image

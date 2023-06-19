@@ -2,7 +2,7 @@ import { describe, test, expect } from '@jest/globals';
 import { PostParse } from '../lib/post_parse.js';
 import { ConfReader } from '../lib/conf_reader.js';
 import { PostFinder } from '../lib/post_finder.js';
-import { copyTempPost, removeTempPost } from './utils.js';
+import { copyTempPost, detectOnly, removeTempPost } from './utils.js';
 
 const TEST_CASE_FRONTMATTER = `---
 title: LICENSE的选择与生成
@@ -106,12 +106,12 @@ describe('post_parse', () => {
     expect(ret1).not.toBeUndefined();
   });
 
-  test.each([
+  test.each(detectOnly([
     {
       name: 'en image link',
       markdownText: TEST_CASE_MARKDOWN_EN_PIC,
       expectedLink: 'https://isaaxite.github.io/blog/resources/license/pic.png',
-      // disable: true
+      // only: true
     },
     {
       name: 'cn image link',
@@ -125,7 +125,7 @@ describe('post_parse', () => {
       expectedLink: 'https://isaaxite.github.io/blog/resources/license/图片.png',
       conf: getConf()
     }
-  ])('test formated $name', ({ markdownText, expectedLink, conf, disable })=> {
+  ]))('test formated $name', ({ markdownText, expectedLink, conf, disable })=> {
     if (disable) {
       return;
     }
@@ -164,9 +164,9 @@ describe('post_parse', () => {
     expect(decodeURIComponent(imgAst.url)).toStrictEqual(expectedLink);
   });
 
-  test('empty parse conf', () => {});
+  test.todo('empty parse conf');
 
-  test('parse conf: if exist sep', () => {});
+  test.todo('parse conf: if exist sep');
 
   test.skip('debug:inject frontmatter to src markdown', () => {
     const { filepath: postpath } = copyTempPost('__test__/temp/source/_posts/license.md');
