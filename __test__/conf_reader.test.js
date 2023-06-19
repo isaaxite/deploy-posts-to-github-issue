@@ -46,6 +46,7 @@ describe('conf reader', () => {
     writeFileSync(destPath, yamlDump(preConf));
     const confReader = new ConfReader({ path: destPath });
     const conf = confReader.get();
+    // console.log(conf)
     expect(conf.link_prefix).toEqual('https://raw.githubusercontent.com/isaaxite/test-repo_deploy-posts-to-github-issue/main/source/')
 
     removeSync(destPath);

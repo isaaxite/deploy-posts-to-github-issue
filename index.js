@@ -79,10 +79,7 @@ export class Isubo {
     const conf = this.#conf;
     const postParse = new PostParse({
       path: filepath,
-      conf: {
-        link_prefix: conf.link_prefix,
-        types: conf.types
-      }
+      conf
     });
     const inputMarkdown = postParse.getInputMarkdown();
     const frontmatter = postParse.getFrontmatter();

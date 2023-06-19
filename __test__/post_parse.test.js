@@ -34,7 +34,8 @@ const DEF_TEST_INPUT_MD_PATH = '__test__/post1.md';
 
 const getConf = ({ link_prefix, types } = {}) => ({
   link_prefix: link_prefix || 'https://isaaxite.github.io/blog/resources/',
-  types: types || ['image']
+  types: types || ['image'],
+  disable_asset_find: true
 });
 
 const getPostIns = ({ path, markdownText, conf } = {}) => new PostParse({
@@ -44,13 +45,14 @@ const getPostIns = ({ path, markdownText, conf } = {}) => new PostParse({
 });
 
 describe('post_parse', () => {
-  test.each([
+  test.each(detectOnly([
     { 
       name: 'use path to get frontmatter:all props:',
       post: new PostParse({
         path: DEF_TEST_INPUT_MD_PATH,
         conf: getConf()
-      })
+      }),
+      // only: true
     },
     {
       name: 'input marddown text to get frontmatter:all props:',
@@ -59,7 +61,7 @@ describe('post_parse', () => {
         conf: getConf()
       })
     }
-  ])('$name', ({ post }) => {
+  ]))('$name', ({ post }) => {
     const ret = post.getFrontmatter();
 
     expect(ret).toHaveProperty('title');
