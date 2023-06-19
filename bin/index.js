@@ -2,6 +2,7 @@
 
 import yargs from 'yargs';
 import { Isubo } from '../index.js';
+import { ConfReader } from '../lib/conf_reader.js';
 
 yargs(process.argv.slice(2))
   .usage(
@@ -34,6 +35,14 @@ yargs(process.argv.slice(2))
     async handler(argv) {
       const isubo = getIsuboIns(argv);
       await isubo.create();
+      process.exit(0);
+    }
+  })
+  .command({
+    command: 'init conf',
+    describe: 'Initialize the configuration file (isubo.conf.yml) in the current directory',
+    async handler() {
+      ConfReader.initConf();
       process.exit(0);
     }
   })

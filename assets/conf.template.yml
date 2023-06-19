@@ -23,7 +23,7 @@ repo: ''
 ## Branch of <owner>/<repo>, the branch where the resource is actually stored.
 ## Default 'main'
 ## branch: main
-branch: ''
+# branch: main
 
 ## [required]
 ## Github Token, it will be used to invoked github api to publish posts
@@ -44,7 +44,7 @@ token: ''
 ## Default "source/"
 ## e.g.
 ## source_dir: "source/"
-source_dir: source/
+# source_dir: source/
 
 
 # Link Format
@@ -70,5 +70,5 @@ source_dir: source/
 ## types, Which link type should be formated.
 ## According to the type specified by types, format the corresponding non-http path.
 ## Currently supports two formats of "image" and "link", the default is only "image" format.
-types: 
-  - image
+# types: 
+#   - image
