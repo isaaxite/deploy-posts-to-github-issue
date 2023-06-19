@@ -13,7 +13,8 @@
   <img src="https://img.shields.io/github/last-commit/isaaxite/deploy-posts-to-github-issue" alt="last-commit">
 </div>
 
-# deploy-posts-to-github-issue
+# Overview
+
 deploy posts are written in markdown  to github issue
 
 # Test situation
