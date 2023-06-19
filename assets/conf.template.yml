@@ -67,6 +67,8 @@ source_dir: source/
 # link_prefix: 
 
 ## [optional]
-## types, Which link type should be formated
+## types, Which link type should be formated.
+## According to the type specified by types, format the corresponding non-http path.
+## Currently supports two formats of "image" and "link", the default is only "image" format.
 types: 
   - image

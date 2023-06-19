@@ -6,3 +6,4 @@ link_prefix: https://isaaxite.github.io/blog/resources/
 asset_dir: '{filename}'
 types: 
   - image
+  - link
