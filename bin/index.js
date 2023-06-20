@@ -3,10 +3,13 @@
 import yargs from 'yargs';
 import { Isubo } from '../index.js';
 import { ConfReader } from '../lib/conf_reader.js';
+import { hinter } from '../lib/hinter.js';
+
+const KEY_POSTS = 'posts';
 
 yargs(process.argv.slice(2))
   .usage(
-    '$0 publish <posts>',
+    `$0 publish [${KEY_POSTS}]`,
     'Determin whether to create or update the posts base on issue_number',
     function builder(yargs) {
       return yargs.positional('posts', {
@@ -15,27 +18,30 @@ yargs(process.argv.slice(2))
       })
     },
     async function handler(argv) {
-      const isubo = getIsuboIns(argv);
-      await isubo.publish();
-      process.exit(0);
+      wraper(async () => {
+        const isubo = getIsuboIns(argv);
+        await isubo.publish();
+      });
     }
   )
   .command({
-    command: 'update <posts>',
+    command: `update [${KEY_POSTS}]`,
     describe: 'Update only those posts that have issue_number',
     async handler(argv) {
-      const isubo = getIsuboIns(argv);
-      await isubo.update();
-      process.exit(0);
+      wraper(async () => {
+        const isubo = getIsuboIns(argv);
+        await isubo.update();
+      });
     }
   })
   .command({
-    command: 'create <posts>',
+    command: `create [${KEY_POSTS}]`,
     describe: 'Mandatory creation, although the article contains issue_number',
     async handler(argv) {
-      const isubo = getIsuboIns(argv);
-      await isubo.create();
-      process.exit(0);
+      wraper(async () => {
+        const isubo = getIsuboIns(argv);
+        await isubo.create();
+      });
     }
   })
   .command({
@@ -50,12 +56,14 @@ yargs(process.argv.slice(2))
     ['$0 publish "How to use license"', 'publish a post name "How to use license"'],
     ['$0 publish "How to use license","What is git"', 'publish several posts']
   ])
-  .demandCommand(2, 'You need at least one command before moving on')
+  .demandCommand(0)
+  // .demandCommand(2, 'You need at least one command before moving on')
   .parse()
 
 function getIsuboIns(argv) {
   const cliParams = formatArgv(argv);
   return new Isubo({
+    selectPosts: !argv[KEY_POSTS],
     cliParams,
     confPath: 'isubo.conf.yml'
   });
@@ -63,8 +71,17 @@ function getIsuboIns(argv) {
 
 function formatArgv(argv) {
   const cliParams = {
-    filename: argv.posts.split(',')
+    filename: argv[KEY_POSTS] ? argv.posts.split(',') : ''
   };
 
   return cliParams;
+}
+
+async function wraper(cb) {
+  try {
+    await cb();
+  } catch (error) {
+    hinter.errMsg(error.message);
+  }
+  process.exit(0);
 }

@@ -1,4 +1,6 @@
+import path from 'path';
 import { ConfReader } from "./lib/conf_reader.js";
+import { hinter } from "./lib/hinter.js";
 import { PostFinder } from "./lib/post_finder.js";
 import { PostManager } from "./lib/post_manager.js";
 import { PostParse } from "./lib/post_parse.js";
@@ -14,15 +16,18 @@ export class Isubo {
   #cliParams = {};
   #finder = null;
   #postManager = null;
+  #selectPosts = false;
   constructor({
     confPath,
     conf,
-    cliParams
+    cliParams,
+    selectPosts
   }) {
     this.#setConf({
       conf,
       confPath
     });
+    this.#selectPosts = !!selectPosts;
     this.#setCliParams(cliParams);
     this.#setPostManager();
     this.#setFinder();
@@ -50,7 +55,7 @@ export class Isubo {
   }
 
   #setCliParams(cliParams) {
-    this.#cliParams = cliParams
+    this.#cliParams = cliParams;
   }
 
   #setConf({
@@ -128,37 +133,84 @@ export class Isubo {
   async #publishOneBy({ filepath }) {
     const { frontmatter } = this.#getPostDetailBy({ filepath });
     if (frontmatter.issue_number) {
-      return await this.#updateOneBy({ filepath });
+      return {
+        type: 'update',
+        ret: await this.#updateOneBy({ filepath })
+      };
     } else {
-      return await this.#createOneBy({ filepath });
+      return {
+        type: 'create',
+        ret: await this.#createOneBy({ filepath })
+      };
+    }
+  }
+
+  #setLoadHints(filepathArr, type) {
+    for (const filepath of filepathArr) {
+      const filename = path.parse(filepath).name;
+      hinter.load(filepath, { text: `${type}: ${filename}` });
     }
   }
 
   async create() {
+    const STR_TPYE = 'Create';
     const retArr = []
-    const filepathArr = this.#finder.getFilepaths();
+    const filepathArr = await this.#getFilepaths();
+    this.#setLoadHints(filepathArr, STR_TPYE);
     for (const filepath of filepathArr) {
-      retArr.push(await this.#createOneBy({ filepath }));
+      try {
+        retArr.push(await this.#createOneBy({ filepath }));
+        hinter.loadSucc(filepath);
+      } catch (error) {
+        const filename = path.parse(filepath).name;
+        hinter.loadFail(filepath, { text: `${STR_TPYE} ${filename}: ${error.message}` });
+      }
     }
 
     return retArr;
   }
 
+  async #getFilepaths() {
+    return this.#selectPosts
+      ? await this.#finder.selectPosts()
+      : this.#finder.getFilepaths();
+  }
+
   async update() {
+    const STR_TPYE = 'Update';
     const retArr = []
-    const filepathArr = this.#finder.getFilepaths();
+    const filepathArr = await this.#getFilepaths();
+    this.#setLoadHints(filepathArr, STR_TPYE);
     for (const filepath of filepathArr) {
-      retArr.push(await this.#updateOneBy({ filepath }));
+      try {
+        retArr.push(await this.#updateOneBy({ filepath }));
+        hinter.loadSucc(filepath);
+      } catch (error) {
+        const filename = path.parse(filepath).name;
+        hinter.loadFail(filepath, { text: `${STR_TPYE} ${filename}: ${error.message}` });
+      }
     }
 
     return retArr;
   }
 
   async publish() {
+    const STR_TPYE = 'Update';
     const retArr = []
-    const filepathArr = this.#finder.getFilepaths();
+    const filepathArr = await this.#getFilepaths();
+    this.#setLoadHints(filepathArr, STR_TPYE);
     for (const filepath of filepathArr) {
-      retArr.push(await this.#publishOneBy({ filepath }));
+      const filename = path.parse(filepath).name;
+      try {
+        const {
+          type,
+          ret
+        } = await this.#publishOneBy({ filepath });
+        retArr.push(ret);
+        hinter.loadSucc(filepath, { text: `${type}: ${filename}` });
+      } catch (error) {
+        hinter.loadFail(filepath, { text: `${STR_TPYE} ${filename}: ${error.message}` });
+      }
     }
 
     return retArr;
