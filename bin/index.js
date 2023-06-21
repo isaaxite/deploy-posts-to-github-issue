@@ -80,8 +80,7 @@ function formatArgv(argv) {
 
 async function wraper(cb) {
   try {
-    await AssetPublisher.push();
-    // await cb();
+    await cb();
   } catch (error) {
     hinter.errMsg(error.message);
   }

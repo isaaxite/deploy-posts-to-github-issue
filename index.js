@@ -4,6 +4,7 @@ import { hinter } from "./lib/hinter.js";
 import { PostFinder } from "./lib/post_finder.js";
 import { PostManager } from "./lib/post_manager.js";
 import { PostParse } from "./lib/post_parse.js";
+import { AssetPublisher } from './lib/asset_publisher.js';
 
 const DeployType = {
   IDLE: 'idle',
@@ -17,6 +18,7 @@ export class Isubo {
   #finder = null;
   #postManager = null;
   #selectPosts = false;
+  #assetpathRecords = [];
   constructor({
     confPath,
     conf,
@@ -80,6 +82,16 @@ export class Isubo {
     });
   }
 
+  #addAssetpathRecord(postpath, assetpaths) {
+    if (!assetpaths.length) {
+      return;
+    }
+    this.#assetpathRecords.push({
+      postpath,
+      assetpaths
+    });
+  }
+
   #getPostDetailBy({ filepath }) {
     const conf = this.#conf;
     const postParse = new PostParse({
@@ -89,16 +101,20 @@ export class Isubo {
     const inputMarkdown = postParse.getInputMarkdown();
     const frontmatter = postParse.getFrontmatter();
     const formatedMarkdown = postParse.getFormatedMarkdown();
+    const assetPathsRelativeRepoArr = postParse.assetPathsRelativeRepoArr
     return {
       postParse,
       inputMarkdown,
       frontmatter,
-      formatedMarkdown
+      formatedMarkdown,
+      assetPathsRelativeRepoArr,
+      injectFrontmatterFn: (...args) => postParse.injectFrontmatter(...args)
     };
   }
 
   async #updateOneBy({ filepath }) {
-    const { frontmatter, formatedMarkdown } = this.#getPostDetailBy({ filepath });
+    const { frontmatter, formatedMarkdown, assetPathsRelativeRepoArr } = this.#getPostDetailBy({ filepath });
+    this.#addAssetpathRecord(filepath, assetPathsRelativeRepoArr);
     const ret = await this.#postManager.update({
       title: frontmatter.title,
       labels: frontmatter.tags,
@@ -111,10 +127,12 @@ export class Isubo {
 
   async #createOneBy({ filepath }) {
     const {
-      postParse,
       frontmatter,
-      formatedMarkdown
+      formatedMarkdown,
+      assetPathsRelativeRepoArr,
+      injectFrontmatterFn
     } = this.#getPostDetailBy({ filepath });
+    this.#addAssetpathRecord(filepath, assetPathsRelativeRepoArr);
     const ret = await this.#postManager.forceCreate({
       title: frontmatter.title,
       labels: frontmatter.tags,
@@ -123,7 +141,7 @@ export class Isubo {
 
     // todo: check forceCreate success or not
 
-    postParse.injectFrontmatter({
+    injectFrontmatterFn({
       issue_number: ret.data.number
     });
 
@@ -152,6 +170,35 @@ export class Isubo {
     }
   }
 
+  async #publishAssets() {
+    const conf = this.#conf;
+    if (!this.#assetpathRecords.length) {
+      return;
+    }
+
+    const getAssetPublisherIns = () => new AssetPublisher({
+      conf,
+      assetRecords: this.#assetpathRecords
+    });
+
+    if (conf.auto_push_asset) {
+      try {
+        await getAssetPublisherIns().push();
+      } catch (error) {
+        hinter.errMsg(error.message);
+      }
+      return;
+    }
+
+    
+    const isExistUnpush = await getAssetPublisherIns().checkIsUnpushPostAndAssets();
+    if (!isExistUnpush) {
+      return;
+    }
+
+    hinter.warnMsg('There are some posts and corresponding assets didn\'t publish, You should deal with it as soon as possible.');
+  }
+
   async create() {
     const STR_TPYE = 'Create';
     const retArr = []
@@ -166,6 +213,8 @@ export class Isubo {
         hinter.loadFail(filepath, { text: `${STR_TPYE} ${filename}: ${error.message}` });
       }
     }
+
+    await this.#publishAssets();
 
     return retArr;
   }
@@ -191,6 +240,8 @@ export class Isubo {
       }
     }
 
+    await this.#publishAssets();
+
     return retArr;
   }
 
@@ -212,6 +263,8 @@ export class Isubo {
         hinter.loadFail(filepath, { text: `${STR_TPYE} ${filename}: ${error.message}` });
       }
     }
+
+    await this.#publishAssets();
 
     return retArr;
   }

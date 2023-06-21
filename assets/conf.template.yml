@@ -72,3 +72,6 @@ token: ''
 ## Currently supports two formats of "image" and "link", the default is only "image" format.
 # types: 
 #   - image
+
+
+auto_push_asset: false
