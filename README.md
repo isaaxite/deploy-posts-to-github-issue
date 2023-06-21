@@ -3,7 +3,9 @@
 </div>
 <br/>
 <div align="center">
-  <a href="https://github.com/isaaxite/deploy-posts-to-github-issue/blob/main/LICENSE"><img src="https://img.shields.io/bower/l/MI" alt="license"></a>
+  <a href="https://github.com/isaaxite/deploy-posts-to-github-issue/blob/main/LICENSE">
+    <img alt="GitHub" src="https://img.shields.io/github/license/isaaxite/deploy-posts-to-github-issue">
+  </a>
   <img src="https://img.shields.io/github/languages/top/isaaxite/deploy-posts-to-github-issue" alt="languages-top">
   <img src="https://img.shields.io/github/package-json/v/isaaxite/deploy-posts-to-github-issue" alt="version">
   <img src="https://img.shields.io/github/languages/count/isaaxite/deploy-posts-to-github-issue" alt="languages-count">
