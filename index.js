@@ -165,8 +165,8 @@ export class Isubo {
 
   #setLoadHints(filepathArr, type) {
     for (const filepath of filepathArr) {
-      const filename = path.parse(filepath).name;
-      hinter.load(filepath, { text: `${type}: ${filename}` });
+      const filename = path.basename(filepath);
+      hinter.load(filepath, { text: `${type} post: ${filename}  ` });
     }
   }
 
@@ -210,7 +210,7 @@ export class Isubo {
         hinter.loadSucc(filepath);
       } catch (error) {
         const filename = path.parse(filepath).name;
-        hinter.loadFail(filepath, { text: `${STR_TPYE} ${filename}: ${error.message}` });
+        hinter.loadFail(filepath, { text: `${STR_TPYE} ${filename}: ${error.message}  ` });
       }
     }
 
@@ -258,9 +258,10 @@ export class Isubo {
           ret
         } = await this.#publishOneBy({ filepath });
         retArr.push(ret);
-        hinter.loadSucc(filepath, { text: `${type}: ${filename}` });
+        hinter.loadSucc(filepath);
       } catch (error) {
-        hinter.loadFail(filepath, { text: `${STR_TPYE} ${filename}: ${error.message}` });
+        hinter.loadFail(filepath);
+        hinter.failMsg(error.message)
       }
     }
 
