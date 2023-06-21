@@ -28,7 +28,7 @@
     <img src="https://img.shields.io/github/last-commit/isaaxite/deploy-posts-to-github-issue" alt="last-commit">
   </a>
   <a href="https://github.com/isaaxite/deploy-posts-to-github-issue/issues/new">
-    <img alt="Static Badge" src="https://img.shields.io/badge/Report-Issue-blue">
+    <img alt="Static Badge" src="https://img.shields.io/badge/Issue-Report-blue">
   </a>
   <a href="https://isaaxite.github.io/deploy-posts-to-github-issue/test-report.html">
     <img alt="Static Badge" src="https://img.shields.io/badge/Test-Report-blue">
