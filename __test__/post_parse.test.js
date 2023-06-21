@@ -1,8 +1,10 @@
+import path from 'path';
 import { describe, test, expect } from '@jest/globals';
 import { PostParse } from '../lib/post_parse.js';
 import { ConfReader } from '../lib/conf_reader.js';
 import { PostFinder } from '../lib/post_finder.js';
-import { copyTempPost, detectOnly, removeTempPost } from './utils.js';
+import { TempRepo, copyTempPost, detectOnly, removeTempPost } from './utils.js';
+import { readdirSync } from 'fs';
 
 const TEST_CASE_FRONTMATTER = `---
 title: LICENSE的选择与生成
@@ -164,6 +166,24 @@ describe('post_parse', () => {
 
     expect(imgAst.url).not.toBeUndefined();
     expect(decodeURIComponent(imgAst.url)).toStrictEqual(expectedLink);
+  });
+
+  test('detect asset paths of a post', () => {
+    const tempRepo = new TempRepo();
+    tempRepo.copy();
+
+    const mdtxtPath = tempRepo.resolveFromSourceDir('license.md');
+    const postParse = new PostParse({
+      path: mdtxtPath,
+      conf: tempRepo.conf
+    });
+    const licenseDirPath = path.join(tempRepo.tempSourceDir, 'license');
+    const assetpathsInLicenseDir = readdirSync(licenseDirPath).map(fname => path.join(licenseDirPath, fname));
+
+    tempRepo.remove();
+    expect(postParse.assetPathsRelativeRepoArr).toEqual(
+      expect.arrayContaining(assetpathsInLicenseDir)
+    );
   });
 
   test.todo('empty parse conf');

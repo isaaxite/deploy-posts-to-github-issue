@@ -4,6 +4,7 @@ import yargs from 'yargs';
 import { Isubo } from '../index.js';
 import { ConfReader } from '../lib/conf_reader.js';
 import { hinter } from '../lib/hinter.js';
+import { AssetPublisher } from '../lib/asset_publisher.js';
 
 const KEY_POSTS = 'posts';
 
@@ -79,7 +80,8 @@ function formatArgv(argv) {
 
 async function wraper(cb) {
   try {
-    await cb();
+    await AssetPublisher.push();
+    // await cb();
   } catch (error) {
     hinter.errMsg(error.message);
   }

@@ -44,6 +44,7 @@
     "remark-frontmatter": "^4.0.1",
     "remark-parse": "^10.0.2",
     "remark-stringify": "^10.0.3",
+    "simple-git": "^3.19.0",
     "spinnies": "^0.5.1",
     "unified": "^10.1.2",
     "yargs": "^17.7.2"
