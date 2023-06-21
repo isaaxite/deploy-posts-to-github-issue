@@ -166,7 +166,7 @@ export class Isubo {
   #setLoadHints(filepathArr, type) {
     for (const filepath of filepathArr) {
       const filename = path.basename(filepath);
-      hinter.load(filepath, { text: `${type} post: ${filename}  ` });
+      hinter.load(filepath, { text: `${type} post: ${filename}          ` });
     }
   }
 
@@ -246,22 +246,19 @@ export class Isubo {
   }
 
   async publish() {
-    const STR_TPYE = 'Update';
+    const STR_TPYE = 'Publish';
     const retArr = []
     const filepathArr = await this.#getFilepaths();
     this.#setLoadHints(filepathArr, STR_TPYE);
     for (const filepath of filepathArr) {
-      const filename = path.parse(filepath).name;
       try {
-        const {
-          type,
-          ret
-        } = await this.#publishOneBy({ filepath });
+        const { ret } = await this.#publishOneBy({ filepath });
         retArr.push(ret);
         hinter.loadSucc(filepath);
       } catch (error) {
+        console.error(error);
         hinter.loadFail(filepath);
-        hinter.failMsg(error.message)
+        hinter.errMsg(error.message)
       }
     }
 
