@@ -92,7 +92,7 @@ async function wraper(cb) {
 }
 
 function logo() {
-  const logo = Array.from(' isubo').join('');
+  const logo = Array.from('isubo').join('');
   const print = (val) => console.log(chalk.blueBright(val));
   try {
     // print(figlet.textSync(logo, "Pagga"));
