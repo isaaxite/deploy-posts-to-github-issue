@@ -5,6 +5,8 @@ import { Isubo } from '../index.js';
 import { ConfReader } from '../lib/conf_reader.js';
 import { hinter } from '../lib/hinter.js';
 import { AssetPublisher } from '../lib/asset_publisher.js';
+import figlet from 'figlet';
+import chalk from 'chalk';
 
 const KEY_POSTS = 'posts';
 
@@ -79,10 +81,24 @@ function formatArgv(argv) {
 }
 
 async function wraper(cb) {
+  
   try {
+    logo();
     await cb();
   } catch (error) {
     hinter.errMsg(error.message);
   }
   process.exit(0);
 }
+
+function logo() {
+  const logo = Array.from(' isubo').join('');
+  const print = (val) => console.log(chalk.blueBright(val));
+  try {
+    // print(figlet.textSync(logo, "Pagga"));
+    print(figlet.textSync(logo, "Slant"));
+    // print(figlet.textSync(logo, "Larry 3D"));
+    // print(figlet.textSync(logo, "Small Isometric1"));
+  } catch (error) {}
+}
+

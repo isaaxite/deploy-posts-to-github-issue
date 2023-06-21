@@ -36,6 +36,7 @@
     "@inquirer/prompts": "^2.1.1",
     "chalk": "^5.2.0",
     "fast-glob": "^3.2.12",
+    "figlet": "^1.6.0",
     "fs-extra": "^11.1.1",
     "jest": "^29.5.0",
     "jest-html-reporter": "^3.10.0",
