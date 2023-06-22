@@ -1,9 +1,0 @@
-owner: isaaxite
-repo: test-repo_deploy-posts-to-github-issue
-token: $GITHUB_TOKEN
-source_dir: source/
-link_prefix: https://isaaxite.github.io/blog/resources/
-asset_dir: '{filename}'
-types: 
-  - image
-  - link
