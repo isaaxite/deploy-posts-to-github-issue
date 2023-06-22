@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1687456549100" clover="3.2.0">
-  <project timestamp="1687456549100" name="All files">
-    <metrics statements="477" coveredstatements="281" conditionals="135" coveredconditionals="57" methods="64" coveredmethods="32" elements="676" coveredelements="370" complexity="0" loc="477" ncloc="477" packages="2" files="7" classes="7"/>
+<coverage generated="1687457871650" clover="3.2.0">
+  <project timestamp="1687457871650" name="All files">
+    <metrics statements="478" coveredstatements="283" conditionals="135" coveredconditionals="57" methods="64" coveredmethods="33" elements="677" coveredelements="373" complexity="0" loc="478" ncloc="478" packages="2" files="7" classes="7"/>
     <package name="__test__">
       <metrics statements="133" coveredstatements="57" conditionals="27" coveredconditionals="7" methods="29" coveredmethods="12"/>
       <file name="utils.js" path="/home/isaac/workspace/deploy-posts-to-github-issue/__test__/utils.js">
@@ -142,7 +142,7 @@
       </file>
     </package>
     <package name="lib">
-      <metrics statements="344" coveredstatements="224" conditionals="108" coveredconditionals="50" methods="35" coveredmethods="20"/>
+      <metrics statements="345" coveredstatements="226" conditionals="108" coveredconditionals="50" methods="35" coveredmethods="21"/>
       <file name="asset_finder.js" path="/home/isaac/workspace/deploy-posts-to-github-issue/lib/asset_finder.js">
         <metrics statements="36" coveredstatements="0" conditionals="16" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="6" count="0" type="stmt"/>
@@ -183,7 +183,7 @@
         <line num="94" count="0" type="stmt"/>
       </file>
       <file name="asset_publisher.js" path="/home/isaac/workspace/deploy-posts-to-github-issue/lib/asset_publisher.js">
-        <metrics statements="153" coveredstatements="136" conditionals="34" coveredconditionals="21" methods="12" coveredmethods="11"/>
+        <metrics statements="154" coveredstatements="137" conditionals="34" coveredconditionals="21" methods="12" coveredmethods="11"/>
         <line num="6" count="7" type="stmt"/>
         <line num="7" count="7" type="stmt"/>
         <line num="8" count="7" type="stmt"/>
@@ -327,16 +327,17 @@
         <line num="333" count="7" type="stmt"/>
         <line num="335" count="4" type="stmt"/>
         <line num="336" count="4" type="stmt"/>
-        <line num="341" count="0" type="stmt"/>
+        <line num="337" count="4" type="stmt"/>
         <line num="342" count="0" type="stmt"/>
-        <line num="344" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="345" count="0" type="stmt"/>
+        <line num="343" count="0" type="stmt"/>
+        <line num="345" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="346" count="0" type="stmt"/>
         <line num="347" count="0" type="stmt"/>
-        <line num="350" count="0" type="stmt"/>
-        <line num="351" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="352" count="0" type="stmt"/>
-        <line num="354" count="0" type="stmt"/>
+        <line num="348" count="0" type="stmt"/>
+        <line num="351" count="0" type="stmt"/>
+        <line num="352" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="353" count="0" type="stmt"/>
+        <line num="355" count="0" type="stmt"/>
       </file>
       <file name="conf_reader.js" path="/home/isaac/workspace/deploy-posts-to-github-issue/lib/conf_reader.js">
         <metrics statements="45" coveredstatements="36" conditionals="28" coveredconditionals="19" methods="3" coveredmethods="2"/>
@@ -387,7 +388,7 @@
         <line num="108" count="0" type="stmt"/>
       </file>
       <file name="hinter.js" path="/home/isaac/workspace/deploy-posts-to-github-issue/lib/hinter.js">
-        <metrics statements="13" coveredstatements="9" conditionals="3" coveredconditionals="3" methods="8" coveredmethods="4"/>
+        <metrics statements="13" coveredstatements="10" conditionals="3" coveredconditionals="3" methods="8" coveredmethods="5"/>
         <line num="6" count="1" type="stmt"/>
         <line num="7" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
@@ -399,7 +400,7 @@
         <line num="28" count="0" type="stmt"/>
         <line num="32" count="0" type="stmt"/>
         <line num="36" count="10" type="cond" truecount="2" falsecount="0"/>
-        <line num="40" count="0" type="stmt"/>
+        <line num="40" count="4" type="stmt"/>
         <line num="44" count="1" type="stmt"/>
       </file>
       <file name="link_formater.js" path="/home/isaac/workspace/deploy-posts-to-github-issue/lib/link_formater.js">

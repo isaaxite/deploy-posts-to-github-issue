@@ -182,11 +182,7 @@ export class Isubo {
     });
 
     if (conf.auto_push_asset) {
-      try {
-        await getAssetPublisherIns().push();
-      } catch (error) {
-        hinter.errMsg(error.message);
-      }
+      await getAssetPublisherIns().push();
       return;
     }
 
