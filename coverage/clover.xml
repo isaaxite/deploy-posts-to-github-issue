@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1687448625884" clover="3.2.0">
-  <project timestamp="1687448625884" name="All files">
-    <metrics statements="476" coveredstatements="209" conditionals="135" coveredconditionals="42" methods="64" coveredmethods="24" elements="675" coveredelements="275" complexity="0" loc="476" ncloc="476" packages="2" files="7" classes="7"/>
+<coverage generated="1687449511193" clover="3.2.0">
+  <project timestamp="1687449511193" name="All files">
+    <metrics statements="476" coveredstatements="218" conditionals="135" coveredconditionals="43" methods="64" coveredmethods="24" elements="675" coveredelements="285" complexity="0" loc="476" ncloc="476" packages="2" files="7" classes="7"/>
     <package name="__test__">
       <metrics statements="133" coveredstatements="57" conditionals="27" coveredconditionals="7" methods="29" coveredmethods="12"/>
       <file name="utils.js" path="/home/isaac/workspace/deploy-posts-to-github-issue/__test__/utils.js">
@@ -142,7 +142,7 @@
       </file>
     </package>
     <package name="lib">
-      <metrics statements="343" coveredstatements="152" conditionals="108" coveredconditionals="35" methods="35" coveredmethods="12"/>
+      <metrics statements="343" coveredstatements="161" conditionals="108" coveredconditionals="36" methods="35" coveredmethods="12"/>
       <file name="asset_finder.js" path="/home/isaac/workspace/deploy-posts-to-github-issue/lib/asset_finder.js">
         <metrics statements="36" coveredstatements="0" conditionals="16" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="6" count="0" type="stmt"/>
@@ -183,7 +183,7 @@
         <line num="94" count="0" type="stmt"/>
       </file>
       <file name="asset_publisher.js" path="/home/isaac/workspace/deploy-posts-to-github-issue/lib/asset_publisher.js">
-        <metrics statements="152" coveredstatements="65" conditionals="34" coveredconditionals="9" methods="12" coveredmethods="4"/>
+        <metrics statements="152" coveredstatements="74" conditionals="34" coveredconditionals="10" methods="12" coveredmethods="4"/>
         <line num="6" count="1" type="stmt"/>
         <line num="7" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
@@ -240,28 +240,28 @@
         <line num="124" count="0" type="stmt"/>
         <line num="128" count="0" type="stmt"/>
         <line num="136" count="1" type="stmt"/>
-        <line num="140" count="0" type="stmt"/>
+        <line num="140" count="1" type="stmt"/>
         <line num="144" count="1" type="stmt"/>
         <line num="145" count="1" type="stmt"/>
         <line num="146" count="1" type="stmt"/>
         <line num="147" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="148" count="1" type="stmt"/>
+        <line num="148" count="0" type="stmt"/>
         <line num="149" count="0" type="stmt"/>
-        <line num="152" count="0" type="stmt"/>
-        <line num="153" count="0" type="stmt"/>
-        <line num="154" count="0" type="stmt"/>
-        <line num="155" count="0" type="stmt"/>
-        <line num="156" count="0" type="stmt"/>
+        <line num="152" count="1" type="stmt"/>
+        <line num="153" count="1" type="stmt"/>
+        <line num="154" count="1" type="stmt"/>
+        <line num="155" count="1" type="stmt"/>
+        <line num="156" count="1" type="stmt"/>
         <line num="158" count="0" type="stmt"/>
-        <line num="162" count="0" type="stmt"/>
+        <line num="162" count="1" type="stmt"/>
         <line num="166" count="1" type="stmt"/>
         <line num="167" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="168" count="1" type="stmt"/>
         <line num="169" count="1" type="stmt"/>
         <line num="170" count="1" type="stmt"/>
         <line num="173" count="1" type="stmt"/>
-        <line num="177" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="178" count="0" type="stmt"/>
+        <line num="177" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="178" count="1" type="stmt"/>
         <line num="183" count="1" type="stmt"/>
         <line num="186" count="1" type="stmt"/>
         <line num="191" count="0" type="stmt"/>
@@ -325,7 +325,7 @@
         <line num="331" count="1" type="stmt"/>
         <line num="332" count="1" type="stmt"/>
         <line num="334" count="1" type="stmt"/>
-        <line num="335" count="0" type="stmt"/>
+        <line num="335" count="1" type="stmt"/>
         <line num="340" count="0" type="stmt"/>
         <line num="341" count="0" type="stmt"/>
         <line num="343" count="0" type="cond" truecount="0" falsecount="2"/>
@@ -392,8 +392,8 @@
         <line num="8" count="1" type="stmt"/>
         <line num="11" count="1" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
-        <line num="16" count="1" type="stmt"/>
-        <line num="20" count="1" type="stmt"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
         <line num="24" count="0" type="stmt"/>
         <line num="28" count="0" type="stmt"/>
         <line num="32" count="0" type="stmt"/>
