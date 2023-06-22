@@ -3,7 +3,7 @@ import { describe, test, expect } from '@jest/globals';
 import { PostParse } from '../lib/post_parse.js';
 import { ConfReader } from '../lib/conf_reader.js';
 import { PostFinder } from '../lib/post_finder.js';
-import { TempRepo, copyTempPost, detectOnly, removeTempPost } from './utils.js';
+import { TempRepo, copyTempPost, detectOnly, removeTempPost } from './utils/index.js';
 import { readdirSync } from 'fs';
 
 const TEST_CASE_FRONTMATTER = `---
@@ -32,7 +32,7 @@ const TEST_CASE_MARKDOWN_CN_ENCODE_PIC = TEST_CASE_FRONTMATTER + `
 ![image](./license/%E5%9B%BE%E7%89%87.png)
 `;
 
-const DEF_TEST_INPUT_MD_PATH = '__test__/post1.md';
+const DEF_TEST_INPUT_MD_PATH = '__test__/assets/post1.md';
 
 const getConf = ({ link_prefix, types } = {}) => ({
   link_prefix: link_prefix || 'https://isaaxite.github.io/blog/resources/',

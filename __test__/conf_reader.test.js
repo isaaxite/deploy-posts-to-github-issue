@@ -5,7 +5,7 @@ import { load as loadYaml, dump as yamlDump } from 'js-yaml';
 import { writeFileSync, readFileSync } from 'fs';
 
 describe('conf reader', () => {
-  const CONF_PATH = '__test__/isubo.conf.yml';
+  const CONF_PATH = '__test__/assets/isubo.conf.yml';
   test('read conf', () => {
     const confReader = new ConfReader({ path: CONF_PATH });
     const conf = confReader.get();
