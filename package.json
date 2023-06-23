@@ -9,7 +9,9 @@
   },
   "scripts": {
     "test": "jest",
-    "estest": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+    "esm-test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "only-test": "npm run esm_test && git checkout reports/",
+    "update-test-reports": "npm run esm_test && git add ./reports && git commit -m 'update test reports'"
   },
   "repository": {
     "type": "git",
