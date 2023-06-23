@@ -7,6 +7,7 @@ import { PostParse } from "./lib/post_parse.js";
 import { AssetPublisher } from './lib/asset_publisher.js';
 import { enumDeployType, enumPushAssetType } from './lib/constants/enum.js';
 import prompts from 'prompts';
+import { manualBpoint } from './lib/utils/index.js';
 
 export class Isubo {
   #conf = {};
@@ -140,7 +141,7 @@ export class Isubo {
       body: formatedMarkdown
     });
 
-    // todo: check forceCreate success or not
+    // TODO: check forceCreate success or not
 
     injectFrontmatterFn({
       issue_number: ret.data.number
@@ -161,6 +162,7 @@ export class Isubo {
         ret: await this.#updateOneBy({ filepath })
       };
     } else {
+      console.info(333)
       type = enumDeployType.CREATE;
       hinter.loadUpdate(filepath, getLoadOpt(type));
       return {
@@ -267,17 +269,18 @@ export class Isubo {
   }
 
   async publish() {
-    const STR_TPYE = enumDeployType.PUBLISH;
+    let type = enumDeployType.PUBLISH;
     const retArr = []
     const filepathArr = await this.#getFilepaths();
-    this.#setLoadHints(filepathArr, STR_TPYE);
+    this.#setLoadHints(filepathArr, type);
     for (const filepath of filepathArr) {
       try {
-        const { ret, type } = await this.#publishOneBy({ filepath });
-        retArr.push(ret);
+        const resp = await this.#publishOneBy({ filepath });
+        type = resp.type;
+        retArr.push(resp.ret);
         hinter.loadSucc(filepath, { text: Isubo.getLoadHintTextBy({ type, filepath }) });
       } catch (error) {
-        console.error(error);
+        // console.error(error);
         hinter.loadFail(filepath, { text: Isubo.getLoadHintTextBy({ type, filepath }) });
         hinter.errMsg(error.message)
       }
