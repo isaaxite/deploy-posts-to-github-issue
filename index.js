@@ -150,15 +150,21 @@ export class Isubo {
   }
 
   async #publishOneBy({ filepath }) {
+    let type;
+    const getLoadOpt = (type) => ({ text: Isubo.getLoadHintTextBy({ type, filepath }) });
     const { frontmatter } = this.#getPostDetailBy({ filepath });
     if (frontmatter.issue_number) {
+      type = enumDeployType.UPDATE;
+      hinter.loadUpdate(filepath, getLoadOpt(type));
       return {
-        type: enumDeployType.UPDATE,
+        type,
         ret: await this.#updateOneBy({ filepath })
       };
     } else {
+      type = enumDeployType.CREATE;
+      hinter.loadUpdate(filepath, getLoadOpt(type));
       return {
-        type: enumDeployType.CREATE,
+        type,
         ret: await this.#createOneBy({ filepath })
       };
     }
