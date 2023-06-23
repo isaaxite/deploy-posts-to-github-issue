@@ -102,7 +102,7 @@ export class Isubo {
     const inputMarkdown = postParse.getInputMarkdown();
     const frontmatter = postParse.getFrontmatter();
     const formatedMarkdown = postParse.getFormatedMarkdown();
-    const assetPathsRelativeRepoArr = postParse.assetPathsRelativeRepoArr
+    const assetPathsRelativeRepoArr = postParse.assetPathsRelativeRepoArr;
     return {
       postParse,
       inputMarkdown,
@@ -153,12 +153,12 @@ export class Isubo {
     const { frontmatter } = this.#getPostDetailBy({ filepath });
     if (frontmatter.issue_number) {
       return {
-        type: 'update',
+        type: enumDeployType.UPDATE,
         ret: await this.#updateOneBy({ filepath })
       };
     } else {
       return {
-        type: 'create',
+        type: enumDeployType.CREATE,
         ret: await this.#createOneBy({ filepath })
       };
     }
@@ -177,6 +177,11 @@ export class Isubo {
       return;
     }
 
+    if (!this.#assetpathRecords.length) {
+      hinter.errMsg('Without any posts were deploy!');
+      return;
+    }
+
     if (conf.push_asset === enumPushAssetType.PROMPT) {
       const isPushAsset = (await prompts({
         type: 'confirm',
@@ -188,11 +193,6 @@ export class Isubo {
       if (!isPushAsset) {
         return;
       }
-    }
-
-    if (!this.#assetpathRecords.length) {
-      hinter.errMsg('Without any posts were deploy!');
-      return;
     }
 
     const getAssetPublisherIns = () => new AssetPublisher({
