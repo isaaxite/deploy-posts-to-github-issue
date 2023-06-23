@@ -75,3 +75,5 @@ token: ''
 
 
 auto_push_asset: false
+# push_asset: prompt | auto | disable
+push_asset: prompt
