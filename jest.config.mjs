@@ -21,9 +21,10 @@ export default {
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   // collectCoverageFrom: undefined,
+  collectCoverageFrom: ['index.js', './lib/**/*.js'],
 
   // The directory where Jest should output its coverage files
-  // coverageDirectory: "__test__/coverage",
+  coverageDirectory: "reports/coverage",
 
   // An array of regexp pattern strings used to skip coverage collection
   // coveragePathIgnorePatterns: [
@@ -40,6 +41,7 @@ export default {
   //   "lcov",
   //   "clover"
   // ],
+  coverageReporters: ["text-summary", "html"],
 
   // An object that configures minimum threshold enforcement for coverage results
   // coverageThreshold: undefined,
@@ -111,7 +113,7 @@ export default {
     "default",
     ["./node_modules/jest-html-reporter", {
       "pageTitle": "Test Report",
-      // "outputPath": "__test__/test-report/index.html"
+      "outputPath": "reports/test.html"
     }]
   ],
 

@@ -30,10 +30,10 @@
   <a href="https://github.com/isaaxite/deploy-posts-to-github-issue/issues/new">
     <img alt="Static Badge" src="https://img.shields.io/badge/Issue-Report-blue">
   </a>
-  <a href="https://isaaxite.github.io/deploy-posts-to-github-issue/test-report.html">
+  <a href="https://isaaxite.github.io/deploy-posts-to-github-issue/reports/test.html">
     <img alt="Static Badge" src="https://img.shields.io/badge/Test-Report-blue">
   </a>
-  <a href="https://isaaxite.github.io/deploy-posts-to-github-issue/coverage/lcov-report/index.html">
+  <a href="https://isaaxite.github.io/deploy-posts-to-github-issue/reports/coverage/index.html">
     <img alt="Static Badge" src="https://img.shields.io/badge/Test-Coverage-blue">
   </a>
 </div>
@@ -44,6 +44,6 @@ deploy posts are written in markdown  to github issue
 
 # Test situation
 
-- [Test Report](https://isaaxite.github.io/deploy-posts-to-github-issue/test-report.html)
+- [Test Report](https://isaaxite.github.io/deploy-posts-to-github-issue/reports/test.html)
 
-- [Coverage](https://isaaxite.github.io/deploy-posts-to-github-issue/coverage/lcov-report/index.html)
+- [Coverage](https://isaaxite.github.io/deploy-posts-to-github-issue/reports/coverage/index.html)
