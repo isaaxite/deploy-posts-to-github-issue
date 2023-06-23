@@ -208,7 +208,7 @@ export class Isubo {
       assetRecords: this.#assetpathRecords
     });
 
-    if (conf.auto_push_asset) {
+    if (conf.push_asset === enumPushAssetType.AUTO) {
       await getAssetPublisherIns().push();
       return;
     }
