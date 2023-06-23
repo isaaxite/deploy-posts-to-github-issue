@@ -5,12 +5,8 @@ import { PostFinder } from "./lib/post_finder.js";
 import { PostManager } from "./lib/post_manager.js";
 import { PostParse } from "./lib/post_parse.js";
 import { AssetPublisher } from './lib/asset_publisher.js';
-
-const DeployType = {
-  IDLE: 'idle',
-  CREATE: 'create',
-  UPDATE: 'date'
-};
+import { enumDeployType, enumPushAssetType } from './lib/constants/enum.js';
+import prompts from 'prompts';
 
 export class Isubo {
   #conf = {};
@@ -33,6 +29,11 @@ export class Isubo {
     this.#setCliParams(cliParams);
     this.#setPostManager();
     this.#setFinder();
+  }
+
+  static getLoadHintTextBy({ filepath, type }) {
+    const filename = path.basename(filepath);
+    return `${type} post: ${filename}`;
   }
 
   #setFinder() {
@@ -165,14 +166,32 @@ export class Isubo {
 
   #setLoadHints(filepathArr, type) {
     for (const filepath of filepathArr) {
-      const filename = path.basename(filepath);
-      hinter.load(filepath, { text: `${type} post: ${filename}          ` });
+      hinter.load(filepath, { text: Isubo.getLoadHintTextBy({ type, filepath }) });
     }
   }
 
   async #publishAssets() {
     const conf = this.#conf;
+
+    if (conf.push_asset === enumPushAssetType.DISABLE) {
+      return;
+    }
+
+    if (conf.push_asset === enumPushAssetType.PROMPT) {
+      const isPushAsset = (await prompts({
+        type: 'confirm',
+        name: 'value',
+        message: 'Push the above posts and relatived assets?',
+        initial: true
+      })).value;
+
+      if (!isPushAsset) {
+        return;
+      }
+    }
+
     if (!this.#assetpathRecords.length) {
+      hinter.errMsg('Without any posts were deploy!');
       return;
     }
 
@@ -196,7 +215,7 @@ export class Isubo {
   }
 
   async create() {
-    const STR_TPYE = 'Create';
+    const STR_TPYE = enumDeployType.CREATE;
     const retArr = []
     const filepathArr = await this.#getFilepaths();
     this.#setLoadHints(filepathArr, STR_TPYE);
@@ -222,7 +241,7 @@ export class Isubo {
   }
 
   async update() {
-    const STR_TPYE = 'Update';
+    const STR_TPYE = enumDeployType.UPDATE;
     const retArr = []
     const filepathArr = await this.#getFilepaths();
     this.#setLoadHints(filepathArr, STR_TPYE);
@@ -242,18 +261,18 @@ export class Isubo {
   }
 
   async publish() {
-    const STR_TPYE = 'Publish';
+    const STR_TPYE = enumDeployType.PUBLISH;
     const retArr = []
     const filepathArr = await this.#getFilepaths();
     this.#setLoadHints(filepathArr, STR_TPYE);
     for (const filepath of filepathArr) {
       try {
-        const { ret } = await this.#publishOneBy({ filepath });
+        const { ret, type } = await this.#publishOneBy({ filepath });
         retArr.push(ret);
-        hinter.loadSucc(filepath);
+        hinter.loadSucc(filepath, { text: Isubo.getLoadHintTextBy({ type, filepath }) });
       } catch (error) {
         console.error(error);
-        hinter.loadFail(filepath);
+        hinter.loadFail(filepath, { text: Isubo.getLoadHintTextBy({ type, filepath }) });
         hinter.errMsg(error.message)
       }
     }
