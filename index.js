@@ -7,7 +7,6 @@ import { PostParse } from "./lib/post_parse.js";
 import { AssetPublisher } from './lib/asset_publisher.js';
 import { enumDeployType, enumPushAssetType } from './lib/constants/enum.js';
 import prompts from 'prompts';
-import { manualBpoint } from './lib/utils/index.js';
 
 export class Isubo {
   #conf = {};
@@ -51,7 +50,7 @@ export class Isubo {
     } else if (pattern) {
       params.patterns = [pattern];
     } else {
-      params.sourceDir = conf.source_dir;
+      params.sourceDir = conf.absolute_source_dir;
       params.filename = filename;
     }
 
@@ -162,7 +161,6 @@ export class Isubo {
         ret: await this.#updateOneBy({ filepath })
       };
     } else {
-      console.info(333)
       type = enumDeployType.CREATE;
       hinter.loadUpdate(filepath, getLoadOpt(type));
       return {
@@ -186,7 +184,7 @@ export class Isubo {
     }
 
     if (!this.#assetpathRecords.length) {
-      hinter.errMsg('Without any posts were deploy!');
+      hinter.errMsg('Without any posts and relatived assets need to push!');
       return;
     }
 
