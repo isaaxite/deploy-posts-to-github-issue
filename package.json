@@ -10,8 +10,8 @@
   "scripts": {
     "test": "jest",
     "esm-test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "only-test": "npm run esm_test && git checkout reports/",
-    "update-test-reports": "npm run esm_test && git add ./reports && git commit -m 'update test reports'"
+    "only-test": "npm run esm-test && git checkout reports/",
+    "update-test-reports": "npm run esm-test && git add ./reports && git commit -m 'update test reports'"
   },
   "repository": {
     "type": "git",

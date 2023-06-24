@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">81.57% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>93/114</span>
+                <span class='fraction'>100/120</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>7/7</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">81.41% </span>
+                <span class="strong">83.05% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>92/113</span>
+                <span class='fraction'>98/118</span>
             </div>
         
             
@@ -347,7 +347,14 @@
 <a name='L282'></a><a href='#L282'>282</a>
 <a name='L283'></a><a href='#L283'>283</a>
 <a name='L284'></a><a href='#L284'>284</a>
-<a name='L285'></a><a href='#L285'>285</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L285'></a><a href='#L285'>285</a>
+<a name='L286'></a><a href='#L286'>286</a>
+<a name='L287'></a><a href='#L287'>287</a>
+<a name='L288'></a><a href='#L288'>288</a>
+<a name='L289'></a><a href='#L289'>289</a>
+<a name='L290'></a><a href='#L290'>290</a>
+<a name='L291'></a><a href='#L291'>291</a>
+<a name='L292'></a><a href='#L292'>292</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -381,8 +388,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -499,13 +506,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -619,8 +632,9 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -683,7 +697,7 @@ export class Isubo {
     } else <span class="missing-if-branch" title="if path not taken" >I</span>if (pattern) {
 <span class="cstat-no" title="statement not covered" >      params.patterns = [pattern];</span>
     } else {
-      params.sourceDir = conf.source_dir;
+      params.sourceDir = conf.absolute_source_dir;
       params.filename = filename;
     }
 &nbsp;
@@ -773,7 +787,7 @@ export class Isubo {
       body: formatedMarkdown
     });
 &nbsp;
-    // todo: check forceCreate success or not
+    // TODO: check forceCreate success or not
 &nbsp;
     injectFrontmatterFn({
       issue_number: ret.data.number
@@ -783,15 +797,21 @@ export class Isubo {
   }
 &nbsp;
   async #publishOneBy({ filepath }) {
+    let type;
+    const getLoadOpt = (type) =&gt; ({ text: Isubo.getLoadHintTextBy({ type, filepath }) });
     const { frontmatter } = this.#getPostDetailBy({ filepath });
     if (frontmatter.issue_number) {
+      type = enumDeployType.UPDATE;
+      hinter.loadUpdate(filepath, getLoadOpt(type));
       return {
-        type: enumDeployType.UPDATE,
+        type,
         ret: await this.#updateOneBy({ filepath })
       };
     } else {
+      type = enumDeployType.CREATE;
+      hinter.loadUpdate(filepath, getLoadOpt(type));
       return {
-        type: enumDeployType.CREATE,
+        type,
         ret: await this.#createOneBy({ filepath })
       };
     }
@@ -811,7 +831,7 @@ export class Isubo {
     }
 &nbsp;
     <span class="missing-if-branch" title="if path not taken" >I</span>if (!this.#assetpathRecords.length) {
-<span class="cstat-no" title="statement not covered" >      hinter.errMsg('Without any posts were deploy!');</span>
+<span class="cstat-no" title="statement not covered" >      hinter.errMsg('Without any posts and relatived assets need to push!');</span>
 <span class="cstat-no" title="statement not covered" >      return;</span>
     }
 &nbsp;
@@ -833,7 +853,7 @@ export class Isubo {
       assetRecords: this.#assetpathRecords
     });
 &nbsp;
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (conf.auto_push_asset) {
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (conf.push_asset === enumPushAssetType.AUTO) {
 <span class="cstat-no" title="statement not covered" >      await getAssetPublisherIns().push();</span>
 <span class="cstat-no" title="statement not covered" >      return;</span>
     }
@@ -894,17 +914,18 @@ export class Isubo {
   }
 &nbsp;
   async publish() {
-    const STR_TPYE = enumDeployType.PUBLISH;
+    let type = enumDeployType.PUBLISH;
     const retArr = []
     const filepathArr = await this.#getFilepaths();
-    this.#setLoadHints(filepathArr, STR_TPYE);
+    this.#setLoadHints(filepathArr, type);
     for (const filepath of filepathArr) {
       try {
-        const { ret, type } = await this.#publishOneBy({ filepath });
-        retArr.push(ret);
+        const resp = await this.#publishOneBy({ filepath });
+        type = resp.type;
+        retArr.push(resp.ret);
         hinter.loadSucc(filepath, { text: Isubo.getLoadHintTextBy({ type, filepath }) });
       } catch (error) {
-<span class="cstat-no" title="statement not covered" >        console.error(error);</span>
+        // console.error(error);
 <span class="cstat-no" title="statement not covered" >        hinter.loadFail(filepath, { text: Isubo.getLoadHintTextBy({ type, filepath }) });</span>
 <span class="cstat-no" title="statement not covered" >        hinter.errMsg(error.message)</span>
       }
@@ -922,7 +943,7 @@ export class Isubo {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-06-23T13:42:17.989Z
+                at 2023-06-24T12:34:59.598Z
             </div>
         <script src="../prettify.js"></script>
         <script>
