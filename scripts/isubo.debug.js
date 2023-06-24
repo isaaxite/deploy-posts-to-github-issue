@@ -1,5 +1,12 @@
 import { Isubo } from '../index.js';
 import { TempGitRepo } from '../__test__/utils/index.js';
+import { enumPushAssetType } from '../lib/constants/enum.js';
+
+const enumCmdType = {
+  UPDATE: 'update',
+  CREATE: 'create',
+  PUBLISH: 'publish'
+};
 
 async function main({
   filename,
@@ -7,7 +14,7 @@ async function main({
 }) {
   const tempGitRepo = new TempGitRepo();
   tempGitRepo.init(preConf => {
-    preConf.source_dir = 'source';
+    preConf.push_asset = enumPushAssetType.AUTO;
     return preConf;
   });
 
@@ -25,5 +32,5 @@ async function main({
 
 main({
   filename: ['license'],
-  cmd: 'update'
+  cmd: enumCmdType.PUBLISH
 });
