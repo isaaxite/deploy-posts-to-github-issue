@@ -50,7 +50,7 @@ export class Isubo {
     } else if (pattern) {
       params.patterns = [pattern];
     } else {
-      params.sourceDir = conf.source_dir;
+      params.sourceDir = conf.absolute_source_dir;
       params.filename = filename;
     }
 
@@ -140,7 +140,7 @@ export class Isubo {
       body: formatedMarkdown
     });
 
-    // todo: check forceCreate success or not
+    // TODO: check forceCreate success or not
 
     injectFrontmatterFn({
       issue_number: ret.data.number
@@ -150,15 +150,21 @@ export class Isubo {
   }
 
   async #publishOneBy({ filepath }) {
+    let type;
+    const getLoadOpt = (type) => ({ text: Isubo.getLoadHintTextBy({ type, filepath }) });
     const { frontmatter } = this.#getPostDetailBy({ filepath });
     if (frontmatter.issue_number) {
+      type = enumDeployType.UPDATE;
+      hinter.loadUpdate(filepath, getLoadOpt(type));
       return {
-        type: enumDeployType.UPDATE,
+        type,
         ret: await this.#updateOneBy({ filepath })
       };
     } else {
+      type = enumDeployType.CREATE;
+      hinter.loadUpdate(filepath, getLoadOpt(type));
       return {
-        type: enumDeployType.CREATE,
+        type,
         ret: await this.#createOneBy({ filepath })
       };
     }
@@ -178,7 +184,7 @@ export class Isubo {
     }
 
     if (!this.#assetpathRecords.length) {
-      hinter.errMsg('Without any posts were deploy!');
+      hinter.errMsg('Without any posts and relatived assets need to push!');
       return;
     }
 
@@ -200,7 +206,7 @@ export class Isubo {
       assetRecords: this.#assetpathRecords
     });
 
-    if (conf.auto_push_asset) {
+    if (conf.push_asset === enumPushAssetType.AUTO) {
       await getAssetPublisherIns().push();
       return;
     }
@@ -261,17 +267,18 @@ export class Isubo {
   }
 
   async publish() {
-    const STR_TPYE = enumDeployType.PUBLISH;
+    let type = enumDeployType.PUBLISH;
     const retArr = []
     const filepathArr = await this.#getFilepaths();
-    this.#setLoadHints(filepathArr, STR_TPYE);
+    this.#setLoadHints(filepathArr, type);
     for (const filepath of filepathArr) {
       try {
-        const { ret, type } = await this.#publishOneBy({ filepath });
-        retArr.push(ret);
+        const resp = await this.#publishOneBy({ filepath });
+        type = resp.type;
+        retArr.push(resp.ret);
         hinter.loadSucc(filepath, { text: Isubo.getLoadHintTextBy({ type, filepath }) });
       } catch (error) {
-        console.error(error);
+        // console.error(error);
         hinter.loadFail(filepath, { text: Isubo.getLoadHintTextBy({ type, filepath }) });
         hinter.errMsg(error.message)
       }
