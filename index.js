@@ -25,6 +25,7 @@ export class Isubo {
       conf,
       confPath
     });
+    // TODO: compatile the input of filename and patterns 
     this.#selectPosts = !!selectPosts;
     this.#setCliParams(cliParams);
     this.#setPostManager();
