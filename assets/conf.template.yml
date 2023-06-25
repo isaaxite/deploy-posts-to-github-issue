@@ -40,7 +40,7 @@ token: ''
 # Post Source
 
 ## [optional]
-## Post dir, The top-level directory where articles are stored, and isubo will look for.
+## Source dir, The top-level directory where articles are stored, and where isubo should looking for.
 ## Default "source/"
 ## e.g.
 ## source_dir: "source/"
@@ -54,16 +54,17 @@ token: ''
 ## it can take a string or plain object, as the blew example
 ##
 ## string: 
-##  link_prefix: https://raw.githubusercontent.com/<owner>/<repo>/<branch>/<post_dir>/
+##  link_prefix: https://raw.githubusercontent.com/<owner>/<repo>/<branch>/<source_dir>/
 ##
 ## object:
 ##  link_prefix:
-##    owner: <owner>, default, global owner
-##    repo: <repo>, default, global repo
-##    branch: <branch>, default global branch
-##    dir: '<dir>', default default global post_dir
+##    owner: <owner>, default is global owner
+##    repo: <repo>, default is global repo
+##    branch: <branch>, default is global branch
+##    dir: '<dir>', default is global source_dir
 ##
-# Default, link_prefix: https://raw.githubusercontent.com/<owner>/<repo>/<branch>/<post_dir>/
+## Default:
+##  link_prefix: https://raw.githubusercontent.com/<owner>/<repo>/<branch>/<source_dir>/
 # link_prefix: 
 
 ## [optional]
@@ -74,6 +75,17 @@ token: ''
 #   - image
 
 
-auto_push_asset: false
-# push_asset: prompt | auto | disable
-push_asset: prompt
+# Assets Push
+
+## [optional]
+## Setting this configuration that will detect link assets of those posts and judge which assets need to push when you published the posts.
+## If there are some assets need to push and this configuration'value is 'prompt' or 'auto', isubo will use git-lib to push them.
+## Hint: You can use this feature with confidence, because we will temporary storage those changes other than assets, 
+## and recover them after pushed assets successfuly, in case we also set up a temporary branch as the last resort. 
+##
+## push_asset: prompt | auto | disable
+##   prompt: prompt to if push assets
+##   auto: push assets automatically
+##   disable: just disable pushing assets
+## Default setting is 'prompt'.
+#push_asset: prompt
