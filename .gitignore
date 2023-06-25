@@ -1,6 +1,6 @@
 .DS_Store
 node_modules/
-__test__/
+__test__/temp/
 temp.*
 temp
 scripts/temp.debug.js

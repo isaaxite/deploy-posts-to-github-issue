@@ -1,0 +1,74 @@
+# Isubo Configuration
+## Docs: https://github.com/isaaxite/deploy-posts-to-github-issue/blob/main/README.md
+## Source: https://github.com/isaaxite/deploy-posts-to-github-issue
+
+
+# Github Info
+
+## [required]
+## Repository owner, Such as "isaaxite" in "isaaxite/blog".
+# e.g.
+# owner: isaaxite
+owner: 'isaaxite'
+
+## [required]
+## Repository name, refer to "blog" in the example above.
+### Please ensure that this repository has been manually created by you, 
+### it will be used to store posts resources, and posts will also be published to this repository's issue.
+# e.g.
+# repo: blog
+repo: 'test-repo_deploy-posts-to-github-issue'
+
+## [optional]
+## Branch of <owner>/<repo>, the branch where the resource is actually stored.
+## Default 'main'
+## branch: main
+branch: master
+
+## [required]
+## Github Token, it will be used to invoked github api to publish posts
+## you can get it in https://github.com/settings/tokens
+## It is strongly recommended not to use plaintext to prevent others from stealing your token. 
+## You can try to use environment variables.
+## If you use an environment variable, please start with $ and use uppercase letters for the remaining part to declare, 
+## and isubo will automatically obtain this environment variable
+# e.g.
+# token: $GITHUB_TOKEN
+token: $GITHUB_TOKEN
+
+
+# Post Source
+
+## [optional]
+## Post dir, The top-level directory where articles are stored, and isubo will look for.
+## Default "source/"
+## e.g.
+## source_dir: "source/"
+source_dir: __test__/source/
+
+
+# Link Format
+
+## [optional]
+## Used to format links in articles, and format relative links as url links
+## it can take a string or plain object, as the blew example
+##
+## string: 
+##  link_prefix: https://raw.githubusercontent.com/<owner>/<repo>/<branch>/<post_dir>/
+##
+## object:
+##  link_prefix:
+##    owner: <owner>, default, global owner
+##    repo: <repo>, default, global repo
+##    branch: <branch>, default global branch
+##    dir: '<dir>', default default global post_dir
+##
+# Default, link_prefix: https://raw.githubusercontent.com/<owner>/<repo>/<branch>/<post_dir>/
+# link_prefix: 
+
+## [optional]
+## types, Which link type should be formated.
+## According to the type specified by types, format the corresponding non-http path.
+## Currently supports two formats of "image" and "link", the default is only "image" format.
+# types: 
+#   - image
