@@ -5,7 +5,7 @@ import { PostFinder } from '../lib/post_finder.js';
 describe('post_finder', () => {
   test('glob all matched fileoath', () => {
     const finder = new PostFinder({
-      patterns: ['__test__/temp/source/_posts/**/*.md']
+      patterns: ['__test__/source/**/*.md']
     });
 
     const ret = finder.getFilepaths();
@@ -16,25 +16,25 @@ describe('post_finder', () => {
   test.each([
     {
       name: 'sourceDir, filename and ext', 
-      params: { sourceDir: '__test__/temp/source/', filename: 'NexT添加文章置顶feat', ext: 'md' }
+      params: { sourceDir: '__test__/source/', filename: 'WSL的hosts文件被重置', ext: 'md' }
     },
     { 
       name: 'sourceDir and filename', 
-      params: { sourceDir: '__test__/temp/source/', filename: 'NexT添加文章置顶feat' }
+      params: { sourceDir: '__test__/source/', filename: 'WSL的hosts文件被重置' }
     },
     {
       name: 'filename include multiple path',
-      params: { sourceDir: '__test__/temp/source/', filename: '/source/_posts/NexT添加文章置顶feat' }
+      params: { sourceDir: '__test__/source/', filename: '/source/WSL的hosts文件被重置' }
     },
     {
       name: 'filename include multiple path and ext',
-      params: { sourceDir: '__test__/temp/source/', filename: '/source/_posts/NexT添加文章置顶feat.html' }
+      params: { sourceDir: '__test__/source/', filename: '/source/WSL的hosts文件被重置.html' }
     },
     {
       name: 'only sourceDir',
-      params: { sourceDir: '__test__/temp/source/' }
+      params: { sourceDir: '__test__/source/' }
     },
-  ])('glob a matched file whit $name', ({ params }) => {
+  ])('glob a matched file with $name', ({ params }) => {
     const finder = new PostFinder({
       ...params
     });
@@ -45,10 +45,10 @@ describe('post_finder', () => {
       const readFilename = ext
         ? path.basename(params.filename).replace(ext, '')
         : path.basename(params.filename);
-      expect(filepath).toEqual(`__test__/temp/source/_posts/${readFilename}.md`)
+      expect(filepath).toEqual(`__test__/source/${readFilename}.md`)
     } else {
       const filepaths = finder.getFilepaths();
-      const isDescendant = filepaths.every(it => it.startsWith('__test__/temp/source/'));
+      const isDescendant = filepaths.every(it => it.startsWith('__test__/source/'));
       const isValidExt = filepaths.every(it => path.extname(it) === '.md');
 
       expect(isDescendant).toBeTruthy();
@@ -57,14 +57,14 @@ describe('post_finder', () => {
   });
 
   test('find with serveral filenames', () => {
-    const filename = ['NexT添加文章置顶feat', 'nvm安装与基本使用'];
+    const filename = ['WSL的hosts文件被重置', 'license'];
     const finder = new PostFinder({
-      sourceDir: '__test__/temp/source/_posts',
+      sourceDir: '__test__/source/',
       filename
     });
     const destFilepaths = finder.getFilepaths();
     expect(destFilepaths).toEqual(
-      expect.arrayContaining(filename.map(it => `__test__/temp/source/_posts/${it}.md`))
+      expect.arrayContaining(filename.map(it => `__test__/source/${it}.md`))
     );
   });
 
