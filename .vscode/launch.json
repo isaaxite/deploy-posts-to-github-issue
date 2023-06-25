@@ -12,6 +12,15 @@
         "<node_internals>/**"
       ],
       "program": "${workspaceFolder}/scripts/isubo.debug.js"
-    }
+    },
+    // {
+    //   "type": "node",
+    //   "request": "launch",
+    //   "name": "Launch Isubo",
+    //   "skipFiles": [
+    //     "<node_internals>/**"
+    //   ],
+    //   "program": "${workspaceFolder}/scripts/temp.debug.js"
+    // }
   ]
 }
