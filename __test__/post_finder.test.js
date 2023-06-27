@@ -68,5 +68,70 @@ describe('post_finder', () => {
     );
   });
 
-  test('todo: check PostFinder params', () => {})
+  test('check PostFinder params is empty', () => {
+    try {
+      new PostFinder(); 
+    } catch (error) {
+      expect(error.message).toEqual('<patterns> or <sourceDir> must be provided');
+    }
+  });
+
+  test('init PostFinder with patterns', () => {
+    try {
+      new PostFinder({
+        patterns: 'Err Data Type'
+      })
+    } catch (error) {
+      console.info(`errMsg: ${error.message}`);
+      expect(error.message).toEqual('patterns must be Array<string>');
+    }
+
+    try {
+      new PostFinder({
+        patterns: ['__test__/test_err_dir/**/*.md']
+      });
+    } catch (error) {
+      console.info(`errMsg: ${error.message}`);
+      expect(error.message.startsWith('patterns invalid'));
+    }
+
+    const postFinder1 = new PostFinder({
+      patterns: [
+        '__test__/source/license_not_exist.md',
+        '__test__/source/**/*.md',
+        '__test__/test_err_dir/**/*.md'
+      ]
+    });
+
+    expect(postFinder1.patterns).toEqual(expect.arrayContaining(['__test__/source/**/*.md']));
+
+    const postFinder2 = new PostFinder({
+      patterns: [
+        '__test__/source/license.md'
+      ]
+    });
+    const filepaths = postFinder2.getFilepaths();
+    expect(filepaths).toEqual(expect.arrayContaining(['__test__/source/license.md']));
+  });
+
+  test('init PostFinder with not exist path of source dir', () => {
+    const sourceDir = '__test__/source_not_exist';
+    try {
+      new PostFinder({
+        sourceDir,
+      }); 
+    } catch (error) {
+      console.info(`errMsg: ${error.message}`);
+      expect(error.message).toEqual(`source dir(${sourceDir}) not exist`);
+    }
+  });
+
+  test('init PostFinder with err ext', () => {
+    const postFinder1 = new PostFinder({
+      sourceDir: '__test__/source',
+      ext: 'html'
+    });
+
+    expect(postFinder1.ext).toEqual('md');
+  });
 });
