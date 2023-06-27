@@ -5,6 +5,8 @@ import { ConfReader } from '../lib/conf_reader.js';
 import { PostFinder } from '../lib/post_finder.js';
 import { TempRepo, copyTempPost, detectOnly, removeTempPost } from './utils/index.js';
 import { readdirSync } from 'fs';
+import { empty_parse_conf } from './test_cases/post_parse.js';
+import { enumPushAssetType } from '../lib/constants/enum.js';
 
 const TEST_CASE_FRONTMATTER = `---
 title: LICENSE的选择与生成
@@ -186,7 +188,46 @@ describe('post_parse', () => {
     );
   });
 
-  test.todo('empty parse conf');
+  test('empty parse conf', () => {
+    try {
+      empty_parse_conf() 
+    } catch (error) {
+      expect(error.message).toEqual('owner is required');
+    }
+
+    try {
+      empty_parse_conf({
+        owner: 'isaaxite'
+      });
+    } catch (error) {
+      expect(error.message).toEqual('repo is required');
+    }
+
+    try {
+      empty_parse_conf({
+        owner: 'isaaxite',
+        repo: 'test-repo_deploy-posts-to-github-issue'
+      });
+    } catch (error) {
+      expect(error.message).toEqual('token is required');
+    }
+
+    const preConf = {
+      owner: 'isaaxite',
+      repo: 'test-repo_deploy-posts-to-github-issue',
+      token: process.env.GITHUB_TOKEN
+    };
+    const defConf = empty_parse_conf(preConf);
+    expect(defConf.owner).toEqual(preConf.owner);
+    expect(defConf.repo).toEqual(preConf.repo);
+    expect(defConf.token).toEqual(preConf.token);
+    expect(defConf.branch).toEqual('main');
+    expect(defConf.source_dir).toEqual('source');
+    expect(defConf.absolute_source_dir).toEqual(path.resolve('source'));
+    expect(defConf.link_prefix).toEqual(`https://raw.githubusercontent.com/${preConf.owner}/${preConf.repo}/main/source`);
+    expect(defConf.types).toEqual(expect.arrayContaining(['image']));
+    expect(defConf.push_asset).toEqual(enumPushAssetType.IDLE);
+  });
 
   test.todo('parse conf: if exist sep');
 
