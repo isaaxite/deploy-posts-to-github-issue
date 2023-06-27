@@ -3,13 +3,15 @@ import { describe, test, expect } from '@jest/globals';
 import { Isubo } from '../index.js';
 import { TempGitRepo, TempRepo, copyTempPost } from './utils/index.js';
 import { PostParse } from '../lib/post_parse.js';
+import { enumPushAssetType } from "../lib/constants/enum.js";
 
 describe('isubo', () => {
   test('create one post', async () => {
     const tempRepo = new TempRepo();
     tempRepo.copy((preConf) => ({
       ...preConf,
-      source_dir: tempRepo.tempSourceDir
+      source_dir: tempRepo.tempSourceDir,
+      push_asset: enumPushAssetType.DISABLE
     }));
     const conf = tempRepo.conf;
     const isubo = new Isubo({
@@ -33,7 +35,8 @@ describe('isubo', () => {
     const tempRepo = new TempRepo();
     tempRepo.copy((preConf) => ({
       ...preConf,
-      source_dir: tempRepo.tempSourceDir
+      source_dir: tempRepo.tempSourceDir,
+      push_asset: enumPushAssetType.DISABLE
     }));
     const conf = tempRepo.conf;
     const postParse = new PostParse({
@@ -60,7 +63,8 @@ describe('isubo', () => {
     const tempRepo = new TempRepo();
     tempRepo.copy((preConf) => ({
       ...preConf,
-      source_dir: tempRepo.tempSourceDir
+      source_dir: tempRepo.tempSourceDir,
+      push_asset: enumPushAssetType.DISABLE
     }));
     const conf = tempRepo.conf;
     const postParse = new PostParse({
