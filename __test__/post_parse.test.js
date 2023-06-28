@@ -4,7 +4,7 @@ import { describe, test, expect } from '@jest/globals';
 import { PostParse } from '../lib/post_parse.js';
 import { ConfReader } from '../lib/conf_reader.js';
 import { PostFinder } from '../lib/post_finder.js';
-import { TempRepo, copyTempPost, detectOnly, removeTempPost } from './utils/index.js';
+import { TempRepo, copyTempPost, copyTempPostWithFrontmatter, detectOnly, removeTempPost } from './utils/index.js';
 import { readdirSync, write, writeSync } from 'fs';
 import { empty_parse_conf, get_ast_from_empty_md_file, inject_yml_data_to_md_file_without_yml_data } from './test_cases/post_parse.js';
 import { enumPushAssetType } from '../lib/constants/enum.js';
@@ -232,10 +232,24 @@ describe('post_parse', () => {
     expect(defConf.push_asset).toEqual(enumPushAssetType.IDLE);
   });
 
-  test.todo('parse conf: if exist sep');
-  test.todo('parse empty markdownTxt');
-  test.todo('parse empty md file');
-  test.todo('parse md file without yml data');
+  test('parse md file without yml data', () => {
+    const {
+      sourceDir,
+      filepath
+    } = copyTempPostWithFrontmatter('__test__/source/license.md');
+    const postParse = new PostParse({
+      path: filepath,
+      conf: {
+        link_prefix: 'https://isaaxite.github.io/blog/resources/',
+        absolute_source_dir: path.resolve(sourceDir)
+      }
+    });
+    const ret = postParse.getFrontmatter();
+
+    expect(ret).toHaveProperty('title', '');
+    expect(ret).toHaveProperty('tags', []);
+    expect(ret).toHaveProperty('issue_number', 0);
+  });
 
   test('inject yml data to md file without yml data', () => {
     inject_yml_data_to_md_file_without_yml_data(({ settingIssueNum, gettingIssueNum }) => {
@@ -285,7 +299,7 @@ describe('post_parse', () => {
     expect(ret).toHaveProperty('issue_number', 0);
   });
 
-  test.only.each(detectOnly([{
+  test.each(detectOnly([{
     name: 'provide right param include markdownText exclude filepath',
     param: {
       markdownText: TEST_CASE_MARKDOWN_EN_PIC,

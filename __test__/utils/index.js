@@ -8,6 +8,7 @@ import { ConfReader } from '../../lib/conf_reader.js';
 import simpleGit from 'simple-git';
 import { execSync } from 'child_process';
 import { cwd } from 'process';
+import { FRONTMATTER } from '../../lib/constants/index.js';
 
 const DEST_SOURCE_PATH_PREFIX = '__test__/temp/source_';
 
@@ -295,4 +296,31 @@ export class TempGitRepo {
   get git () {
     return this.#git;
   }
+}
+
+export function copyTempPostWithFrontmatter(src) {
+  const temp = copyTempPost(src);
+  const {
+    sourceDir,
+    filepath
+  } = temp;
+  const getPostParse = () => new PostParse({
+    path: filepath,
+    conf: {
+      link_prefix: 'https://isaaxite.github.io/blog/resources/',
+      absolute_source_dir: path.resolve(sourceDir)
+    },
+    disable_immediate_formatAssetLink: true
+  });
+
+  const postParse = getPostParse();
+  const ast = postParse.getAst();
+
+  if (ast.children[0].type === FRONTMATTER) {
+    ast.children = ast.children.slice(1);
+  }
+  const mdtxt = postParse.getFormatedMarkdown({ ast });
+  writeFileSync(filepath, mdtxt);
+
+  return temp;
 }
