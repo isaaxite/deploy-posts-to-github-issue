@@ -7,6 +7,7 @@ import { TempRepo, copyTempPost, detectOnly, removeTempPost } from './utils/inde
 import { readdirSync } from 'fs';
 import { empty_parse_conf } from './test_cases/post_parse.js';
 import { enumPushAssetType } from '../lib/constants/enum.js';
+import { DEF_LINK_TYPE_LIST } from '../lib/constants/index.js';
 
 const TEST_CASE_FRONTMATTER = `---
 title: LICENSE的选择与生成
@@ -238,7 +239,7 @@ describe('post_parse', () => {
   test.todo('get formated mdtxt from empty md file');
   test.todo('get frontmatter from empty md file');
 
-  test.only.each([{
+  test.only.each(detectOnly([{
     name: 'provide right param include markdownText exclude filepath',
     param: {
       markdownText: TEST_CASE_MARKDOWN_EN_PIC,
@@ -247,21 +248,149 @@ describe('post_parse', () => {
   }, {
     name: 'provide right param include filepath exclude markdownText',
     param: {
-      filepath: '__test__/source/license.md',
+      path: '__test__/source/license.md',
       conf: getConf()
     }
   }, {
     name: 'provide nothing will emit err',
     param: undefined,
-    getExpect: () => 'Constructor param must be object'
+    getExpect: () => 'Constructor param must be non-empty Object'
   }, {
     name: 'init with {}, it will emit err',
     param: {},
-    getExpect: () => 'Constructor param must be object'
-  }])('PostParse Ctor param, $name', ({ param, getExpect }) => {
+    getExpect: () => 'Constructor param must be non-empty Object'
+  }, {
+    name: 'init with only conf, it will emit err',
+    param: {
+      conf: getConf()
+    },
+    getExpect: () => 'Must provide <markdownText> or <path>'
+  }, {
+    name: 'init with empty conf, it will emit err',
+    param: {
+      markdownText: TEST_CASE_MARKDOWN_EN_PIC,
+      conf: {}
+    },
+    getExpect: () => 'conf must be a non-empty Object'
+  }, {
+    name: 'init with empty str of conf.link_prefix, it will emit err',
+    param: {
+      markdownText: TEST_CASE_MARKDOWN_EN_PIC,
+      conf: {
+        link_prefix: ''
+      }
+    },
+    getExpect: () => 'conf.link_prefix must be a non-empty String'
+  }, {
+    name: 'init with non-str of conf.link_prefix, it will emit err',
+    param: {
+      markdownText: TEST_CASE_MARKDOWN_EN_PIC,
+      conf: {
+        link_prefix: {}
+      }
+    },
+    getExpect: () => 'conf.link_prefix must be a non-empty String'
+  }, {
+    name: 'init with empty-str of conf.absolute_source_dir, it will emit err',
+    param: {
+      path: '__test__/source/license.md',
+      conf: {
+        link_prefix: 'https://isaaxite.github.io/blog/resources/',
+        absolute_source_dir: ''
+      }
+    },
+    getExpect: () => 'conf.absolute_source_dir must be a non-empty String'
+  }, {
+    name: 'init with non-str of conf.absolute_source_dir, it will emit err',
+    param: {
+      path: '__test__/source/license.md',
+      conf: {
+        link_prefix: 'https://isaaxite.github.io/blog/resources/',
+        absolute_source_dir: {}
+      }
+    },
+    getExpect: () => 'conf.absolute_source_dir must be a non-empty String'
+  }, {
+    name: 'init with empty-array of conf.types, it will emit err',
+    param: {
+      path: '__test__/source/license.md',
+      conf: {
+        link_prefix: 'https://isaaxite.github.io/blog/resources/',
+        absolute_source_dir: path.resolve('source'),
+        types: []
+      }
+    },
+    getExpect: () => 'conf.types must be a non-empty Array'
+  }, {
+    name: 'init with undefined of conf.types, it will use def types and pass',
+    param: {
+      path: '__test__/source/license.md',
+      conf: {
+        link_prefix: 'https://isaaxite.github.io/blog/resources/',
+        absolute_source_dir: path.resolve('source'),
+        types: undefined
+      }
+    },
+    getExpect: ({ ins }) => expect(ins.linkTypes).toEqual(expect.arrayContaining(DEF_LINK_TYPE_LIST))
+  }, {
+    name: 'init with non-array of conf.types, it will emit err',
+    param: {
+      path: '__test__/source/license.md',
+      conf: {
+        link_prefix: 'https://isaaxite.github.io/blog/resources/',
+        absolute_source_dir: path.resolve('source'),
+        types: {}
+      }
+    },
+    getExpect: () => 'conf.types must be a Array'
+  }, {
+    name: 'init with empty-array of conf.types, it will use def types and pass',
+    param: {
+      path: '__test__/source/license.md',
+      conf: {
+        link_prefix: 'https://isaaxite.github.io/blog/resources/',
+        absolute_source_dir: path.resolve('source'),
+        types: []
+      }
+    },
+    getExpect: ({ ins }) => expect(ins.linkTypes).toEqual(expect.arrayContaining(DEF_LINK_TYPE_LIST))
+  }, {
+    name: 'init with conf.types include non-enumLinkType item, that item will be delate and pass',
+    param: {
+      path: '__test__/source/license.md',
+      conf: {
+        link_prefix: 'https://isaaxite.github.io/blog/resources/',
+        absolute_source_dir: path.resolve('source'),
+        types: [ ...DEF_LINK_TYPE_LIST, 'non-enumLinkType']
+      }
+    },
+    getExpect: ({ ins }) => expect(ins.linkTypes).toEqual(expect.arrayContaining(DEF_LINK_TYPE_LIST))
+  }, {
+    name: 'init with conf.types filling non-enumLinkType item, it will use def types and pass',
+    param: {
+      path: '__test__/source/license.md',
+      conf: {
+        link_prefix: 'https://isaaxite.github.io/blog/resources/',
+        absolute_source_dir: path.resolve('source'),
+        types: ['non-enumLinkType']
+      }
+    },
+    getExpect: ({ ins }) => expect(ins.linkTypes).toEqual(expect.arrayContaining(DEF_LINK_TYPE_LIST))
+  }, {
+    name: 'init with markdownText, conf.disable_asset_find will be set to true aumaticaly',
+    param: {
+      markdownText: TEST_CASE_MARKDOWN_EN_PIC,
+      conf: {
+        link_prefix: 'https://isaaxite.github.io/blog/resources/',
+        types: undefined,
+        disable_asset_find: false
+      }
+    },
+    getExpect: ({ ins }) => expect(ins.disableAssetFind).toBeTruthy()
+  }]))('PostParse Ctor param, $name', ({ param, getExpect }) => {
     try {
       const ins = new PostParse(param);
-      expect(ins instanceof PostParse);
+      getExpect ? getExpect({ param, ins }) : expect(ins instanceof PostParse);
     } catch (error) {
       console.info(`errMsg: ${error.message}`);
       expect(error.message).toEqual(getExpect({ param }));
