@@ -1,12 +1,13 @@
 import path from "path";
 import { describe, test, expect } from '@jest/globals';
 import { Isubo } from '../index.js';
-import { TempGitRepo, TempRepo, copyTempPost } from './utils/index.js';
+import { TempRepo, sleep } from './utils/index.js';
 import { PostParse } from '../lib/post_parse.js';
 import { enumPushAssetType } from "../lib/constants/enum.js";
 
 describe('isubo', () => {
   test('create one post', async () => {
+    await sleep(3000);
     const tempRepo = new TempRepo();
     tempRepo.copy((preConf) => ({
       ...preConf,
@@ -28,9 +29,10 @@ describe('isubo', () => {
 
     const frontmatter = postParse.getFrontmatter();
     expect(ret.data.number).toEqual(frontmatter.issue_number);
-  }, 5000);
+  }, 10000);
 
   test('update one post', async () => {
+    await sleep(3000);
     const issue_number = 1;
     const tempRepo = new TempRepo();
     tempRepo.copy((preConf) => ({
@@ -56,9 +58,10 @@ describe('isubo', () => {
     expect(ret).not.toBeUndefined();
     expect(ret.status).toBeGreaterThanOrEqual(200);
     expect(ret.status).toBeLessThan(300);
-  }, 5000);
+  }, 10000);
 
   test('publish posts, according post\'s issue_number', async () => {
+    await sleep(3000);
     const issue_number = 58;
     const tempRepo = new TempRepo();
     tempRepo.copy((preConf) => ({
@@ -81,5 +84,5 @@ describe('isubo', () => {
       }
     });
     await isubo.publish();
-  }, 10 * 1000);
+  }, 20 * 1000);
 });
