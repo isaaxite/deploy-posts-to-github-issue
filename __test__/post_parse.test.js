@@ -1,13 +1,15 @@
 import path from 'path';
+import { writeFileSync } from 'fs';
 import { describe, test, expect } from '@jest/globals';
 import { PostParse } from '../lib/post_parse.js';
 import { ConfReader } from '../lib/conf_reader.js';
 import { PostFinder } from '../lib/post_finder.js';
 import { TempRepo, copyTempPost, detectOnly, removeTempPost } from './utils/index.js';
-import { readdirSync } from 'fs';
-import { empty_parse_conf } from './test_cases/post_parse.js';
+import { readdirSync, write, writeSync } from 'fs';
+import { empty_parse_conf, get_ast_from_empty_md_file, inject_yml_data_to_md_file_without_yml_data } from './test_cases/post_parse.js';
 import { enumPushAssetType } from '../lib/constants/enum.js';
 import { DEF_LINK_TYPE_LIST } from '../lib/constants/index.js';
+import { removeSync } from 'fs-extra/esm';
 
 const TEST_CASE_FRONTMATTER = `---
 title: LICENSE的选择与生成
@@ -234,10 +236,54 @@ describe('post_parse', () => {
   test.todo('parse empty markdownTxt');
   test.todo('parse empty md file');
   test.todo('parse md file without yml data');
-  test.todo('inject yml data to md file without yml data');
-  test.todo('get ast from empty md file');
-  test.todo('get formated mdtxt from empty md file');
-  test.todo('get frontmatter from empty md file');
+
+  test('inject yml data to md file without yml data', () => {
+    inject_yml_data_to_md_file_without_yml_data(({ settingIssueNum, gettingIssueNum }) => {
+      expect(gettingIssueNum).toEqual(settingIssueNum);
+    })
+  });
+
+  test('get ast from empty md file, rootAst.children will be a empty Array', () => {
+    get_ast_from_empty_md_file((ast) => {
+      expect(ast).toHaveProperty('children', []);
+    });
+  });
+
+  test('get formated mdtxt from empty md file', () => {
+    const filepath = '__test__/temp/empty.md';
+    writeFileSync(filepath, '');
+    const postParse = new PostParse({
+      path: filepath,
+      conf: {
+        link_prefix: 'https://isaaxite.github.io/blog/resources/',
+        absolute_source_dir: path.resolve('source'),
+        types: ['non-enumLinkType']
+      }
+    });
+    removeSync(filepath)
+
+    const ret = postParse.getFormatedMarkdown();
+    expect(ret).toBe('');
+  });
+
+  test('get frontmatter from empty md file', () => {
+    const filepath = '__test__/temp/empty.md';
+    writeFileSync(filepath, '');
+    const postParse = new PostParse({
+      path: filepath,
+      conf: {
+        link_prefix: 'https://isaaxite.github.io/blog/resources/',
+        absolute_source_dir: path.resolve('source'),
+        types: ['non-enumLinkType']
+      }
+    });
+    removeSync(filepath)
+
+    const ret = postParse.getFrontmatter();
+    expect(ret).toHaveProperty('title', '');
+    expect(ret).toHaveProperty('tags', []);
+    expect(ret).toHaveProperty('issue_number', 0);
+  });
 
   test.only.each(detectOnly([{
     name: 'provide right param include markdownText exclude filepath',
@@ -316,7 +362,7 @@ describe('post_parse', () => {
       path: '__test__/source/license.md',
       conf: {
         link_prefix: 'https://isaaxite.github.io/blog/resources/',
-        absolute_source_dir: path.resolve('source'),
+        absolute_source_dir: path.resolve('__test__/source'),
         types: []
       }
     },
@@ -327,7 +373,7 @@ describe('post_parse', () => {
       path: '__test__/source/license.md',
       conf: {
         link_prefix: 'https://isaaxite.github.io/blog/resources/',
-        absolute_source_dir: path.resolve('source'),
+        absolute_source_dir: path.resolve('__test__/source'),
         types: undefined
       }
     },
@@ -338,7 +384,7 @@ describe('post_parse', () => {
       path: '__test__/source/license.md',
       conf: {
         link_prefix: 'https://isaaxite.github.io/blog/resources/',
-        absolute_source_dir: path.resolve('source'),
+        absolute_source_dir: path.resolve('__test__/source'),
         types: {}
       }
     },
@@ -349,7 +395,7 @@ describe('post_parse', () => {
       path: '__test__/source/license.md',
       conf: {
         link_prefix: 'https://isaaxite.github.io/blog/resources/',
-        absolute_source_dir: path.resolve('source'),
+        absolute_source_dir: path.resolve('__test__/source'),
         types: []
       }
     },
@@ -360,7 +406,7 @@ describe('post_parse', () => {
       path: '__test__/source/license.md',
       conf: {
         link_prefix: 'https://isaaxite.github.io/blog/resources/',
-        absolute_source_dir: path.resolve('source'),
+        absolute_source_dir: path.resolve('__test__/source'),
         types: [ ...DEF_LINK_TYPE_LIST, 'non-enumLinkType']
       }
     },
@@ -371,7 +417,7 @@ describe('post_parse', () => {
       path: '__test__/source/license.md',
       conf: {
         link_prefix: 'https://isaaxite.github.io/blog/resources/',
-        absolute_source_dir: path.resolve('source'),
+        absolute_source_dir: path.resolve('__test__/source'),
         types: ['non-enumLinkType']
       }
     },
