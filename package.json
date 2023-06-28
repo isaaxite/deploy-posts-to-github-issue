@@ -11,7 +11,7 @@
     "test": "jest",
     "esm-test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "only-test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config=jest.dev.config.mjs",
-    "update-test-reports": "npm run esm-test && git add ./reports && git commit -m 'update test reports'"
+    "update-test-reports": "npm run esm-test && (git add ./reports && git commit -m 'update test reports') || git checkout ./reports"
   },
   "repository": {
     "type": "git",

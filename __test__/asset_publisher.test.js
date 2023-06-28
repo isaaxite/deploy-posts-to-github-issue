@@ -159,98 +159,66 @@ describe('asset_publisher', () => {
     expect(postAndAssetsCommitId).toEqual(gitlog.latest.hash);
   }, 60 * 1000);
 
-  test('AssetPublisher param', () => {
-    try {
-      new AssetPublisher();
-    } catch (error) {
-      console.info(`errMsg: ${error.message}`);
-      expect(error.message).toEqual('Constructor param muse be object');
-    }
-
-    try {
-      new AssetPublisher({});
-    } catch (error) {
-      console.info(`errMsg: ${error.message}`);
-      expect(error.message).toEqual('Must be provide assetRecords');
-    }
-
-    const ins = new AssetPublisher({
-      assetRecords: []
-    });
-
-    expect(ins instanceof AssetPublisher).toBeTruthy();
-
-    try {
-      new AssetPublisher({
-        assetRecords: {}
-      });
-    } catch (error) {
-      console.info(`errMsg: ${error.message}`);
-      expect(error.message).toEqual('Constructor param assetRecords must be Array');
-    }
-
-    try {
-      new AssetPublisher({
-        assetRecords: [{}]
-      });
-    } catch (error) {
-      console.info(`errMsg: ${error.message}`);
-      expect(error.message).toEqual('assetRecords[].postpath must be non-empty string');
-    }
-
-    try {
-      new AssetPublisher({
+  test.each([
+    {
+      name: 'init with undefined, it will emit err',
+      param: undefined,
+      getExpext: () => 'Constructor param muse be object'
+    },
+    {
+      name: 'init with {}, it will emit err',
+      param: {},
+      getExpext: () => 'Constructor param muse be object'
+    },
+    {
+      name: 'init with { assetRecords: {} }, it will emit err',
+      param: { assetRecords: {} },
+      getExpext: () => 'Constructor param assetRecords must be Array'
+    },
+    {
+      name: 'init with { assetRecords: [{}] }, it will emit err',
+      param: { assetRecords: [{}] },
+      getExpext: () => 'assetRecords[].postpath must be non-empty string'
+    },
+    {
+      name: 'init with { assetRecords: [{ postpath: 1 }] }, it will emit err',
+      param: { assetRecords: [{ postpath: 1 }] },
+      getExpext: () => 'assetRecords[].postpath must be non-empty string'
+    },
+    {
+      name: 'init with { assetRecords: [{postpath: \'temp.md\'}] }, it will emit err',
+      param: { assetRecords: [{postpath: 'temp.md'}] },
+      getExpext: () => 'assetRecords[].assetpaths must be Array<string>'
+    },
+    {
+      name: 'init with { assetRecords: [{postpath: \'temp.md\', assetpaths: {}}] }, it will emit err',
+      param: { assetRecords: [{postpath: 'temp.md', assetpaths: {}}] },
+      getExpext: () => 'assetRecords[].assetpaths must be Array<string>'
+    },
+    {
+      name: 'init with { assetRecords: [{postpath: \'temp.md\', assetpaths: [\'\']}] }, it will emit err',
+      param: { assetRecords: [{postpath: 'temp.md', assetpaths: ['']}] },
+      getExpext: () => 'assetRecords[].assetpaths must be Array<string>'
+    },
+    {
+      name: 'init with { assetRecords: [] }, it will pass',
+      param: { assetRecords: [] },
+    },
+    {
+      name: 'init with { assetRecords: [{postpath: \'temp.md\', assetpaths: []}] }, it will be passed',
+      param: {
         assetRecords: [{
-          postpath: 1
+          postpath: 'temp.md', assetpaths: []
         }]
-      });
-    } catch (error) {
-      console.info(`errMsg: ${error.message}`);
-      expect(error.message).toEqual('assetRecords[].postpath must be non-empty string');
+      }
     }
-
+  ])('AssetPublisher ctor param, $name', ({ param, getExpext }) => {
     try {
-      new AssetPublisher({
-        assetRecords: [{
-          postpath: '/a/b.md'
-        }]
-      });
+      const ins = new AssetPublisher(param);
+      expect(ins instanceof AssetPublisher).toBeTruthy();
     } catch (error) {
       console.info(`errMsg: ${error.message}`);
-      expect(error.message).toEqual('assetRecords[].assetpaths must be Array<string>');
-    }
-
-    try {
-      new AssetPublisher({
-        assetRecords: [{
-          postpath: '/a/b.md',
-          assetpaths: {}
-        }]
-      });
-    } catch (error) {
-      console.info(`errMsg: ${error.message}`);
-      expect(error.message).toEqual('assetRecords[].assetpaths must be Array<string>');
-    }
-
-    const ins1 = new AssetPublisher({
-      assetRecords: [{
-        postpath: '/a/b.md',
-        assetpaths: []
-      }]
-    });
-
-    expect(ins1 instanceof AssetPublisher).toBeTruthy();
-
-    try {
-      new AssetPublisher({
-        assetRecords: [{
-          postpath: '/a/b.md',
-          assetpaths: ['']
-        }]
-      });
-    } catch (error) {
-      console.info(`errMsg: ${error.message}`);
-      expect(error.message).toEqual('assetRecords[].assetpaths must be Array<string>');
+      expect(error.message).toEqual(getExpext({ param }));
     }
   });
 });
