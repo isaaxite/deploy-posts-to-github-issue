@@ -74,6 +74,8 @@ token: ''
 # types: 
 #   - image
 
+## [optional]
+# disable_asset_find: false
 
 # Assets Push
 

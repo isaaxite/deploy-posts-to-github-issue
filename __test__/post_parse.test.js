@@ -230,4 +230,41 @@ describe('post_parse', () => {
   });
 
   test.todo('parse conf: if exist sep');
+  test.todo('parse empty markdownTxt');
+  test.todo('parse empty md file');
+  test.todo('parse md file without yml data');
+  test.todo('inject yml data to md file without yml data');
+  test.todo('get ast from empty md file');
+  test.todo('get formated mdtxt from empty md file');
+  test.todo('get frontmatter from empty md file');
+
+  test.only.each([{
+    name: 'provide right param include markdownText exclude filepath',
+    param: {
+      markdownText: TEST_CASE_MARKDOWN_EN_PIC,
+      conf: getConf()
+    }
+  }, {
+    name: 'provide right param include filepath exclude markdownText',
+    param: {
+      filepath: '__test__/source/license.md',
+      conf: getConf()
+    }
+  }, {
+    name: 'provide nothing will emit err',
+    param: undefined,
+    getExpect: () => 'Constructor param must be object'
+  }, {
+    name: 'init with {}, it will emit err',
+    param: {},
+    getExpect: () => 'Constructor param must be object'
+  }])('PostParse Ctor param, $name', ({ param, getExpect }) => {
+    try {
+      const ins = new PostParse(param);
+      expect(ins instanceof PostParse);
+    } catch (error) {
+      console.info(`errMsg: ${error.message}`);
+      expect(error.message).toEqual(getExpect({ param }));
+    }
+  })
 });
