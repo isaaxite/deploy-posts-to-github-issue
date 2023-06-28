@@ -158,4 +158,99 @@ describe('asset_publisher', () => {
     expect(postAndAssetsCommitId).not.toStrictEqual('');
     expect(postAndAssetsCommitId).toEqual(gitlog.latest.hash);
   }, 60 * 1000);
+
+  test('AssetPublisher param', () => {
+    try {
+      new AssetPublisher();
+    } catch (error) {
+      console.info(`errMsg: ${error.message}`);
+      expect(error.message).toEqual('Constructor param muse be object');
+    }
+
+    try {
+      new AssetPublisher({});
+    } catch (error) {
+      console.info(`errMsg: ${error.message}`);
+      expect(error.message).toEqual('Must be provide assetRecords');
+    }
+
+    const ins = new AssetPublisher({
+      assetRecords: []
+    });
+
+    expect(ins instanceof AssetPublisher).toBeTruthy();
+
+    try {
+      new AssetPublisher({
+        assetRecords: {}
+      });
+    } catch (error) {
+      console.info(`errMsg: ${error.message}`);
+      expect(error.message).toEqual('Constructor param assetRecords must be Array');
+    }
+
+    try {
+      new AssetPublisher({
+        assetRecords: [{}]
+      });
+    } catch (error) {
+      console.info(`errMsg: ${error.message}`);
+      expect(error.message).toEqual('assetRecords[].postpath must be non-empty string');
+    }
+
+    try {
+      new AssetPublisher({
+        assetRecords: [{
+          postpath: 1
+        }]
+      });
+    } catch (error) {
+      console.info(`errMsg: ${error.message}`);
+      expect(error.message).toEqual('assetRecords[].postpath must be non-empty string');
+    }
+
+    try {
+      new AssetPublisher({
+        assetRecords: [{
+          postpath: '/a/b.md'
+        }]
+      });
+    } catch (error) {
+      console.info(`errMsg: ${error.message}`);
+      expect(error.message).toEqual('assetRecords[].assetpaths must be Array<string>');
+    }
+
+    try {
+      new AssetPublisher({
+        assetRecords: [{
+          postpath: '/a/b.md',
+          assetpaths: {}
+        }]
+      });
+    } catch (error) {
+      console.info(`errMsg: ${error.message}`);
+      expect(error.message).toEqual('assetRecords[].assetpaths must be Array<string>');
+    }
+
+    const ins1 = new AssetPublisher({
+      assetRecords: [{
+        postpath: '/a/b.md',
+        assetpaths: []
+      }]
+    });
+
+    expect(ins1 instanceof AssetPublisher).toBeTruthy();
+
+    try {
+      new AssetPublisher({
+        assetRecords: [{
+          postpath: '/a/b.md',
+          assetpaths: ['']
+        }]
+      });
+    } catch (error) {
+      console.info(`errMsg: ${error.message}`);
+      expect(error.message).toEqual('assetRecords[].assetpaths must be Array<string>');
+    }
+  });
 });
