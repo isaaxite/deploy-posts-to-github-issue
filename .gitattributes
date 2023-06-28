@@ -1,1 +1,6 @@
+__test__/** linguist-vendored
+.vscode/** linguist-vendored
+assets/logo.png linguist-vendored
 reports/** linguist-vendored
+scripts/** linguist-vendored
+jest.* linguist-vendored
