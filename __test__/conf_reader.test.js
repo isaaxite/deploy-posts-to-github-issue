@@ -50,4 +50,38 @@ describe('conf reader', () => {
 
     removeSync(destPath);
   });
+
+  test('init with not exist conf path', () => {
+    const confPath = '__test__/temp/not_exist_conf_path.conf.yml';
+    try {
+      new ConfReader({ path: confPath });
+    } catch (error) {
+      console.info(`errMsg: ${error.message}`);
+      expect(error.message).toEqual(`Cannot find conf in ${confPath}`);
+    }
+  });
+
+  test('init with none params', () => {
+    try {
+      new ConfReader();
+    } catch (error) {
+      console.info(`errMsg: ${error.message}`);
+      expect(error.message).toEqual('Must be provide conf path');
+    }
+  });
+
+  test('init with conf path of wrong ext', () => {
+    const confPath = `__test__/temp/isubo.conf_${String(Date.now()).slice(2)}.xml`;
+    const exts = new ConfReader({ path: CONF_PATH }).exts;
+    copySync(CONF_PATH, confPath)
+    try {
+      new ConfReader({
+        path: confPath
+      });
+    } catch (error) {
+      console.info(`errMsg: ${error.message}`);
+      expect(error.message).toEqual(`Only supports ${exts.map(it => `[${it}]`).join(', ')} files`);
+    }
+    removeSync(confPath);
+  });
 });
