@@ -42,19 +42,35 @@
 
 deploy posts are written in markdown  to github issue
 
+It focuses on:
+
+- item-1
+- item-2
+- item-3
+
+Its features include:
+
+- item-1
+- item-2
+- item-3
+
+# Prerequisites 💻
+
+todo
+
 # Installation
 
 ```shell
 npm i isubo -g
 ```
 
-# Quick Start
+# Quick Start 🚀
 
 ## Configuration
 
 Fist of all, you need to init a configuration file.And setting several required properties include `owner`, `repo` and `token` in the above configuration file.
 
-Then, you can write a post what you want.
+Then, you can write a post what you want 🎊.
 
 ### Init
 
@@ -68,7 +84,7 @@ isubo init conf
 
 There are three required basic setting at the below.They are important info for publish your articles.
 
-#### 📌owner
+#### 📌 owner
 
 Repository owner, Such as `isaaxite` in `isaaxite/blog`.
 
@@ -79,7 +95,7 @@ owner: <owner>
 owner: isaaxite
 ```
 
-#### 📌repo
+#### 📌 repo
 
 Repository name, refer to `blog` in the example above.Please ensure that this repository has been manually created by you, it will be used to store posts resources, and posts will also be published to this repository's issue.
 
@@ -90,7 +106,7 @@ repo: <repo>
 repo: issue-blog
 ```
 
-#### 📌token
+#### 📌 token
 
 Github Token, it will be used to invoked github api to publish posts, you can get it in https://github.com/settings/tokens.
 
@@ -124,9 +140,26 @@ isubo publish
 ![]()
 
 
+# Contact
+
+If you encounter a bug, please open an [issue]().I will handle it as possible as i can.
+
+For general questions or discussions, you can also use:
+
+- Email: issaxite@outlook.com
+
+# Donate
+
+- Star my repo
+
+- Buy me a coffe
 
 # Test situation
 
 - [Test Report](https://isaaxite.github.io/deploy-posts-to-github-issue/reports/test.html)
 
 - [Coverage](https://isaaxite.github.io/deploy-posts-to-github-issue/reports/coverage/index.html)
+
+# Licence
+
+MIT @ IssacKam
