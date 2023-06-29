@@ -42,7 +42,7 @@
 
 deploy posts are written in markdown  to github issue
 
-# Install
+# Installation
 
 ```shell
 npm i isubo -g
@@ -52,16 +52,23 @@ npm i isubo -g
 
 ## Configuration
 
+Fist of all, you need to init a configuration file.And setting several required properties include `owner`, `repo` and `token` in the above configuration file.
+
+Then, you can write a post what you want.
 
 ### Init
 
-```
+Use the below `cmd` to init a configuration file. A file name `isubo.conf.yml` will be created at current directory.It contain several required setting and a lost of optional setting that have default.You can alter theme according to your situation.
+
+```shell
 isubo init conf
 ```
 
 ### Setting
 
-#### owner
+There are three required basic setting at the below.They are important info for publish your articles.
+
+#### 📌owner
 
 Repository owner, Such as `isaaxite` in `isaaxite/blog`.
 
@@ -72,7 +79,7 @@ owner: <owner>
 owner: isaaxite
 ```
 
-#### repo
+#### 📌repo
 
 Repository name, refer to `blog` in the example above.Please ensure that this repository has been manually created by you, it will be used to store posts resources, and posts will also be published to this repository's issue.
 
@@ -83,13 +90,15 @@ repo: <repo>
 repo: issue-blog
 ```
 
-#### token
+#### 📌token
 
 Github Token, it will be used to invoked github api to publish posts, you can get it in https://github.com/settings/tokens.
 
-**It is strongly recommended not to use plaintext to prevent others from stealing your token.**
+**⚠️ It is strongly recommended not to use plaintext to prevent others from stealing your token.**
 
-You can try to use environment variables.If you use an environment variable, please start with `$` and use uppercase letters for the remaining part to declare,  and isubo will automatically obtain this environment variable.
+*You can try to use environment variables.*
+
+**📝Hint:** If you use an environment variable, please **start with `$`** and use **uppercase letters** for the remaining part to declare,  and isubo will automatically obtain this environment variable.
 
 ```yml
 token: <token>
