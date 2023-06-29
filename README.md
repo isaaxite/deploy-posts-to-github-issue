@@ -42,6 +42,80 @@
 
 deploy posts are written in markdown  to github issue
 
+# Install
+
+```shell
+npm i isubo -g
+```
+
+# Quick Start
+
+## Configuration
+
+
+### Init
+
+```
+isubo init conf
+```
+
+### Setting
+
+#### owner
+
+Repository owner, Such as `isaaxite` in `isaaxite/blog`.
+
+```yml
+owner: <owner>
+
+# e.g.
+owner: isaaxite
+```
+
+#### repo
+
+Repository name, refer to `blog` in the example above.Please ensure that this repository has been manually created by you, it will be used to store posts resources, and posts will also be published to this repository's issue.
+
+```yml
+repo: <repo>
+
+# e.g.
+repo: issue-blog
+```
+
+#### token
+
+Github Token, it will be used to invoked github api to publish posts, you can get it in https://github.com/settings/tokens.
+
+**It is strongly recommended not to use plaintext to prevent others from stealing your token.**
+
+You can try to use environment variables.If you use an environment variable, please start with `$` and use uppercase letters for the remaining part to declare,  and isubo will automatically obtain this environment variable.
+
+```yml
+token: <token>
+
+# e.g.
+# use an environment variable. [strongly recommended]
+token: $GITHUB_TOKEN
+
+# use plaintext. [not recommended]
+token: ghp_CMg41ahiAAtNEN_xxxxxxx_sZctu2M5t6W
+```
+
+### Usage
+
+#### Type CLI
+
+```shell
+isubo publish
+```
+
+#### Select posts
+
+![]()
+
+
+
 # Test situation
 
 - [Test Report](https://isaaxite.github.io/deploy-posts-to-github-issue/reports/test.html)
