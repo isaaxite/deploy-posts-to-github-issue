@@ -44,9 +44,13 @@ deploy posts are written in markdown  to github issue
 
 It focuses on:
 
-- item-1
-- item-2
-- item-3
+- **Easy to use:** Just one cmmand (`isubo publish`) to publish posts what you want.
+
+- **Excellent interaction:** Enter the title of the post, Isubo will automatically search for the relevant list, all you need to do is select and confirm.
+
+- **Autocomplete resource links:** Isubo will search the asset links in the post and format them to full https url non-intrusively.Allows you to write locally so as to get an excellent writing and preview experience, without requiring you to format resource links one by one.
+
+- **Trustworthy:** More than 80 test cases to ensure the reliability of the core logic.Every version is published after pass all test cases.
 
 Its features include:
 
