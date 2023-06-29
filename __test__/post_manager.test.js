@@ -1,6 +1,6 @@
 import { describe, test, expect } from '@jest/globals';
 import { PostManager } from '../lib/post_manager.js';
-import { TempPost, sleep } from './utils/index.js';
+import { sleepFactory } from './utils/index.js';
 import { force_create_a_issue_and_then_update_it } from './test_cases/post_manager.js';
 
 const OWNER = 'isaaxite';
@@ -20,8 +20,7 @@ describe('post_manager', () => {
     expect(ret.status).toBeLessThan(300);
   };
 
-  test('force create a issue and then update it', async () => {
-    await sleep(3000);
+  sleepFactory(test.only)('force create a issue and then update it', async () => {
     await force_create_a_issue_and_then_update_it({
       forceCreate(ret) {
         expextBaseResp(ret);
@@ -36,7 +35,7 @@ describe('post_manager', () => {
         expect(updateRet.data.title).toStrictEqual(updateTitle);
       }
     });
-  }, 13000);
+  }, 10000);
 
   test.todo('update fail');
 

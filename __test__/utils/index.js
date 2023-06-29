@@ -330,3 +330,14 @@ export function copyTempPostWithFrontmatter(src) {
 export async function sleep(ms = 1000) {
   return new Promise(fn => setTimeout(() => fn(null), ms))
 }
+
+export function sleepFactory(testExec, sleepMs = 1000) {
+  return (name, cb, timeout = 5000) => testExec(...[
+    name,
+    async () => {
+      await sleep(sleepMs);
+      await cb();
+    },
+    timeout + sleepMs
+  ]);
+}
