@@ -38,7 +38,7 @@
   </a>
 </div>
 
-# Overview
+# 📑 Overview
 
 deploy posts are written in markdown  to github issue
 
@@ -58,19 +58,19 @@ Its features include:
 - item-2
 - item-3
 
-# Prerequisites 💻
+# 💻 Prerequisites
 
 todo
 
-# Installation
+# 📥 Installation
 
 ```shell
 npm i isubo -g
 ```
 
-# Quick Start 🚀
+# 🚀 Quick Start
 
-## Configuration
+## 🛠️ Configuration
 
 Fist of all, you need to init a configuration file.And setting several required properties include `owner`, `repo` and `token` in the above configuration file.
 
@@ -131,7 +131,7 @@ token: $GITHUB_TOKEN
 token: ghp_CMg41ahiAAtNEN_xxxxxxx_sZctu2M5t6W
 ```
 
-### Usage
+### 🕹️ Usage
 
 #### Type CLI
 
@@ -144,7 +144,7 @@ isubo publish
 ![]()
 
 
-# Contact
+# 📞 Contact
 
 If you encounter a bug, please open an [issue]().I will handle it as possible as i can.
 
@@ -152,18 +152,18 @@ For general questions or discussions, you can also use:
 
 - Email: issaxite@outlook.com
 
-# Donate
+# 🎁 Donate
 
 - Star my repo
 
 - Buy me a coffe
 
-# Test situation
+# 📄 Test situation
 
 - [Test Report](https://isaaxite.github.io/deploy-posts-to-github-issue/reports/test.html)
 
 - [Coverage](https://isaaxite.github.io/deploy-posts-to-github-issue/reports/coverage/index.html)
 
-# Licence
+# 📜 Licence
 
 MIT @ IssacKam
