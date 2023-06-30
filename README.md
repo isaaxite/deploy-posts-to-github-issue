@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/logo.png" />
+  <img src="assets/logo.svg" />
 </div>
 <br/>
 <div align="center">
@@ -82,7 +82,7 @@ You only need the following steps to achieve:
 
 - Step 1: init a configuration;
 
-- Step 2: Setting required properties;
+- Step 2: Setting required properties in the configuration file just created;
 
 - Step 3: Write some posts at `<repo>/source/`;
 
