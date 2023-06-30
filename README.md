@@ -62,7 +62,7 @@ deploy posts are written in markdown  to github issue
 
 # 💻 Prerequisites
 
-- A valid Githun Token.
+- A valid Github Token.
 
 - At least a Github Reposibility used to publish issues.
 
@@ -82,7 +82,10 @@ Fist of all, you need to init a configuration file.And setting several required 
 
 Then, you can write a post what you want 🎊.
 
+
 ### Init
+
+Create a github reposibility as your issue-blog, clone it at local environment
 
 Use the below `cmd` to init a configuration file. A file name `isubo.conf.yml` will be created at current directory.It contain several required setting and a lost of optional setting that have default.You can alter theme according to your situation.
 
@@ -160,9 +163,28 @@ For general questions or discussions, you can also use:
 
 # 🎁 Donate
 
-- Star this repo
 
-- Buy me a coffe ☕️
+<details open>
+  <summary><strong>Support this reposibility 📣</strong></summary>
+  <blockquote>
+    <br/>
+    <li>Give this repository a free star</li>
+    <li>Let more people know about this project</li>
+    <li>Looking forward to you finding bugs and submitting them to issues to help me improve this project</li>
+    <br/>
+  </blockquote>
+</details>
+
+<details>
+  <summary><strong>Buy me a coffee ☕️</strong></summary>
+  <blockquote>
+    <br/>
+    <img width="44%" src="https://isaaxite.github.io/blog/images/alipay.jpg" />
+    <img width="50%" src="https://isaaxite.github.io/blog/images/wechatpay.jpg" align="right"/>
+    <br/>
+  </blockquote>
+</details>
+
 
 # 📄 Test situation
 
