@@ -88,9 +88,10 @@ export class Isubo {
     if (!assetpaths.length) {
       return;
     }
+    const { absolute_source_dir } = this.#conf;
     this.#assetpathRecords.push({
-      postpath,
-      assetpaths
+      postpath: path.resolve(absolute_source_dir, postpath),
+      assetpaths: assetpaths.map(assetpath => path.resolve(absolute_source_dir, assetpath))
     });
   }
 
@@ -179,46 +180,51 @@ export class Isubo {
 
   async #publishAssets() {
     const conf = this.#conf;
-
-    if (conf.push_asset === enumPushAssetType.DISABLE) {
-      return;
-    }
-
-    if (!this.#assetpathRecords.length) {
-      hinter.errMsg('Without any posts and relatived assets need to push!');
-      return;
-    }
-
-    if (conf.push_asset === enumPushAssetType.PROMPT) {
-      const isPushAsset = (await prompts({
-        type: 'confirm',
-        name: 'value',
-        message: 'Push the above posts and relatived assets?',
-        initial: true
-      })).value;
-
-      if (!isPushAsset) {
-        return;
-      }
-    }
-
     const getAssetPublisherIns = () => new AssetPublisher({
       conf,
       assetRecords: this.#assetpathRecords
     });
 
-    if (conf.push_asset === enumPushAssetType.AUTO) {
+    let isPushAsset = false;
+    switch (conf.push_asset) {
+      case enumPushAssetType.DISABLE: {
+        isPushAsset = false;
+        const isExistUnpush = await getAssetPublisherIns().checkIsUnpushPostAndAssets();
+        if (!isExistUnpush) {
+          break;
+        }
+
+        hinter.warnMsg('There are some posts and corresponding assets didn\'t publish, You should deal with it as soon as possible.');
+        break;
+      }
+
+      case enumPushAssetType.AUTO: {
+        if (!this.#assetpathRecords.length) {
+          hinter.warnMsg('Without any posts and relatived assets need to push!');
+          break;
+        }
+        isPushAsset = true;
+        break;
+      }
+
+      case enumPushAssetType.PROMPT:
+      default: {
+        if (!this.#assetpathRecords.length) {
+          hinter.warnMsg('Without any posts and relatived assets need to push!');
+          break;
+        }
+        isPushAsset = (await prompts({
+          type: 'confirm',
+          name: 'value',
+          message: 'Push the above posts and relatived assets?',
+          initial: true
+        })).value;
+      }
+    }
+
+    if (isPushAsset) {
       await getAssetPublisherIns().push();
-      return;
     }
-
-    
-    const isExistUnpush = await getAssetPublisherIns().checkIsUnpushPostAndAssets();
-    if (!isExistUnpush) {
-      return;
-    }
-
-    hinter.warnMsg('There are some posts and corresponding assets didn\'t publish, You should deal with it as soon as possible.');
   }
 
   async create() {
