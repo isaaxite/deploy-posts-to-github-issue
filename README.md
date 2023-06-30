@@ -76,6 +76,19 @@ npm i isubo -g
 
 # 🚀 Quick Start
 
+The following is a quick start based on the premise of a new repository.
+
+You only need the following steps to achieve:
+
+- Step 1: init a configuration;
+
+- Step 2: Setting required properties;
+
+- Step 3: Write some posts at `<repo>/source/`;
+
+- Step 4: Publish your posts by `isubo publish`.
+
+
 ## 🛠️ Configuration
 
 Fist of all, you need to init a configuration file.And setting several required properties include `owner`, `repo` and `token` in the above configuration file.
@@ -97,7 +110,7 @@ isubo init conf
 
 There are three required basic setting at the below.They are important info for publish your articles.
 
-#### 📌 owner
+#### ❗ owner
 
 Repository owner, Such as `isaaxite` in `isaaxite/blog`.
 
@@ -108,7 +121,7 @@ owner: <owner>
 owner: isaaxite
 ```
 
-#### 📌 repo
+#### ❗ repo
 
 Repository name, refer to `blog` in the example above.Please ensure that this repository has been manually created by you, it will be used to store posts resources, and posts will also be published to this repository's issue.
 
@@ -119,7 +132,7 @@ repo: <repo>
 repo: issue-blog
 ```
 
-#### 📌 token
+#### ❗ token
 
 Github Token, it will be used to invoked github api to publish posts, you can get it in https://github.com/settings/tokens.
 
@@ -142,13 +155,13 @@ token: ghp_CMg41ahiAAtNEN_xxxxxxx_sZctu2M5t6W
 
 ### 🕹️ Usage
 
-#### Type CLI
+Exec the below commands at your local reposibility directory, isubo will return a list of your posts which can be select by pressing space.
 
 ```shell
 isubo publish
 ```
 
-#### Select posts
+Select posts and Submit, and wait it finish, that all!
 
 ![]()
 
