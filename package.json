@@ -1,6 +1,6 @@
 {
   "name": "deploy-posts-to-github-issue",
-  "version": "1.0.0",
+  "version": "0.0.9",
   "description": "deploy posts are written in markdown to github issue",
   "main": "index.js",
   "type": "module",
