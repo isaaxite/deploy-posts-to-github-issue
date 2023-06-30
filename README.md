@@ -42,25 +42,31 @@
 
 deploy posts are written in markdown  to github issue
 
-It focuses on:
+👍 It focuses on:
 
 - **Easy to use:** Just one cmmand (`isubo publish`) to publish posts what you want.
 
 - **Excellent interaction:** Enter the title of the post, Isubo will automatically search for the relevant list, all you need to do is select and confirm.
 
-- **Autocomplete resource links:** Isubo will search the asset links in the post and format them to full https url non-intrusively.Allows you to write locally so as to get an excellent writing and preview experience, without requiring you to format resource links one by one.
+- **Non-intrusively:** Isubo will search the asset links in the post and format them to full https url non-intrusively.Allows you to write locally so as to get an excellent writing and preview experience, without requiring you to format resource links one by one.
 
 - **Trustworthy:** More than 80 test cases to ensure the reliability of the core logic.Every version is published after pass all test cases.
 
-Its features include:
+🧀 Its features include:
 
-- item-1
-- item-2
-- item-3
+- **Publish local posts as github issues:** Write posts locally, use `isubo command` to publish, update and force create as issues.
+
+- **Autocomplete resource links:** Format the resource link, no matter what path is used, as long as it exists, it will be formatted as a path relative to the repo directory, and finally get an accessible https link.
+
+- **Assets push:** 
 
 # 💻 Prerequisites
 
-todo
+- A valid Githun Token.
+
+- At least a Github Reposibility used to publish issues.
+
+- NodeJS environment, node version >= `12.0.0`
 
 # 📥 Installation
 
@@ -154,9 +160,9 @@ For general questions or discussions, you can also use:
 
 # 🎁 Donate
 
-- Star my repo
+- Star this repo
 
-- Buy me a coffe
+- Buy me a coffe ☕️
 
 # 📄 Test situation
 
