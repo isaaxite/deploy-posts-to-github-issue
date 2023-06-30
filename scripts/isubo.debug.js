@@ -13,9 +13,11 @@ async function main({
   cmd
 }) {
   const tempGitRepo = new TempGitRepo();
-  tempGitRepo.init(preConf => {
-    preConf.push_asset = enumPushAssetType.AUTO;
-    return preConf;
+  await tempGitRepo.init({
+    preConf(conf) {
+      conf.push_asset = enumPushAssetType.AUTO;
+      return conf;
+    }
   });
 
   process.chdir(tempGitRepo.repoLocalPath);

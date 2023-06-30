@@ -178,37 +178,37 @@ describe('asset_publisher', () => {
     {
       name: 'init with { assetRecords: [{}] }, it will emit err',
       param: { assetRecords: [{}] },
-      getExpext: () => 'assetRecords[].postpath must be non-empty string'
+      getExpext: () => 'assetRecords[].postpath must be non-empty absolute path'
     },
     {
       name: 'init with { assetRecords: [{ postpath: 1 }] }, it will emit err',
       param: { assetRecords: [{ postpath: 1 }] },
-      getExpext: () => 'assetRecords[].postpath must be non-empty string'
+      getExpext: () => 'assetRecords[].postpath must be non-empty absolute path'
     },
     {
-      name: 'init with { assetRecords: [{postpath: \'temp.md\'}] }, it will emit err',
-      param: { assetRecords: [{postpath: 'temp.md'}] },
-      getExpext: () => 'assetRecords[].assetpaths must be Array<string>'
+      name: 'init with { assetRecords: [{postpath: \'/temp.md\'}] }, it will emit err',
+      param: { assetRecords: [{postpath: '/temp.md'}] },
+      getExpext: () => 'assetRecords[].assetpaths must be Array<AbsolutePath>'
     },
     {
-      name: 'init with { assetRecords: [{postpath: \'temp.md\', assetpaths: {}}] }, it will emit err',
-      param: { assetRecords: [{postpath: 'temp.md', assetpaths: {}}] },
-      getExpext: () => 'assetRecords[].assetpaths must be Array<string>'
+      name: 'init with { assetRecords: [{postpath: \'/temp.md\', assetpaths: {}}] }, it will emit err',
+      param: { assetRecords: [{postpath: '/temp.md', assetpaths: {}}] },
+      getExpext: () => 'assetRecords[].assetpaths must be Array<AbsolutePath>'
     },
     {
-      name: 'init with { assetRecords: [{postpath: \'temp.md\', assetpaths: [\'\']}] }, it will emit err',
-      param: { assetRecords: [{postpath: 'temp.md', assetpaths: ['']}] },
-      getExpext: () => 'assetRecords[].assetpaths must be Array<string>'
+      name: 'init with { assetRecords: [{postpath: \'/temp.md\', assetpaths: [\'\']}] }, it will emit err',
+      param: { assetRecords: [{postpath: '/temp.md', assetpaths: ['']}] },
+      getExpext: () => 'assetRecords[].assetpaths must be Array<AbsolutePath>'
     },
     {
       name: 'init with { assetRecords: [] }, it will pass',
       param: { assetRecords: [] },
     },
     {
-      name: 'init with { assetRecords: [{postpath: \'temp.md\', assetpaths: []}] }, it will be passed',
+      name: 'init with { assetRecords: [{postpath: \'/temp.md\', assetpaths: []}] }, it will be passed',
       param: {
         assetRecords: [{
-          postpath: 'temp.md', assetpaths: []
+          postpath: '/temp.md', assetpaths: []
         }]
       }
     }

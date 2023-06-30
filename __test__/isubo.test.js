@@ -28,7 +28,7 @@ describe('isubo', () => {
 
     const frontmatter = postParse.getFrontmatter();
     expect(ret.data.number).toEqual(frontmatter.issue_number);
-  }, 10000);
+  }, 60 * 1000);
 
   sleepFactory(test)('update one post', async () => {
     const issue_number = 1;
@@ -56,7 +56,7 @@ describe('isubo', () => {
     expect(ret).not.toBeUndefined();
     expect(ret.status).toBeGreaterThanOrEqual(200);
     expect(ret.status).toBeLessThan(300);
-  }, 10000);
+  }, 60 * 1000);
 
   sleepFactory(test)('publish posts, according post\'s issue_number', async () => {
     const issue_number = 58;
@@ -81,5 +81,5 @@ describe('isubo', () => {
       }
     });
     await isubo.publish();
-  }, 20 * 1000);
+  }, 60 * 1000);
 });

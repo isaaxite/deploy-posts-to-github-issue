@@ -268,8 +268,8 @@ export class TempGitRepo {
     writeFileSync(dest, mdtxt);
 
     return {
-      postpath: path.relative(this.#repoLocalPath, dest),
-      assetpaths: readdirSync(destDir).map(it => path.relative(
+      postpath: path.resolve(this.#repoLocalPath, dest),
+      assetpaths: readdirSync(destDir).map(it => path.resolve(
         this.#repoLocalPath,
         path.join(destDir, it)
       ))
