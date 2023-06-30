@@ -9,7 +9,6 @@ import simpleGit from 'simple-git';
 import { execSync } from 'child_process';
 import { cwd } from 'process';
 import { FRONTMATTER } from '../../lib/constants/index.js';
-import { test } from '@jest/globals';
 
 const DEST_SOURCE_PATH_PREFIX = '__test__/temp/source_';
 
