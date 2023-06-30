@@ -50,7 +50,7 @@ deploy posts are written in markdown  to github issue
 
 - **Non-intrusively:** Isubo will search the asset links in the post and format them to full https url non-intrusively.Allows you to write locally so as to get an excellent writing and preview experience, without requiring you to format resource links one by one.
 
-- **Trustworthy:** More than 80 test cases to ensure the reliability of the core logic.Every version is published after pass all test cases.
+- **Trustworthy:** Nearly 100 test cases to ensure the reliability of the core logic.Every version is published after pass all test cases.
 
 🧀 Its features include:
 
@@ -166,13 +166,22 @@ Select posts and Submit, and wait it finish, that all!
 ![]()
 
 
+# 📄 Test situation
+
+- [Test Report](https://isaaxite.github.io/deploy-posts-to-github-issue/reports/test.html)
+
+- [Coverage](https://isaaxite.github.io/deploy-posts-to-github-issue/reports/coverage/index.html)
+
+
 # 📞 Contact
 
 If you encounter a bug, please open an [issue]().I will handle it as possible as i can.
 
 For general questions or discussions, you can also use:
 
-- Email: issaxite@outlook.com
+- Email: `issaxite@outlook.com`
+
+- Wechat: `isaackam_`
 
 # 🎁 Donate
 
@@ -198,13 +207,15 @@ For general questions or discussions, you can also use:
   </blockquote>
 </details>
 
+# 🤟 友情链接
 
-# 📄 Test situation
+🔗 [Isaac Kam's Blog]
 
-- [Test Report](https://isaaxite.github.io/deploy-posts-to-github-issue/reports/test.html)
-
-- [Coverage](https://isaaxite.github.io/deploy-posts-to-github-issue/reports/coverage/index.html)
 
 # 📜 Licence
 
-MIT @ IssacKam
+[MIT] @ [isaaxite]
+
+[Isaac Kam's Blog]: https://isaaxite.github.io/blog/
+[MIT]: https://github.com/isaaxite/deploy-posts-to-github-issue/blob/main/LICENSE
+[isaaxite]: https://github.com/isaaxite
