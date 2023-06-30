@@ -1,10 +1,10 @@
 import { describe, test, expect } from "@jest/globals";
-import { TempGitRepo } from "./utils/index.js";
+import { TempGitRepo, sleepFactory } from "./utils/index.js";
 import { AssetPublisher } from "../lib/asset_publisher.js";
 
 describe('asset_publisher', () => {
   // const cachePath = await TempGitRepo.cache();
-  test('Without prev staged, push a post and relatived assets', async () => {
+  sleepFactory(test)('Without prev staged, push a post and relatived assets', async () => {
     const tempGitRepo = new TempGitRepo();
 
     await tempGitRepo.init()
@@ -19,7 +19,7 @@ describe('asset_publisher', () => {
     await assetPublisher.push();
   }, 60 * 1000)
 
-  test('set prev staged, then push a post and relatived assets', async () => {
+  sleepFactory(test)('set prev staged, then push a post and relatived assets', async () => {
     const tempGitRepo = new TempGitRepo();
 
     await tempGitRepo.init()
@@ -37,7 +37,7 @@ describe('asset_publisher', () => {
     expect(curStaged).toEqual(expect.arrayContaining(prevStaged))
   }, 60 * 1000);
 
-  test('set prev staged includes a post will be pushed, then check reset staged after pushed', async () => {
+  sleepFactory(test)('set prev staged includes a post will be pushed, then check reset staged after pushed', async () => {
     const tempGitRepo = new TempGitRepo();
 
     await tempGitRepo.init()
@@ -80,7 +80,7 @@ describe('asset_publisher', () => {
     };
   };
 
-  test('Revert as err occurred after backup prev staged', async () => {
+  sleepFactory(test)('Revert as err occurred after backup prev staged', async () => {
     const {
       prevStaged,
       tempGitRepo,
@@ -102,7 +102,7 @@ describe('asset_publisher', () => {
     expect(curStaged).toEqual(expect.arrayContaining(prevStaged));
   }, 60 * 1000);
 
-  test('Revert as err occurred after commit post and assets', async () => {
+  sleepFactory(test)('Revert as err occurred after commit post and assets', async () => {
     const {
       prevStaged,
       tempGitRepo,
@@ -121,7 +121,7 @@ describe('asset_publisher', () => {
     expect(curStaged).toEqual(expect.arrayContaining(prevStaged));
   }, 60 * 1000);
 
-  test('Revert as err occurred before push post and assets or push fail', async () => {
+  sleepFactory(test)('Revert as err occurred before push post and assets or push fail', async () => {
     const {
       prevStaged,
       tempGitRepo,
@@ -137,7 +137,7 @@ describe('asset_publisher', () => {
     expect(curStaged).toEqual(expect.arrayContaining(prevStaged));
   }, 60 * 1000);
 
-  test('Revert as err occurred after push post and assets', async () => {
+  sleepFactory(test)('Revert as err occurred after push post and assets', async () => {
     let postAndAssetsCommitId = '';
     const {
       prevStaged,
@@ -178,37 +178,37 @@ describe('asset_publisher', () => {
     {
       name: 'init with { assetRecords: [{}] }, it will emit err',
       param: { assetRecords: [{}] },
-      getExpext: () => 'assetRecords[].postpath must be non-empty string'
+      getExpext: () => 'assetRecords[].postpath must be non-empty absolute path'
     },
     {
       name: 'init with { assetRecords: [{ postpath: 1 }] }, it will emit err',
       param: { assetRecords: [{ postpath: 1 }] },
-      getExpext: () => 'assetRecords[].postpath must be non-empty string'
+      getExpext: () => 'assetRecords[].postpath must be non-empty absolute path'
     },
     {
-      name: 'init with { assetRecords: [{postpath: \'temp.md\'}] }, it will emit err',
-      param: { assetRecords: [{postpath: 'temp.md'}] },
-      getExpext: () => 'assetRecords[].assetpaths must be Array<string>'
+      name: 'init with { assetRecords: [{postpath: \'/temp.md\'}] }, it will emit err',
+      param: { assetRecords: [{postpath: '/temp.md'}] },
+      getExpext: () => 'assetRecords[].assetpaths must be Array<AbsolutePath>'
     },
     {
-      name: 'init with { assetRecords: [{postpath: \'temp.md\', assetpaths: {}}] }, it will emit err',
-      param: { assetRecords: [{postpath: 'temp.md', assetpaths: {}}] },
-      getExpext: () => 'assetRecords[].assetpaths must be Array<string>'
+      name: 'init with { assetRecords: [{postpath: \'/temp.md\', assetpaths: {}}] }, it will emit err',
+      param: { assetRecords: [{postpath: '/temp.md', assetpaths: {}}] },
+      getExpext: () => 'assetRecords[].assetpaths must be Array<AbsolutePath>'
     },
     {
-      name: 'init with { assetRecords: [{postpath: \'temp.md\', assetpaths: [\'\']}] }, it will emit err',
-      param: { assetRecords: [{postpath: 'temp.md', assetpaths: ['']}] },
-      getExpext: () => 'assetRecords[].assetpaths must be Array<string>'
+      name: 'init with { assetRecords: [{postpath: \'/temp.md\', assetpaths: [\'\']}] }, it will emit err',
+      param: { assetRecords: [{postpath: '/temp.md', assetpaths: ['']}] },
+      getExpext: () => 'assetRecords[].assetpaths must be Array<AbsolutePath>'
     },
     {
       name: 'init with { assetRecords: [] }, it will pass',
       param: { assetRecords: [] },
     },
     {
-      name: 'init with { assetRecords: [{postpath: \'temp.md\', assetpaths: []}] }, it will be passed',
+      name: 'init with { assetRecords: [{postpath: \'/temp.md\', assetpaths: []}] }, it will be passed',
       param: {
         assetRecords: [{
-          postpath: 'temp.md', assetpaths: []
+          postpath: '/temp.md', assetpaths: []
         }]
       }
     }

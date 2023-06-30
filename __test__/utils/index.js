@@ -9,7 +9,6 @@ import simpleGit from 'simple-git';
 import { execSync } from 'child_process';
 import { cwd } from 'process';
 import { FRONTMATTER } from '../../lib/constants/index.js';
-import { test } from '@jest/globals';
 
 const DEST_SOURCE_PATH_PREFIX = '__test__/temp/source_';
 
@@ -269,8 +268,8 @@ export class TempGitRepo {
     writeFileSync(dest, mdtxt);
 
     return {
-      postpath: path.relative(this.#repoLocalPath, dest),
-      assetpaths: readdirSync(destDir).map(it => path.relative(
+      postpath: path.resolve(this.#repoLocalPath, dest),
+      assetpaths: readdirSync(destDir).map(it => path.resolve(
         this.#repoLocalPath,
         path.join(destDir, it)
       ))
@@ -329,4 +328,15 @@ export function copyTempPostWithFrontmatter(src) {
 
 export async function sleep(ms = 1000) {
   return new Promise(fn => setTimeout(() => fn(null), ms))
+}
+
+export function sleepFactory(testExec, sleepMs = 1000) {
+  return (name, cb, timeout = 5000) => testExec(...[
+    name,
+    async () => {
+      await sleep(sleepMs);
+      await cb();
+    },
+    timeout + sleepMs
+  ]);
 }

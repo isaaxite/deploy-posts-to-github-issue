@@ -1,17 +1,6 @@
 import { describe, test, expect } from '@jest/globals';
-import { PostManager } from '../lib/post_manager.js';
-import { TempPost, sleep } from './utils/index.js';
+import { sleepFactory } from './utils/index.js';
 import { force_create_a_issue_and_then_update_it } from './test_cases/post_manager.js';
-
-const OWNER = 'isaaxite';
-const REPO = 'test-repo_deploy-posts-to-github-issue';
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-
-const getPostManagerIns = () => new PostManager({
-  owner: OWNER,
-  repo: REPO,
-  token: GITHUB_TOKEN
-});
 
 describe('post_manager', () => {
   const expextBaseResp = (ret) => {
@@ -20,8 +9,7 @@ describe('post_manager', () => {
     expect(ret.status).toBeLessThan(300);
   };
 
-  test('force create a issue and then update it', async () => {
-    await sleep(3000);
+  sleepFactory(test.only)('force create a issue and then update it', async () => {
     await force_create_a_issue_and_then_update_it({
       forceCreate(ret) {
         expextBaseResp(ret);
