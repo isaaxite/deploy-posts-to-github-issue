@@ -80,17 +80,17 @@ npm i isubo -g
 
 # 🚀 Quick Start
 
-The following is a quick start based on the premise of a new repository.
+The following is a quick start based on the premise of a new repository. Otherwise, you can Consult the [MANUAL] for Customization.
 
 You only need the following steps to achieve:
 
-- Step 1: init a configuration file;
+- **Step 1:** Init a configuration file;
 
-- Step 2: Setting required properties in the configuration file just created;
+- **Step 2:** Setting required properties in the configuration file just created;
 
-- Step 3: Write some posts at `<repo>/source/`;
+- **Step 3:** Write some posts at `<repo>/source/`;
 
-- Step 4: Publish your posts by `isubo publish`.
+- **Step 4:** Publish your posts by `isubo publish`.
 
 
 ## 🛠️ Configuration
@@ -133,7 +133,7 @@ Repository name, refer to `blog` in the example above.Please ensure that this re
 repo: <repo>
 
 # e.g.
-repo: issue-blog
+repo: blog
 ```
 
 #### ❗ token
@@ -159,22 +159,22 @@ token: ghp_CMg41ahiAAtNEN_xxxxxxx_sZctu2M5t6W
 
 ### 🕹️ Usage
 
-Exec the below commands at your local reposibility directory, isubo will return a list of your posts which can be select by pressing space.
+Exec the below commands at your local reposibility directory, isubo will return a list of your posts which can be select by pressing `space`.
 
 ```shell
 isubo publish
 ```
 
-Select posts and Submit, and wait it finish, that all!
+Select posts and Submit, and wait it finish, that all 🌈!
 
 ![](./assets/select_posts.gif)
 
 
 # 📄 Test situation
 
-- [Test Report](https://isaaxite.github.io/deploy-posts-to-github-issue/reports/test.html)
+- [Test Report], Nearly 100 test cases.
 
-- [Coverage](https://isaaxite.github.io/deploy-posts-to-github-issue/reports/coverage/index.html)
+- [Coverage], Ensure 100% test coverage of the core code.
 
 
 # 📞 Contact
@@ -223,3 +223,6 @@ For general questions or discussions, you can also use:
 [Isaac Kam's Blog]: https://isaaxite.github.io/blog/
 [MIT]: https://github.com/isaaxite/deploy-posts-to-github-issue/blob/main/LICENSE
 [isaaxite]: https://github.com/isaaxite
+[MANUAL]: https://github.com/isaaxite/deploy-posts-to-github-issue/MANUAL.md
+[Test Report]: https://isaaxite.github.io/deploy-posts-to-github-issue/reports/test.html
+[Coverage]: https://isaaxite.github.io/deploy-posts-to-github-issue/reports/coverage/index.html
