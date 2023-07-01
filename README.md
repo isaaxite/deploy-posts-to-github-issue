@@ -169,6 +169,10 @@ Select posts and Submit, and wait it finish, that all 🌈!
 
 ![](./assets/select_posts.gif)
 
+# 🧩 Customization
+
+Isubo can do much more than the feats introduced in the quick start above.You should consult the [MANUAL].
+
 
 # 📄 Test situation
 
@@ -223,6 +227,6 @@ For general questions or discussions, you can also use:
 [Isaac Kam's Blog]: https://isaaxite.github.io/blog/
 [MIT]: https://github.com/isaaxite/deploy-posts-to-github-issue/blob/main/LICENSE
 [isaaxite]: https://github.com/isaaxite
-[MANUAL]: https://github.com/isaaxite/deploy-posts-to-github-issue/MANUAL.md
+[MANUAL]: MANUAL.md
 [Test Report]: https://isaaxite.github.io/deploy-posts-to-github-issue/reports/test.html
 [Coverage]: https://isaaxite.github.io/deploy-posts-to-github-issue/reports/coverage/index.html

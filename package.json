@@ -11,7 +11,8 @@
     "test": "jest",
     "esm-test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "only-test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config=jest.dev.config.mjs",
-    "update-test-reports": "npm run esm-test && (git add ./reports && git commit -m 'update test reports') || git checkout ./reports"
+    "update-test-reports": "npm run esm-test && (git add ./reports && git commit -m 'update test reports') || git checkout ./reports",
+    "toc": "markdown-toc $1 --maxdepth=3"
   },
   "repository": {
     "type": "git",
@@ -54,6 +55,7 @@
   "devDependencies": {
     "@jest/globals": "^29.5.0",
     "jest": "^29.5.0",
-    "jest-html-reporter": "^3.10.0"
+    "jest-html-reporter": "^3.10.0",
+    "markdown-toc": "^1.2.0"
   }
 }
