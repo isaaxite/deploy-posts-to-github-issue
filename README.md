@@ -40,7 +40,11 @@
 
 # 📑 Overview
 
-deploy posts are written in markdown  to github issue
+As we known, a lost of developer use github isses as their blog which is so great. However, the bad experience of writing articles on the issue page of github is really hard to describe. And Isubo was born for this 💪.
+
+Isubo is a CLI tool to publish markdown content to github issues. It allows you to focus on writing posts in the local environment to obtain a comfortable experience, and gracefully solve the storage and publishing of posts and resources for you 🤟.
+
+![](./assets/complete.gif)
 
 👍 It focuses on:
 
@@ -58,7 +62,7 @@ deploy posts are written in markdown  to github issue
 
 - **Autocomplete resource links:** Format the resource link, no matter what path is used, as long as it exists, it will be formatted as a path relative to the repo directory, and finally get an accessible https link.
 
-- **Assets push:** 
+- **Assets push:** push the posts and its assets to solve the accessing of resources referenced by issues.
 
 # 💻 Prerequisites
 
@@ -80,7 +84,7 @@ The following is a quick start based on the premise of a new repository.
 
 You only need the following steps to achieve:
 
-- Step 1: init a configuration;
+- Step 1: init a configuration file;
 
 - Step 2: Setting required properties in the configuration file just created;
 
