@@ -163,7 +163,7 @@ isubo publish
 
 Select posts and Submit, and wait it finish, that all!
 
-![]()
+![](./assets/select_posts.gif)
 
 
 # 📄 Test situation
