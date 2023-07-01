@@ -6,6 +6,7 @@
   * [Github Info](#github-info)
     + [owner](#owner)
     + [repo](#repo)
+    + [branch](#branch)
     + [token](#token)
   * [Post Source](#post-source)
     + [source_dir](#source_dir)
@@ -14,6 +15,15 @@
     + [types](#types)
   * [Assets Push](#assets-push)
     + [push_asset](#push_asset)
+- [Usage](#usage)
+  * [Init](#init-1)
+  * [publish](#publish)
+  * [update](#update)
+  * [create](#create)
+  * [`[input]`](#input)
+    + [No param](#no-param)
+    + [post titles](#post-titles)
+    + [patterns](#patterns)
 
 # Installation
 
@@ -51,7 +61,7 @@ Type: `string`
 
 Default: `none`
 
-Repository owner, Such as "isaaxite" in "isaaxite/blog".
+Repository owner, Such as `isaaxite` in `isaaxite/blog`.
 
 ```yml
 owner: <owner>
@@ -65,7 +75,7 @@ Type: `string`
 
 Default: `none`
 
-Repository name, refer to "blog" in the example above. Please ensure that this repository has been manually created by you, it will be used to store posts resources, and posts will also be published to this repository's issue.
+Repository name, refer to `blog` in the example above. Please ensure that this repository has been manually created by you, it will be used to store posts resources, and posts will also be published to this repository's issue.
 
 ```yml
 repo: <repo>
@@ -79,7 +89,7 @@ Type: `string`
 
 Default: `main`
 
-Branch of <owner>/<repo>, the branch where the resource is actually stored.
+Branch of `<owner>/<repo>`, the branch where the resource is actually stored.
 
 ```yml
 branch: <branch>
@@ -94,7 +104,7 @@ Type: `string`
 
 Default: `none`
 
-Github Token, it will be used to invoked github api to publish posts, you can get it in https://github.com/settings/tokens.
+Github Token, it will be used to invoked github api to publish posts, you can get it in [Settings / Developer Settings > Generate new token (classic) ](https://github.com/settings/tokens).
 
 **⚠️ It is strongly recommended not to use plaintext to prevent others from stealing your token.**
 
@@ -135,9 +145,13 @@ Used to format links in articles, and format relative links as url links. it can
 
 This is the default setting. Isubo will think you are using github to store the assets are refed by issues, a github raw link will be generated:
 
+**⚠️ If your issues and assets are in a same reposibility, you should choice this.**
+
 ```url
 https://raw.githubusercontent.com/<owner>/<repo>/<branch>/<source_dir>/
 ```
+
+Isubo will find the asset path relative to your local reposibility directory, then splice it with the link_prefix.
 
 #### `string`
 
@@ -145,12 +159,14 @@ If set it whit `string`, you must offer a valid https path as prefix. According 
 
 - Default
 
-  Isubo will find the asset path relative to your local reposibility directory, then splice it with the `link_prefix`.
+  The splice way is same to the effect of setting to [`undefined`](#undefined).
 
 
 - Set [`push_asset`](#push_asset) with `disable`
 
   Under this premise, Isubo will not find the relative path, but splice the asset path with `link_prefix` directly.
+
+**⚠️ If your assets is store in third-part, you should choice this.**
 
 ```yml
 link_prefix: <link_prefix>
@@ -165,6 +181,8 @@ On the premise of using GitHub to store assets, the reposibility where you publi
 ```url
 https://raw.githubusercontent.com/<owner>/<repo>/<branch>/<dir>/
 ```
+
+The complete setting.
 
 ```yml
 link_prefix:
@@ -182,7 +200,7 @@ Type: `string`
 
 Default: `<global owner>`
 
-todo: desc
+Similar to `global owner`, the default value is also `global owner`, but its priority is higher.
 
 ```yml
 link_prefix:
@@ -197,7 +215,7 @@ Type: `string`
 
 Default: `<global repo>`
 
-todo: desc
+Similar to `global repo`, the default value is also `global repo`, but its priority is higher.
 
 ```yml
 link_prefix:
@@ -212,7 +230,7 @@ Type: `string`
 
 Default: `<global branch>`
 
-todo: desc
+Similar to `global branch`, the default value is also `global branch`, but its priority is higher.
 
 ```yml
 link_prefix:
@@ -227,7 +245,7 @@ Type: `string`
 
 Default: `<global source_dir>`
 
-todo: desc
+Similar to `global source_dir`, the default value is also `global source_dir`, but its priority is higher.
 
 ```yml
 link_prefix:
@@ -260,7 +278,7 @@ types:
 
 ## Assets Push
 
-todo: desc
+
 
 ### push_asset
 
@@ -293,3 +311,98 @@ Setting `auto` will skip the confirmation of prompt above.
 Setting `auto` will disable the push of posts and assets. The resource referenced by the issue may not take effect, then you need to push it manually.
 
 **📢 If your resources are not saved using github, then of course you should set it to `disable`.**
+
+# Usage
+
+Isubo contains 2 types of commands, namely `init` and `depoloy`.
+
+- Init conmand is used to init a configuration file, `isubo.conf.yml` file will be created at current directory which you exec the command.
+
+- Deploy contains 3 commands, namely `publish`, `update` and `create`.
+
+
+**📢 You can use `isubo --help` to show all commmands.**
+
+## Init 
+
+Init a configuration. Please refer to the [configuration](#configuration) section above for details.
+
+```shell
+isubo init conf
+```
+
+## publish
+
+
+According to the state of post, it will be updated or created.
+
+```shell
+isubo publish [input]
+```
+
+**📝Hint:** `[input]` is an optional parameter as below. Please refer to the [`[input]`](#input) section above for details.
+
+
+## update
+
+Only used to update, if it is skined that the post did not meet the condition for updating.
+
+```shell
+isubo update [input]
+```
+
+## create
+
+The post will be force update event if it should be updated.
+
+```shell
+isubo create [input]
+```
+
+## `[input]`
+
+It is a optional param. According to input or not, diffent process will be emited. `[input]` can be **no param**, **post tiles**, or **patterns**.
+
+### No param
+
+Isubo will show show a list that contain all markdown files at `source_dir` when you does not input. 
+
+![](./assets/select_posts.gif)
+
+### post titles
+
+You can enter one or more titles, or some keywords of the title, separate multiple titles with commas.
+
+If they are unique they will go directly to the deploy process, otherwise it will return a list as above.
+
+```shell
+# one title
+isubo publish <title>
+
+# e.g.
+isubo publish license
+
+# multiple titles
+isubo publish <title 1>,<title 2>,...
+
+# e.g.
+isubo publish license,"The principle of CORS"
+```
+
+### patterns
+
+Also supports multi-parameter input. **Note that pattern uses [glob]() syntax and they must be a subset of `source_dir`**.
+
+```shell
+# one pattern
+isubo publish <pattern>
+
+# e.g.
+isubo publish "source/**/*.md"
+
+# multiple patterns
+isubo publish <pattern 1>,<pattern 2>,...
+
+# e.g.
+isubo publish "source/_posts/*.md","source/_draft/*md"
+```
