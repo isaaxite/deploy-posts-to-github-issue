@@ -296,9 +296,13 @@ export class TempGitRepo {
   get git () {
     return this.#git;
   }
+
+  get confPath () {
+    return this.#confPath;
+  }
 }
 
-export function copyTempPostWithFrontmatter(src) {
+export function copyTempPostWithoutFrontmatter(src) {
   const temp = copyTempPost(src);
   const {
     sourceDir,
