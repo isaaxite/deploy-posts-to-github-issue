@@ -4,9 +4,9 @@ import { describe, test, expect } from '@jest/globals';
 import { PostParse } from '../lib/post_parse.js';
 import { ConfReader } from '../lib/conf_reader.js';
 import { PostFinder } from '../lib/post_finder.js';
-import { TempRepo, copyTempPost, copyTempPostWithFrontmatter, detectOnly, removeTempPost } from './utils/index.js';
+import { TempGitRepo, TempRepo, copyTempPost, copyTempPostWithoutFrontmatter, detectOnly, removeTempPost } from './utils/index.js';
 import { readdirSync, write, writeSync } from 'fs';
-import { empty_parse_conf, get_ast_from_empty_md_file, inject_yml_data_to_md_file_without_yml_data } from './test_cases/post_parse.js';
+import { empty_parse_conf, get_ast_from_empty_md_file, get_hidden_frontmatter_formatedMarkdown, inject_yml_data_to_md_file_without_yml_data } from './test_cases/post_parse.js';
 import { enumPushAssetType } from '../lib/constants/enum.js';
 import { DEF_LINK_TYPE_LIST } from '../lib/constants/index.js';
 import { removeSync } from 'fs-extra/esm';
@@ -236,7 +236,7 @@ describe('post_parse', () => {
     const {
       sourceDir,
       filepath
-    } = copyTempPostWithFrontmatter('__test__/source/license.md');
+    } = copyTempPostWithoutFrontmatter('__test__/source/license.md');
     const postParse = new PostParse({
       path: filepath,
       conf: {
@@ -455,5 +455,12 @@ describe('post_parse', () => {
       console.info(`errMsg: ${error.message}`);
       expect(error.message).toEqual(getExpect({ param }));
     }
+  })
+
+  test('get hidden frontmatter formatedMarkdown', () => {
+    get_hidden_frontmatter_formatedMarkdown(({ prevFrontmatter, nextFrontmatter }) => {
+      expect(prevFrontmatter.title).not.toEqual('');
+      expect(nextFrontmatter.title).toEqual('');
+    });
   })
 });

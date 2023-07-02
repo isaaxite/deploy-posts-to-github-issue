@@ -91,3 +91,5 @@ token: ''
 ##   disable: just disable pushing assets
 ## Default setting is 'prompt'.
 #push_asset: prompt
+
+hide_frontmatter: true

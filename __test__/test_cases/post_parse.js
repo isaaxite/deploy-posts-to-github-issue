@@ -1,8 +1,8 @@
 import path from 'path';
 import { writeFileSync } from "fs";
 import { ConfReader } from "../../lib/conf_reader.js";
-import { load as loadYaml, dump as yamlDump } from 'js-yaml';
-import { copyTempPost, copyTempPostWithFrontmatter } from "../utils/index.js";
+import { dump as yamlDump } from 'js-yaml';
+import { TempRepo, copyTempPostWithoutFrontmatter } from "../utils/index.js";
 import { PostParse } from "../../lib/post_parse.js";
 import { removeSync } from 'fs-extra/esm';
 
@@ -20,7 +20,7 @@ export function inject_yml_data_to_md_file_without_yml_data(cb) {
   const {
     sourceDir,
     filepath
-  } = copyTempPostWithFrontmatter('__test__/source/license.md');
+  } = copyTempPostWithoutFrontmatter('__test__/source/license.md');
 
   const getPostParse = () => new PostParse({
     path: filepath,
@@ -66,4 +66,58 @@ export function get_ast_from_empty_md_file(cb) {
   cb && cb(ast);
 
   return ast;
+}
+
+export function get_hidden_frontmatter_formatedMarkdown(cb) {
+  const tempRepo = new TempRepo();
+  tempRepo.copy((conf) => {
+    conf.hide_frontmatter = true;
+    return conf;
+  });
+
+  const postpath = path.join(tempRepo.tempSourceDir, 'license.md');
+  const confReader = new ConfReader({ path: tempRepo.tempConfPath });
+  const conf = confReader.get();
+  const postParse = new PostParse({
+    path: postpath,
+    conf
+  });
+
+  const markdownText = postParse.getFormatedMarkdown();
+
+  const postParse1 = new PostParse({
+    markdownText,
+    conf: {
+      ...conf,
+      hide_frontmatter: false
+    }
+  });
+
+  const prevFrontmatter = postParse.getFrontmatter();
+  const nextFrontmatter = postParse1.getFrontmatter();
+
+  const ret = {
+    prevFrontmatter,
+    nextFrontmatter
+  };
+  cb && cb(ret);
+  return ret;
+}
+
+export function parse_md_file_without_yml_data(cb) {
+  const {
+    sourceDir,
+    filepath
+  } = copyTempPostWithoutFrontmatter('__test__/source/license.md');
+  const postParse = new PostParse({
+    path: filepath,
+    conf: {
+      link_prefix: 'https://isaaxite.github.io/blog/resources/',
+      absolute_source_dir: path.resolve(sourceDir)
+    }
+  });
+  const ret = postParse.getFrontmatter();
+  cb && cb(ret);
+
+  return ret;
 }
