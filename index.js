@@ -264,8 +264,8 @@ export class Isubo {
         retArr.push(await this.#updateOneBy({ filepath }));
         hinter.loadSucc(filepath);
       } catch (error) {
-        const filename = path.parse(filepath).name;
-        hinter.loadFail(filepath, { text: `${STR_TPYE} ${filename}: ${error.message}` });
+        const { postTitle } = postPath.parse(filepath);
+        hinter.loadFail(filepath, { text: `${STR_TPYE} ${postTitle}: ${error.message}` });
       }
     }
 
