@@ -7,6 +7,7 @@ import { PostParse } from "./lib/post_parse.js";
 import { AssetPublisher } from './lib/asset_publisher.js';
 import { enumDeployType, enumPushAssetType } from './lib/constants/enum.js';
 import prompts from 'prompts';
+import { postPath } from './lib/post_path.js';
 
 export class Isubo {
   #conf = {};
@@ -32,9 +33,9 @@ export class Isubo {
     this.#setFinder();
   }
 
-  static getLoadHintTextBy({ filepath, type }) {
-    const filename = path.basename(filepath);
-    return `${type} post: ${filename}`;
+  #getLoadHintTextBy({ filepath, type }) {
+    const { postTitle } = postPath.parse(filepath);
+    return `${type} post: ${postTitle}`;
   }
 
   #setFinder() {
@@ -153,7 +154,7 @@ export class Isubo {
 
   async #publishOneBy({ filepath }) {
     let type;
-    const getLoadOpt = (type) => ({ text: Isubo.getLoadHintTextBy({ type, filepath }) });
+    const getLoadOpt = (type) => ({ text: this.#getLoadHintTextBy({ type, filepath }) });
     const { frontmatter } = this.#getPostDetailBy({ filepath });
     if (frontmatter.issue_number) {
       type = enumDeployType.UPDATE;
@@ -174,7 +175,7 @@ export class Isubo {
 
   #setLoadHints(filepathArr, type) {
     for (const filepath of filepathArr) {
-      hinter.load(filepath, { text: Isubo.getLoadHintTextBy({ type, filepath }) });
+      hinter.load(filepath, { text: this.#getLoadHintTextBy({ type, filepath }) });
     }
   }
 
@@ -283,10 +284,10 @@ export class Isubo {
         const resp = await this.#publishOneBy({ filepath });
         type = resp.type;
         retArr.push(resp.ret);
-        hinter.loadSucc(filepath, { text: Isubo.getLoadHintTextBy({ type, filepath }) });
+        hinter.loadSucc(filepath, { text: this.#getLoadHintTextBy({ type, filepath }) });
       } catch (error) {
         // console.error(error);
-        hinter.loadFail(filepath, { text: Isubo.getLoadHintTextBy({ type, filepath }) });
+        hinter.loadFail(filepath, { text: this.#getLoadHintTextBy({ type, filepath }) });
         hinter.errMsg(error.message)
       }
     }
