@@ -45,7 +45,9 @@ export class Isubo {
       patterns,
       pattern
     } = this.#cliParams;
-    const params = {};
+    const params = {
+      postTitleSeat: conf.post_title_seat
+    };
 
     if (patterns) {
       params.patterns = patterns;
