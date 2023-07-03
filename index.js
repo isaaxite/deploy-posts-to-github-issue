@@ -118,11 +118,20 @@ export class Isubo {
     };
   }
 
+  #getPostTitleBy({ frontmatter, filepath }) {
+    if (!frontmatter.title) {
+      return postPath.parse(filepath).postTitle;
+    }
+
+    return frontmatter.title;
+  }
+
   async #updateOneBy({ filepath }) {
     const { frontmatter, formatedMarkdown, assetPathsRelativeRepoArr } = this.#getPostDetailBy({ filepath });
+    const title = this.#getPostTitleBy({ frontmatter, filepath });
     this.#addAssetpathRecord(filepath, assetPathsRelativeRepoArr);
     const ret = await this.#postManager.update({
-      title: frontmatter.title,
+      title,
       labels: frontmatter.tags,
       issue_number: frontmatter.issue_number,
       body: formatedMarkdown
@@ -138,18 +147,24 @@ export class Isubo {
       assetPathsRelativeRepoArr,
       injectFrontmatterFn
     } = this.#getPostDetailBy({ filepath });
+    const title = this.#getPostTitleBy({ frontmatter, filepath });
     this.#addAssetpathRecord(filepath, assetPathsRelativeRepoArr);
     const ret = await this.#postManager.forceCreate({
-      title: frontmatter.title,
+      title,
       labels: frontmatter.tags,
       body: formatedMarkdown
     });
 
     // TODO: check forceCreate success or not
 
-    injectFrontmatterFn({
+    const injectedFrontmatter = {
       issue_number: ret.data.number
-    });
+    };
+    if (!frontmatter.title) {
+      injectedFrontmatter.title = title;
+    }
+
+    injectFrontmatterFn(injectedFrontmatter);
 
     return ret;
   }
@@ -285,10 +300,16 @@ export class Isubo {
       try {
         const resp = await this.#publishOneBy({ filepath });
         type = resp.type;
-        retArr.push(resp.ret);
+        retArr.push({
+          filepath,
+          ret: resp.ret
+        });
         hinter.loadSucc(filepath, { text: this.#getLoadHintTextBy({ type, filepath }) });
       } catch (error) {
-        // console.error(error);
+        retArr.push({
+          filepath,
+          ret: error
+        });
         hinter.loadFail(filepath, { text: this.#getLoadHintTextBy({ type, filepath }) });
         hinter.errMsg(error.message)
       }
