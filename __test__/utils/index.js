@@ -9,6 +9,7 @@ import simpleGit from 'simple-git';
 import { execSync } from 'child_process';
 import { cwd } from 'process';
 import { FRONTMATTER } from '../../lib/constants/index.js';
+import { postPath } from '../../lib/post_path.js';
 
 const DEST_SOURCE_PATH_PREFIX = '__test__/temp/source_';
 
@@ -145,6 +146,7 @@ export class TempRepo {
   copy(cb = val => val) {
     ensureDirSync(this.tempRepo);
     copySync('__test__/assets/isubo.conf.yml', this.tempConfPath);
+    postPath.setConfBy({ confpath: this.tempConfPath });
     const preConf = loadYaml(readFileSync(this.tempConfPath));
     preConf.source_dir = this.tempSourceDir;
     writeFileSync(this.tempConfPath, yamlDump(cb(preConf)));

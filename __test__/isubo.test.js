@@ -4,6 +4,7 @@ import { Isubo } from '../index.js';
 import { TempRepo, sleep, sleepFactory } from './utils/index.js';
 import { PostParse } from '../lib/post_parse.js';
 import { enumPushAssetType } from "../lib/constants/enum.js";
+import { update_one_post } from "./test_cases/isubo.js";
 
 describe('isubo', () => {
   sleepFactory(test)('create one post', async () => {
@@ -31,28 +32,7 @@ describe('isubo', () => {
   }, 60 * 1000);
 
   sleepFactory(test)('update one post', async () => {
-    const issue_number = 1;
-    const tempRepo = new TempRepo();
-    tempRepo.copy((preConf) => ({
-      ...preConf,
-      source_dir: tempRepo.tempSourceDir,
-      push_asset: enumPushAssetType.DISABLE
-    }));
-    const conf = tempRepo.conf;
-    const postParse = new PostParse({
-      path: path.join(tempRepo.tempSourceDir, 'license.md'),
-      conf
-    });
-    postParse.injectFrontmatter({
-      issue_number
-    });
-    const isubo = new Isubo({
-      conf,
-      cliParams: {
-        filename: 'license'
-      }
-    });
-    const ret = (await isubo.update()).pop();
+    const ret = await update_one_post();
     expect(ret).not.toBeUndefined();
     expect(ret.status).toBeGreaterThanOrEqual(200);
     expect(ret.status).toBeLessThan(300);

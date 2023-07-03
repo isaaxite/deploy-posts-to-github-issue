@@ -1,6 +1,8 @@
+import path from 'path';
 import { Isubo } from '../index.js';
 import { TempGitRepo } from '../__test__/utils/index.js';
 import { enumPushAssetType } from '../lib/constants/enum.js';
+import { postPath } from '../lib/post_path.js';
 
 const enumCmdType = {
   UPDATE: 'update',
@@ -20,16 +22,23 @@ async function main({
     }
   });
 
+  const { postpath } = tempGitRepo.addNewPostSync(filename);
+
+
   process.chdir(tempGitRepo.repoLocalPath);
+
+  postPath.setConfBy({ confpath: path.join(tempGitRepo.repoLocalPath, 'isubo.conf.yml') });
+  const { postTitle } = postPath.parse(postpath);
 
   const isubo = new Isubo({
     confPath: 'isubo.conf.yml',
     cliParams: {
-      filename
+      filename: postTitle
     }
   });
 
-  await isubo[cmd]();
+  const ret = await isubo[cmd]();
+  console.info(ret)
 }
 
 main({
