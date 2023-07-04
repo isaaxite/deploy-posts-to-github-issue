@@ -1,7 +1,7 @@
 import path from 'path';
 import fg from 'fast-glob';
 import { writeFileSync, readFileSync, existsSync, readdirSync } from 'fs';
-import { copySync, removeSync, ensureDirSync } from 'fs-extra/esm';
+import { copySync, removeSync, ensureDirSync, moveSync } from 'fs-extra/esm';
 import { PostParse } from '../../lib/post_parse.js';
 import { load as loadYaml, dump as yamlDump } from 'js-yaml';
 import { ConfReader } from '../../lib/conf_reader.js';
@@ -188,6 +188,7 @@ export class TempGitRepo {
   static #repo = 'git@github.com:isaaxite/test-repo_deploy-posts-to-github-issue.git';
   #uniqueKey = getTimestampKey();
   #repoLocalPath = getEnsureDirSync(`__test__/temp/git_repo_${this.#uniqueKey}`);
+  #conf = null;
   #confPath = path.join(this.#repoLocalPath, 'isubo.conf.yml');
   #sourceDir = path.join(this.#repoLocalPath, 'source');
   #branch = `temp_branch_${this.#uniqueKey}`;
@@ -229,6 +230,9 @@ export class TempGitRepo {
       preConfFn && preConfFn(preConf);
       return preConf;
     });
+
+    const confReader = new ConfReader({ path: this.#confPath });
+    this.#conf = confReader.get();
 
     execSync(`cd ${this.#repoLocalPath} && npm i ${cwd()}`);
 
@@ -276,6 +280,46 @@ export class TempGitRepo {
         path.join(destDir, it)
       ))
     };
+  }
+
+  #ensurePostDir(postTitle) {
+    const { post_title_seat } = this.#conf;
+
+    const mid = new Array(post_title_seat - 1).fill(() => `${String(Math.random()).slice(2)}`).map(exec => exec()).join(path.sep);
+
+    const dir = path.join(this.#sourceDir, postTitle, mid);
+    ensureDirSync(dir);
+    return dir;
+  }
+
+  adjustPostDirStruct() {
+    const { post_title_seat } = this.#conf;
+
+    if (post_title_seat <= 0) {
+      return;
+    }
+
+    const backSourceDir = `${this.#sourceDir}_backup`;
+    moveSync(this.#sourceDir, backSourceDir);
+    const postArr = fg.sync([`${backSourceDir}/**/*.md`]).map(postPath => {
+      const absolutePath = path.resolve(postPath);
+
+      return {
+        postTitle: path.parse(absolutePath).name,
+        postPath: absolutePath,
+        assetDirPath: absolutePath.replace('.md', '')
+      };
+    });
+
+    ensureDirSync(this.#sourceDir);
+
+    for (const it of postArr) {
+      const postDir = this.#ensurePostDir(it.postTitle);
+      moveSync(it.postPath, path.join(postDir, path.basename(it.postPath)));
+      moveSync(it.assetDirPath, path.join(postDir, path.basename(it.assetDirPath)));
+    }
+
+    removeSync(backSourceDir);
   }
 
   touch() {
