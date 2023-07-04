@@ -11,6 +11,7 @@ const enumCmdType = {
 };
 
 async function main({
+  postTitleSeat,
   filename,
   cmd
 }) {
@@ -18,22 +19,28 @@ async function main({
   await tempGitRepo.init({
     preConf(conf) {
       conf.push_asset = enumPushAssetType.AUTO;
+      conf.post_title_seat = postTitleSeat || 0;
       return conf;
     }
   });
 
-  const { postpath } = tempGitRepo.addNewPostSync(filename);
+
+  tempGitRepo.adjustPostDirStruct();
+
+  tempGitRepo.addNewPostSync(filename);
+
+  // const { postpath } = tempGitRepo.addNewPostSync(filename);
 
 
   process.chdir(tempGitRepo.repoLocalPath);
 
   postPath.setConfBy({ confpath: path.join(tempGitRepo.repoLocalPath, 'isubo.conf.yml') });
-  const { postTitle } = postPath.parse(postpath);
+  // const { postTitle } = postPath.parse(postpath);
 
   const isubo = new Isubo({
     confPath: 'isubo.conf.yml',
     cliParams: {
-      filename: postTitle
+      // filename: postTitle
     }
   });
 
@@ -42,6 +49,7 @@ async function main({
 }
 
 main({
+  postTitleSeat: 1,
   filename: ['license'],
   cmd: enumCmdType.PUBLISH
 });
