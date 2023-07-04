@@ -7,6 +7,7 @@ import { PostParse } from "./lib/post_parse.js";
 import { AssetPublisher } from './lib/asset_publisher.js';
 import { enumDeployType, enumPushAssetType } from './lib/constants/enum.js';
 import prompts from 'prompts';
+import { postPath } from './lib/post_path.js';
 
 export class Isubo {
   #conf = {};
@@ -32,9 +33,9 @@ export class Isubo {
     this.#setFinder();
   }
 
-  static getLoadHintTextBy({ filepath, type }) {
-    const filename = path.basename(filepath);
-    return `${type} post: ${filename}`;
+  #getLoadHintTextBy({ filepath, type }) {
+    const { postTitle } = postPath.parse(filepath);
+    return `${type} post: ${postTitle}`;
   }
 
   #setFinder() {
@@ -44,7 +45,9 @@ export class Isubo {
       patterns,
       pattern
     } = this.#cliParams;
-    const params = {};
+    const params = {
+      postTitleSeat: conf.post_title_seat
+    };
 
     if (patterns) {
       params.patterns = patterns;
@@ -115,11 +118,20 @@ export class Isubo {
     };
   }
 
+  #getPostTitleBy({ frontmatter, filepath }) {
+    if (!frontmatter.title) {
+      return postPath.parse(filepath).postTitle;
+    }
+
+    return frontmatter.title;
+  }
+
   async #updateOneBy({ filepath }) {
     const { frontmatter, formatedMarkdown, assetPathsRelativeRepoArr } = this.#getPostDetailBy({ filepath });
+    const title = this.#getPostTitleBy({ frontmatter, filepath });
     this.#addAssetpathRecord(filepath, assetPathsRelativeRepoArr);
     const ret = await this.#postManager.update({
-      title: frontmatter.title,
+      title,
       labels: frontmatter.tags,
       issue_number: frontmatter.issue_number,
       body: formatedMarkdown
@@ -135,25 +147,31 @@ export class Isubo {
       assetPathsRelativeRepoArr,
       injectFrontmatterFn
     } = this.#getPostDetailBy({ filepath });
+    const title = this.#getPostTitleBy({ frontmatter, filepath });
     this.#addAssetpathRecord(filepath, assetPathsRelativeRepoArr);
     const ret = await this.#postManager.forceCreate({
-      title: frontmatter.title,
+      title,
       labels: frontmatter.tags,
       body: formatedMarkdown
     });
 
     // TODO: check forceCreate success or not
 
-    injectFrontmatterFn({
+    const injectedFrontmatter = {
       issue_number: ret.data.number
-    });
+    };
+    if (!frontmatter.title) {
+      injectedFrontmatter.title = title;
+    }
+
+    injectFrontmatterFn(injectedFrontmatter);
 
     return ret;
   }
 
   async #publishOneBy({ filepath }) {
     let type;
-    const getLoadOpt = (type) => ({ text: Isubo.getLoadHintTextBy({ type, filepath }) });
+    const getLoadOpt = (type) => ({ text: this.#getLoadHintTextBy({ type, filepath }) });
     const { frontmatter } = this.#getPostDetailBy({ filepath });
     if (frontmatter.issue_number) {
       type = enumDeployType.UPDATE;
@@ -174,7 +192,7 @@ export class Isubo {
 
   #setLoadHints(filepathArr, type) {
     for (const filepath of filepathArr) {
-      hinter.load(filepath, { text: Isubo.getLoadHintTextBy({ type, filepath }) });
+      hinter.load(filepath, { text: this.#getLoadHintTextBy({ type, filepath }) });
     }
   }
 
@@ -237,8 +255,8 @@ export class Isubo {
         retArr.push(await this.#createOneBy({ filepath }));
         hinter.loadSucc(filepath);
       } catch (error) {
-        const filename = path.parse(filepath).name;
-        hinter.loadFail(filepath, { text: `${STR_TPYE} ${filename}: ${error.message}  ` });
+        const { postTitle } = postPath.parse(filepath);
+        hinter.loadFail(filepath, { text: `${STR_TPYE} ${postTitle}: ${error.message}  ` });
       }
     }
 
@@ -263,8 +281,8 @@ export class Isubo {
         retArr.push(await this.#updateOneBy({ filepath }));
         hinter.loadSucc(filepath);
       } catch (error) {
-        const filename = path.parse(filepath).name;
-        hinter.loadFail(filepath, { text: `${STR_TPYE} ${filename}: ${error.message}` });
+        const { postTitle } = postPath.parse(filepath);
+        hinter.loadFail(filepath, { text: `${STR_TPYE} ${postTitle}: ${error.message}` });
       }
     }
 
@@ -282,11 +300,17 @@ export class Isubo {
       try {
         const resp = await this.#publishOneBy({ filepath });
         type = resp.type;
-        retArr.push(resp.ret);
-        hinter.loadSucc(filepath, { text: Isubo.getLoadHintTextBy({ type, filepath }) });
+        retArr.push({
+          filepath,
+          ret: resp.ret
+        });
+        hinter.loadSucc(filepath, { text: this.#getLoadHintTextBy({ type, filepath }) });
       } catch (error) {
-        // console.error(error);
-        hinter.loadFail(filepath, { text: Isubo.getLoadHintTextBy({ type, filepath }) });
+        retArr.push({
+          filepath,
+          ret: error
+        });
+        hinter.loadFail(filepath, { text: this.#getLoadHintTextBy({ type, filepath }) });
         hinter.errMsg(error.message)
       }
     }

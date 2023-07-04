@@ -91,3 +91,17 @@ token: ''
 ##   disable: just disable pushing assets
 ## Default setting is 'prompt'.
 #push_asset: prompt
+
+hide_frontmatter: true
+
+
+## [optional]
+## Isubo use directory name or filename at post path as post title
+## By default, filename is used as the title of the post
+## You can set it with `post_title_seat`
+## e.g.
+## /home/issue-blog/source/license.md
+## 0: license
+## 1: source
+## 2: isubo-blog
+post_title_seat: 0

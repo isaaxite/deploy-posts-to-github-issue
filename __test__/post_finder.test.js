@@ -1,6 +1,8 @@
 import path from 'path';
 import { describe, expect, test } from '@jest/globals';
 import { PostFinder } from '../lib/post_finder.js';
+import { getTimestampKey } from './utils/index.js';
+import { ensureFileSync, removeSync } from 'fs-extra/esm';
 
 describe('post_finder', () => {
   test('glob all matched fileoath', () => {
@@ -16,19 +18,19 @@ describe('post_finder', () => {
   test.each([
     {
       name: 'sourceDir, filename and ext', 
-      params: { sourceDir: '__test__/source/', filename: 'WSL的hosts文件被重置', ext: 'md' }
+      params: { postTitleSeat: 0, sourceDir: '__test__/source/', filename: 'WSL的hosts文件被重置', ext: 'md' }
     },
     { 
       name: 'sourceDir and filename', 
-      params: { sourceDir: '__test__/source/', filename: 'WSL的hosts文件被重置' }
+      params: { postTitleSeat: 0, sourceDir: '__test__/source/', filename: 'WSL的hosts文件被重置' }
     },
     {
       name: 'filename include multiple path',
-      params: { sourceDir: '__test__/source/', filename: '/source/WSL的hosts文件被重置' }
+      params: { postTitleSeat: 0, sourceDir: '__test__/source/', filename: '/source/WSL的hosts文件被重置' }
     },
     {
       name: 'filename include multiple path and ext',
-      params: { sourceDir: '__test__/source/', filename: '/source/WSL的hosts文件被重置.html' }
+      params: { postTitleSeat: 0, sourceDir: '__test__/source/', filename: '/source/WSL的hosts文件被重置.html' }
     },
     {
       name: 'only sourceDir',
@@ -60,7 +62,8 @@ describe('post_finder', () => {
     const filename = ['WSL的hosts文件被重置', 'license'];
     const finder = new PostFinder({
       sourceDir: '__test__/source/',
-      filename
+      filename,
+      postTitleSeat: 0
     });
     const destFilepaths = finder.getFilepaths();
     expect(destFilepaths).toEqual(
@@ -73,6 +76,17 @@ describe('post_finder', () => {
       new PostFinder(); 
     } catch (error) {
       expect(error.message).toEqual('<patterns> or <sourceDir> must be provided');
+    }
+  });
+
+  test('check PostFinder params with filename but lack postTitleSeat, it will emit err', () => {
+    try {
+      new PostFinder({
+        filename: 'license',
+        sourceDir: '__test__/source/',
+      }); 
+    } catch (error) {
+      expect(error.message).toEqual('postTitleSeat must be provided');
     }
   });
 
@@ -133,5 +147,41 @@ describe('post_finder', () => {
     });
 
     expect(postFinder1.ext).toEqual('md');
+  });
+
+  test('find with filename and diffence postTitleSeat', () => {
+    const sourceDir = '__test__/temp/postTitleSeat';
+    const timestampKey = `post_title_${getTimestampKey()}`;
+    const items = [
+      {
+        path: `${sourceDir}/${timestampKey}.md`,
+        postTitleSeat: 0
+      },
+      {
+        path: `${sourceDir}/${timestampKey}/${getTimestampKey()}.md`,
+        postTitleSeat: 1
+      },
+      {
+        path: `${sourceDir}/${timestampKey}/${getTimestampKey()}/${getTimestampKey()}.md`,
+        postTitleSeat: 2
+      }
+    ];
+
+    for (const it of items) {
+      ensureFileSync(it.path);
+    }
+
+    for (const it of items) {
+      const postFinder = new PostFinder({
+        sourceDir,
+        filename: timestampKey,
+        postTitleSeat: it.postTitleSeat
+      });
+
+      const filepaths = postFinder.getFilepaths();
+      expect(filepaths.length).toEqual(1);
+      expect(filepaths[0]).toEqual(it.path);
+    }
+    removeSync(sourceDir);
   });
 });

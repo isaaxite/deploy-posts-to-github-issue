@@ -1,6 +1,8 @@
+import path from 'path';
 import { Isubo } from '../index.js';
 import { TempGitRepo } from '../__test__/utils/index.js';
 import { enumPushAssetType } from '../lib/constants/enum.js';
+import { postPath } from '../lib/post_path.js';
 
 const enumCmdType = {
   UPDATE: 'update',
@@ -9,6 +11,7 @@ const enumCmdType = {
 };
 
 async function main({
+  postTitleSeat,
   filename,
   cmd
 }) {
@@ -16,23 +19,37 @@ async function main({
   await tempGitRepo.init({
     preConf(conf) {
       conf.push_asset = enumPushAssetType.AUTO;
+      conf.post_title_seat = postTitleSeat || 0;
       return conf;
     }
   });
 
+
+  tempGitRepo.adjustPostDirStruct();
+
+  tempGitRepo.addNewPostSync(filename);
+
+  // const { postpath } = tempGitRepo.addNewPostSync(filename);
+
+
   process.chdir(tempGitRepo.repoLocalPath);
+
+  postPath.setConfBy({ confpath: path.join(tempGitRepo.repoLocalPath, 'isubo.conf.yml') });
+  // const { postTitle } = postPath.parse(postpath);
 
   const isubo = new Isubo({
     confPath: 'isubo.conf.yml',
     cliParams: {
-      filename
+      // filename: postTitle
     }
   });
 
-  await isubo[cmd]();
+  const ret = await isubo[cmd]();
+  console.info(ret)
 }
 
 main({
+  postTitleSeat: 1,
   filename: ['license'],
   cmd: enumCmdType.PUBLISH
 });
