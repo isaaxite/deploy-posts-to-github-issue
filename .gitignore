@@ -4,3 +4,4 @@ __test__/temp/
 temp.*
 temp
 scripts/temp.debug.js
+dist/
