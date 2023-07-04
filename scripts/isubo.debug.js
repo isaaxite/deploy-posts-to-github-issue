@@ -24,9 +24,10 @@ async function main({
     }
   });
 
-  tempGitRepo.addNewPostSync(filename);
 
   tempGitRepo.adjustPostDirStruct();
+
+  tempGitRepo.addNewPostSync(filename);
 
   // const { postpath } = tempGitRepo.addNewPostSync(filename);
 
