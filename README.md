@@ -46,7 +46,7 @@ Isubo is a CLI tool to publish markdown content to github issues. It allows you 
 
 ![](./assets/complete.gif)
 
-👍 It focuses on:
+🎯 It focuses on:
 
 - **Easy to use:** Just one cmmand (`isubo publish`) to publish posts what you want.
 
@@ -70,7 +70,9 @@ Isubo is a CLI tool to publish markdown content to github issues. It allows you 
 
 - At least a Github Reposibility used to publish issues.
 
-- NodeJS environment, node version >= `12.0.0`
+- NodeJS environment, node version >= `12.0.0`.
+
+- Only for `Linux` / `Unix`(MacOS) / `WSL`(Windows).
 
 # 📥 Installation
 
@@ -156,6 +158,44 @@ token: $GITHUB_TOKEN
 # use plaintext. [not recommended]
 token: ghp_CMg41ahiAAtNEN_xxxxxxx_sZctu2M5t6W
 ```
+
+## ✍️ Writing
+
+The following is the directory structure used in the default configuration. If you need to change the directory structure, you should consult the [MANUAL].
+
+```shell
+└── <repo dir>
+    ├── isubo.conf.yml
+    ├── ...
+    └── source
+        ├── <post assets>
+        │   ├── pic.webp
+        │   ├── ...
+        │   └── pic.png
+        └── <post title>.md
+
+# e.g.
+└── issue-blog
+    ├── isubo.conf.yml
+    └── source
+        ├── WSL's hosts file is reset
+        │   ├── Snipaste_2023-03-08_16-08-58.png
+        │   └── Snipaste_2023-03-08_16-15-42.png
+        ├── Getting to Know WSL2
+        │   ├── enable-wsl1-windows-10.webp
+        │   └── Snipaste_2023-04-11_18-49-48.png
+        │
+        ├── WSL's hosts file is reset.md
+        └── Getting to Know WSL2.md
+```
+
+- **source**, `source/` is the default source dir, if you need to change that, you can ref [MANUAL > source_dir](MANUAL.md#source_dir).
+
+- **`<post assets>`**, you can set it as global assets dir or dir for a single post. 📣 Note that Each resource file is unique, and the file name should not be repeated.
+
+- **`<post title>`**, in default, you need to set markdown filename with post title.If you want to change that, you should consult the [MANUAL].
+
+
 
 ### 🕹️ Usage
 
