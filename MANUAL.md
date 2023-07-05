@@ -15,6 +15,11 @@
     + [types](#types)
   * [Assets Push](#assets-push)
     + [push_asset](#push_asset)
+    + [hide_frontmatter](#hide_frontmatter)
+    + [post_title_seat](#post_title_seat)
+- [Writing](#writing)
+  * [Directory Struct](#directory-struct)
+  * [Write a post](#write-a-post)
 - [Usage](#usage)
   * [Init](#init-1)
   * [publish](#publish)
@@ -24,6 +29,11 @@
     + [No param](#no-param)
     + [post titles](#post-titles)
     + [patterns](#patterns)
+- [Appendix](#appendix)
+  * [Directory Struct](#directory-struct-1)
+    + [Hexo](#hexo)
+    + [Global Assets](#global-assets)
+    + [Typora / VS Code](#typora--vs-code)
 
 # Installation
 
@@ -139,7 +149,7 @@ Type: `undefined | string | object`
 
 Default: `https://raw.githubusercontent.com/<owner>/<repo>/<branch>/<source_dir>/`
 
-Used to format links in articles, and format relative links as url links. it can take a string or plain object, as the blew example\
+Used to format links in articles, and format relative links as url links. it can take a string or plain object, as the blew example.
 
 #### `undefined`
 
@@ -312,11 +322,128 @@ Setting `auto` will disable the push of posts and assets. The resource reference
 
 **📢 If your resources are not saved using github, then of course you should set it to `disable`.**
 
+
+### hide_frontmatter
+
+State: `optional`
+
+Type: `boolean`
+
+Default: `true`
+
+In Isubo, the post support yml metadata like the below. By default, the published issue will delete this part of metadata.If you want to show that, you should set `hide_frontmatter: false`.
+
+```yml
+---
+title: LICENSE
+date: 2023-05-30 16:50:28
+tags:
+- Standards developed
+- LICENSE
+---
+
+# content of post...
+```
+
+
+### post_title_seat
+
+State: `optional`
+
+Type: `number`
+
+Default: `0`
+
+Isubo use **directory name** or **filename** at post path as post title. By default, filename is used as the title of the post.
+
+If you need to change post directory struct, you should set `post_title_seat` to achieve.
+
+
+![](./assets/post_title_seat-example.png)
+
+
+As above example, default is set to `post_title_seat: 0`, so `license` will be read as the post title.
+
+**📝Hint:** For more examples of this setup see [Appendix > Directory Struct](#directory-struct-1).
+
+
+# Writing
+
+## Directory Struct
+
+The following is the directory structure used in the default configuration. If you need to change the directory structure, you should modify the [`post_title_seat`](#post_title_seat) attribute.
+
+```shell
+└── <repo dir>
+    ├── isubo.conf.yml
+    ├── ...
+    └── source
+        ├── <post assets>
+        │   ├── pic.webp
+        │   ├── ...
+        │   └── pic.png
+        └── <post title>.md
+
+# e.g.
+└── issue-blog
+    ├── isubo.conf.yml
+    └── source
+        ├── WSL's hosts file is reset
+        │   ├── Snipaste_2023-03-08_16-08-58.png
+        │   └── Snipaste_2023-03-08_16-15-42.png
+        ├── Getting to Know WSL2
+        │   ├── enable-wsl1-windows-10.webp
+        │   └── Snipaste_2023-04-11_18-49-48.png
+        │
+        ├── WSL's hosts file is reset.md
+        └── Getting to Know WSL2.md
+```
+
+- **source**, `source/` is the default source dir, if you need to change that, you should modify the [`source_dir`](#source_dir) attribute..
+
+- **`<post assets>`**, you can set it as global assets dir or dir for a single post. 📣 Note that Each resource file is unique, and the file name should not be repeated.
+
+- **`<post title>`**, in default, you need to set markdown filename with post title.If you want to change that, you should modify the [`post_title_seat`](#post_title_seat).
+
+**📝Hint:** For more examples of this setup see [Appendix > Directory Struct](#directory-struct-1).
+
+
+
+## Write a post
+
+It contain metadata and content, refer to the below. Metadata is written using yml syntax, open with `---` and close with `---`.It is optional, but isubo recommends writing corresponding metadata.
+
+📣 **Note that `title` and `issue_number` of metadata will be injected.** 
+
+```markdown
+// metadata
+---
+title: LICENSE
+tags:
+- Standards developed
+- LICENSE
+issue_number: 178
+---
+
+// content
+# Overview
+
+content of post...
+```
+
+| Attributes | Type | Desc | State |
+|:--|:--|:--|:--|
+| title | `string` | If the title is not written, the post title in the path will be read and published, and it will be injected into the metadata after the publication is successfully | `optional` |
+| tags | `array` | `tags` correspond to the `labels` of the issue | `optional` |
+| issue_number | `number` | **⚠️ It does not need to be set!** Issue number was injected after created a relatived issue successfuly | `optional` |
+
+
+
 # Usage
 
 Isubo contains 2 types of commands, namely `init` and `depoloy`.
 
-- Init conmand is used to init a configuration file, `isubo.conf.yml` file will be created at current directory which you exec the command.
+- Init conmand is used to init a configuration file, `isubo.conf.yml` will be created at current directory which you exec the command.
 
 - Deploy contains 3 commands, namely `publish`, `update` and `create`.
 
@@ -365,7 +492,7 @@ It is a optional param. According to input or not, diffent process will be emite
 
 ### No param
 
-Isubo will show show a list that contain all markdown files at `source_dir` when you does not input. 
+Isubo will show a list that contain all markdown files at `source_dir` when you does not input. 
 
 ![](./assets/select_posts.gif)
 
@@ -391,7 +518,32 @@ isubo publish license,"The principle of CORS"
 
 ### patterns
 
-Also supports multi-parameter input. **Note that pattern uses [glob]() syntax and they must be a subset of `source_dir`**.
+Also supports multi-parameter input. **Note that pattern uses [glob](https://en.wikipedia.org/wiki/Glob_(programming)) syntax and they must be a subset of `source_dir`**.
+
+<details>
+  <summary><strong>What is glob?</strong></summary>
+  <blockquote>
+    <br/>
+    <p>Glob syntax is a simple syntax used to specify file path patterns, typically used in command-line tools and scripts on Unix systems. Here are some basic rules of the Glob syntax:</p>
+    <ul>
+      <li><code>*</code>: Matches any number of characters (including zero characters).</li>
+      <li><code>?</code>: Matches any single character.</li>
+      <li><code>[]</code>: Matches any one character from a set of characters. Character ranges can be specified using a hyphen (<code>-</code>).</li>
+      <li><code>!</code>: Use <code>!</code> at the beginning of the pattern to negate the match, i.e., to match any character except those specified.</li>
+      </ul>
+      <p>Here are some examples:</p>
+      <ul>
+      <li><code>*.txt</code>: Matches all files ending with <code>.txt</code>.</li>
+      <li><code>file?.txt</code>: Matches all files with the name <code>file</code>, followed by any single character, followed by <code>.txt</code>.</li>
+      <li><code>[abc]*.txt</code>: Matches all files starting with <code>a</code>, <code>b</code>, or <code>c</code>, and ending with <code>.txt</code>.</li>
+      <li><code>!*.txt</code>: Matches all files that do not end with <code>.txt</code>.</li>
+    </ul>
+    <p>Note that Glob syntax is case-insensitive, so <code>*.txt</code> and <code>*.TXT</code> will match the same files. Also, Glob syntax does not support recursive searching, so it cannot match files in subdirectories.</p>
+    <br/>
+  </blockquote>
+</details>
+<br/>
+
 
 ```shell
 # one pattern
@@ -405,4 +557,90 @@ isubo publish <pattern 1>,<pattern 2>,...
 
 # e.g.
 isubo publish "source/_posts/*.md","source/_draft/*md"
+```
+
+# Appendix
+
+## Directory Struct
+
+### Hexo
+
+**Struct:**
+
+```
+└── source
+    ├── ...
+    ├── _drafts
+    │   ├── Getting to Know WSL2
+    │   │   ├── ...
+    │   │   └── Snipaste_2023-03-14_23-48-30.png
+    │   └── Getting to Know WSL2.md
+    └── _posts
+        ├── WSL's hosts file is reset
+        │   ├── a9lAHCJZZrebOSKrkPRD.webp
+        │   └── Snipaste_2023-06-09_12-25-21.png
+        └── WSL's hosts file is reset.md
+```
+
+**Config:**
+
+```yml
+source_dir: source/
+# if you just want to publish and list those posts at _post
+# source_dir: source/_posts/
+
+post_title_seat: 0
+```
+
+
+### Global Assets
+
+**Struct:**
+
+```
+└── source
+    ├── ...
+    ├── assets
+    │   ├── ...
+    │   ├── Snipaste_2023-06-09_12-25-21.png
+    │   └── Snipaste_2023-03-14_23-48-30.png
+    ├── Getting to Know WSL2.md
+    └── WSL's hosts file is reset.md
+```
+
+**Config:**
+
+```yml
+source_dir: source/
+post_title_seat: 0
+```
+
+### Typora / VS Code
+
+**Struct:**
+
+```
+└── source
+    ├── ...
+    ├── assets
+    │   ├── ...
+    │   ├── Snipaste_2023-06-09_12-25-21.png
+    │   └── Snipaste_2023-03-14_23-48-30.png
+    ├── Getting to Know WSL2
+    │   ├── assets
+    │   │   ├── ...
+    │   │   └── Snipaste_2023-03-14_23-48-30.png
+    │   └── index.md
+    └── WSL's hosts file is reset
+        ├── assets
+        │   ├── ...
+        │   └── Snipaste_2023-06-09_12-25-21.png
+        └── index.md
+```
+
+**Config:**
+
+```yml
+source_dir: source/
+post_title_seat: 1
 ```
