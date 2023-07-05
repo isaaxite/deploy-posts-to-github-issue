@@ -18,9 +18,8 @@
     "type": "git",
     "url": "git+https://github.com/isaaxite/deploy-posts-to-github-issue.git"
   },
-  "lib": [
-    "dist/",
-    "LICENSE"
+  "files": [
+    "dist/"
   ],
   "keywords": [
     "markdown",
