@@ -1,17 +1,6 @@
 import { describe, test, expect } from '@jest/globals';
-import { PostManager } from '../lib/post_manager.js';
 import { sleepFactory } from './utils/index.js';
 import { force_create_a_issue_and_then_update_it } from './test_cases/post_manager.js';
-
-const OWNER = 'isaaxite';
-const REPO = 'test-repo_deploy-posts-to-github-issue';
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-
-const getPostManagerIns = () => new PostManager({
-  owner: OWNER,
-  repo: REPO,
-  token: GITHUB_TOKEN
-});
 
 describe('post_manager', () => {
   const expextBaseResp = (ret) => {
@@ -35,7 +24,7 @@ describe('post_manager', () => {
         expect(updateRet.data.title).toStrictEqual(updateTitle);
       }
     });
-  }, 10000);
+  }, 13000);
 
   test.todo('update fail');
 
