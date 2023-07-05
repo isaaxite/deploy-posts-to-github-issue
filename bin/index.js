@@ -4,7 +4,6 @@ import yargs from 'yargs';
 import { Isubo } from '../index.js';
 import { ConfReader } from '../lib/conf_reader.js';
 import { hinter } from '../lib/hinter.js';
-import { AssetPublisher } from '../lib/asset_publisher.js';
 import figlet from 'figlet';
 import chalk from 'chalk';
 
