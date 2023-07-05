@@ -303,11 +303,7 @@ export class TempGitRepo {
   }
 
   #addNewPostSync(postname) {
-    // const srcDir = `${this.#sourceDir}/${postname}`;
-    // const src = `${srcDir}.md`;
     const destname = `${postname}_${this.#uniqueKey}`;
-    // const dest = path.join(this.#sourceDir, `${destname}.md`);
-    // const destDir = path.join(this.#sourceDir, destname);
 
     const { post_title_seat } = this.#conf;
     const lastPostname = path.parse(postname).name;
