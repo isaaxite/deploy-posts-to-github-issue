@@ -193,11 +193,11 @@ The following is the directory structure used in the default configuration. If y
 
 - **`<post assets>`**, you can set it as global assets dir or dir for a single post. 📣 Note that Each resource file is unique, and the file name should not be repeated.
 
-- **`<post title>`**, in default, you need to set markdown filename with post title.If you want to change that, you should consult the [MANUAL].
+- **`<post title>`**, in default, you need to set markdown filename with post title.If you want to change that, you should consult the [MANUAL > post_title_seat](MANUAL.md#post_title_seat).
 
 
 
-### 🕹️ Usage
+## 🕹️ Usage
 
 Exec the below commands at your local reposibility directory, isubo will return a list of your posts which can be select by pressing `space`.
 
