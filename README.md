@@ -259,7 +259,7 @@ For general questions or discussions, you can also use:
   </blockquote>
 </details>
 
-# 🤟 友情链接
+# 🤟 Links
 
 🔗 [Isaac Kam's Blog]
 

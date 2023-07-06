@@ -14,7 +14,7 @@ export default {
   plugins: [
     copy({
       targets: [
-        { src: 'assets/*', dest: 'dist/assets' },
+        { src: 'assets/conf.template.yml', dest: 'dist/assets' },
         { src: ['package.json', 'LICENSE', 'README.md', 'MANUAL.md'], dest: 'dist/' },
       ]
     })
