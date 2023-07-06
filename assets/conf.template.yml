@@ -92,8 +92,11 @@ token: ''
 ## Default setting is 'prompt'.
 #push_asset: prompt
 
+## [optional]
+## In Isubo, the post support yml metadata like the below. By default, the published issue will delete this part of metadata.
+## If you want to show that, you should set `hide_frontmatter: false`.
+## Default: true
 hide_frontmatter: true
-
 
 ## [optional]
 ## Isubo use directory name or filename at post path as post title
