@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "type": "module",
   "bin": {
-    "isubo": "dist/bin/index.js"
+    "isubo": "bin/index.js"
   },
   "scripts": {
     "test": "jest",
@@ -13,15 +13,13 @@
     "only-test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config=jest.dev.config.mjs",
     "update-test-reports": "npm run esm-test && (git add ./reports && git commit -m 'update test reports') || git checkout ./reports",
     "build": "rm -rf dist && rollup -c rollup.config.js && sed -i '1i#!/usr/bin/env node' dist/bin/index.js",
+    "publish": "cd dist && npm publish $1 $2",
     "toc": "markdown-toc $1 --maxdepth=3"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/isaaxite/deploy-posts-to-github-issue.git"
   },
-  "files": [
-    "dist/"
-  ],
   "keywords": [
     "markdown",
     "deploy",

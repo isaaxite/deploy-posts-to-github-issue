@@ -36,7 +36,11 @@
   <a href="https://isaaxite.github.io/deploy-posts-to-github-issue/reports/coverage/index.html">
     <img alt="Static Badge" src="https://img.shields.io/badge/Test-Coverage-blue">
   </a>
+  <a href="https://github.com/isaaxite/deploy-posts-to-github-issue">
+    <img src="https://img.shields.io/bundlephobia/min/isubo" alt="npm bundle size">
+  </a>
 </div>
+
 
 # 📑 Overview
 
