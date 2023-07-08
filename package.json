@@ -2,7 +2,7 @@
   "name": "isubo",
   "version": "0.0.11-alpha.2",
   "description": "deploy posts are written in markdown to github issue",
-  "main": "dist/index.js",
+  "main": "index.js",
   "type": "module",
   "bin": {
     "isubo": "bin/index.js"
@@ -44,6 +44,7 @@
     "js-yaml": "^4.1.0",
     "octokit": "^2.0.19",
     "ora": "^6.3.1",
+    "progress": "^2.0.3",
     "prompts": "^2.4.2",
     "remark-frontmatter": "^4.0.1",
     "remark-parse": "^10.0.2",
