@@ -163,6 +163,26 @@ token: $GITHUB_TOKEN
 token: ghp_CMg41ahiAAtNEN_xxxxxxx_sZctu2M5t6W
 ```
 
+<details>
+  <summary><strong>How to set environment variables of token name <code>GITHUB_TOKEN</code>?</strong></summary>
+  <blockquote>
+    <br/>
+    <p>📣 The following is an example of setting an environment variable named <code>GITHUB_TOKEN</code></p>
+    <p><strong>View environment variables</strong></p>
+    <pre><code class="language-shell">echo $GITHUB_TOKEN</code></pre>
+    <p><strong>Temporary settings</strong></p>
+    <pre><code class="language-shell">export GITHUB_TOKEN=&quot;ghp_CMg41ahiAAtNEN_xxxxxxx_sZctu2M5t6W&quot;</code></pre>
+    <p><strong>Permanent setting</strong></p>
+    <p>❗ step 1: Open the configuration file(zsh: <code>~/.zshrc</code>, bash: <code>~/.bashrc</code>) of your shell tool.Let&#39;s take zsh as an example.</p>
+    <p>❗ step 2: Add the following statement at the bottom of the file content:</p>
+    <pre><code class="language-shell">export GITHUB_TOKEN=&quot;ghp_CMg41ahiAAtNEN_xxxxxxx_sZctu2M5t6W&quot;</code></pre>
+    <p>❗ step 3: Save (Press <code>ESC</code> and then press <code>:</code> then enter <code>wq</code>, and finally press <code>Enter</code>) and execute the following command to reload the configuration.</p>
+    <pre><code class="language-shell">source ~/.zshrc</code></pre>
+    <p>That all! 💪.</p>
+    <br/>
+  </blockquote>
+</details>
+
 ## ✍️ Writing
 
 The following is the directory structure used in the default configuration. If you need to change the directory structure, you should consult the [MANUAL].
