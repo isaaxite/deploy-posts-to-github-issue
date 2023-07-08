@@ -8,6 +8,7 @@ import { AssetPublisher } from './lib/asset_publisher.js';
 import { enumDeployType, enumPushAssetType } from './lib/constants/enum.js';
 import prompts from 'prompts';
 import { postPath } from './lib/post_path.js';
+import { requestQueue } from './lib/utils/index.js';
 
 export class Isubo {
   #conf = {};
@@ -246,46 +247,55 @@ export class Isubo {
     }
   }
 
-  async create() {
-    const STR_TPYE = enumDeployType.CREATE;
-    const retArr = []
-    const filepathArr = await this.#getFilepaths();
-    this.#setLoadHints(filepathArr, STR_TPYE);
-    for (const filepath of filepathArr) {
-      try {
-        retArr.push(await this.#createOneBy({ filepath }));
-        hinter.loadSucc(filepath);
-      } catch (error) {
-        const { postTitle } = postPath.parse(filepath);
-        hinter.loadFail(filepath, { text: `${STR_TPYE} ${postTitle}: ${error.message}  ` });
-      }
-    }
-
-    await this.#publishAssets();
-
-    return retArr;
-  }
-
   async #getFilepaths() {
     return this.#selectPosts
       ? await this.#finder.selectPosts()
       : this.#finder.getFilepaths();
   }
 
+  async #requestQueue(requests) {
+    return await requestQueue(requests, {
+      maxRequests: 6,
+      timeout: 10 * 1000
+    });
+  }
+
+  async create() {
+    const STR_TPYE = enumDeployType.CREATE;
+    const retArr = []
+    const filepathArr = await this.#getFilepaths();
+
+    await this.#requestQueue(filepathArr.map(filepath => async () => {
+      try {
+        hinter.load(filepath, { text: this.#getLoadHintTextBy({ type: STR_TPYE, filepath }) });
+        retArr.push(await this.#createOneBy({ filepath }));
+        hinter.loadSucc(filepath);
+      } catch (error) {
+        const { postTitle } = postPath.parse(filepath);
+        hinter.loadFail(filepath, { text: `${STR_TPYE} ${postTitle}: ${error.message}  ` });
+      }
+    }));
+
+    await this.#publishAssets();
+
+    return retArr;
+  }
+
   async update() {
     const STR_TPYE = enumDeployType.UPDATE;
     const retArr = []
     const filepathArr = await this.#getFilepaths();
-    this.#setLoadHints(filepathArr, STR_TPYE);
-    for (const filepath of filepathArr) {
+
+    await this.#requestQueue(filepathArr.map(filepath => async () => {
       try {
+        hinter.load(filepath, { text: this.#getLoadHintTextBy({ type: STR_TPYE, filepath }) });
         retArr.push(await this.#updateOneBy({ filepath }));
         hinter.loadSucc(filepath);
       } catch (error) {
         const { postTitle } = postPath.parse(filepath);
         hinter.loadFail(filepath, { text: `${STR_TPYE} ${postTitle}: ${error.message}` });
       }
-    }
+    }));
 
     await this.#publishAssets();
 
@@ -296,9 +306,10 @@ export class Isubo {
     let type = enumDeployType.PUBLISH;
     const retArr = []
     const filepathArr = await this.#getFilepaths();
-    this.#setLoadHints(filepathArr, type);
-    for (const filepath of filepathArr) {
+
+    await this.#requestQueue(filepathArr.map(filepath => async () => {
       try {
+        hinter.load(filepath, { text: this.#getLoadHintTextBy({ type, filepath }) });
         const resp = await this.#publishOneBy({ filepath });
         type = resp.type;
         retArr.push({
@@ -314,7 +325,7 @@ export class Isubo {
         hinter.loadFail(filepath, { text: this.#getLoadHintTextBy({ type, filepath }) });
         hinter.errMsg(error.message)
       }
-    }
+    }));
 
     await this.#publishAssets();
 
