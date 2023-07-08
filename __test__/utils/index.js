@@ -235,7 +235,7 @@ export class TempGitRepo {
     const confReader = new ConfReader({ path: this.#confPath });
     this.#conf = confReader.get();
 
-    execSync(`cd ${this.#repoLocalPath} && npm i ${cwd()}`);
+    execSync(`cd ${this.#repoLocalPath} && pnpm add ${cwd()}`);
 
     return ret;
   }
