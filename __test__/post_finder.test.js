@@ -18,19 +18,19 @@ describe('post_finder', () => {
   test.each([
     {
       name: 'sourceDir, filename and ext', 
-      params: { postTitleSeat: 0, sourceDir: '__test__/source/', filename: 'WSL的hosts文件被重置', ext: 'md' }
+      params: { postTitleSeat: 0, sourceDir: '__test__/source/', filename: "WSL的hosts文件被重置", ext: 'md' }
     },
     { 
       name: 'sourceDir and filename', 
-      params: { postTitleSeat: 0, sourceDir: '__test__/source/', filename: 'WSL的hosts文件被重置' }
+      params: { postTitleSeat: 0, sourceDir: '__test__/source/', filename: "WSL的hosts文件被重置" }
     },
     {
       name: 'filename include multiple path',
-      params: { postTitleSeat: 0, sourceDir: '__test__/source/', filename: '/source/WSL的hosts文件被重置' }
+      params: { postTitleSeat: 0, sourceDir: '__test__/source/', filename: "/source/WSL的hosts文件被重置" }
     },
     {
       name: 'filename include multiple path and ext',
-      params: { postTitleSeat: 0, sourceDir: '__test__/source/', filename: '/source/WSL的hosts文件被重置.html' }
+      params: { postTitleSeat: 0, sourceDir: '__test__/source/', filename: "/source/WSL的hosts文件被重置.html" }
     },
     {
       name: 'only sourceDir',
@@ -59,7 +59,7 @@ describe('post_finder', () => {
   });
 
   test('find with serveral filenames', () => {
-    const filename = ['WSL的hosts文件被重置', 'license'];
+    const filename = ["WSL的hosts文件被重置", 'license'];
     const finder = new PostFinder({
       sourceDir: '__test__/source/',
       filename,

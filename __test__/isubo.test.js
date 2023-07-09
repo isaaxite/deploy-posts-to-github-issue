@@ -57,7 +57,7 @@ describe('isubo', () => {
     const isubo = new Isubo({
       conf,
       cliParams: {
-        filename: ['license', 'WSL的hosts文件被重置']
+        filename: ['license', "WSL的hosts文件被重置"]
       }
     });
     await isubo.publish();

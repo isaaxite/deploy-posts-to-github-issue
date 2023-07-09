@@ -49,7 +49,7 @@ export function parse_a_md_file_and_find_nonrelative_path_asset(cb) {
   });
   const conf = confReader.get();
   const postParse = new PostParse({
-    path: path.join(tempSource, 'WSL的hosts文件被重置.md'),
+    path: path.join(tempSource, "WSL的hosts文件被重置.md"),
     conf
   });
   const mktxt = postParse.getFormatedMarkdown();
