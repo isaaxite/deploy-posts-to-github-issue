@@ -28,7 +28,6 @@ export class Isubo {
       confPath
     });
     // TODO: compatile the input of filename and patterns 
-    postPath.init(confPath);
     this.#selectPosts = !!selectPosts;
     this.#setCliParams(cliParams);
     this.#setPostManager();
@@ -78,6 +77,8 @@ export class Isubo {
       const confReader = new ConfReader({ path: confPath });
       this.#conf = confReader.get();
     }
+
+    postPath.init(this.#conf);
   }
 
   #setPostManager() {
