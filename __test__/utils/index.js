@@ -211,6 +211,25 @@ export class TempGitRepo {
     return this.#repoLocalPath;
   }
 
+  get simpleGitOpt () {
+    return {
+      ...this.#simpleGitOpt,
+      config: [...this.#simpleGitOpt.config]
+    };
+  }
+
+  get git () {
+    return this.#git;
+  }
+
+  get confPath () {
+    return this.#confPath;
+  }
+
+  get sourceDir() {
+    return this.#sourceDir;
+  }
+
   async init({
     preConf: preConfFn
   } = {}) {
@@ -413,21 +432,6 @@ export class TempGitRepo {
 
   async addStaged(filepaths) {
     await this.#git.add(filepaths)
-  }
-
-  get simpleGitOpt () {
-    return {
-      ...this.#simpleGitOpt,
-      config: [...this.#simpleGitOpt.config]
-    };
-  }
-
-  get git () {
-    return this.#git;
-  }
-
-  get confPath () {
-    return this.#confPath;
   }
 }
 

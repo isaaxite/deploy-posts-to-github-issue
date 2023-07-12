@@ -2,7 +2,7 @@ import path from 'path';
 import { writeFileSync } from "fs";
 import { ConfReader } from "../../lib/conf_reader.js";
 import { dump as yamlDump } from 'js-yaml';
-import { TempRepo, copyTempPostWithoutFrontmatter } from "../utils/index.js";
+import { TempGitRepo, TempRepo, copyTempPostWithoutFrontmatter } from "../utils/index.js";
 import { PostParse } from "../../lib/post_parse.js";
 import { removeSync } from 'fs-extra/esm';
 
@@ -47,6 +47,27 @@ export function inject_yml_data_to_md_file_without_yml_data(cb) {
   cb && cb(ret)
 
   return ret;
+}
+
+export async function inject_yml_data_to_md_file_existed_yml_data(cb) {
+  const temp = new TempGitRepo();
+  await temp.init();
+
+  const postpath = path.join(temp.sourceDir, 'license.md');
+
+  const getPostParse = () => new PostParse({
+    path: postpath,
+    conf: {
+      link_prefix: 'https://isaaxite.github.io/blog/resources/',
+      absolute_source_dir: path.resolve(temp.sourceDir)
+    }
+  });
+
+  const issue_number = Math.ceil(Math.random() * 100) + 100;
+  const postParse1 = getPostParse();
+  postParse1.injectFrontmatter({ issue_number });
+
+  removeSync(temp.repoLocalPath);
 }
 
 export function get_ast_from_empty_md_file(cb) {
