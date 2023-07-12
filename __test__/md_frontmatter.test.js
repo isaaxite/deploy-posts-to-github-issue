@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { describe, test, expect } from "@jest/globals";
-import { FRONTMATTER_DATA, FRONTMATTER_TXT, FRONTMATTER_TXT_WITH_FENCE, LIMITED_MD_FULL_TXT_CASES, MD_CONTENT_TXT, MD_FULL_TXT, inject_data_to_frontmatter_of_a_markdown_text, limit_only_the_top_of_the_file_content, md_frontmatter_parse, md_frontmatter_parse_with_filepath } from "./test_cases/md_frontmatter.js";
+import { FRONTMATTER_DATA, FRONTMATTER_TXT, FRONTMATTER_TXT_WITH_FENCE, LIMITED_MD_FULL_TXT_CASES, MD_CONTENT_TXT, MD_FULL_TXT, inject_data_to_frontmatter_of_a_markdown_text, inject_data_to_markdown_text_without_frontmatter, limit_only_the_top_of_the_file_content, md_frontmatter_parse, md_frontmatter_parse_with_filepath } from "./test_cases/md_frontmatter.js";
 import { MdFrontmatter } from "../lib/md_frontmatter.js";
 
 describe('class MdFrontmatter', () => {
@@ -39,28 +39,19 @@ describe('class MdFrontmatter', () => {
   });
 
   test('inject data to markdown text without frontmatter', () => {
-    const filepath = `__test__/temp/${String(Date.now()).slice(2)}.md`;
-
-    fs.writeFileSync(filepath, MD_CONTENT_TXT);
-
-    const mdFrontmatter = new MdFrontmatter({
-      filepath
-    });
-
-    fs.unlinkSync(filepath);
-
-    const retMarkdownTxt = mdFrontmatter.inject(FRONTMATTER_DATA);
-    const mdFrontmatter2 = new MdFrontmatter({
-      markdownTxt: retMarkdownTxt
-    });
+    const {
+      ONLY_MD_CONTENT_TXT,
+      afterFrontmatterData,
+      markdownContTxt
+    } = inject_data_to_markdown_text_without_frontmatter();
 
     const {
       title,
       date,
       tags
-    } = mdFrontmatter2.frontmatterData;
+    } = afterFrontmatterData;
 
-    expect(mdFrontmatter.markdownContTxt).toEqual(MD_CONTENT_TXT);
+    expect(markdownContTxt).toEqual(ONLY_MD_CONTENT_TXT);
     expect(title).toEqual(FRONTMATTER_DATA.title);
     expect(date).toEqual(FRONTMATTER_DATA.date);
     expect(tags).toEqual(
@@ -93,8 +84,29 @@ describe('class MdFrontmatter', () => {
     try {
       new MdFrontmatter({});
     } catch (error) {
-      console.info(error.message)
       expect(error.message).toEqual('Constructor param must be non-empty Object');
+    }
+
+    try {
+      new MdFrontmatter({ foo: 0 });
+    } catch (error) {
+      expect(error.message).toEqual('Must provide markdownTxt or filepath');
+    }
+
+    try {
+      new MdFrontmatter({
+        markdownTxt: 1
+      });
+    } catch (error) {
+      expect(error.message).toEqual('markdownTxt must be a non-empty String');
+    }
+
+    try {
+      new MdFrontmatter({
+        filepath: {}
+      });
+    } catch (error) {
+      expect(error.message).toEqual('filepath must be a non-empty String');
     }
   });
 

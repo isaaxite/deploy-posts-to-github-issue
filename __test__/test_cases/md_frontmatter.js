@@ -19,7 +19,6 @@ export const FRONTMATTER_TXT_WITH_FENCE = [
 ].join('\n');
 
 export const MD_CONTENT_TXT = `
-
 # Overview
 
 ![]()`;
@@ -30,6 +29,14 @@ export const LIMITED_MD_FULL_TXT_CASES = [
   {
     name: 'preceded by text',
     mdtxt: `xxx\n${MD_FULL_TXT}`
+  },
+  {
+    name: 'start with non ---',
+    mdtxt: `xxx${MD_FULL_TXT}`
+  },
+  {
+    name: 'end with non ---',
+    mdtxt: `${FRONTMATTER_TXT_WITH_FENCE}xxx${MD_CONTENT_TXT}`
   }
 ];
 
@@ -90,6 +97,36 @@ export function inject_data_to_frontmatter_of_a_markdown_text() {
     beforeFrontmatterData: mdFrontmatter.frontmatterData,
     afterFrontmatterData: mdFrontmatter2.frontmatterData
   };
+
+  return ret;
+}
+
+export function inject_data_to_markdown_text_without_frontmatter() {
+  const filepath = `__test__/temp/${String(Date.now()).slice(2)}.md`;
+  const ONLY_MD_CONTENT_TXT = [
+    '# Overview',
+    '![]()',
+    ''
+  ].join('\n');
+  fs.writeFileSync(filepath, ONLY_MD_CONTENT_TXT);
+
+  const mdFrontmatter = new MdFrontmatter({
+    filepath
+  });
+
+  const retMarkdownTxt = mdFrontmatter.inject(FRONTMATTER_DATA);
+  fs.writeFileSync(filepath, retMarkdownTxt);
+  const mdFrontmatter2 = new MdFrontmatter({
+    filepath
+  });
+
+  const ret = {
+    ONLY_MD_CONTENT_TXT,
+    afterFrontmatterData: mdFrontmatter2.frontmatterData,
+    markdownContTxt: mdFrontmatter.markdownContTxt
+  };
+
+  fs.unlinkSync(filepath);
 
   return ret;
 }
