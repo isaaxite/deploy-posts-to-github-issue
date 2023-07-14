@@ -1,7 +1,7 @@
-import fs from 'fs';
 import { describe, test, expect } from "@jest/globals";
 import { FRONTMATTER_DATA, FRONTMATTER_TXT, FRONTMATTER_TXT_WITH_FENCE, LIMITED_MD_FULL_TXT_CASES, MD_CONTENT_TXT, MD_FULL_TXT, inject_data_to_frontmatter_of_a_markdown_text, inject_data_to_markdown_text_without_frontmatter, limit_only_the_top_of_the_file_content, md_frontmatter_parse, md_frontmatter_parse_with_filepath } from "./test_cases/md_frontmatter.js";
 import { MdFrontmatter } from "../lib/md_frontmatter.js";
+import { AtLeastPropError, CtorParamDataObjectError, DataObjectError, FileNotExistError, NonEmptyStringError } from "../lib/utils/error.js";
 
 describe('class MdFrontmatter', () => {
   test('parse markdown text to frontmatter data, frontmatter text and markdown content', () => {
@@ -78,19 +78,19 @@ describe('class MdFrontmatter', () => {
     try {
       new MdFrontmatter();
     } catch (error) {
-      expect(error.message).toEqual('Constructor param must be non-empty Object');
+      expect(error.message).toEqual(new CtorParamDataObjectError().message);
     }
 
     try {
       new MdFrontmatter({});
     } catch (error) {
-      expect(error.message).toEqual('Constructor param must be non-empty Object');
+      expect(error.message).toEqual(new CtorParamDataObjectError().message);
     }
 
     try {
       new MdFrontmatter({ foo: 0 });
     } catch (error) {
-      expect(error.message).toEqual('Must provide markdownTxt or filepath');
+      expect(error.message).toEqual(new AtLeastPropError('markdownTxt, filepath').message);
     }
 
     try {
@@ -98,7 +98,7 @@ describe('class MdFrontmatter', () => {
         markdownTxt: 1
       });
     } catch (error) {
-      expect(error.message).toEqual('markdownTxt must be a non-empty String');
+      expect(error.message).toEqual(new NonEmptyStringError('markdownTxt').message);
     }
 
     try {
@@ -106,7 +106,7 @@ describe('class MdFrontmatter', () => {
         filepath: {}
       });
     } catch (error) {
-      expect(error.message).toEqual('filepath must be a non-empty String');
+      expect(error.message).toEqual(new NonEmptyStringError('filepath').message);
     }
   });
 
@@ -117,7 +117,7 @@ describe('class MdFrontmatter', () => {
         filepath
       });
     } catch (error) {
-      expect(error.message).toEqual(`${filepath} not exist`);
+      expect(error.message).toEqual(new FileNotExistError(filepath).message);
     }
   });
 
@@ -166,7 +166,7 @@ describe('class MdFrontmatter', () => {
   
       mdFrontmatter.inject(1); 
     } catch (error) {
-      expect(error.message).toEqual(`data must be non-empty Object`);
+      expect(error.message).toEqual(new DataObjectError('data').message);
     }
   });
 
@@ -185,7 +185,7 @@ describe('class MdFrontmatter', () => {
       });
       mdFrontmatter.genFrontmatterWithFence(0); 
     } catch (error) {
-      expect(error.message).toEqual('frontmatterData must be non-empty Object'); 
+      expect(error.message).toEqual(new DataObjectError('frontmatterData').message);
     }
   });
 });

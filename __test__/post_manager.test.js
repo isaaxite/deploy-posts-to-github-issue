@@ -1,52 +1,53 @@
 import { describe, test, expect } from '@jest/globals';
-import { detectOnly, getErrMsgFrom, sleepFactory } from './utils/index.js';
+import { detectOnly, sleepFactory } from './utils/index.js';
 import { force_create_a_issue_and_then_update_it, getPostManagerIns, update_a_post_without_issue_number } from './test_cases/post_manager.js';
-import { throwCtorParamDataObjectErr, throwDataObjectErr, throwNonEmptyStringErr, throwNonEmptyStringItemArrayErr, throwTruthPositiveIntErr } from '../lib/utils/error.js';
+import { CtorParamDataObjectError, DataObjectError, NonEmptyStringError, NonEmptyStringItemArrayError, TruthPositiveIntError } from '../lib/utils/error.js';
 import { PostManager } from '../lib/post_manager.js';
 
 describe('Class PostManager, instance init', () => {
-  test.each([
+  test.each(detectOnly([
     {
+      // only: true,
       name: 'init with empty',
       param: undefined,
-      throwErrFunc: throwCtorParamDataObjectErr
+      expectErr: new CtorParamDataObjectError()
     },
     {
+      // only: true,
       name: 'init with empty owner',
       param: { owner: '' },
-      throwErrFunc: () => throwNonEmptyStringErr('owner')
+      expectErr: new NonEmptyStringError('owner')
     },
     {
       name: 'init with non-string owner',
       param: { owner: 0 },
-      throwErrFunc: () => throwNonEmptyStringErr('owner')
+      expectErr: new NonEmptyStringError('owner')
     },
     {
       name: 'init with empty repo',
       param: { owner: 'owner' },
-      throwErrFunc: () => throwNonEmptyStringErr('repo')
+      expectErr: new NonEmptyStringError('repo')
     },
     {
       name: 'init with non-string repo',
       param: { owner: 'owner', repo: 0 },
-      throwErrFunc: () => throwNonEmptyStringErr('repo')
+      expectErr: new NonEmptyStringError('repo')
     },
     {
       name: 'init with empty token',
       param: { owner: 'owner', repo: 'repo'  },
-      throwErrFunc: () => throwNonEmptyStringErr('token')
+      expectErr: new NonEmptyStringError('token')
     },
     {
       name: 'init with non-string token',
       param: { owner: 'owner', repo: 'repo', token: 'token'  },
-      throwErrFunc: () => throwNonEmptyStringErr('token')
+      expectErr: new NonEmptyStringError('token')
     }
-  ])('$name, it will emit err', ({ param, throwErrFunc }) => {
+  ]))('$name, it will emit err', ({ param, expectErr }) => {
     try {
       new PostManager(param);
     } catch (error) {
-      const expectErrMsg = getErrMsgFrom({ throwErrFunc });
-      expect(expectErrMsg).toEqual(error.message);
+      expect(expectErr.message).toEqual(error.message);
     }
   });
 
@@ -87,97 +88,100 @@ describe('Class PostManager, method test', () => {
     try {
       await update_a_post_without_issue_number(); 
     } catch (error) {
-      const expectErrMsg = getErrMsgFrom({
-        throwErrFunc: throwTruthPositiveIntErr.bind(this, 'params.issue_number')
-      });
-      expect(expectErrMsg).toEqual(error.message);
+      expect(
+        new TruthPositiveIntError('params.issue_number').message
+      ).toEqual(error.message);
     }
   }, 13000);
 
   test.each(detectOnly([
     {
+      only: true,
       name: 'use empty params',
       param: undefined,
       method: 'update',
-      throwErrFunc: () => throwTruthPositiveIntErr('params.issue_number')
+      expectErr: new TruthPositiveIntError('params.issue_number')
     },
     {
       // only: true,
       name: 'use empty params',
       param: undefined,
       method: 'forceCreate',
-      throwErrFunc: () => throwDataObjectErr('params')
+      expectErr: new DataObjectError('params')
     },
     {
       // only: true,
       name: 'use non-object params',
       param: { any: 1 },
       method: 'forceCreate',
-      throwErrFunc: () => throwNonEmptyStringErr('params.title')
+      expectErr: new NonEmptyStringError('params.title')
     },
     {
       // only: true,
       name: 'use params that non-string title',
       param: { title: 1 },
       method: 'forceCreate',
-      throwErrFunc: () => throwNonEmptyStringErr('params.title')
+      expectErr: new NonEmptyStringError('params.title')
     },
     {
       // only: true,
       name: 'use params that empty-string title',
       param: { title: '' },
       method: 'forceCreate',
-      throwErrFunc: () => throwNonEmptyStringErr('params.title')
+      expectErr: new NonEmptyStringError('params.title')
     },
     {
       // only: true,
       name: 'use params without body',
       param: { title: 'title' },
       method: 'forceCreate',
-      throwErrFunc: () => throwNonEmptyStringErr('params.body')
+      expectErr: new NonEmptyStringError('params.body')
     },
     {
       // only: true,
       name: 'use params that empty-string body',
       param: { title: 'title', body: '' },
       method: 'forceCreate',
-      throwErrFunc: () => throwNonEmptyStringErr('params.body')
+      expectErr: new NonEmptyStringError('params.body')
     },
     {
       // only: true,
       name: 'use params that non-string body',
       param: { title: 'title', body: 0 },
       method: 'forceCreate',
-      throwErrFunc: () => throwNonEmptyStringErr('params.body')
+      expectErr: new NonEmptyStringError('params.body')
     },
     {
       // only: true,
       name: 'use params that non-array labels',
       param: { title: 'title', body: 'body', labels: 0 },
       method: 'forceCreate',
-      throwErrFunc: () => throwNonEmptyStringItemArrayErr('params.labels')
+      expectErr: new NonEmptyStringError('params.labels')
     },
     {
       // only: true,
       name: 'use params that non-string-array labels',
       param: { title: 'title', body: 'body', labels: [0] },
       method: 'forceCreate',
-      throwErrFunc: () => throwNonEmptyStringItemArrayErr('params.labels')
+      expectErr: new NonEmptyStringItemArrayError('params.labels')
     },
     {
       // only: true,
       name: 'use params that string-array labels include empty item',
       param: { title: 'title', body: 'body', labels: ['label-1', ''] },
       method: 'forceCreate',
-      throwErrFunc: () => throwNonEmptyStringItemArrayErr('params.labels')
+      expectErr: new NonEmptyStringItemArrayError('params.labels')
     }
-  ]))('invoked $method method, $name that will emit err', async ({ method, param, throwErrFunc }) => {
+  ]))('invoked $method method, $name that will emit err', async ({
+    method,
+    param,
+    expectErr
+  }) => {
     try {
       const postManager = getPostManagerIns();
       await postManager[method](param);
     } catch (error) {
-      const expectErrMsg = getErrMsgFrom({ throwErrFunc });
-      expect(expectErrMsg).toEqual(error.message);
+      expect(expectErr.message).toEqual(error.message);
     }
   });
 
