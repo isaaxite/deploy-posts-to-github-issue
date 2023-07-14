@@ -477,3 +477,12 @@ export function sleepFactory(testExec, sleepMs = 1000) {
     timeout + sleepMs
   ]);
 }
+
+
+export function getErrMsgFrom({ throwErrFunc }) {
+  try {
+    throwErrFunc();
+  } catch (error) {
+    return error.message;
+  }
+}
