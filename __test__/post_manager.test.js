@@ -96,7 +96,7 @@ describe('Class PostManager, method test', () => {
 
   test.each(detectOnly([
     {
-      only: true,
+      // only: true,
       name: 'use empty params',
       param: undefined,
       method: 'update',
@@ -156,7 +156,7 @@ describe('Class PostManager, method test', () => {
       name: 'use params that non-array labels',
       param: { title: 'title', body: 'body', labels: 0 },
       method: 'forceCreate',
-      expectErr: new NonEmptyStringError('params.labels')
+      expectErr: new NonEmptyStringItemArrayError('params.labels')
     },
     {
       // only: true,
@@ -181,7 +181,7 @@ describe('Class PostManager, method test', () => {
       const postManager = getPostManagerIns();
       await postManager[method](param);
     } catch (error) {
-      expect(expectErr.message).toEqual(error.message);
+      expect(error.message).toEqual(expectErr.message);
     }
   });
 
