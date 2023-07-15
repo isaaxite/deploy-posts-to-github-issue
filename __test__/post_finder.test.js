@@ -1,10 +1,162 @@
 import path from 'path';
+import prompts from 'prompts';
 import { describe, expect, test } from '@jest/globals';
 import { PostFinder } from '../lib/post_finder.js';
-import { getTimestampKey } from './utils/index.js';
-import { ensureFileSync, removeSync } from 'fs-extra/esm';
+import { detectOnly, getTimestampKey } from './utils/index.js';
+import { ensureFileSync, ensureDirSync, removeSync } from 'fs-extra/esm';
+import { postPath } from '../lib/post_path.js';
+import { copyFileSync } from 'fs';
+import { AtLeastPropError, CtorParamDataObjectError, DirNotExistError, InvalidPatternListError, NonEmptyError, NonEmptyStringError, NonEmptyStringItemArrayError, NonEmptyStringOrNonEmptyStringItemArrayError, TruthNaturalNumError } from '../lib/utils/error.js';
 
-describe('post_finder', () => {
+describe('Class PostFinder, init instance', () => {
+  test.each(detectOnly([
+    {
+      name: 'init with empty',
+      param: undefined,
+      expectErr: new CtorParamDataObjectError()
+    },
+    {
+      // only: true,
+      name: 'init with wrong-object whithout patterns or sourceDir',
+      param: { any: 0 },
+      expectErr: new AtLeastPropError('param.patterns, param.sourceDir')
+    },
+    {
+      // only: true,
+      name: 'init with non-array patterns',
+      param: { patterns: 0 },
+      expectErr: new NonEmptyStringItemArrayError('patterns')
+    },
+    {
+      // only: true,
+      name: 'init with empty-array patterns',
+      param: { patterns: [] },
+      expectErr: new NonEmptyStringItemArrayError('patterns')
+    },
+    {
+      // only: true,
+      name: 'init with array patterns but include empty item',
+      param: { patterns: [''] },
+      expectErr: new NonEmptyStringItemArrayError('patterns')
+    },
+    {
+      // only: true,
+      name: 'init with array patterns but include non-string item',
+      param: { patterns: [0] },
+      expectErr: new NonEmptyStringItemArrayError('patterns')
+    },
+    {
+      // only: true,
+      name: 'init with array patterns but all invalid item',
+      param: { patterns: ['/not_exist_dir', '/not_exist_dir/*'] },
+      expectErr: new InvalidPatternListError(['/not_exist_dir', '/not_exist_dir/*'])
+    },
+    {
+      // only: true,
+      name: 'init with non-string sourceDir',
+      param: { sourceDir: 0 },
+      expectErr: new NonEmptyStringError(['sourceDir'])
+    },
+    {
+      // only: true,
+      name: 'init with not-exist sourceDir',
+      param: { sourceDir: '/not_exist_dir' },
+      expectErr: new DirNotExistError(`sourceDir(/not_exist_dir)`)
+    },
+    {
+      // only: true,
+      name: 'init with sourceDir and non-string, non-string-array filename ',
+      param: {
+        sourceDir: '__test__/source',
+        filename: 0,
+        postTitleSeat: 0
+      },
+      expectErr: new NonEmptyStringOrNonEmptyStringItemArrayError('filename')
+    },
+    {
+      // only: true,
+      name: 'init with sourceDir and empty-array filename ',
+      param: {
+        sourceDir: '__test__/source',
+        filename: [],
+        postTitleSeat: 0
+      },
+      expectErr: new NonEmptyStringOrNonEmptyStringItemArrayError('filename')
+    },
+    {
+      // only: true,
+      name: 'init with sourceDir, filename and undefined postTitleSeat',
+      param: {
+        sourceDir: '__test__/source',
+        filename: ['postname'],
+        postTitleSeat: undefined
+      },
+      expectErr: new NonEmptyError('postTitleSeat')
+    },
+    {
+      // only: true,
+      name: 'init with sourceDir, filename and decimal postTitleSeat',
+      param: {
+        sourceDir: '__test__/source',
+        filename: ['postname'],
+        postTitleSeat: 1.1
+      },
+      expectErr: new TruthNaturalNumError('postTitleSeat')
+    },
+    {
+      // only: true,
+      name: 'init with sourceDir, filename and postTitleSeat of negative number',
+      param: {
+        sourceDir: '__test__/source',
+        filename: ['postname'],
+        postTitleSeat: -1
+      },
+      expectErr: new TruthNaturalNumError('postTitleSeat')
+    }
+  ]))('$name, it will emit err', ({ param, expectErr }) => {
+    try {
+      new PostFinder(param);
+    } catch (error) {
+      // console.info(error)
+      expect(error.message).toEqual(expectErr.message);
+    }
+  });
+
+  test('init with unexpected ext', () => {
+    const ext = 'html';
+    const ins = new PostFinder({
+      sourceDir: '__test__/source',
+      ext
+    });
+
+    expect(ins.ext).not.toBe(ext);
+    expect(ins.ext).toEqual('md');
+  });
+
+  test.each(detectOnly([
+    {
+      // only: true,
+      name: 'source, filename, postTitleSeat, ext',
+      param: {
+        sourceDir: '__test__/source',
+        postTitleSeat: 0,
+        filename: 'post_name',
+        ext: 'md'
+      }
+    },
+    {
+      // only: true,
+      name: 'patterns',
+      param: {
+        patterns: ['__test__/source/*']
+      }
+    }
+  ]))('init with right param that $name', ({ param }) => {
+    new PostFinder(param);
+  });
+});
+
+describe('Class PostFinder', () => {
   test('glob all matched fileoath', () => {
     const finder = new PostFinder({
       patterns: ['__test__/source/**/*.md']
@@ -71,35 +223,7 @@ describe('post_finder', () => {
     );
   });
 
-  test('check PostFinder params is empty', () => {
-    try {
-      new PostFinder(); 
-    } catch (error) {
-      expect(error.message).toEqual('<patterns> or <sourceDir> must be provided');
-    }
-  });
-
-  test('check PostFinder params with filename but lack postTitleSeat, it will emit err', () => {
-    try {
-      new PostFinder({
-        filename: 'license',
-        sourceDir: '__test__/source/',
-      }); 
-    } catch (error) {
-      expect(error.message).toEqual('postTitleSeat must be provided');
-    }
-  });
-
   test('init PostFinder with patterns', () => {
-    try {
-      new PostFinder({
-        patterns: 'Err Data Type'
-      })
-    } catch (error) {
-      console.info(`errMsg: ${error.message}`);
-      expect(error.message).toEqual('patterns must be Array<string>');
-    }
-
     try {
       new PostFinder({
         patterns: ['__test__/test_err_dir/**/*.md']
@@ -126,18 +250,6 @@ describe('post_finder', () => {
     });
     const filepaths = postFinder2.getFilepaths();
     expect(filepaths).toEqual(expect.arrayContaining(['__test__/source/license.md']));
-  });
-
-  test('init PostFinder with not exist path of source dir', () => {
-    const sourceDir = '__test__/source_not_exist';
-    try {
-      new PostFinder({
-        sourceDir,
-      }); 
-    } catch (error) {
-      console.info(`errMsg: ${error.message}`);
-      expect(error.message).toEqual(`source dir(${sourceDir}) not exist`);
-    }
   });
 
   test('init PostFinder with err ext', () => {
@@ -182,6 +294,34 @@ describe('post_finder', () => {
       expect(filepaths.length).toEqual(1);
       expect(filepaths[0]).toEqual(it.path);
     }
+    removeSync(sourceDir);
+  });
+
+  test('method test, selectpost', async () => {
+    const timestampKey = getTimestampKey();
+    const postname = 'license.md';
+    const sourceDir = `__test__/temp/source_${timestampKey}`;
+    const postFilepath = path.join(sourceDir, postname);
+    const confpath = '__test__/assets/isubo.conf.yml';
+    const getIns = () => new PostFinder({
+      postTitleSeat: 0,
+      sourceDir
+    });
+
+    ensureDirSync(sourceDir);
+    copyFileSync(`__test__/source/${postname}`, postFilepath);
+
+    postPath.setConfBy({ confpath });
+    prompts.inject(['__ALL__']);
+    const ins = getIns();
+    const choices = await ins.selectPosts();
+    expect(choices).toEqual(expect.arrayContaining([postFilepath]));
+
+    prompts.inject([[postFilepath]]);
+    const ins2 = getIns();
+    const choices2 = await ins2.selectPosts();
+    expect(choices2).toEqual(expect.arrayContaining([postFilepath]));
+
     removeSync(sourceDir);
   });
 });
