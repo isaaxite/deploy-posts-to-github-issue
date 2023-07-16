@@ -17,12 +17,34 @@ export class Isubo {
   #postManager = null;
   #selectPosts = false;
   #assetpathRecords = [];
-  constructor({
-    confPath,
-    conf,
-    cliParams,
-    selectPosts
-  }) {
+
+  /**
+   * @typedef {Object} CliParams
+   * @property {string|string[]} filename
+   * 
+   * @typedef {Object.<string, *>} IsuboConf
+   * @property {string|string[]} filename
+   * 
+   * @typedef {Object} IsuboCtorParam0 - init with confPath
+   * @property {string} confPath
+   * @property {CliParams} cliParams
+   * @property {boolean} [selectPosts]
+   * 
+   * @typedef {Object} IsuboCtorParam1 - init with config data
+   * @property {IsuboConf} conf
+   * @property {CliParams} cliParams
+   * @property {boolean} [selectPosts]
+   * 
+   * @param {IsuboCtorParam0|IsuboCtorParam1} param
+   */
+  constructor(param) {
+    const {
+      confPath,
+      conf,
+      cliParams,
+      selectPosts
+    } = param;
+
     this.#setConf({
       conf,
       confPath
@@ -190,12 +212,6 @@ export class Isubo {
         type,
         ret: await this.#createOneBy({ filepath })
       };
-    }
-  }
-
-  #setLoadHints(filepathArr, type) {
-    for (const filepath of filepathArr) {
-      hinter.load(filepath, { text: this.#getLoadHintTextBy({ type, filepath }) });
     }
   }
 
