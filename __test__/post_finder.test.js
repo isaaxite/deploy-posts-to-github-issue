@@ -55,7 +55,7 @@ describe('Class PostFinder, init instance', () => {
       // only: true,
       name: 'init with non-string sourceDir',
       param: { sourceDir: 0 },
-      expectErr: new NonEmptyStringError(['sourceDir'])
+      expectErr: new NonEmptyStringError('sourceDir')
     },
     {
       // only: true,
