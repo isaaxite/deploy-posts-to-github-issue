@@ -544,7 +544,11 @@
 <a name='L479'></a><a href='#L479'>479</a>
 <a name='L480'></a><a href='#L480'>480</a>
 <a name='L481'></a><a href='#L481'>481</a>
-<a name='L482'></a><a href='#L482'>482</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L482'></a><a href='#L482'>482</a>
+<a name='L483'></a><a href='#L483'>483</a>
+<a name='L484'></a><a href='#L484'>484</a>
+<a name='L485'></a><a href='#L485'>485</a>
+<a name='L486'></a><a href='#L486'>486</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -569,6 +573,25 @@
 <span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -579,21 +602,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -688,7 +696,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-yes">71x</span>
+<span class="cline-any cline-yes">68x</span>
 <span class="cline-any cline-yes">57x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -921,7 +929,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">131x</span>
+<span class="cline-any cline-yes">130x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1057,29 +1065,33 @@ export class AssetPublisher {
     afterPushPostAndAssets: async () =&gt; {}
   };
 &nbsp;
+  /**
+   * @typedef {Object} AssetRecordItem
+   * @property {string} postpath
+   * @property {string[]} assetpaths
+   * 
+   * @typedef {Object} PushHooks
+   * @property {function(): Promise&lt;void&gt;} [beforePush]
+   * @property {function(): Promise&lt;void&gt;} [afterBackupPrevStaged]
+   * @property {function(): Promise&lt;void&gt;} [afterCommitPostAndAssets]
+   * @property {function(): Promise&lt;void&gt;} [beforePushPostAndAssets]
+   * @property {function(): Promise&lt;void&gt;} [afterPushPostAndAssets]
+   * 
+   * @typedef {Object} AssetPublisherCtorParam
+   * @property {AssetRecordItem[]} assetRecords
+   * @property {object} [simpleGitOpt]
+   * @property {PushHooks} [pushHooks]
+   * 
+   * @param {AssetPublisherCtorParam} param 
+   */
   constructor(param) {
     if (!isDataObject(param)) {
       throw new Error('Constructor param muse be object');
     }
 &nbsp;
-    // TODO: push to reposibility of sep by link_prefix preferentially.
-&nbsp;
     const {
-      /**
-        [required]
-        {
-          postpath: AbsolutePath
-          assetpaths: Array&lt;AbsolutePath&gt;
-        }
-      */
       assetRecords,
-  
-      // [optional]
-      // for test
       simpleGitOpt,
-      
-      // [optional]
-      // for test
       pushHooks
     } = param;
     this.#setSimpleGitOptAndBaseDirBy({ simpleGitOpt })
@@ -1513,7 +1525,7 @@ export class AssetPublisher {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-07-16T06:56:34.111Z
+                at 2023-07-17T07:13:15.488Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
