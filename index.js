@@ -8,7 +8,8 @@ import { AssetPublisher } from './lib/asset_publisher.js';
 import { enumDeployType, enumPushAssetType } from './lib/constants/enum.js';
 import prompts from 'prompts';
 import { postPath } from './lib/post_path.js';
-import { requestQueue } from './lib/utils/index.js';
+import { isAtLeastOneOf, isDataObject, isNonEmptyArray, isNonEmptyString, isNonEmptyStringItemArray, isNullOrUndefined, isUndefined, requestQueue } from './lib/utils/index.js';
+import { AtLeastPropError, CtorParamDataObjectError, DataObjectError, NonEmptyError, NonEmptyStringError, NonEmptyStringOrNonEmptyStringItemArrayError } from './lib/utils/error.js';
 
 export class Isubo {
   #conf = {};
@@ -38,6 +39,10 @@ export class Isubo {
    * @param {IsuboCtorParam0|IsuboCtorParam1} param
    */
   constructor(param) {
+    if (!isDataObject(param)) {
+      throw new CtorParamDataObjectError();
+    }
+
     const {
       confPath,
       conf,
@@ -45,7 +50,7 @@ export class Isubo {
       selectPosts
     } = param;
 
-    this.#setConf({
+    this.#setConfByOneOf({
       conf,
       confPath
     });
@@ -65,37 +70,64 @@ export class Isubo {
     const conf = this.#conf;
     const {
       filename,
-      patterns,
-      pattern
+      // patterns,
+      // pattern
     } = this.#cliParams;
-    const params = {
-      postTitleSeat: conf.post_title_seat
-    };
+    // TODO: achieve patterns and pattern
 
-    if (patterns) {
-      params.patterns = patterns;
-    } else if (pattern) {
-      params.patterns = [pattern];
-    } else {
-      params.sourceDir = conf.absolute_source_dir;
-      params.filename = filename;
-    }
+    // const params = {
+    //   postTitleSeat: conf.post_title_seat
+    // };
+
+    // if (patterns) {
+    //   params.patterns = patterns;
+    // } else if (pattern) {
+    //   params.patterns = [pattern];
+    // } else {
+    //   params.sourceDir = conf.absolute_source_dir;
+    //   params.filename = filename;
+    // }
+
+    const params = {
+      postTitleSeat: conf.post_title_seat,
+      sourceDir: conf.absolute_source_dir,
+      filename
+    };
 
     this.#finder = new PostFinder(params);
   }
 
+  /**
+   * set cliParams and validate it
+   * @param {CliParams} cliParams 
+   */
   #setCliParams(cliParams) {
+    if (!isDataObject(cliParams)) {
+      throw new DataObjectError('cliParams');
+    }
+
+    if (!isNonEmptyString(cliParams.filename) && !isNonEmptyStringItemArray(cliParams.filename)) {
+      throw new NonEmptyStringOrNonEmptyStringItemArrayError('cliParams.filename');
+    }
+
     this.#cliParams = cliParams;
   }
 
-  #setConf({
+  #setConfByOneOf({
     conf,
     confPath
   }) {
-    if (conf) {
+    if (!isAtLeastOneOf(conf, confPath)) {
+      throw new AtLeastPropError('conf, confPath');
+    }
+
+    if (!isUndefined(conf)) {
+      if (!isDataObject(conf)) {
+        throw new DataObjectError('conf');
+      }
+      // TODO: use ConfReader to format input-conf
       this.#conf = conf;
     } else {
-      // todo: check confPath
       const confReader = new ConfReader({ path: confPath });
       this.#conf = confReader.get();
     }
@@ -174,11 +206,14 @@ export class Isubo {
     } = this.#getPostDetailBy({ filepath });
     const title = this.#getPostTitleBy({ frontmatter, filepath });
     this.#addAssetpathRecord(filepath, assetPathsRelativeRepoArr);
-    const ret = await this.#postManager.forceCreate({
+    const params = {
       title,
-      labels: frontmatter.tags,
       body: formatedMarkdown
-    });
+    };
+    if (isNonEmptyArray(frontmatter.tags)) {
+      params.labels = frontmatter.tags;
+    }
+    const ret = await this.#postManager.forceCreate(params);
 
     // TODO: check forceCreate success or not
 

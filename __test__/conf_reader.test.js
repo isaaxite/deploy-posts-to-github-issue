@@ -3,6 +3,7 @@ import { ConfReader } from '../lib/conf_reader.js';
 import { copySync, removeSync } from 'fs-extra/esm';
 import { load as loadYaml, dump as yamlDump } from 'js-yaml';
 import { writeFileSync, readFileSync } from 'fs';
+import { NonEmptyStringError } from '../lib/utils/error.js';
 
 describe('conf reader', () => {
   const CONF_PATH = '__test__/assets/isubo.conf.yml';
@@ -65,8 +66,9 @@ describe('conf reader', () => {
     try {
       new ConfReader();
     } catch (error) {
-      console.info(`errMsg: ${error.message}`);
-      expect(error.message).toEqual('Must be provide conf path');
+      expect(error.message).toEqual(
+        new NonEmptyStringError('param.path').message
+      );
     }
   });
 

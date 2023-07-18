@@ -470,9 +470,9 @@ export async function sleep(ms = 1000) {
 export function sleepFactory(testExec, sleepMs = 1000) {
   return (name, cb, timeout = 5000) => testExec(...[
     name,
-    async () => {
+    async (...argvs) => {
       await sleep(sleepMs);
-      await cb();
+      await cb(...argvs);
     },
     timeout + sleepMs
   ]);
