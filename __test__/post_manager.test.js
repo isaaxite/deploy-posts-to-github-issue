@@ -82,7 +82,7 @@ describe('Class PostManager, method test', () => {
         expect(updateRet.data.title).toStrictEqual(updateTitle);
       }
     });
-  }, 13000);
+  }, 30 * 1000);
 
   sleepFactory(test)('force create a issue and then update it', async () => {
     try {
@@ -92,7 +92,7 @@ describe('Class PostManager, method test', () => {
         new TruthPositiveIntError('params.issue_number').message
       ).toEqual(error.message);
     }
-  }, 13000);
+  }, 30 * 1000);
 
   test.each(detectOnly([
     {

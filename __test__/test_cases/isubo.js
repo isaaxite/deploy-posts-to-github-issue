@@ -43,6 +43,8 @@ export async function create_posts({
     });
   }
 
+  tempRepo.remove();
+
   return lastRet;
 };
 
@@ -72,6 +74,8 @@ export async function update_one_post(cb) {
   const ret = (await isubo.update()).pop();
 
   cb && cb(ret);
+
+  tempRepo.remove();
 
   return ret;
 }
