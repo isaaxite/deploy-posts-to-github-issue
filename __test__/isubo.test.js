@@ -4,31 +4,89 @@ import { Isubo } from '../index.js';
 import { TempRepo, sleep, sleepFactory } from './utils/index.js';
 import { PostParse } from '../lib/post_parse.js';
 import { enumPushAssetType } from "../lib/constants/enum.js";
-import { update_one_post } from "./test_cases/isubo.js";
+import { create_posts, update_one_post } from "./test_cases/isubo.js";
+import { AtLeastPropError, CtorParamDataObjectError, DataObjectError, NonEmptyStringError, NonEmptyStringOrNonEmptyStringItemArrayError } from "../lib/utils/error.js";
+import prompts from "prompts";
 
-describe('isubo', () => {
-  sleepFactory(test)('create one post', async () => {
-    const tempRepo = new TempRepo();
-    tempRepo.copy((preConf) => ({
-      ...preConf,
-      source_dir: tempRepo.tempSourceDir,
-      push_asset: enumPushAssetType.DISABLE
-    }));
-    const conf = tempRepo.conf;
-    const isubo = new Isubo({
-      conf,
-      cliParams: {
-        filename: 'license'
+describe('Class Isubo, init instance', () => {
+  test.each([
+    {
+      name: 'init with empty',
+      params: [undefined],
+      expectErr: new CtorParamDataObjectError()
+    },
+    {
+      name: 'init with undefined conf data',
+      params: [
+        { conf: undefined }
+      ],
+      expectErr: new AtLeastPropError('conf, confPath')
+    },
+    {
+      name: 'init with non-object or empty-object conf data',
+      params: [
+        { conf: '' },
+        { conf: null },
+        { conf: 0 },
+        { conf: 1 },
+        { conf: [] },
+        { conf: {} }
+      ],
+      expectErr: new DataObjectError('conf')
+    },
+    {
+      name: 'init with non-object or empty-object cliParams data',
+      params: [
+        '', 0, 1, null, [], {}
+      ].map(wrongCliParams => ({
+        confPath: '__test__/assets/isubo.conf.yml',
+        cliParams: wrongCliParams
+      })),
+      expectErr: new DataObjectError('cliParams')
+    },
+    {
+      name: 'init with non-string or empty-string cliParams.filename data',
+      params: [
+        undefined, '', 0, 1, null, [], [''], {}
+      ].map(wrongFilename => ({
+        confPath: '__test__/assets/isubo.conf.yml',
+        cliParams: { filename: wrongFilename }
+      })),
+      expectErr: new NonEmptyStringOrNonEmptyStringItemArrayError('cliParams.filename')
+    },
+  ])('$name. It with emit err', ({ params, expectErr }) => {
+    for (const param of params) {
+      try {
+        new Isubo(param);
+      } catch (error) {
+        expect(error.message).toEqual(expectErr.message);
       }
-    });
-    const ret = (await isubo.create()).pop();
-    const postParse = new PostParse({
-      path: path.join(tempRepo.tempSourceDir, 'license.md'),
-      conf
-    });
+    }
+  });
+});
 
-    const frontmatter = postParse.getFrontmatter();
-    expect(ret.data.number).toEqual(frontmatter.issue_number);
+
+describe('Class Isubo, method test', () => {
+  sleepFactory(test.each([
+    {
+      name: 'disable push assets',
+      push_asset: enumPushAssetType.DISABLE
+    },
+    {
+      name: 'auto push assets',
+      push_asset: enumPushAssetType.AUTO
+    },
+    {
+      name: 'prompts to confirm if push assets',
+      push_asset: enumPushAssetType.PROMPT,
+      injectFunc: () => prompts.inject(true)
+    }
+  ]))('create posts, $name', async ({ push_asset, injectFunc }) => {
+    injectFunc && injectFunc();
+    const retArr = await create_posts({ push_asset });
+    for (const { ret, frontmatter } of retArr) {
+      expect(ret.data.number).toEqual(frontmatter.issue_number);
+    }
   }, 60 * 1000);
 
   sleepFactory(test)('update one post', async () => {
@@ -38,7 +96,7 @@ describe('isubo', () => {
     expect(ret.status).toBeLessThan(300);
   }, 60 * 1000);
 
-  sleepFactory(test)('publish posts, according post\'s issue_number', async () => {
+  sleepFactory(test)(`publish posts, according post's issue_number`, async () => {
     const issue_number = 58;
     const tempRepo = new TempRepo();
     tempRepo.copy((preConf) => ({
