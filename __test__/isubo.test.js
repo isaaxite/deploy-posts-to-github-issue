@@ -4,7 +4,7 @@ import { Isubo } from '../index.js';
 import { TempRepo, sleep, sleepFactory } from './utils/index.js';
 import { PostParse } from '../lib/post_parse.js';
 import { enumPushAssetType } from "../lib/constants/enum.js";
-import { create_posts, update_one_post } from "./test_cases/isubo.js";
+import { create_a_post_but_disable_push_assets, create_posts, create_posts_inject_select_posts, create_posts_without_assets, deploy_emit_err_by_hook, update_one_post } from "./test_cases/isubo.js";
 import { AtLeastPropError, CtorParamDataObjectError, DataObjectError, NonEmptyStringError, NonEmptyStringOrNonEmptyStringItemArrayError } from "../lib/utils/error.js";
 import prompts from "prompts";
 
@@ -88,6 +88,39 @@ describe('Class Isubo, method test', () => {
       expect(ret.data.number).toEqual(frontmatter.issue_number);
     }
   }, 60 * 1000);
+
+  sleepFactory(test)('create a post but disable push assets', async () => {
+    const ret = await create_a_post_but_disable_push_assets();
+    expect(ret).not.toBeUndefined();
+    expect(ret.status).toBeGreaterThanOrEqual(200);
+    expect(ret.status).toBeLessThan(300);
+  }, 60 * 1000);
+
+  sleepFactory(test.each([
+    {
+      name: 'disable push assets',
+      push_asset: enumPushAssetType.DISABLE
+    },
+    {
+      name: 'auto push assets',
+      push_asset: enumPushAssetType.AUTO
+    },
+    {
+      name: 'prompts to confirm if push assets',
+      push_asset: enumPushAssetType.PROMPT,
+      injectFunc: () => prompts.inject([true])
+    }
+  ]))('create posts without assets, $name', async ({ push_asset, injectFunc }) => {
+    injectFunc && injectFunc();
+    const retArr = await create_posts_without_assets({ push_asset });
+    for (const { ret, frontmatter } of retArr) {
+      expect(ret.data.number).toEqual(frontmatter.issue_number);
+    }
+  }, 60 * 1000);
+
+  test('deploy_emit_err_by_hook', async () => {
+    await deploy_emit_err_by_hook();
+  });
 
   sleepFactory(test)('update one post', async () => {
     const ret = await update_one_post();
