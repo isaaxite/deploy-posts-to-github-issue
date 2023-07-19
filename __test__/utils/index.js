@@ -138,8 +138,8 @@ export function findImageFrom({ ast }, ret = []) {
 }
 
 export class TempRepo {
-  timestemp = String(Date.now()).slice(2);
-  tempRepo = `__test__/temp/repo_${this.timestemp}`;
+  uniqueKey = `${String(Math.random()).slice(2)}`;
+  tempRepo = `__test__/temp/repo_${this.uniqueKey}`;
   tempConfPath = path.join(this.tempRepo, 'isubo.conf.yml');
   tempSourceDir = path.join(this.tempRepo, 'source');
   conf = null;

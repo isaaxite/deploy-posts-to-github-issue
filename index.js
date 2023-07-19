@@ -8,7 +8,7 @@ import { AssetPublisher } from './lib/asset_publisher.js';
 import { enumDeployType, enumPushAssetType } from './lib/constants/enum.js';
 import prompts from 'prompts';
 import { postPath } from './lib/post_path.js';
-import { isAtLeastOneOf, isDataObject, isNonEmptyArray, isNonEmptyString, isNonEmptyStringItemArray, isNullOrUndefined, isUndefined, requestQueue } from './lib/utils/index.js';
+import { isAtLeastOneOf, isDataObject, isFunction, isNonEmptyArray, isNonEmptyString, isNonEmptyStringItemArray, isNullOrUndefined, isUndefined, requestQueue } from './lib/utils/index.js';
 import { AtLeastPropError, CtorParamDataObjectError, DataObjectError, NonEmptyError, NonEmptyStringError, NonEmptyStringOrNonEmptyStringItemArrayError } from './lib/utils/error.js';
 
 export class Isubo {
@@ -18,6 +18,9 @@ export class Isubo {
   #postManager = null;
   #selectPosts = false;
   #assetpathRecords = [];
+  #hooks = {
+    beforeDeploy: async () => {}
+  };
 
   /**
    * @typedef {Object} CliParams
@@ -26,15 +29,20 @@ export class Isubo {
    * @typedef {Object.<string, *>} IsuboConf
    * @property {string|string[]} filename
    * 
+   * @typedef {Object} Hooks
+   * @property {function():Promise<void>} beforeDeploy
+   * 
    * @typedef {Object} IsuboCtorParam0 - init with confPath
    * @property {string} confPath
-   * @property {CliParams} cliParams
+   * @property {CliParams} [cliParams]
    * @property {boolean} [selectPosts]
+   * @property {Hooks} [hooks]
    * 
    * @typedef {Object} IsuboCtorParam1 - init with config data
    * @property {IsuboConf} conf
-   * @property {CliParams} cliParams
+   * @property {CliParams} [cliParams]
    * @property {boolean} [selectPosts]
+   * @property {Hooks} [hooks]
    * 
    * @param {IsuboCtorParam0|IsuboCtorParam1} param
    */
@@ -47,7 +55,8 @@ export class Isubo {
       confPath,
       conf,
       cliParams,
-      selectPosts
+      selectPosts,
+      hooks
     } = param;
 
     this.#setConfByOneOf({
@@ -55,10 +64,21 @@ export class Isubo {
       confPath
     });
     // TODO: compatile the input of filename and patterns 
+    this.#setHooks(hooks);
     this.#selectPosts = !!selectPosts;
     this.#setCliParams(cliParams);
     this.#setPostManager();
     this.#setFinder();
+  }
+
+  #setHooks(hooks) {
+    if (!isDataObject(hooks)) {
+      return;
+    }
+
+    if (isFunction(hooks.beforeDeploy)) {
+      this.#hooks.beforeDeploy = hooks.beforeDeploy;
+    }
   }
 
   #getLoadHintTextBy({ filepath, type }) {
@@ -102,6 +122,10 @@ export class Isubo {
    * @param {CliParams} cliParams 
    */
   #setCliParams(cliParams) {
+    if (isUndefined(cliParams)) {
+      return;
+    }
+
     if (!isDataObject(cliParams)) {
       throw new DataObjectError('cliParams');
     }
@@ -144,6 +168,14 @@ export class Isubo {
     });
   }
 
+  /**
+   * add record for asset paths of the post,
+   * add only if assets exist
+   * 
+   * @param {string} postpath - post path
+   * @param {string[]} assetpaths - asset paths of the post
+   * @returns 
+   */
   #addAssetpathRecord(postpath, assetpaths) {
     if (!assetpaths.length) {
       return;
@@ -317,17 +349,22 @@ export class Isubo {
     const retArr = []
     const filepathArr = await this.#getFilepaths();
 
+    // TODO: without select should stop at here!
+
     await this.#requestQueue(filepathArr.map(filepath => async () => {
       try {
         hinter.load(filepath, { text: this.#getLoadHintTextBy({ type: STR_TPYE, filepath }) });
+        await this.#hooks.beforeDeploy();
         retArr.push(await this.#createOneBy({ filepath }));
         hinter.loadSucc(filepath);
       } catch (error) {
         const { postTitle } = postPath.parse(filepath);
         hinter.loadFail(filepath, { text: `${STR_TPYE} ${postTitle}: ${error.message}  ` });
+        throw error;
       }
     }));
 
+    // TODO: if exist deploy item err, it's record should be remove from this.#assetpathRecords
     await this.#publishAssets();
 
     return retArr;
@@ -341,11 +378,13 @@ export class Isubo {
     await this.#requestQueue(filepathArr.map(filepath => async () => {
       try {
         hinter.load(filepath, { text: this.#getLoadHintTextBy({ type: STR_TPYE, filepath }) });
+        await this.#hooks.beforeDeploy();
         retArr.push(await this.#updateOneBy({ filepath }));
         hinter.loadSucc(filepath);
       } catch (error) {
         const { postTitle } = postPath.parse(filepath);
         hinter.loadFail(filepath, { text: `${STR_TPYE} ${postTitle}: ${error.message}` });
+        throw error;
       }
     }));
 
@@ -362,6 +401,7 @@ export class Isubo {
     await this.#requestQueue(filepathArr.map(filepath => async () => {
       try {
         hinter.load(filepath, { text: this.#getLoadHintTextBy({ type, filepath }) });
+        await this.#hooks.beforeDeploy();
         const resp = await this.#publishOneBy({ filepath });
         type = resp.type;
         retArr.push({
@@ -375,7 +415,8 @@ export class Isubo {
           ret: error
         });
         hinter.loadFail(filepath, { text: this.#getLoadHintTextBy({ type, filepath }) });
-        hinter.errMsg(error.message)
+        hinter.errMsg(error.message);
+        throw error;
       }
     }));
 
