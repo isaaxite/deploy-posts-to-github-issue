@@ -1,5 +1,5 @@
 import { describe, test, expect } from "@jest/globals";
-import { cov2num, requestQueue, setManualInterval } from "../lib/utils/index.js";
+import { cov2num, isAsyncFunction, requestQueue, setManualInterval } from "../lib/utils/index.js";
 import { TruthNumberError } from "../lib/utils/error.js";
 
 describe('lib utils', () => {
@@ -121,5 +121,27 @@ describe('lib utils', () => {
         new TruthNumberError('interval').message
       );
     }
-  })
+  });
+
+  test('isAsyncFunction', () => {
+    [
+      () => {},
+      class Temp{},
+      function(){},
+      {},
+      []
+    ].every(fn => {
+      expect(isAsyncFunction(fn)).not.toBeTruthy();
+    });
+
+    [
+      async () => {},
+      async function(){},
+      () => new Promise(),
+      () => Promise.reject(),
+      () => Promise.resolve(),
+    ].every(fn => {
+      expect(isAsyncFunction(fn)).toBeTruthy();
+    });
+  });
 });
