@@ -174,7 +174,5 @@ export async function update_one_post(cb) {
 
   cb && cb(ret);
 
-  tempRepo.remove();
-
   return ret;
 }
