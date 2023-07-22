@@ -10,6 +10,7 @@ import { empty_parse_conf, get_ast_from_empty_md_file, get_hidden_frontmatter_fo
 import { enumPushAssetType } from '../lib/constants/enum.js';
 import { DEF_LINK_TYPE_LIST } from '../lib/constants/index.js';
 import { removeSync } from 'fs-extra/esm';
+import { NonEmptyStringError } from '../lib/utils/error.js';
 
 const TEST_CASE_FRONTMATTER = `---
 title: LICENSE的选择与生成
@@ -195,7 +196,9 @@ describe('post_parse', () => {
     try {
       empty_parse_conf() 
     } catch (error) {
-      expect(error.message).toEqual('owner is required');
+      expect(error.message).toEqual(
+        new NonEmptyStringError('conf.owner').message
+      );
     }
 
     try {
@@ -203,7 +206,9 @@ describe('post_parse', () => {
         owner: 'isaaxite'
       });
     } catch (error) {
-      expect(error.message).toEqual('repo is required');
+      expect(error.message).toEqual(
+        new NonEmptyStringError('conf.repo').message
+      );
     }
 
     try {
@@ -212,7 +217,9 @@ describe('post_parse', () => {
         repo: 'test-repo_deploy-posts-to-github-issue'
       });
     } catch (error) {
-      expect(error.message).toEqual('token is required');
+      expect(error.message).toEqual(
+        new NonEmptyStringError('conf.token').message
+      );
     }
 
     const preConf = {
