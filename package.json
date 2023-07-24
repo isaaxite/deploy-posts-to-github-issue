@@ -13,11 +13,11 @@
     "only-test": "./jest.js",
     "update-test-reports": "npm run esm-test && (git add ./reports && git commit -m 'chore: update test reports') || git checkout ./reports",
     "build": "rm -rf dist && rollup -c rollup.config.js && sed -i '1i#!/usr/bin/env node' dist/bin/index.js",
-    "version": "node scripts/npm.version.js",
     "publish": "node scripts/npm.publish.js",
     "toc": "markdown-toc $1 --maxdepth=3",
     "prepare": "husky install",
-    "commitlint": "commitlint --edit"
+    "commitlint": "commitlint --edit",
+    "postversion": "git push && git push origin --tags"
   },
   "repository": {
     "type": "git",
@@ -67,6 +67,7 @@
     "markdown-toc": "^1.2.0",
     "rollup": "^3.26.0",
     "rollup-plugin-copy": "^3.4.0",
-    "rollup-plugin-terser": "^7.0.2"
+    "rollup-plugin-terser": "^7.0.2",
+    "standard-version": "^9.5.0"
   }
 }
