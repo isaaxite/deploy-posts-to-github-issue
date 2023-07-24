@@ -2,7 +2,7 @@ import path from 'path';
 import { copySync, ensureDirSync, ensureFileSync, removeSync } from 'fs-extra/esm'
 // import { copySync, ensureFileSync, removeSync } from 'fs-extra'
 import { AssetFinder } from '../../lib/asset_finder.js';
-import { findImageFrom, makeTempConfFile } from '../utils/index.js';
+import { findImageFrom, getTimestampKey, makeTempConfFile } from '../utils/index.js';
 import { ConfReader } from '../../lib/conf_reader.js';
 import { PostParse } from '../../lib/post_parse.js';
 import { writeFileSync } from 'fs';
@@ -33,6 +33,29 @@ export function multiLevelSearchForResources(cb) {
     });
     removeSync(path.join(sourceDirPath, levelDirnames[0]));
   }
+}
+
+export function asset_is_outside_the_source_dir() {
+  const picname = 'asset_find.test.png'
+  const picpath = `__test__/assets/${picname}`;
+  const uniqueChars = getTimestampKey();
+  const tempDir = `__test__/temp_${uniqueChars}`
+  const sourceDir = path.join(tempDir, 'source');
+  const postpath = path.join(sourceDir, 'temp.md');
+  const assetDestPath = path.join(tempDir, picname);
+  ensureFileSync(postpath);
+  copySync(picpath, assetDestPath);
+
+  const assetFinder = new AssetFinder({
+    sourceDirPath: sourceDir,
+    postpath,
+    assetPath: `./${picname}`
+  });
+  const assetPath = assetFinder.get();
+  assetFinder.getRelativeToSourceDir();
+  removeSync(tempDir);
+
+  return assetPath;
 }
 
 export function parse_a_md_file_and_find_nonrelative_path_asset(cb) {
