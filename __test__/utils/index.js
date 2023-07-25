@@ -97,7 +97,7 @@ export function detectOnly(arr) {
   const onlyItem = []; 
   const restItems = [];
   for (const it of arr) {
-    if (it.only) {
+    if (it.only || Object.keys(it).includes('only')) {
       onlyItem.push(it);
     } else {
       restItems.push(it);
