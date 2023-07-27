@@ -1,3 +1,4 @@
+import path from "path";
 import { AssetPublisher } from "../../lib/asset_publisher.js";
 import { TempGitRepo } from "../utils/index.js";
 
@@ -74,5 +75,91 @@ async function getAssetPublisherInsForTestRevert(hooks) {
     prevStaged,
     tempGitRepo,
     assetPublisher
+  };
+}
+
+export async function getIns_checkIsUnpushPostAndAssets({
+  existUnpush,
+  existStaged,
+  existUnstaged
+} = {}) {
+  let stagedFiles = [];
+  let unstagedFiles = [];
+  const tempGitRepo = new TempGitRepo();
+
+  await tempGitRepo.init();
+  const licensePost = tempGitRepo.addNewPostSync('license_88526298164');
+
+  if (!existUnpush) {
+    await tempGitRepo.git.add([licensePost.postpath, ...licensePost.assetpaths]);
+    await tempGitRepo.git.commit('init tempGitRepo');
+  }
+
+  if (existStaged) {
+    const { postpath, assetpaths } = tempGitRepo.addNewPostSync('license');
+    stagedFiles = [postpath, ...assetpaths].map(it => path.relative(tempGitRepo.repoLocalPath, it));
+    await tempGitRepo.git.add(stagedFiles);
+  }
+
+  if (existUnstaged) {
+    const { postpath, assetpaths } = tempGitRepo.addNewPostSync('WSL的hosts文件被重置');
+    unstagedFiles = [postpath, ...assetpaths].map(it => path.relative(tempGitRepo.repoLocalPath, it));
+  }
+
+  const assetPublisher = new AssetPublisher({
+    assetRecords: [licensePost],
+    simpleGitOpt: tempGitRepo.simpleGitOpt
+  });
+
+  return {
+    tempGitRepo,
+    assetPublisher,
+    stagedFiles,
+    unstagedFiles
+  };
+}
+
+/**
+ * @typedef {{postpath: string, assetpaths: string[]}} AssetRecordItem
+ * 
+ * @typedef {Object} BeforeInstancParams
+ * @property {Object<string, *>} git
+ * @property {(postname: string) => AssetRecordItem} addNewPostSync
+ * @property {(assetRecordItem: AssetRecordItem) => void} updateAssetRecords
+ * 
+ * @typedef {(param0: BeforeInstancParams) => Promise<void>} BeforeInstanceFunc
+ * 
+ * @param {{ beforeInstance?: BeforeInstanceFunc, assetPublisherParam?: Object<string, *> }} param0
+ */
+export async function getInsWith({
+  beforeInstance,
+  assetPublisherParam
+} = {}) {
+  const tempGitRepo = new TempGitRepo();
+
+  await tempGitRepo.init();
+  const licensePost = tempGitRepo.addNewPostSync('license_88526298164');
+  await tempGitRepo.git.add('./*');
+  await tempGitRepo.git.commit('init tempGitRepo');
+
+  let assetRecords = [licensePost];
+
+  beforeInstance && await beforeInstance({
+    git: tempGitRepo.git,
+    addNewPostSync: (postname) => tempGitRepo.addNewPostSync(postname),
+    updateAssetRecords: (item) => {
+      assetRecords = [item];
+    }
+  });
+
+  const assetPublisher = new AssetPublisher({
+    ...(assetPublisherParam || {}),
+    assetRecords: assetRecords.filter(it => it.assetpaths.length),
+    simpleGitOpt: tempGitRepo.simpleGitOpt
+  });
+
+  return {
+    assetPublisher,
+    tempGitRepo
   };
 }
