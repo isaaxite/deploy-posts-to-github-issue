@@ -93,6 +93,11 @@ export class TempPost {
   }
 }
 
+/**
+ * 
+ * @param {Array<{ only?: boolean | undefined, [key: string]: any }>} arr 
+ * @returns 
+ */
 export function detectOnly(arr) {
   const onlyItem = []; 
   const restItems = [];
