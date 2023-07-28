@@ -1,5 +1,5 @@
 import { describe, test, expect } from "@jest/globals";
-import { cov2num, isAsyncFunction, requestQueue, setManualInterval } from "../lib/utils/index.js";
+import { cov2num, defineConstStruct, isAsyncFunction, requestQueue, setManualInterval } from "../lib/utils/index.js";
 import { TruthNumberError } from "../lib/utils/error.js";
 
 describe('lib utils', () => {
@@ -143,5 +143,70 @@ describe('lib utils', () => {
     ].every(fn => {
       expect(isAsyncFunction(fn)).toBeTruthy();
     });
+  });
+});
+
+describe.only('lib utils: defineConstStruct', () => {
+  test('xx', () => {
+    const src = {
+      foo: {
+        brz: [1, 2, { bar: 10 }]
+      },
+      brz: [1, 2, { bar: 10 }],
+      bar: [1, 2],
+      far: 10
+    }
+    const ret = defineConstStruct(src);
+
+    expect(ret).toHaveProperty('foo');
+    expect(ret.foo).toHaveProperty('brz', [1, 2, { bar: 10 }]);
+    expect(ret.foo.brz[2]).toHaveProperty('bar', 10);
+
+    expect(ret).toHaveProperty('brz', [1, 2, { bar: 10 }]);
+    expect(ret.brz[2]).toHaveProperty('bar', 10);
+    expect(ret).toHaveProperty('bar', [1, 2]);
+    expect(ret).toHaveProperty('far', 10);
+
+    const expectThrowErr = (cb) => {
+      [false, 0, function() {}, [], {}, null, undefined].forEach(val => {
+        expect(() => {
+          cb(val)
+        }).toThrowError();
+      });
+    };
+
+    expectThrowErr((val) => ret.foo = val);
+    expectThrowErr((val) => ret.foo.brz = val);
+    expectThrowErr((val) => ret.foo.brz[0] = val);
+    expectThrowErr((val) => ret.foo.brz[2] = val);
+    expectThrowErr((val) => ret.foo.brz[2].bar = val);
+
+    expectThrowErr((val) => ret.brz = val);
+    expectThrowErr((val) => ret.brz[0] = val);
+    expectThrowErr((val) => ret.brz[2] = val);
+    expectThrowErr((val) => ret.brz[2].bar = val);
+
+    expectThrowErr((val) => ret.bar = val);
+    expectThrowErr((val) => ret.bar[0] = val);
+
+    expectThrowErr((val) => ret.far = val);
+
+    const oldBarLen = ret.bar.length;
+    const oldBarVal = [...ret.bar];
+    ret.bar.push(1);
+    expect(ret.bar.length).toEqual(oldBarLen);
+    expect(ret.bar).toEqual(expect.arrayContaining(oldBarVal));
+
+    ret.bar.pop();
+    expect(ret.bar.length).toEqual(oldBarLen);
+    expect(ret.bar).toEqual(expect.arrayContaining(oldBarVal));
+
+    ret.bar.shift();
+    expect(ret.bar.length).toEqual(oldBarLen);
+    expect(ret.bar).toEqual(expect.arrayContaining(oldBarVal));
+
+    ret.bar.splice(0, 1, 33);
+    expect(ret.bar.length).toEqual(oldBarLen);
+    expect(ret.bar).toEqual(expect.arrayContaining(oldBarVal));
   });
 });
