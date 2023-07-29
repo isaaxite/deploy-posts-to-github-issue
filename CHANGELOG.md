@@ -1,4 +1,16 @@
 # Changelog
+### [0.0.11-alpha.10](https://github.com/isaaxite/deploy-posts-to-github-issue/compare/v0.0.11-alpha.9...v0.0.11-alpha.10) (2023-07-29)
+
+
+### Bug Fixes
+
+* **asset_publisher:** clear timer of pushing asset timeout ([8c94425](https://github.com/isaaxite/deploy-posts-to-github-issue/commit/8c94425d628d134c1ca15b035df40e75b1fc07fb))
+
+
+### Refactors
+
+* add util 'defineConstStruct' ([a1a596e](https://github.com/isaaxite/deploy-posts-to-github-issue/commit/a1a596ece994f4d1ead544e5bb9685b54245910b))
+
 ### [0.0.11-alpha.9](https://github.com/isaaxite/deploy-posts-to-github-issue/compare/v0.0.11-alpha.5...v0.0.11-alpha.9) (2023-07-28)
 
 
