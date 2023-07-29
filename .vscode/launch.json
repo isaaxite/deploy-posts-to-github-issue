@@ -15,6 +15,7 @@
     // },
     {
       "type": "node",
+      // "runtimeVersion": "16.20.1",
       "request": "launch",
       "name": "Launch Isubo",
       "skipFiles": [

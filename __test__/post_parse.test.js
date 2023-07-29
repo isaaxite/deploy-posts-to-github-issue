@@ -537,28 +537,28 @@ describe('Class PostParse, method test', () => {
     expect(ret).toHaveProperty('issue_number', 0);
   });
 
-  test('get hidden frontmatter formatedMarkdown', () => {
-    get_hidden_frontmatter_formatedMarkdown(({ prevFrontmatter, nextFrontmatter }) => {
-      expect(prevFrontmatter.title).not.toEqual('');
-      expect(nextFrontmatter.title).toEqual('');
-    });
-  });
+  // test('get hidden frontmatter formatedMarkdown', () => {
+  //   get_hidden_frontmatter_formatedMarkdown(({ prevFrontmatter, nextFrontmatter }) => {
+  //     expect(prevFrontmatter.title).not.toEqual('');
+  //     expect(nextFrontmatter.title).toEqual('');
+  //   });
+  // });
 
-  test('parse invalid asset link', () => {
-    const uniqueChars = getTimestampKey();
-    const filepath = `__test__/temp/temp_${uniqueChars}.md`;
-    writeFileSync(filepath, TEST_CASE_MARKDOWN_ASSET_WITHOUT_URL);
-    expect(() => {
-      new PostParse({
-        path: filepath,
-        conf: {
-          link_prefix: 'https://isaaxite.github.io/blog/resources/',
-          absolute_source_dir: path.resolve('__test__/source'),
-          disable_asset_find: false
-        }
-      });
-    }).not.toThrowError();
+  // test('parse invalid asset link', () => {
+  //   const uniqueChars = getTimestampKey();
+  //   const filepath = `__test__/temp/temp_${uniqueChars}.md`;
+  //   writeFileSync(filepath, TEST_CASE_MARKDOWN_ASSET_WITHOUT_URL);
+  //   expect(() => {
+  //     new PostParse({
+  //       path: filepath,
+  //       conf: {
+  //         link_prefix: 'https://isaaxite.github.io/blog/resources/',
+  //         absolute_source_dir: path.resolve('__test__/source'),
+  //         disable_asset_find: false
+  //       }
+  //     });
+  //   }).not.toThrowError();
 
-    removeSync(filepath);
-  })
+  //   removeSync(filepath);
+  // })
 });

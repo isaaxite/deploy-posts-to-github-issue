@@ -20,7 +20,8 @@ export async function set_prev_staged_includes_a_post_will_be_pushed_then_check_
   const ret = {
     curStaged,
     prevStaged,
-    tempfilepath
+    tempfilepath,
+    repoLocalPath: tempGitRepo.repoLocalPath
   };
 
   cb && cb(ret);

@@ -4,6 +4,8 @@ import { force_create_a_issue_and_then_update_it, getPostManagerIns, update_a_po
 import { CtorParamDataObjectError, DataObjectError, NonEmptyStringError, NonEmptyStringItemArrayError, TruthPositiveIntError } from '../lib/utils/error.js';
 import { PostManager } from '../lib/post_manager.js';
 
+import "./utils/msw.jest.js";
+
 describe('Class PostManager, instance init', () => {
   test.each(detectOnly([
     {

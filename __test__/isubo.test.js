@@ -4,9 +4,11 @@ import { Isubo } from '../index.js';
 import { TempRepo, sleep, sleepFactory } from './utils/index.js';
 import { PostParse } from '../lib/post_parse.js';
 import { enumPushAssetType } from "../lib/constants/enum.js";
-import { create_a_post_but_disable_push_assets, create_posts, create_posts_inject_select_posts, create_posts_without_assets, deploy_emit_err_by_hook, update_one_post } from "./test_cases/isubo.js";
-import { AtLeastPropError, CtorParamDataObjectError, DataObjectError, NonEmptyStringError, NonEmptyStringOrNonEmptyStringItemArrayError } from "../lib/utils/error.js";
+import { create_a_post_but_disable_push_assets, create_posts, create_posts_without_assets, deploy_emit_err_by_hook, update_one_post } from "./test_cases/isubo.js";
+import { AtLeastPropError, CtorParamDataObjectError, DataObjectError, NonEmptyStringOrNonEmptyStringItemArrayError } from "../lib/utils/error.js";
 import prompts from "prompts";
+
+import "./utils/msw.jest.js";
 
 describe('Class Isubo, init instance', () => {
   test.each([
