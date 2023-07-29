@@ -4,6 +4,7 @@ import { AssetPublisher } from "../lib/asset_publisher.js";
 import { getInsWith, getIns_checkIsUnpushPostAndAssets, revert_as_err_occurred_after_backup_prev_staged, set_prev_staged_includes_a_post_will_be_pushed_then_check_reset_staged_after_pushed } from "./test_cases/asset_publisher.js";
 import { CtorParamDataObjectError, NonArrayError, NonEmptyAbsolutePathError, NonEmptyAbsolutePathItemArrayError } from "../lib/utils/error.js";
 import { DEF_SIMPLE_GIT_OPT } from "../lib/constants/index.js";
+import { removeSync } from "fs-extra/esm";
 
 describe('Class AssetPublisher, init instance', () => {
   test.each(detectOnly([
@@ -106,6 +107,7 @@ describe('Class AssetPublisher, method test', () => {
     });
 
     await assetPublisher.push();
+    removeSync(tempGitRepo.repoLocalPath);
   }, 60 * 1000)
 
   sleepFactory(test)('set prev staged, then push a post and relatived assets', async () => {
@@ -123,14 +125,21 @@ describe('Class AssetPublisher, method test', () => {
     });
     await assetPublisher.push();
     const curStaged = (await tempGitRepo.git.status()).staged;
-    expect(curStaged).toEqual(expect.arrayContaining(prevStaged))
+    expect(curStaged).toEqual(expect.arrayContaining(prevStaged));
+    removeSync(tempGitRepo.repoLocalPath);
   }, 60 * 1000);
 
   sleepFactory(test)('set prev staged includes a post will be pushed, then check reset staged after pushed', async () => {
-    await set_prev_staged_includes_a_post_will_be_pushed_then_check_reset_staged_after_pushed(({ prevStaged, curStaged, tempfilepath }) => {
+    await set_prev_staged_includes_a_post_will_be_pushed_then_check_reset_staged_after_pushed(({
+      prevStaged,
+      curStaged,
+      tempfilepath,
+      repoLocalPath
+    }) => {
       expect(curStaged).not.toEqual(expect.arrayContaining(prevStaged));
       expect(curStaged.length).toEqual(1);
       expect(curStaged[0]).toStrictEqual(tempfilepath);
+      removeSync(repoLocalPath);
     });
   }, 60 * 1000);
 

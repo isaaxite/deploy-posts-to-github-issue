@@ -146,8 +146,8 @@ describe('lib utils', () => {
   });
 });
 
-describe.only('lib utils: defineConstStruct', () => {
-  test('xx', () => {
+describe('lib utils: defineConstStruct', () => {
+  test('test', () => {
     const src = {
       foo: {
         brz: [1, 2, { bar: 10 }]
