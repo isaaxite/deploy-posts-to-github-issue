@@ -351,6 +351,10 @@ export class Isubo {
     const retArr = []
     const filepathArr = await this.#getFilepaths();
 
+    if (!filepathArr?.length) {
+      return retArr;
+    }
+
     // TODO: without select should stop at here!
 
     await this.#requestQueue(filepathArr.map(filepath => async () => {
@@ -377,6 +381,10 @@ export class Isubo {
     const retArr = []
     const filepathArr = await this.#getFilepaths();
 
+    if (!filepathArr?.length) {
+      return retArr;
+    }
+
     await this.#requestQueue(filepathArr.map(filepath => async () => {
       try {
         hinter.load(filepath, { text: this.#getLoadHintTextBy({ type: STR_TPYE, filepath }) });
@@ -399,6 +407,10 @@ export class Isubo {
     let type = enumDeployType.PUBLISH;
     const retArr = []
     const filepathArr = await this.#getFilepaths();
+
+    if (!filepathArr?.length) {
+      return retArr;
+    }
 
     await this.#requestQueue(filepathArr.map(filepath => async () => {
       try {

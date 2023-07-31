@@ -10,14 +10,20 @@ import chalk from 'chalk';
 const KEY_POSTS = 'posts';
 
 yargs(process.argv.slice(2))
+  
   .usage(
-    `$0 publish [${KEY_POSTS}]`,
-    'Determin whether to create or update the posts base on issue_number',
+    `$0 [cmd] [${KEY_POSTS}]`,
+    `Exec default cmd: 'isubo publish' to select posts for publishing.`,
     function builder(yargs) {
-      return yargs.positional('posts', {
-        describe: 'post name, one or several, use comma to split several post names',
-        type: 'string'
-      })
+      return yargs
+        .positional('cmd', {
+          describe: `Isubo cmds include 'publish', 'create', 'update'.Default is 'publish'.`,
+          type: 'string'
+        })
+        .positional('posts', {
+          describe: 'post name, one or several, use comma to split several post names.',
+          type: 'string'
+        });
     },
     async function handler(argv) {
       wraper(async () => {
@@ -26,6 +32,16 @@ yargs(process.argv.slice(2))
       });
     }
   )
+  .command({
+    command: `publish [${KEY_POSTS}]`,
+    describe: 'Determin whether to create or update the posts base on issue_number',
+    async handler(argv) {
+      wraper(async () => {
+        const isubo = getIsuboIns(argv);
+        await isubo.update();
+      });
+    }
+  })
   .command({
     command: `update [${KEY_POSTS}]`,
     describe: 'Update only those posts that have issue_number',
@@ -55,6 +71,8 @@ yargs(process.argv.slice(2))
     }
   })
   .example([
+    ['$0', 'Select posts by prompt for publishing'],
+    ['$0 publish | create | update', 'Select posts by prompt'],
     ['$0 publish "How to use license"', 'publish a post name "How to use license"'],
     ['$0 publish "How to use license","What is git"', 'publish several posts']
   ])
