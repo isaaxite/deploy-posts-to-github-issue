@@ -1,6 +1,6 @@
 {
   "name": "isubo",
-  "version": "0.0.11-alpha.10",
+  "version": "0.0.11-alpha.11",
   "description": "deploy posts are written in markdown to github issue",
   "main": "index.js",
   "type": "module",

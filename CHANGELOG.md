@@ -1,4 +1,11 @@
 # Changelog
+### [0.0.11-alpha.11](https://github.com/isaaxite/deploy-posts-to-github-issue/compare/v0.0.11-alpha.10...v0.0.11-alpha.11) (2023-07-31)
+
+
+### Bug Fixes
+
+* select posts by using 'isubo publish' ([8a007b2](https://github.com/isaaxite/deploy-posts-to-github-issue/commit/8a007b20e3432045f14666bb10f16c505764f3e6))
+
 ### [0.0.11-alpha.10](https://github.com/isaaxite/deploy-posts-to-github-issue/compare/v0.0.11-alpha.9...v0.0.11-alpha.10) (2023-07-29)
 
 
