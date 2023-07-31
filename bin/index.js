@@ -73,7 +73,7 @@ function getIsuboIns(argv) {
 
 function formatArgv(argv) {
   const cliParams = {
-    filename: argv[KEY_POSTS] ? argv.posts.split(',') : ''
+    filename: argv[KEY_POSTS] ? argv.posts.split(',') : undefined
   };
 
   return cliParams;

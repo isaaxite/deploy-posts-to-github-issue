@@ -130,9 +130,11 @@ export class Isubo {
       throw new DataObjectError('cliParams');
     }
 
-    if (!isNonEmptyString(cliParams.filename) && !isNonEmptyStringItemArray(cliParams.filename)) {
-      throw new NonEmptyStringOrNonEmptyStringItemArrayError('cliParams.filename');
-    }
+    // if (!isNonEmptyString(cliParams.filename) && !isNonEmptyStringItemArray(cliParams.filename)) {
+    //   throw new NonEmptyStringOrNonEmptyStringItemArrayError('cliParams.filename');
+    // }
+
+    // if (!isUndefined(cliParams.filename) )
 
     this.#cliParams = cliParams;
   }
