@@ -1,5 +1,6 @@
+<!-- TOC_OPEN -->
 # Table Of Content
-
+- [Table Of Content](#table-of-content)
 - [Installation](#installation)
 - [Init](#init)
 - [Configuration](#configuration)
@@ -34,6 +35,7 @@
     + [Hexo](#hexo)
     + [Global Assets](#global-assets)
     + [Typora / VS Code](#typora--vs-code)
+<!-- TOC_CLOSE -->
 
 # Installation
 
@@ -455,7 +457,7 @@ Isubo contains 2 types of commands, namely `init` and `depoloy`.
 Init a configuration. Please refer to the [configuration](#configuration) section above for details.
 
 ```shell
-isubo init conf
+isubo init-conf
 ```
 
 ## publish

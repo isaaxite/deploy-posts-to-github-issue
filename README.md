@@ -58,7 +58,7 @@ Isubo is a CLI tool to publish markdown content to github issues. It allows you 
 
 - **Non-intrusively:** Isubo will search the asset links in the post and format them to full https url non-intrusively.Allows you to write locally so as to get an excellent writing and preview experience, without requiring you to format resource links one by one.
 
-- **Trustworthy:** Nearly 100 test cases to ensure the reliability of the core logic.Every version is published after pass all test cases.
+- **Trustworthy:** Nearly 200 test cases to ensure the reliability of the core logic.Every version is published after pass all test cases.
 
 🧀 Its features include:
 
@@ -82,6 +82,8 @@ Isubo is a CLI tool to publish markdown content to github issues. It allows you 
 
 ```shell
 npm i isubo -g
+
+pnpm add isubo
 ```
 
 # 🚀 Quick Start
@@ -113,7 +115,9 @@ Create a github reposibility as your issue-blog, clone it at local environment
 Use the below `cmd` to init a configuration file. A file name `isubo.conf.yml` will be created at current directory.It contain several required setting and a lost of optional setting that have default.You can alter theme according to your situation.
 
 ```shell
-isubo init conf
+isubo init-conf
+
+npx isubo init-conf
 ```
 
 ### Setting
@@ -226,7 +230,11 @@ The following is the directory structure used in the default configuration. If y
 Exec the below commands at your local reposibility directory, isubo will return a list of your posts which can be select by pressing `space`.
 
 ```shell
+# global
 isubo publish
+
+# partial
+npx isubo publish
 ```
 
 Select posts and Submit, and wait it finish, that all 🌈!
@@ -240,7 +248,7 @@ Isubo can do much more than the feats introduced in the quick start above.You sh
 
 # 📄 Test situation
 
-- [Test Report], Nearly 100 test cases.
+- [Test Report], Nearly 200 test cases.
 
 - [Coverage], Ensure 100% test coverage of the core code.
 

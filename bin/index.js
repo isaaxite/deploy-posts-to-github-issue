@@ -63,7 +63,7 @@ yargs(process.argv.slice(2))
     }
   })
   .command({
-    command: 'init conf',
+    command: 'init-conf',
     describe: 'Initialize the configuration file (isubo.conf.yml) in the current directory',
     async handler() {
       ConfReader.initConf();
