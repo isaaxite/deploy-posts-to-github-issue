@@ -1,4 +1,11 @@
 # Changelog
+### [0.0.11-alpha.12](https://github.com/isaaxite/deploy-posts-to-github-issue/compare/v0.0.11-alpha.11...v0.0.11-alpha.12) (2023-07-31)
+
+
+### Bug Fixes
+
+* err tips for selecting posts ([b038b10](https://github.com/isaaxite/deploy-posts-to-github-issue/commit/b038b1031fa8f7e8b2a373af62758ad11c34daf0))
+
 ### [0.0.11-alpha.11](https://github.com/isaaxite/deploy-posts-to-github-issue/compare/v0.0.11-alpha.10...v0.0.11-alpha.11) (2023-07-31)
 
 
