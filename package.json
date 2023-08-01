@@ -13,7 +13,7 @@
     "only-test": "./jest.js",
     "update-test-reports": "npm run esm-test && (git add ./reports && git commit -m 'chore: update test reports') || git checkout ./reports",
     "build": "rm -rf dist && rollup -c rollup.config.js && sed -i '1i#!/usr/bin/env node' dist/bin/index.js",
-    "publish": "node scripts/npm.publish.js",
+    "publish": "npm run build && node scripts/npm.publish.js",
     "toc-for": "node ./scripts/toc-for.js",
     "prepare": "husky install",
     "commitlint": "commitlint --edit",
@@ -60,6 +60,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.6.6",
     "@commitlint/config-conventional": "^17.6.6",
+    "@isubo-org/version": "0.0.2-alpha.6",
     "@jest/globals": "^29.5.0",
     "@octokit/request": "^8.1.1",
     "husky": "^8.0.3",
@@ -71,7 +72,6 @@
     "node-fetch": "^3.3.2",
     "rollup": "^3.26.0",
     "rollup-plugin-copy": "^3.4.0",
-    "rollup-plugin-terser": "^7.0.2",
-    "standard-version": "^9.5.0"
+    "rollup-plugin-terser": "^7.0.2"
   }
 }
