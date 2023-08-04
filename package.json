@@ -33,6 +33,7 @@
     "local",
     "cli"
   ],
+  "owner": "isaacgun",
   "author": "isaaxite",
   "license": "MIT",
   "bugs": {

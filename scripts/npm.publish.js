@@ -6,7 +6,8 @@ import { execSync } from 'child_process';
 
 const pkgJson= JSON.parse(fs.readFileSync('package.json', 'utf8'));
 const {
-  version
+  version,
+  owner
 } = pkgJson;
 
 const PUBLISH_CWD = 'dist';
@@ -51,7 +52,7 @@ function deleteScripts() {
     throw new Error(`✖ ${chalk.redBright(`${distPkgPath} not exist!`)}`);
   }
 
-  if (pkgJson?.scripts?.prepare) {
+  if (pkgJson?.scripts) {
     distPkg = {
       ...pkgJson,
       scripts: excludepRrops(
@@ -84,10 +85,20 @@ function execPublishCmd(tag) {
 }
 
 function loginIf() {
-  const isLogin = !!execSync(`npm whoami`, {
+  const warn = (val) => console.warn(`\n${chalk.bgYellowBright(chalk.black('WARN'))} ${val}`);
+  const username = execSync(`npm whoami`, {
     encoding: 'utf8'
   });
-  if (!isLogin) {
+
+  if (!username) {
+    warn('No login information');
+  }
+
+  if (username !== owner) {
+    warn(`Expected ${chalk.greenBright(owner)}, but currently has login information for ${chalk.greenBright(username)}`)
+  }
+
+  if (!username || username !== owner) {
     execSync('npm login', { stdio: 'inherit' });
   }
 }
