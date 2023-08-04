@@ -1,6 +1,7 @@
 import path from "path";
 import { AssetPublisher } from "../../lib/asset_publisher.js";
 import { TempGitRepo } from "../utils/index.js";
+import { removeSync } from "fs-extra/esm";
 
 export async function set_prev_staged_includes_a_post_will_be_pushed_then_check_reset_staged_after_pushed(cb) {
   const tempGitRepo = new TempGitRepo();
@@ -163,4 +164,32 @@ export async function getInsWith({
     assetPublisher,
     tempGitRepo
   };
+}
+
+export async function set_prev_staged_then_push_a_post_and_relatived_assets(cb) {
+  let ret = {};
+  const tempGitRepo = new TempGitRepo();
+
+  await tempGitRepo.init()
+  const licensePost = tempGitRepo.addNewPostSync('license');
+  tempGitRepo.addNewPostSync("WSL的hosts文件被重置");
+  const tempfilepath = tempGitRepo.touch();
+  await tempGitRepo.git.add(tempfilepath);
+  const prevStaged = (await tempGitRepo.git.status()).staged;
+  const assetPublisher = new AssetPublisher({
+    assetRecords: [licensePost],
+    simpleGitOpt: tempGitRepo.simpleGitOpt
+  });
+  await assetPublisher.push();
+  const curStaged = (await tempGitRepo.git.status()).staged;
+
+  ret = {
+    curStaged,
+    prevStaged
+  };
+  cb && cb(ret);
+
+  // removeSync(tempGitRepo.repoLocalPath);
+
+  return ret;
 }

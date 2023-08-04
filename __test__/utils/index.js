@@ -261,6 +261,8 @@ export class TempGitRepo {
 
     execSync(`cd ${this.#repoLocalPath} && pnpm add ${cwd()}`);
 
+    await this.#git.add('./*').commit('TempGitRepo init');
+
     return ret;
   }
 
