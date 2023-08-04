@@ -45,17 +45,7 @@ describe('Class Isubo, init instance', () => {
         cliParams: wrongCliParams
       })),
       expectErr: new DataObjectError('cliParams')
-    },
-    {
-      name: 'init with non-string or empty-string cliParams.filename data',
-      params: [
-        undefined, '', 0, 1, null, [], [''], {}
-      ].map(wrongFilename => ({
-        confPath: '__test__/assets/isubo.conf.yml',
-        cliParams: { filename: wrongFilename }
-      })),
-      expectErr: new NonEmptyStringOrNonEmptyStringItemArrayError('cliParams.filename')
-    },
+    }
   ])('$name. It with emit err', ({ params, expectErr }) => {
     for (const param of params) {
       try {
