@@ -209,7 +209,7 @@ export class TempGitRepo {
   
   constructor() {
     // ensureDirSync(this.#repoLocalPath);
-    console.info(this.#repoLocalPath)
+    // console.info(this.#repoLocalPath)
   }
 
   get repoLocalPath() {
@@ -233,6 +233,10 @@ export class TempGitRepo {
 
   get sourceDir() {
     return this.#sourceDir;
+  }
+
+  get conf() {
+    return this.#conf;
   }
 
   async init({

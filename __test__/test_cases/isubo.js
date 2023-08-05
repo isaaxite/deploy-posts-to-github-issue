@@ -11,21 +11,47 @@ function createPostsFactory({
   titleMaptoFilename
 }) {
   return async ({ push_asset }) => {
-    const tempRepo = new TempRepo();
-    tempRepo.copy((preConf) => ({
-      ...preConf,
-      source_dir: tempRepo.tempSourceDir,
-      push_asset
-    }));
-    const conf = tempRepo.conf;
+    // const tempRepo = new TempRepo();
+    // tempRepo.copy((preConf) => ({
+    //   ...preConf,
+    //   source_dir: tempRepo.tempSourceDir,
+    //   push_asset
+    // }));
+    // const conf = tempRepo.conf;
+    // const params = { conf };
+    // if (filename) {
+    //   params.cliParams = { filename };
+    //   params.selectPosts = false;
+    // } else if (injectSelectPosts) {
+    //   params.selectPosts = true;
+    //   injectSelectPosts(tempRepo.tempSourceDir);
+    // }
+
+    const tempGitRepo = new TempGitRepo();
+    await tempGitRepo.init({
+      preConf(conf) {
+        conf.source_dir = tempGitRepo.sourceDir;
+        conf.push_asset = push_asset;
+      }
+    });
+
+    const conf = tempGitRepo.conf;
     const params = { conf };
     if (filename) {
-      params.cliParams = { filename };
+      const newFilename = [];
+      for (const it of filename) {
+        const { postpath } = tempGitRepo.addNewPostSync(it);
+        newFilename.push(path.basename(postpath));
+      }
+      params.cliParams = { filename: newFilename };
       params.selectPosts = false;
     } else if (injectSelectPosts) {
       params.selectPosts = true;
-      injectSelectPosts(tempRepo.tempSourceDir);
+      injectSelectPosts(tempGitRepo.sourceDir);
     }
+
+    const precwd = process.cwd();
+    process.chdir(tempGitRepo.repoLocalPath);
 
     const isubo = new Isubo(params);
     const retArr = (await isubo.create());
@@ -33,7 +59,7 @@ function createPostsFactory({
 
     for (const ret of retArr) {
       const { title } = ret.data;
-      const postpath = path.join(tempRepo.tempSourceDir, `${titleMaptoFilename[title]}.md`);
+      const postpath = path.join(tempGitRepo.sourceDir, `${titleMaptoFilename[title] || title}.md`);
       const postParse = new PostParse({
         path: postpath,
         conf
@@ -47,6 +73,7 @@ function createPostsFactory({
     }
 
     // tempRepo.remove();
+    process.chdir(precwd)
 
     return lastRet;
   };

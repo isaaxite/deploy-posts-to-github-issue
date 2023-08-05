@@ -229,7 +229,7 @@ describe('Class PostFinder', () => {
         patterns: ['__test__/test_err_dir/**/*.md']
       });
     } catch (error) {
-      console.info(`errMsg: ${error.message}`);
+      // console.info(`errMsg: ${error.message}`);
       expect(error.message.startsWith('patterns invalid'));
     }
 

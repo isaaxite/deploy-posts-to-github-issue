@@ -9,7 +9,8 @@ try {
   execSync([
     'node --experimental-vm-modules node_modules/jest/bin/jest.js',
     '--config=jest.dev.config.mjs',
-    args[0]
+    '--runInBand',
+    ...args
   ].join(' '), {
     stdio: 'inherit'
   }); 

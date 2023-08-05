@@ -7,7 +7,7 @@ import { readdirSync } from 'fs';
 import { empty_parse_conf, get_ast_from_empty_md_file, get_hidden_frontmatter_formatedMarkdown, inject_yml_data_to_md_file_without_yml_data } from './test_cases/post_parse.js';
 import { enumPushAssetType } from '../lib/constants/enum.js';
 import { DEF_LINK_TYPE_LIST } from '../lib/constants/index.js';
-import { removeSync } from 'fs-extra/esm';
+import { removeSync, ensureDirSync } from 'fs-extra/esm';
 import { AtLeastPropError, CtorParamDataObjectError, DataObjectError, FileNotExistError, NonArrayError, NonEmptyStringError, NonStringError } from '../lib/utils/error.js';
 
 const TEST_CASE_FRONTMATTER = `---
@@ -537,28 +537,33 @@ describe('Class PostParse, method test', () => {
     expect(ret).toHaveProperty('issue_number', 0);
   });
 
-  // test('get hidden frontmatter formatedMarkdown', () => {
-  //   get_hidden_frontmatter_formatedMarkdown(({ prevFrontmatter, nextFrontmatter }) => {
-  //     expect(prevFrontmatter.title).not.toEqual('');
-  //     expect(nextFrontmatter.title).toEqual('');
-  //   });
-  // });
+  test('get hidden frontmatter formatedMarkdown', () => {
+    get_hidden_frontmatter_formatedMarkdown(({ prevFrontmatter, nextFrontmatter }) => {
+      expect(prevFrontmatter.title).not.toEqual('');
+      expect(nextFrontmatter.title).toEqual('');
+    });
+  });
 
-  // test('parse invalid asset link', () => {
-  //   const uniqueChars = getTimestampKey();
-  //   const filepath = `__test__/temp/temp_${uniqueChars}.md`;
-  //   writeFileSync(filepath, TEST_CASE_MARKDOWN_ASSET_WITHOUT_URL);
-  //   expect(() => {
-  //     new PostParse({
-  //       path: filepath,
-  //       conf: {
-  //         link_prefix: 'https://isaaxite.github.io/blog/resources/',
-  //         absolute_source_dir: path.resolve('__test__/source'),
-  //         disable_asset_find: false
-  //       }
-  //     });
-  //   }).not.toThrowError();
+  test('parse invalid asset link', () => {
+    const uniqueChars = getTimestampKey();
+    const sourceDir = `__test__/temp/source_${uniqueChars}`;
+    const filepath = path.join(sourceDir, 'temp.md');
 
-  //   removeSync(filepath);
-  // })
+    ensureDirSync(sourceDir);
+
+    writeFileSync(filepath, TEST_CASE_MARKDOWN_ASSET_WITHOUT_URL);
+    expect(() => {
+      const params = {
+        path: filepath,
+        conf: {
+          link_prefix: 'https://isaaxite.github.io/blog/resources/',
+          absolute_source_dir: path.resolve(sourceDir),
+          disable_asset_find: false
+        }
+      };
+      new PostParse(params);
+    }).not.toThrowError();
+
+    removeSync(sourceDir);
+  });
 });
