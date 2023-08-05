@@ -8,8 +8,8 @@ import { AssetPublisher } from './lib/asset_publisher.js';
 import { enumDeployType, enumPushAssetType } from './lib/constants/enum.js';
 import prompts from 'prompts';
 import { postPath } from './lib/post_path.js';
-import { isAtLeastOneOf, isDataObject, isFunction, isNonEmptyArray, isNonEmptyString, isNonEmptyStringItemArray, isNullOrUndefined, isUndefined, requestQueue } from './lib/utils/index.js';
-import { AtLeastPropError, CtorParamDataObjectError, DataObjectError, NonEmptyError, NonEmptyStringError, NonEmptyStringOrNonEmptyStringItemArrayError } from './lib/utils/error.js';
+import { isAtLeastOneOf, isDataObject, isFunction, isNonEmptyArray, isUndefined, requestQueue } from './lib/utils/index.js';
+import { AtLeastPropError, CtorParamDataObjectError, DataObjectError } from './lib/utils/error.js';
 
 export class Isubo {
   #conf = {};
@@ -295,7 +295,7 @@ export class Isubo {
     switch (conf.push_asset) {
       case enumPushAssetType.DISABLE: {
         isPushAsset = false;
-        const isExistUnpush = await getAssetPublisherIns().checkIsUnpushPostAndAssets();
+        const isExistUnpush = await (getAssetPublisherIns().checkIsUnpushPostAndAssets());
         if (!isExistUnpush) {
           break;
         }

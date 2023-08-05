@@ -197,6 +197,25 @@ describe('Class AssetPublisher, method test', () => {
     expect(curStaged).toEqual(expect.arrayContaining(prevStaged));
   }, 60 * 1000);
 
+  sleepFactory(test)('err occurred when recovering', async () => {
+    const {
+      tempGitRepo,
+      assetPublisher
+    } = await getAssetPublisherInsForTestRevert({
+      beforePushPostAndAssets: () => {
+        throw new Error('Revert as err occurred beforePushPostAndAssets');
+      },
+      recoveringTasks: () => {
+        throw new Error();
+      }
+    });
+    await assetPublisher.push();
+
+    const curStaged = (await tempGitRepo.git.status()).staged;
+    
+    expect(curStaged).toEqual(expect.arrayContaining([]));
+  }, 60 * 1000);
+
   sleepFactory(test)('Revert as err occurred after push post and assets', async () => {
     let postAndAssetsCommitId = '';
     const {

@@ -15,7 +15,7 @@ describe('Class ConfReader init', () => {
     try {
       new ConfReader({ path: confPath });
     } catch (error) {
-      console.info(`errMsg: ${error.message}`);
+      // console.info(`errMsg: ${error.message}`);
       expect(error.message).toEqual(
         new FileNotExistError(confPath).message
       );
@@ -60,7 +60,7 @@ describe('Class ConfReader init', () => {
         path: confPath
       });
     } catch (error) {
-      console.info(`errMsg: ${error.message}`);
+      // console.info(`errMsg: ${error.message}`);
       expect(error.message).toEqual(`Only supports ${exts.map(it => `[${it}]`).join(', ')} files`);
     }
     removeSync(confPath);

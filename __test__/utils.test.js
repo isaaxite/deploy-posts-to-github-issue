@@ -1,6 +1,5 @@
 import { describe, test, expect } from "@jest/globals";
-import { cov2num, defineConstStruct, isAsyncFunction, requestQueue, setManualInterval } from "../lib/utils/index.js";
-import { TruthNumberError } from "../lib/utils/error.js";
+import { cov2num, defineConstStruct, hintWraper, isAsyncFunction, isDataObject, isFunction, isNonEmptyAbsolutePathItemArray, isNonEmptyStringItemArray, isNull, isNullOrUndefined, isPlainFunction, isStringArray, isTruthNaturalNum, isTruthPositiveInt, isUndefined, requestQueue } from "../lib/utils/index.js";
 
 describe('lib utils', () => {
   test('util:requeseQueue', async () => {
@@ -75,54 +74,6 @@ describe('lib utils', () => {
     expect(ret).toEqual(expectRet);
   });
 
-
-  test('setManualInterval, init with right params', async () => {
-    
-    let count = 0;
-    let now = Date.now();
-    let prevms = now;
-    let prevTimeid = null;
-    let resolveFunc = () => {};
-    const exitCount = 3;
-    const waitFinish = new Promise((resolve) => {
-      resolveFunc = resolve;
-    });
-
-    setManualInterval((ref) => {
-      const now = Date.now();
-      const costms = now - prevms;
-      count += 1;
-
-      expect(ref.timerId._idleTimeout).not.toEqual(prevTimeid);
-      expect(ref.interval).toEqual(Math.round(costms / 100) * 100);
-      expect(ref.count).toEqual(count);
-
-      if (ref.count === exitCount) {
-        ref.clearTimeout();
-        resolveFunc('end');
-      }
-
-      prevms = now;
-      ref.interval += 200;
-      prevTimeid = ref.timerId._idleTimeout;
-    }, 200);
-
-    const ret = await waitFinish;
-    expect(ret).toEqual('end');
-  });
-
-  test('setManualInterval, init with non-number interval. It will emit err.', () => {
-    try {
-      setManualInterval((ref) => {
-        ref.clearTimeout();
-      }, '500'); 
-    } catch (error) {
-      expect(error.message).toEqual(
-        new TruthNumberError('interval').message
-      );
-    }
-  });
-
   test('isAsyncFunction', () => {
     [
       () => {},
@@ -143,6 +94,332 @@ describe('lib utils', () => {
     ].every(fn => {
       expect(isAsyncFunction(fn)).toBeTruthy();
     });
+  });
+
+  test.each([
+    {
+      name: 'exec async callback',
+      callback: () => 'test',
+      expectRet: 'test'
+    },
+    {
+      name: 'throw error when exec callback',
+      callback: () => {
+        throw new Error('test')
+      },
+      expectErrMsg: 'test'
+    },
+  ])('hintWraper: $name', async ({ callback, expectRet, expectErrMsg }) => {
+    try {
+      const ret = await hintWraper({
+        text: 'test text',
+        action: 'test action',
+        callback
+      });
+
+      if (expectRet) {
+        expect(ret).toEqual(expectRet);
+      }
+
+      expect(false).toBeTruthy();
+    } catch (error) {
+      if (expectErrMsg) {
+        expect(error.message).toEqual(expectErrMsg);
+      }
+    }
+  });
+
+  test.each([
+    {
+      name: 'failed entry',
+      paramArr: [
+        0, false, function() {}, {}, '', undefined, null,
+        ['a/b'], [''], [0], [false], [function() {}],
+        [{}], [undefined], [null]
+      ],
+      expectRet: false
+    },
+    {
+      name: 'passed entry',
+      paramArr: [
+        [], ['/a/b']
+      ],
+      expectRet: true
+    }
+  ])('isNonEmptyAbsolutePathItemArray, $name', ({ paramArr, expectRet }) => {
+    for (const param of paramArr) {
+      const ret = isNonEmptyAbsolutePathItemArray(param);
+      expect(ret).toEqual(expectRet);
+    }
+  });
+
+  test.each([
+    {
+      name: 'failed entry',
+      paramArr: [
+        0, false, function() {}, {}, '', undefined, null,
+        [0], [false], [function() {}], [{}], [undefined], [null]
+      ],
+      expectRet: false
+    },
+    {
+      name: 'passed entry',
+      paramArr: [
+        [], [''], ['0']
+      ],
+      expectRet: true
+    }
+  ])('isStringArray, $name', ({ paramArr, expectRet }) => {
+    for (const param of paramArr) {
+      const ret = isStringArray(param);
+      expect(ret).toEqual(expectRet);
+    }
+  });
+
+  test.each([
+    {
+      name: 'failed entry',
+      paramArr: [
+        0, false, function() {}, {}, '', undefined, null,
+        [], [''], [0], [false], [function() {}], [{}],
+        [undefined], [null]
+      ],
+      expectRet: false
+    },
+    {
+      name: 'passed entry',
+      paramArr: [
+        ['10']
+      ],
+      expectRet: true
+    }
+  ])('isNonEmptyStringItemArray, $name', ({ paramArr, expectRet }) => {
+    for (const param of paramArr) {
+      const ret = isNonEmptyStringItemArray(param);
+      expect(ret).toEqual(expectRet);
+    }
+  });
+
+  test.each([
+    {
+      name: 'failed entry',
+      paramArr: [
+        0, false, function() {}, {}, [], '', undefined, null,
+        new Set(), new Map()
+      ],
+      expectRet: false
+    },
+    {
+      name: 'passed entry',
+      paramArr: [
+        { foo: 1 }
+      ],
+      expectRet: true
+    }
+  ])('isDataObject, $name', ({ paramArr, expectRet }) => {
+    for (const param of paramArr) {
+      const ret = isDataObject(param);
+      expect(ret).toEqual(expectRet);
+    }
+  });
+
+  test.each([
+    {
+      name: 'failed entry',
+      paramArr: [
+        0, false, function() {}, {}, [], '', undefined, null,
+        new Set(), new Map(), () => {},
+        function () { return new Promise(); },
+        () => new Promise()
+      ],
+      expectRet: false
+    },
+    {
+      name: 'passed entry',
+      paramArr: [
+        async function() {},
+        async () => {}
+      ],
+      expectRet: true
+    }
+  ])('isAsyncFunction, $name', ({ paramArr, expectRet }) => {
+    for (const param of paramArr) {
+      const ret = isAsyncFunction(param);
+      expect(ret).toEqual(expectRet);
+    }
+  });
+
+  test.each([
+    {
+      name: 'failed entry',
+      paramArr: [
+        0, false, {}, [], '', undefined, null,
+        new Set(), new Map(),
+        async function() {},
+        async () => {}
+      ],
+      expectRet: false
+    },
+    {
+      name: 'passed entry',
+      paramArr: [
+        function() {},
+        function () { return new Promise(); },
+        () => {},
+        () => new Promise()
+      ],
+      expectRet: true
+    }
+  ])('isPlainFunction, $name', ({ paramArr, expectRet }) => {
+    for (const param of paramArr) {
+      const ret = isPlainFunction(param);
+      expect(ret).toEqual(expectRet);
+    }
+  });
+
+  test.each([
+    {
+      name: 'failed entry',
+      paramArr: [
+        0, false, {}, [], '', undefined, null,
+        new Set(), new Map()
+      ],
+      expectRet: false
+    },
+    {
+      name: 'passed entry',
+      paramArr: [
+        function() {},
+        () => {},
+        async function() {},
+        async () => {},
+        function () { return new Promise(); },
+        () => new Promise()
+      ],
+      expectRet: true
+    }
+  ])('isFunction, $name', ({ paramArr, expectRet }) => {
+    for (const param of paramArr) {
+      const ret = isFunction(param);
+      expect(ret).toEqual(expectRet);
+    }
+  });
+
+  test.each([
+    {
+      name: 'failed entry',
+      paramArr: [
+        0, false, {}, [], '', null,
+        new Set(), new Map()
+      ],
+      expectRet: false
+    },
+    {
+      name: 'passed entry',
+      paramArr: [
+        undefined
+      ],
+      expectRet: true
+    }
+  ])('isUndefined, $name', ({ paramArr, expectRet }) => {
+    for (const param of paramArr) {
+      const ret = isUndefined(param);
+      expect(ret).toEqual(expectRet);
+    }
+  });
+
+  test.each([
+    {
+      name: 'failed entry',
+      paramArr: [
+        0, false, {}, [], '', undefined,
+        new Set(), new Map()
+      ],
+      expectRet: false
+    },
+    {
+      name: 'passed entry',
+      paramArr: [
+        null
+      ],
+      expectRet: true
+    }
+  ])('isNull, $name', ({ paramArr, expectRet }) => {
+    for (const param of paramArr) {
+      const ret = isNull(param);
+      expect(ret).toEqual(expectRet);
+    }
+  });
+
+  test.each([
+    {
+      name: 'failed entry',
+      paramArr: [
+        0, false, {}, [], '',
+        new Set(), new Map()
+      ],
+      expectRet: false
+    },
+    {
+      name: 'passed entry',
+      paramArr: [
+        null, undefined
+      ],
+      expectRet: true
+    }
+  ])('isNullOrUndefined, $name', ({ paramArr, expectRet }) => {
+    for (const param of paramArr) {
+      const ret = isNullOrUndefined(param);
+      expect(ret).toEqual(expectRet);
+    }
+  });
+
+  test.each([
+    {
+      name: 'failed entry',
+      paramArr: [
+        -1, false, {}, [], '',
+        new Set(), new Map(),
+        1.1
+      ],
+      expectRet: false
+    },
+    {
+      name: 'passed entry',
+      paramArr: [
+        0, 1, 2
+      ],
+      expectRet: true
+    }
+  ])('isTruthNaturalNum, $name', ({ paramArr, expectRet }) => {
+    for (const param of paramArr) {
+      const ret = isTruthNaturalNum(param);
+      expect(ret).toEqual(expectRet);
+    }
+  });
+
+  test.each([
+    {
+      name: 'failed entry',
+      paramArr: [
+        -1, false, {}, [], '',
+        new Set(), new Map(),
+        1.1, 0
+      ],
+      expectRet: false
+    },
+    {
+      name: 'passed entry',
+      paramArr: [
+        1, 2
+      ],
+      expectRet: true
+    }
+  ])('isTruthPositiveInt, $name', ({ paramArr, expectRet }) => {
+    for (const param of paramArr) {
+      const ret = isTruthPositiveInt(param);
+      expect(ret).toEqual(expectRet);
+    }
   });
 });
 
