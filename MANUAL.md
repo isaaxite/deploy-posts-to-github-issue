@@ -13,6 +13,7 @@
     + [source_dir](#source_dir)
   * [Link Format](#link-format)
     + [link_prefix](#link_prefix)
+    + [disable_asset_find](#disable_asset_find)
     + [types](#types)
   * [Assets Push](#assets-push)
     + [push_asset](#push_asset)
@@ -262,6 +263,23 @@ Similar to `global source_dir`, the default value is also `global source_dir`, b
 ```yml
 link_prefix:
   dir: <dir>
+```
+
+### disable_asset_find
+
+State: `optional`
+
+Type: `boolean`
+
+Default: `false`
+
+*Disable Isubo to find the real path of asset in post content.*
+
+By default, isubo will find the real path of asset. The real path as last path to splice with 'link_prefix'.
+If you disable it, isubo will use asset path in post content to splice.
+
+```yml
+disable_asset_find: true
 ```
 
 ### types

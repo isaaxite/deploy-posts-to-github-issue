@@ -13,12 +13,6 @@
     <img src="https://img.shields.io/github/package-json/v/isaaxite/deploy-posts-to-github-issue" alt="version">
   </a>
   <a href="https://github.com/isaaxite/deploy-posts-to-github-issue">
-    <img src="https://img.shields.io/github/languages/count/isaaxite/deploy-posts-to-github-issue" alt="languages-count">
-  </a>
-  <a href="https://github.com/isaaxite/deploy-posts-to-github-issue">
-    <img src="https://img.shields.io/github/directory-file-count/isaaxite/deploy-posts-to-github-issue" alt="files">
-  </a>
-  <a href="https://github.com/isaaxite/deploy-posts-to-github-issue">
     <img src="https://img.shields.io/github/languages/code-size/isaaxite/deploy-posts-to-github-issue" alt="code-size">
   </a>
   <a href="https://github.com/isaaxite/deploy-posts-to-github-issue/commits/main">
@@ -36,9 +30,6 @@
   <a href="https://isaaxite.github.io/deploy-posts-to-github-issue/reports/coverage/index.html">
     <img alt="Static Badge" src="https://img.shields.io/badge/Test-Coverage-blue">
   </a>
-  <a href="https://github.com/isaaxite/deploy-posts-to-github-issue">
-    <img src="https://img.shields.io/bundlephobia/min/isubo" alt="npm bundle size">
-  </a>
 </div>
 
 
@@ -47,6 +38,8 @@
 As we known, a lost of developer use github isses as their blog which is so great. However, the bad experience of writing articles on the issue page of github is really hard to describe. And Isubo was born for this 💪.
 
 Isubo is a CLI tool to publish markdown content to github issues. It allows you to focus on writing posts in the local environment to obtain a comfortable experience, and gracefully solve the storage and publishing of posts and resources for you 🤟.
+
+📣 *This is a start-up project, please give me a star, your support is the driving force for my continuous update.*
 
 ![](./assets/complete.gif)
 
