@@ -1,4 +1,11 @@
 # Changelog
+### [0.0.11-beta.0](https://github.com/isaaxite/deploy-posts-to-github-issue/compare/v0.0.11-alpha.12...v0.0.11-beta.0) (2023-08-06)
+
+
+### Features
+
+* reduce the push process ([cc6a4b6](https://github.com/isaaxite/deploy-posts-to-github-issue/commit/cc6a4b669705505b569337b1e4db1cf88c092095))
+
 ### [0.0.11-alpha.12](https://github.com/isaaxite/deploy-posts-to-github-issue/compare/v0.0.11-alpha.11...v0.0.11-alpha.12) (2023-07-31)
 
 
