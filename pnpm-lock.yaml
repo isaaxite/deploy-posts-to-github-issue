@@ -58,6 +58,9 @@ devDependencies:
   '@commitlint/config-conventional':
     specifier: ^17.6.6
     version: 17.6.6
+  '@isubo-org/publish':
+    specifier: 0.0.2-alpha.1
+    version: 0.0.2-alpha.1
   '@isubo-org/version':
     specifier: 0.0.2-alpha.6
     version: 0.0.2-alpha.6
@@ -1572,6 +1575,14 @@ packages:
   /@istanbuljs/schema@0.1.3:
     resolution: {integrity: sha512-ZXRY4jNvVgSVQ8DL3LTcakaAtXwTVUxE81hslsyD2AtoXW/wVob10HkOJ1X/pAlcI7D+2YoZKg5do8G/w6RYgA==}
     engines: {node: '>=8'}
+    dev: true
+
+  /@isubo-org/publish@0.0.2-alpha.1:
+    resolution: {integrity: sha512-c8TRqfYMDg2Q9xUpXMLqEdaFyxrKz66wZe8RoAib5WUUZbHTBB33mQaUfPd97VbhUD63/nTuduC8WtK79eVN2g==}
+    hasBin: true
+    dependencies:
+      prompts: 2.4.2
+      yargs: 17.7.2
     dev: true
 
   /@isubo-org/version@0.0.2-alpha.6:
