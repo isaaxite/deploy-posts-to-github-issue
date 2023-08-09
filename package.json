@@ -19,6 +19,11 @@
     "commitlint": "commitlint --edit",
     "postversion": "git push && git push origin --tags"
   },
+  "standard-version": {
+    "scripts": {
+      "posttag": "npm run postversion"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/isaaxite/deploy-posts-to-github-issue.git"
