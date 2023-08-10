@@ -292,6 +292,6 @@ For general questions or discussions, you can also use:
 [Isaac Kam's Blog]: https://isaaxite.github.io/blog/
 [MIT]: https://github.com/isaaxite/deploy-posts-to-github-issue/blob/main/LICENSE
 [isaaxite]: https://github.com/isaaxite
-[MANUAL]: MANUAL.md
+[MANUAL]: https://github.com/isaaxite/deploy-posts-to-github-issue/blob/main/MANUAL.md
 [Test Report]: https://isaaxite.github.io/deploy-posts-to-github-issue/reports/test.html
 [Coverage]: https://isaaxite.github.io/deploy-posts-to-github-issue/reports/coverage/index.html
