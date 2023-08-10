@@ -12,7 +12,7 @@
     "esm-test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand",
     "only-test": "./jest.js",
     "update-test-reports": "npm run esm-test && (git add ./reports && git commit -m 'chore: update test reports') || git checkout ./reports",
-    "build": "rm -rf dist && rollup -c rollup.config.js && sed -i '1i#!/usr/bin/env node' dist/bin/index.js",
+    "build": "node ./scripts/build.js",
     "publish": "npm run build && node scripts/npm.publish.js",
     "toc-for": "node ./scripts/toc-for.js",
     "prepare": "husky install",
