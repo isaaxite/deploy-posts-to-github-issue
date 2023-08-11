@@ -59,8 +59,8 @@ devDependencies:
     specifier: ^17.6.6
     version: 17.6.6
   '@isubo-org/publish':
-    specifier: 0.0.2-alpha.1
-    version: 0.0.2-alpha.1
+    specifier: 0.0.2
+    version: 0.0.2
   '@isubo-org/version':
     specifier: 0.0.2-alpha.6
     version: 0.0.2-alpha.6
@@ -1571,8 +1571,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /@isubo-org/publish@0.0.2-alpha.1:
-    resolution: {integrity: sha512-c8TRqfYMDg2Q9xUpXMLqEdaFyxrKz66wZe8RoAib5WUUZbHTBB33mQaUfPd97VbhUD63/nTuduC8WtK79eVN2g==}
+  /@isubo-org/publish@0.0.2:
+    resolution: {integrity: sha512-yDuJnTUNAKkDWoZfKcDGXGRKMV7RMervxR3T0PlveAlQoihchDLtlKZEb9HG60Ah8KxFOBlPU71Tf9bFeonnGQ==}
     hasBin: true
     dependencies:
       prompts: 2.4.2
