@@ -23,7 +23,14 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       
-      - run: node ./scripts/build.js
+      - name: Build artifact
+        run: node ./scripts/build.js
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifact
+          path: ./dist
 
   publish-npm:
     needs: build
@@ -41,6 +48,13 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - run: npx isubo-publish --skin-login --skin-build
+      - name: Download build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: build-artifact
+          path: ./dist
+
+      - name: Publish artifact to npm
+        run: npx isubo-publish --skin-login --skin-build
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
