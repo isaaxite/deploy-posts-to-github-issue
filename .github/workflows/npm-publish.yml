@@ -17,12 +17,18 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: Install pnpm
-        run: npm install -g pnpm
 
-      - name: Install dependencies
-        run: pnpm install
+      - name: Cache dependencies
+        id: cache-dependencies
+        uses: actions/cache@v3
+        with:
+          path: ./node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('./pnpm-lock.yaml') }}
       
+      - name: Install dependencies
+        if: steps.cache-dependencies.outputs.cache-hit != 'true'
+        run: npm install -g pnpm && pnpm install    
+
       - name: Build artifact
         run: node ./scripts/build.js
 
@@ -42,11 +48,17 @@ jobs:
           node-version: 16
           registry-url: https://registry.npmjs.org/
 
-      - name: Install pnpm
-        run: npm install -g pnpm
+      # - name: Install pnpm
+      #   run: npm install -g pnpm
 
-      - name: Install dependencies
-        run: pnpm install
+      # - name: Install dependencies
+      #   run: pnpm install
+
+      - name: Restore dependencies cache
+        uses: actions/cache@v3
+        with:
+          path: ./node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('./pnpm-lock.yaml') }}
 
       - name: Download build artifact
         uses: actions/download-artifact@v3
