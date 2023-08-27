@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - temp/dist/post_finder.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>temp/dist/post_finder.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">66.52</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">255</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">53.50</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">2.76</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
+function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedeclaration(obj, privateMap); privateMap.set(obj, value); }
+function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError(&quot;Cannot initialize the same private elements twice on an object&quot;); } }
+function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = _classExtractFieldDescriptor(receiver, privateMap, &quot;set&quot;); _classApplyDescriptorSet(receiver, descriptor, value); return value; }
+function _classApplyDescriptorSet(receiver, descriptor, value) { if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError(&quot;attempted to set read only private field&quot;); } descriptor.value = value; } }
+function _classPrivateFieldGet(receiver, privateMap) { var descriptor = _classExtractFieldDescriptor(receiver, privateMap, &quot;get&quot;); return _classApplyDescriptorGet(receiver, descriptor); }
+function _classExtractFieldDescriptor(receiver, privateMap, action) { if (!privateMap.has(receiver)) { throw new TypeError(&quot;attempted to &quot; + action + &quot; private field on non-instance&quot;); } return privateMap.get(receiver); }
+function _classApplyDescriptorGet(receiver, descriptor) { if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
+function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError(&quot;attempted to get private field on non-instance&quot;); } return fn; }
+import fg from &#039;fast-glob&#039;;
+import { existsSync } from &#039;fs&#039;;
+import path from &#039;path&#039;;
+import prompts from &#039;prompts&#039;;
+import { hinter } from &#039;./hinter.js&#039;;
+import { isDataObject, isNonEmptyString, isNonEmptyStringItemArray, isNullOrUndefined, isTruthNaturalNum, isUndefined } from &#039;./utils/index.js&#039;;
+import { postPath } from &#039;./post_path.js&#039;;
+import { AtLeastPropError, CtorParamDataObjectError, DirNotExistError, InvalidPatternListError, NonEmptyError, NonEmptyStringError, NonEmptyStringItemArrayError, NonEmptyStringOrNonEmptyStringItemArrayError, TruthNaturalNumError } from &#039;./utils/error.js&#039;;
+var _limitedExts = /*#__PURE__*/new WeakMap();
+var _filename = /*#__PURE__*/new WeakMap();
+var _ext = /*#__PURE__*/new WeakMap();
+var _patterns = /*#__PURE__*/new WeakMap();
+var _sourceDir = /*#__PURE__*/new WeakMap();
+var _postTitleSeat = /*#__PURE__*/new WeakMap();
+var _setPostTitleSeat = /*#__PURE__*/new WeakSet();
+var _setFilename = /*#__PURE__*/new WeakSet();
+var _setExt = /*#__PURE__*/new WeakSet();
+var _setSourceDir = /*#__PURE__*/new WeakSet();
+var _setPatterns = /*#__PURE__*/new WeakSet();
+var _getPatternSuffix = /*#__PURE__*/new WeakSet();
+var _setPatternsWith = /*#__PURE__*/new WeakSet();
+export class PostFinder {
+  /**
+  patterns was used in the end.sourceDir, ext and filename all are used to contruct a pattern
+  so, patterns and them is mutually independant
+  */
+  /**
+  * @typedef {Object} PostFinderCtorParam0
+  * @property {string[]} patterns - glob pattern list
+  * @typedef {Object} PostFinderCtorParam1
+  * @property {string} sourceDir - source dir path
+  * @property {string} [ext] - extname, e.g. &#039;md&#039;
+  * @typedef {Object} PostFinderCtorParam2
+  * @property {string} sourceDir - source dir path
+  * @property {string} filename - post title
+  * @property {number} postTitleSeat
+  * @property {string} [ext] - extname, e.g. &#039;md&#039;
+  * @param {PostFinderCtorParam0|PostFinderCtorParam1|PostFinderCtorParam2} param
+  */
+  constructor(param) {
+    _classPrivateMethodInitSpec(this, _setPatternsWith);
+    _classPrivateMethodInitSpec(this, _getPatternSuffix);
+    _classPrivateMethodInitSpec(this, _setPatterns);
+    _classPrivateMethodInitSpec(this, _setSourceDir);
+    _classPrivateMethodInitSpec(this, _setExt);
+    _classPrivateMethodInitSpec(this, _setFilename);
+    _classPrivateMethodInitSpec(this, _setPostTitleSeat);
+    _classPrivateFieldInitSpec(this, _limitedExts, {
+      writable: true,
+      value: [&#039;md&#039;]
+    });
+    _classPrivateFieldInitSpec(this, _filename, {
+      writable: true,
+      value: &#039;&#039;
+    });
+    _classPrivateFieldInitSpec(this, _ext, {
+      writable: true,
+      value: &#039;md&#039;
+    });
+    _classPrivateFieldInitSpec(this, _patterns, {
+      writable: true,
+      value: []
+    });
+    _classPrivateFieldInitSpec(this, _sourceDir, {
+      writable: true,
+      value: &#039;&#039;
+    });
+    _classPrivateFieldInitSpec(this, _postTitleSeat, {
+      writable: true,
+      value: 0
+    });
+    if (!isDataObject(param)) {
+      throw new CtorParamDataObjectError();
+    }
+    const {
+      // [required] number, natual number
+      postTitleSeat: _postTitleSeat2,
+      // [optional required], Array&lt;string&gt;
+      patterns: _patterns2,
+      // [optional required], string
+      sourceDir: _sourceDir2,
+      // [optional], string
+      // not start with point(.)
+      ext: _ext2,
+      // [optional], Array&lt;string&gt; | string
+      filename: _filename2
+    } = param;
+    // 0. required params
+    if (isUndefined(_patterns2) &amp;&amp; isUndefined(_sourceDir2)) {
+      throw new AtLeastPropError(&#039;param.patterns, param.sourceDir&#039;);
+    }
+
+    // 1. Determine whether to use patterns directly, and if so, check whether it is valid
+    if (!isUndefined(_patterns2)) {
+      _classPrivateMethodGet(this, _setPatterns, _setPatterns2).call(this, _patterns2);
+    } else {
+      _classPrivateMethodGet(this, _setExt, _setExt2).call(this, _ext2);
+      if (!isNullOrUndefined(_filename2)) {
+        _classPrivateMethodGet(this, _setPostTitleSeat, _setPostTitleSeat2).call(this, _postTitleSeat2);
+        _classPrivateMethodGet(this, _setFilename, _setFilename2).call(this, _filename2);
+      }
+      _classPrivateMethodGet(this, _setSourceDir, _setSourceDir2).call(this, _sourceDir2);
+      _classPrivateMethodGet(this, _setPatternsWith, _setPatternsWith2).call(this, {
+        sourceDir: _classPrivateFieldGet(this, _sourceDir)
+      });
+    }
+  }
+  get ext() {
+    return _classPrivateFieldGet(this, _ext);
+  }
+  get patterns() {
+    return _classPrivateFieldGet(this, _patterns);
+  }
+  getFilepaths() {
+    const ret = fg.sync(_classPrivateFieldGet(this, _patterns), {
+      unique: true
+    });
+    return ret;
+  }
+  async selectPosts() {
+    const ALL_POSTS = &#039;__ALL__&#039;;
+    const filepathArr = this.getFilepaths();
+    let choices = filepathArr.map(filepath =&gt; {
+      // const filename = path.basename(filepath);
+      const title = postPath.parse(filepath).postTitle;
+      return {
+        title,
+        value: filepath
+      };
+    });
+    choices = [{
+      title: &#039;All&#039;,
+      value: ALL_POSTS
+    }, ...choices];
+    const lastRet = (await prompts({
+      instructions: false,
+      type: &#039;autocompleteMultiselect&#039;,
+      name: &#039;userSelected&#039;,
+      message: &#039;Select one or several posts!&#039;,
+      choices,
+      max: 6,
+      hint: &#039;- [Space] to select. [Enter] to submit.[↑/↓] to move.&#039;,
+      format(ret) {
+        if (ret.includes(ALL_POSTS)) {
+          return filepathArr;
+        }
+        return ret;
+      }
+    })).userSelected;
+    return lastRet;
+  }
+}
+function _setPostTitleSeat2(postTitleSeat) {
+  if (isNullOrUndefined(postTitleSeat)) {
+    throw new NonEmptyError(&#039;postTitleSeat&#039;);
+  }
+  if (!isTruthNaturalNum(postTitleSeat)) {
+    throw new TruthNaturalNumError(&#039;postTitleSeat&#039;);
+  }
+  _classPrivateFieldSet(this, _postTitleSeat, postTitleSeat);
+}
+function _setFilename2(filename) {
+  if (!isNonEmptyString(filename) &amp;&amp; !isNonEmptyStringItemArray(filename)) {
+    throw new NonEmptyStringOrNonEmptyStringItemArrayError(&#039;filename&#039;);
+  }
+  const destArr = [];
+  const srcArr = isNonEmptyString(filename) ? [filename] : filename;
+  for (let idx = 0; idx &lt; srcArr.length; idx += 1) {
+    const it = srcArr[idx];
+    const ext = path.extname(it);
+    const readFilename = ext ? path.basename(it).replace(ext, &#039;&#039;) : path.basename(it);
+    destArr.push(readFilename);
+  }
+  _classPrivateFieldSet(this, _filename, Array.from(new Set(destArr)));
+}
+function _setExt2(ext) {
+  if (!ext) {
+    return;
+  }
+  if (!_classPrivateFieldGet(this, _limitedExts).includes(ext)) {
+    hinter.warnMsg(`unexpext ${ext}, allow ext like: ${_classPrivateFieldGet(this, _limitedExts).join(&#039;, &#039;)}, default use md.`);
+  } else {
+    _classPrivateFieldSet(this, _ext, ext);
+  }
+}
+function _setSourceDir2(sourceDir) {
+  if (!isNonEmptyString(sourceDir)) {
+    throw new NonEmptyStringError(&#039;sourceDir&#039;);
+  }
+  if (!existsSync(sourceDir)) {
+    throw new DirNotExistError(`sourceDir(${sourceDir})`);
+  }
+  _classPrivateFieldSet(this, _sourceDir, path.join(sourceDir, &#039;./&#039;));
+}
+function _setPatterns2(prePatterns) {
+  const validatePatterns = patterns =&gt; {
+    if (!isNonEmptyStringItemArray(patterns)) {
+      throw new NonEmptyStringItemArrayError(&#039;patterns&#039;);
+    }
+    const validPatterns = [];
+    const invalidPatterns = [];
+    for (let idx = 0; idx &lt; patterns.length; idx += 1) {
+      const pattern = patterns[idx];
+      if (!pattern.includes(&#039;*&#039;)) {
+        if (!existsSync(pattern)) {
+          invalidPatterns.push(pattern);
+        } else {
+          validPatterns.push(pattern);
+        }
+      } else {
+        const [parentDir] = pattern.split(&#039;*&#039;);
+        if (!existsSync(parentDir)) {
+          invalidPatterns.push(pattern);
+        } else {
+          validPatterns.push(pattern);
+        }
+      }
+    }
+    if (invalidPatterns.length === patterns.length) {
+      throw new InvalidPatternListError(invalidPatterns);
+    }
+    if (invalidPatterns.length) {
+      hinter.warnMsg(`${invalidPatterns.join(&#039;, &#039;)} are invalid. Corresponding patterns will be deleted.`);
+    }
+    return validPatterns;
+  };
+  const validPatterns = validatePatterns(prePatterns);
+  _classPrivateFieldSet(this, _patterns, validPatterns);
+}
+function _getPatternSuffix2(postTitle) {
+  let suffix = path.join(postTitle, new Array(_classPrivateFieldGet(this, _postTitleSeat)).fill(&#039;*&#039;).join(path.sep));
+  suffix += `.${_classPrivateFieldGet(this, _ext)}`;
+  return suffix;
+}
+function _setPatternsWith2({
+  sourceDir
+}) {
+  if (_classPrivateFieldGet(this, _filename)) {
+    _classPrivateFieldSet(this, _patterns, _classPrivateFieldGet(this, _filename).map(filenameIt =&gt; {
+      const suffix = _classPrivateMethodGet(this, _getPatternSuffix, _getPatternSuffix2).call(this, filenameIt);
+      return `${sourceDir}**/${suffix}`;
+    }));
+  } else {
+    _classPrivateFieldSet(this, _patterns, [`${sourceDir}**/*.${_classPrivateFieldGet(this, _ext)}`]);
+  }
+}</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ cyclomatic }} <br>
+    Length : {{ halstead.length }} <br>
+    Difficulty : {{ halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - temp/dist/constants/asset.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>temp/dist/constants/asset.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">93.13</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">114</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">2.00</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">0.01</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">export const CONFIG_FILE_TEMPLATE = `
+# Isubo Configuration
+## Docs: https://github.com/isaaxite/deploy-posts-to-github-issue/blob/main/README.md
+## Source: https://github.com/isaaxite/deploy-posts-to-github-issue
+
+
+# Github Info
+
+## [required]
+## Repository owner, Such as &quot;isaaxite&quot; in &quot;isaaxite/blog&quot;.
+# e.g.
+# owner: isaaxite
+owner: &#039;&#039;
+
+## [required]
+## Repository name, refer to &quot;blog&quot; in the example above.
+### Please ensure that this repository has been manually created by you, 
+### it will be used to store posts resources, and posts will also be published to this repository&#039;s issue.
+# e.g.
+# repo: blog
+repo: &#039;&#039;
+
+## [optional]
+## Branch of &lt;owner&gt;/&lt;repo&gt;, the branch where the resource is actually stored.
+## Default &#039;main&#039;
+## branch: main
+# branch: main
+
+## [required]
+## Github Token, it will be used to invoked github api to publish posts
+## you can get it in https://github.com/settings/tokens
+## It is strongly recommended not to use plaintext to prevent others from stealing your token. 
+## You can try to use environment variables.
+## If you use an environment variable, please start with $ and use uppercase letters for the remaining part to declare, 
+## and isubo will automatically obtain this environment variable
+# e.g.
+# token: $GITHUB_TOKEN
+token: &#039;&#039;
+
+
+# Post Source
+
+## [optional]
+## Source dir, The top-level directory where articles are stored, and where isubo should looking for.
+## Default &quot;source/&quot;
+## e.g.
+## source_dir: &quot;source/&quot;
+# source_dir: source/
+
+
+# Link Format
+
+## [optional]
+## Used to format links in articles, and format relative links as url links
+## it can take a string or plain object, as the blew example
+##
+## string: 
+##  link_prefix: https://raw.githubusercontent.com/&lt;owner&gt;/&lt;repo&gt;/&lt;branch&gt;/&lt;source_dir&gt;/
+##
+## object:
+##  link_prefix:
+##    owner: &lt;owner&gt;, default is global owner
+##    repo: &lt;repo&gt;, default is global repo
+##    branch: &lt;branch&gt;, default is global branch
+##    dir: &#039;&lt;dir&gt;&#039;, default is global source_dir
+##
+## Default:
+##  link_prefix: https://raw.githubusercontent.com/&lt;owner&gt;/&lt;repo&gt;/&lt;branch&gt;/&lt;source_dir&gt;/
+# link_prefix: 
+
+## [optional]
+## types, Which link type should be formated.
+## According to the type specified by types, format the corresponding non-http path.
+## Currently supports two formats of &quot;image&quot; and &quot;link&quot;, the default is only &quot;image&quot; format.
+# types: 
+#   - image
+
+## [optional]
+## By default, isubo will find the real path of asset. The real path as last path to splice with &#039;link_prefix&#039;.
+## If you disable it, isubo will use asset path in post content to splice.
+# disable_asset_find: false
+
+# Assets Push
+
+## [optional]
+## Setting this configuration that will detect link assets of those posts and judge which assets need to push when you published the posts.
+## If there are some assets need to push and this configuration&#039;value is &#039;prompt&#039; or &#039;auto&#039;, isubo will use git-lib to push them.
+## Hint: You can use this feature with confidence, because we will temporary storage those changes other than assets, 
+## and recover them after pushed assets successfuly, in case we also set up a temporary branch as the last resort. 
+##
+## push_asset: prompt | auto | disable
+##   prompt: prompt to if push assets
+##   auto: push assets automatically
+##   disable: just disable pushing assets
+## Default setting is &#039;prompt&#039;.
+#push_asset: prompt
+
+## [optional]
+## In Isubo, the post support yml metadata like the below. By default, the published issue will delete this part of metadata.
+## If you want to show that, you should set &#039;hide_frontmatter: false&#039;.
+## Default: true
+hide_frontmatter: true
+
+## [optional]
+## Isubo use directory name or filename at post path as post title
+## By default, filename is used as the title of the post
+## You can set it with &#039;post_title_seat&#039;
+## e.g.
+## /home/issue-blog/source/license.md
+## 0: license
+## 1: source
+## 2: isubo-blog
+post_title_seat: 0
+`;</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ cyclomatic }} <br>
+    Length : {{ halstead.length }} <br>
+    Difficulty : {{ halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

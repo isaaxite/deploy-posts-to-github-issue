@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - temp/dist/asset_publisher.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>temp/dist/asset_publisher.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">68.10</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">476</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">73.25</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">5.31</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
+function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedeclaration(obj, privateMap); privateMap.set(obj, value); }
+function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError(&quot;Cannot initialize the same private elements twice on an object&quot;); } }
+function _classPrivateFieldGet(receiver, privateMap) { var descriptor = _classExtractFieldDescriptor(receiver, privateMap, &quot;get&quot;); return _classApplyDescriptorGet(receiver, descriptor); }
+function _classApplyDescriptorGet(receiver, descriptor) { if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
+function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError(&quot;attempted to get private field on non-instance&quot;); } return fn; }
+function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = _classExtractFieldDescriptor(receiver, privateMap, &quot;set&quot;); _classApplyDescriptorSet(receiver, descriptor, value); return value; }
+function _classExtractFieldDescriptor(receiver, privateMap, action) { if (!privateMap.has(receiver)) { throw new TypeError(&quot;attempted to &quot; + action + &quot; private field on non-instance&quot;); } return privateMap.get(receiver); }
+function _classApplyDescriptorSet(receiver, descriptor, value) { if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError(&quot;attempted to set read only private field&quot;); } descriptor.value = value; } }
+import path from &#039;path&#039;;
+import { simpleGit, ResetMode } from &#039;simple-git&#039;;
+import { spawnSync } from &#039;child_process&#039;;
+import chalk from &#039;chalk&#039;;
+import { hinter } from &#039;./hinter.js&#039;;
+import { hintWraper, isArray, isDataObject, isFunction, isNonEmptyAbsolutePath, isNonEmptyAbsolutePathItemArray, isNonEmptyString } from &#039;./utils/index.js&#039;;
+import { DEF_SIMPLE_GIT_OPT } from &#039;./constants/index.js&#039;;
+import { CtorParamDataObjectError, NonArrayError, NonEmptyAbsolutePathError, NonEmptyAbsolutePathItemArrayError } from &#039;./utils/error.js&#039;;
+var _git = /*#__PURE__*/new WeakMap();
+var _simpleGitOpt = /*#__PURE__*/new WeakMap();
+var _baseDir = /*#__PURE__*/new WeakMap();
+var _staged = /*#__PURE__*/new WeakMap();
+var _assetRecords = /*#__PURE__*/new WeakMap();
+var _srcPostpaths = /*#__PURE__*/new WeakMap();
+var _srcAssetpaths = /*#__PURE__*/new WeakMap();
+var _srcUnpushPaths = /*#__PURE__*/new WeakMap();
+var _unpushPaths = /*#__PURE__*/new WeakMap();
+var _postAndAssetsCommitId = /*#__PURE__*/new WeakMap();
+var _latestCommitId = /*#__PURE__*/new WeakMap();
+var _uniqueKey = /*#__PURE__*/new WeakMap();
+var _recoverQueue = /*#__PURE__*/new WeakMap();
+var _pushHooks = /*#__PURE__*/new WeakMap();
+var _execmdSync = /*#__PURE__*/new WeakSet();
+var _setSimpleGitOptAndBaseDirBy = /*#__PURE__*/new WeakSet();
+var _setAssetRecords = /*#__PURE__*/new WeakSet();
+var _setPushHooks = /*#__PURE__*/new WeakSet();
+var _setLatestCommitId = /*#__PURE__*/new WeakSet();
+var _setSrcAssetpathsAndSrcPostpaths = /*#__PURE__*/new WeakSet();
+var _getUnpushPathsBy = /*#__PURE__*/new WeakSet();
+var _commitPostAndAssets = /*#__PURE__*/new WeakSet();
+var _commitPostAndAssetsWithHint = /*#__PURE__*/new WeakSet();
+var _addRecoverTask = /*#__PURE__*/new WeakSet();
+var _dumpRecoverTasks = /*#__PURE__*/new WeakSet();
+var _execRecoverTasks = /*#__PURE__*/new WeakSet();
+var _backupPrevStagedBy = /*#__PURE__*/new WeakSet();
+var _recoverPrevStaged = /*#__PURE__*/new WeakSet();
+var _backupPrevStagedWithHintBy = /*#__PURE__*/new WeakSet();
+var _recoverStaged = /*#__PURE__*/new WeakSet();
+var _resetTolatestCommit = /*#__PURE__*/new WeakSet();
+var _recoverAsSucPush = /*#__PURE__*/new WeakSet();
+var _recoverAsSucPushWithHint = /*#__PURE__*/new WeakSet();
+var _pushPostAndAssetsWithHint = /*#__PURE__*/new WeakSet();
+var _push = /*#__PURE__*/new WeakSet();
+export class AssetPublisher {
+  /**
+   * @typedef {Object} AssetRecordItem
+   * @property {string} postpath
+   * @property {string[]} assetpaths
+   *
+   * @typedef {Object} RecoverQueueItem
+   * @property {string} name
+   * @property {function():Promise&lt;void&gt;} task
+   * @property {string} [hint]
+   *
+   * @typedef {Object} PushHooks
+   * @property {function(): Promise&lt;void&gt;} [beforePush]
+   * @property {function(): Promise&lt;void&gt;} [afterBackupPrevStaged]
+   * @property {function(): Promise&lt;void&gt;} [beforeSetBackupBranch]
+   * @property {function(): Promise&lt;void&gt;} [afterCommitPostAndAssets]
+   * @property {function(): Promise&lt;void&gt;} [beforePushPostAndAssets]
+   * @property {function(): Promise&lt;void&gt;} [pushingPostAndAssets]
+   * @property {function(): Promise&lt;void&gt;} [afterPushPostAndAssets]
+   * @property {(param0: RecoverQueueItem) =&gt; Promise&lt;void&gt;} [recoveringTasks]
+   *
+   * @typedef {Object} AssetPublisherCtorParam
+   * @property {AssetRecordItem[]} assetRecords
+   * @property {object} [simpleGitOpt]
+   * @property {PushHooks} [pushHooks]
+   *
+   * @param {AssetPublisherCtorParam} param
+   */
+  constructor(param) {
+    _classPrivateMethodInitSpec(this, _push);
+    _classPrivateMethodInitSpec(this, _pushPostAndAssetsWithHint);
+    _classPrivateMethodInitSpec(this, _recoverAsSucPushWithHint);
+    _classPrivateMethodInitSpec(this, _recoverAsSucPush);
+    _classPrivateMethodInitSpec(this, _resetTolatestCommit);
+    _classPrivateMethodInitSpec(this, _recoverStaged);
+    _classPrivateMethodInitSpec(this, _backupPrevStagedWithHintBy);
+    _classPrivateMethodInitSpec(this, _recoverPrevStaged);
+    _classPrivateMethodInitSpec(this, _backupPrevStagedBy);
+    _classPrivateMethodInitSpec(this, _execRecoverTasks);
+    _classPrivateMethodInitSpec(this, _dumpRecoverTasks);
+    _classPrivateMethodInitSpec(this, _addRecoverTask);
+    _classPrivateMethodInitSpec(this, _commitPostAndAssetsWithHint);
+    _classPrivateMethodInitSpec(this, _commitPostAndAssets);
+    _classPrivateMethodInitSpec(this, _getUnpushPathsBy);
+    _classPrivateMethodInitSpec(this, _setSrcAssetpathsAndSrcPostpaths);
+    _classPrivateMethodInitSpec(this, _setLatestCommitId);
+    _classPrivateMethodInitSpec(this, _setPushHooks);
+    /**
+     * set asset records
+     * assetRecords can be a empty array but non-array
+     *
+     * @param {AssetRecordItem} assetRecords
+     * @returns {void}
+     */
+    _classPrivateMethodInitSpec(this, _setAssetRecords);
+    _classPrivateMethodInitSpec(this, _setSimpleGitOptAndBaseDirBy);
+    _classPrivateMethodInitSpec(this, _execmdSync);
+    _classPrivateFieldInitSpec(this, _git, {
+      writable: true,
+      value: null
+    });
+    _classPrivateFieldInitSpec(this, _simpleGitOpt, {
+      writable: true,
+      value: DEF_SIMPLE_GIT_OPT
+    });
+    _classPrivateFieldInitSpec(this, _baseDir, {
+      writable: true,
+      value: process.cwd()
+    });
+    _classPrivateFieldInitSpec(this, _staged, {
+      writable: true,
+      value: []
+    });
+    _classPrivateFieldInitSpec(this, _assetRecords, {
+      writable: true,
+      value: []
+    });
+    _classPrivateFieldInitSpec(this, _srcPostpaths, {
+      writable: true,
+      value: []
+    });
+    _classPrivateFieldInitSpec(this, _srcAssetpaths, {
+      writable: true,
+      value: []
+    });
+    _classPrivateFieldInitSpec(this, _srcUnpushPaths, {
+      writable: true,
+      value: []
+    });
+    _classPrivateFieldInitSpec(this, _unpushPaths, {
+      writable: true,
+      value: []
+    });
+    _classPrivateFieldInitSpec(this, _postAndAssetsCommitId, {
+      writable: true,
+      value: &#039;&#039;
+    });
+    _classPrivateFieldInitSpec(this, _latestCommitId, {
+      writable: true,
+      value: &#039;&#039;
+    });
+    _classPrivateFieldInitSpec(this, _uniqueKey, {
+      writable: true,
+      value: String(Date.now()).slice(2)
+    });
+    _classPrivateFieldInitSpec(this, _recoverQueue, {
+      writable: true,
+      value: []
+    });
+    _classPrivateFieldInitSpec(this, _pushHooks, {
+      writable: true,
+      value: {
+        beforePush: async () =&gt; {},
+        afterBackupPrevStaged: async () =&gt; {},
+        afterCommitPostAndAssets: async () =&gt; {},
+        beforeSetBackupBranch: async () =&gt; {},
+        beforePushPostAndAssets: async () =&gt; {},
+        pushingPostAndAssets: async () =&gt; {},
+        afterPushPostAndAssets: async () =&gt; {},
+        recoveringTasks: async argv =&gt; argv
+      }
+    });
+    if (!isDataObject(param)) {
+      throw new CtorParamDataObjectError();
+    }
+    const {
+      assetRecords: _assetRecords2,
+      simpleGitOpt: _simpleGitOpt2,
+      pushHooks: _pushHooks2
+    } = param;
+    _classPrivateFieldSet(this, _baseDir, process.cwd());
+    _classPrivateMethodGet(this, _setSimpleGitOptAndBaseDirBy, _setSimpleGitOptAndBaseDirBy2).call(this, {
+      simpleGitOpt: _simpleGitOpt2
+    });
+    _classPrivateFieldSet(this, _git, simpleGit(_classPrivateFieldGet(this, _simpleGitOpt)));
+    _classPrivateMethodGet(this, _setAssetRecords, _setAssetRecords2).call(this, _assetRecords2);
+    _classPrivateMethodGet(this, _setSrcAssetpathsAndSrcPostpaths, _setSrcAssetpathsAndSrcPostpaths2).call(this);
+    _classPrivateFieldSet(this, _srcUnpushPaths, [..._classPrivateFieldGet(this, _srcPostpaths), ..._classPrivateFieldGet(this, _srcAssetpaths)]);
+    _classPrivateMethodGet(this, _setPushHooks, _setPushHooks2).call(this, _pushHooks2);
+  }
+  async push() {
+    const git = _classPrivateFieldGet(this, _git);
+    const status = await git.status();
+    if (status.isClean()) {
+      hinter.infoMsg(&#039;Current branch is clean, please check if need to manually push!&#039;);
+      return;
+    }
+
+    // const curBranch = await git.branchLocal();
+    await _classPrivateMethodGet(this, _setLatestCommitId, _setLatestCommitId2).call(this);
+    try {
+      await _classPrivateFieldGet(this, _pushHooks).beforePush();
+      await _classPrivateMethodGet(this, _push, _push2).call(this);
+    } catch (error) {
+      // console.log(error)
+      hinter.errMsg(error.message);
+      await _classPrivateMethodGet(this, _execRecoverTasks, _execRecoverTasks2).call(this);
+      // throw error;
+    }
+  }
+
+  /**
+   * cheng workdir whether exist unpush post and its assets
+   *
+   * @returns {Promise&lt;boolean&gt;}
+   */
+  async checkIsUnpushPostAndAssets() {
+    const git = _classPrivateFieldGet(this, _git);
+    let status = await git.status();
+    if (status.staged.length) {
+      _classPrivateFieldSet(this, _staged, [...status.staged]);
+      await git.reset(ResetMode.MIXED);
+      status = await git.status();
+    }
+    _classPrivateFieldSet(this, _unpushPaths, _classPrivateMethodGet(this, _getUnpushPathsBy, _getUnpushPathsBy2).call(this, {
+      status
+    }));
+    if (_classPrivateFieldGet(this, _staged).length) {
+      await git.add(_classPrivateFieldGet(this, _staged));
+    }
+    return !!_classPrivateFieldGet(this, _unpushPaths).length;
+  }
+}
+function _execmdSync2(cmd, opt = {}) {
+  const params = {
+    cwd: _classPrivateFieldGet(this, _baseDir),
+    shell: true,
+    ...opt
+  };
+  // console.info(params);
+  const ret = spawnSync(cmd, params);
+  return ret;
+}
+function _setSimpleGitOptAndBaseDirBy2({
+  simpleGitOpt
+}) {
+  if (!simpleGitOpt) {
+    _classPrivateFieldSet(this, _baseDir, process.cwd());
+    _classPrivateFieldSet(this, _simpleGitOpt, {
+      ...DEF_SIMPLE_GIT_OPT,
+      baseDir: _classPrivateFieldGet(this, _baseDir)
+    });
+    return;
+  }
+  if (!isDataObject(simpleGitOpt)) {
+    hinter.warnMsg(&#039;simpleGitOpt muse non-empty data object, use def DEF_SIMPLE_GIT_OPT&#039;);
+    return;
+  }
+  if (isNonEmptyString(simpleGitOpt.baseDir)) {
+    _classPrivateFieldSet(this, _baseDir, simpleGitOpt.baseDir);
+  }
+  _classPrivateFieldSet(this, _simpleGitOpt, {
+    ...DEF_SIMPLE_GIT_OPT,
+    ...simpleGitOpt,
+    baseDir: _classPrivateFieldGet(this, _baseDir)
+  });
+}
+function _setAssetRecords2(assetRecords) {
+  if (!isArray(assetRecords)) {
+    throw new NonArrayError(&#039;assetRecords&#039;);
+  }
+  for (let idx = 0; idx &lt; assetRecords.length; idx += 1) {
+    const it = assetRecords[idx];
+    if (!isNonEmptyAbsolutePath(it.postpath)) {
+      throw new NonEmptyAbsolutePathError(&#039;assetRecords[].postpath&#039;);
+    }
+    if (!isNonEmptyAbsolutePathItemArray(it.assetpaths)) {
+      throw new NonEmptyAbsolutePathItemArrayError(&#039;assetRecords[].assetpaths&#039;);
+    }
+  }
+  _classPrivateFieldSet(this, _assetRecords, assetRecords);
+}
+function _setPushHooks2(pushHooks) {
+  if (!pushHooks || !isDataObject(pushHooks)) {
+    return;
+  }
+  Object.keys(_classPrivateFieldGet(this, _pushHooks)).forEach(key =&gt; {
+    if (isFunction(pushHooks[key])) {
+      _classPrivateFieldGet(this, _pushHooks)[key] = pushHooks[key];
+    }
+  });
+}
+async function _setLatestCommitId2() {
+  const ret = await _classPrivateFieldGet(this, _git).log();
+  _classPrivateFieldSet(this, _latestCommitId, ret.latest.hash);
+}
+function _setSrcAssetpathsAndSrcPostpaths2() {
+  const srcPostpaths = [];
+  let srcAssetpaths = [];
+  for (let idx = 0; idx &lt; _classPrivateFieldGet(this, _assetRecords).length; idx += 1) {
+    const it = _classPrivateFieldGet(this, _assetRecords)[idx];
+    srcPostpaths.push(it.postpath);
+    srcAssetpaths = [...srcAssetpaths, ...it.assetpaths];
+  }
+  _classPrivateFieldSet(this, _srcPostpaths, Array.from(new Set(srcPostpaths)));
+  _classPrivateFieldSet(this, _srcAssetpaths, Array.from(new Set(srcAssetpaths)));
+}
+function _getUnpushPathsBy2({
+  status
+}) {
+  const statusFiles = status.files || [];
+  const unpushFilepaths = statusFiles.map(it =&gt; path.resolve(_classPrivateFieldGet(this, _baseDir), it.path));
+  return _classPrivateFieldGet(this, _srcUnpushPaths).filter(it =&gt; unpushFilepaths.includes(it));
+}
+async function _commitPostAndAssets2() {
+  const git = _classPrivateFieldGet(this, _git);
+  await git.add(_classPrivateFieldGet(this, _unpushPaths));
+  const firstPostname = path.parse(_classPrivateFieldGet(this, _srcPostpaths)[0]).name;
+  const ret = await git.commit(_classPrivateFieldGet(this, _srcPostpaths).length &gt; 1 ? `Update ${_classPrivateFieldGet(this, _srcPostpaths).length} articles  including &quot;${firstPostname}&quot;, and related resources` : `Update &quot;${firstPostname}&quot; article and related resources`);
+  _classPrivateFieldSet(this, _postAndAssetsCommitId, ret.commit);
+}
+async function _commitPostAndAssetsWithHint2() {
+  return hintWraper({
+    action: &#039;commitPostAndAssets&#039;,
+    text: &#039;Set a commit for posts and corresponding assets&#039;,
+    callback: () =&gt; _classPrivateMethodGet(this, _commitPostAndAssets, _commitPostAndAssets2).call(this)
+  });
+}
+async function _addRecoverTask2({
+  name,
+  hint,
+  task
+}) {
+  _classPrivateFieldGet(this, _recoverQueue).push({
+    name,
+    hint,
+    task
+  });
+}
+async function _dumpRecoverTasks2() {
+  _classPrivateFieldSet(this, _recoverQueue, []);
+}
+async function _execRecoverTasks2() {
+  const recoverQueue = _classPrivateFieldGet(this, _recoverQueue);
+  const recoverQueueLen = recoverQueue.length;
+  for (let i = 0; i &lt; recoverQueueLen; i += 1) {
+    const {
+      name,
+      task,
+      hint
+    } = recoverQueue.pop();
+    // if (!hint) {
+    //   try {
+    //     await this.#pushHooks.recoveringTasks({ name, task, hint });
+    //     await task();
+    //   } catch (error) {
+    //     hinter.errMsg(`task (${name}) recover faill`);
+    //   }
+    //   continue;
+    // }
+
+    const hintKey = `exec_recover_rask_${name}_${String(Date.now()).slice(2)}`;
+    try {
+      hinter.load(hintKey, {
+        text: hint
+      });
+      // eslint-disable-next-line no-await-in-loop
+      await _classPrivateFieldGet(this, _pushHooks).recoveringTasks({
+        name,
+        task,
+        hint
+      });
+      // eslint-disable-next-line no-await-in-loop
+      await task();
+      hinter.loadSucc(hintKey);
+    } catch (error) {
+      hinter.loadFail(hintKey);
+    }
+  }
+  _classPrivateMethodGet(this, _dumpRecoverTasks, _dumpRecoverTasks2).call(this);
+}
+async function _backupPrevStagedBy2({
+  status
+}) {
+  let ret = status;
+  const git = _classPrivateFieldGet(this, _git);
+  if (status.staged.length) {
+    _classPrivateFieldSet(this, _staged, [...status.staged]);
+    await git.reset(ResetMode.MIXED);
+    ret = await git.status();
+  }
+  return ret;
+}
+function _recoverPrevStaged2() {
+  if (_classPrivateFieldGet(this, _staged).length) {
+    const cmd = `git add ${_classPrivateFieldGet(this, _staged).join(&#039; &#039;)}`;
+    _classPrivateMethodGet(this, _execmdSync, _execmdSync2).call(this, cmd);
+  }
+}
+async function _backupPrevStagedWithHintBy2({
+  status
+}) {
+  return hintWraper({
+    action: &#039;backupStaged&#039;,
+    text: &#039;Backup current staged&#039;,
+    callback: async () =&gt; _classPrivateMethodGet(this, _backupPrevStagedBy, _backupPrevStagedBy2).call(this, {
+      status
+    })
+  });
+}
+async function _recoverStaged2() {
+  const staged = _classPrivateFieldGet(this, _staged).filter(it =&gt; !_classPrivateFieldGet(this, _unpushPaths).includes(it));
+  if (staged.length) {
+    await _classPrivateFieldGet(this, _git).add(staged);
+  }
+}
+function _resetTolatestCommit2() {
+  if (_classPrivateFieldGet(this, _latestCommitId)) {
+    const cmd = `git reset ${_classPrivateFieldGet(this, _latestCommitId)}`;
+    _classPrivateMethodGet(this, _execmdSync, _execmdSync2).call(this, cmd);
+  }
+}
+async function _recoverAsSucPush2() {
+  await _classPrivateMethodGet(this, _recoverStaged, _recoverStaged2).call(this);
+}
+async function _recoverAsSucPushWithHint2() {
+  return hintWraper({
+    action: &#039;recoverAsSucPush&#039;,
+    text: &#039;Recover stash and staged above&#039;,
+    callback: () =&gt; _classPrivateMethodGet(this, _recoverAsSucPush, _recoverAsSucPush2).call(this)
+  });
+}
+async function _pushPostAndAssetsWithHint2() {
+  const git = _classPrivateFieldGet(this, _git);
+  const branchLocal = await git.branchLocal();
+  const cmd = `git push origin ${branchLocal.current}`;
+  await _classPrivateFieldGet(this, _pushHooks).beforePushPostAndAssets();
+  hinter.streamlog(`${chalk.greenBright(&#039;ℹ &#039;)}${cmd}\n`);
+  _classPrivateMethodGet(this, _execmdSync, _execmdSync2).call(this, cmd, {
+    stdio: &#039;inherit&#039;
+  });
+  hinter.streamlog(`\n${chalk.greenBright(&#039;✓ Publish posts and corresponding assets&#039;)}`);
+}
+async function _push2() {
+  const git = _classPrivateFieldGet(this, _git);
+  let status = await git.status();
+  status = await _classPrivateMethodGet(this, _backupPrevStagedWithHintBy, _backupPrevStagedWithHintBy2).call(this, {
+    status
+  });
+  _classPrivateMethodGet(this, _addRecoverTask, _addRecoverTask2).call(this, {
+    name: &#039;recoverPrevStaged&#039;,
+    hint: &#039;Revert prev staged&#039;,
+    task: _classPrivateMethodGet(this, _recoverPrevStaged, _recoverPrevStaged2).bind(this)
+  });
+  await _classPrivateFieldGet(this, _pushHooks).afterBackupPrevStaged();
+  _classPrivateFieldSet(this, _unpushPaths, _classPrivateMethodGet(this, _getUnpushPathsBy, _getUnpushPathsBy2).call(this, {
+    status
+  }));
+  if (!_classPrivateFieldGet(this, _unpushPaths).length) {
+    hinter.infoMsg(&#039;Without any posts and corresponding assets need to publish!&#039;);
+    return;
+  }
+  await _classPrivateMethodGet(this, _commitPostAndAssetsWithHint, _commitPostAndAssetsWithHint2).call(this);
+  _classPrivateMethodGet(this, _addRecoverTask, _addRecoverTask2).call(this, {
+    name: &#039;resetTolatestCommit&#039;,
+    hint: &#039;Revert to the record before push&#039;,
+    task: _classPrivateMethodGet(this, _resetTolatestCommit, _resetTolatestCommit2).bind(this, ResetMode.MIXED)
+  });
+  await _classPrivateFieldGet(this, _pushHooks).afterCommitPostAndAssets();
+  await _classPrivateMethodGet(this, _pushPostAndAssetsWithHint, _pushPostAndAssetsWithHint2).call(this);
+  _classPrivateMethodGet(this, _dumpRecoverTasks, _dumpRecoverTasks2).call(this);
+  await _classPrivateFieldGet(this, _pushHooks).afterPushPostAndAssets(_classPrivateFieldGet(this, _postAndAssetsCommitId));
+  await _classPrivateMethodGet(this, _recoverAsSucPushWithHint, _recoverAsSucPushWithHint2).call(this);
+}</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ cyclomatic }} <br>
+    Length : {{ halstead.length }} <br>
+    Difficulty : {{ halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

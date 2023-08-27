@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - temp/dist/post_parse.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>temp/dist/post_parse.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">63.76</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">413</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">76.60</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">4.62</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
+function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedeclaration(obj, privateMap); privateMap.set(obj, value); }
+function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError(&quot;Cannot initialize the same private elements twice on an object&quot;); } }
+function _classPrivateFieldGet(receiver, privateMap) { var descriptor = _classExtractFieldDescriptor(receiver, privateMap, &quot;get&quot;); return _classApplyDescriptorGet(receiver, descriptor); }
+function _classApplyDescriptorGet(receiver, descriptor) { if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
+function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = _classExtractFieldDescriptor(receiver, privateMap, &quot;set&quot;); _classApplyDescriptorSet(receiver, descriptor, value); return value; }
+function _classExtractFieldDescriptor(receiver, privateMap, action) { if (!privateMap.has(receiver)) { throw new TypeError(&quot;attempted to &quot; + action + &quot; private field on non-instance&quot;); } return privateMap.get(receiver); }
+function _classApplyDescriptorSet(receiver, descriptor, value) { if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError(&quot;attempted to set read only private field&quot;); } descriptor.value = value; } }
+function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError(&quot;attempted to get private field on non-instance&quot;); } return fn; }
+import path from &#039;path&#039;;
+import { existsSync, readFileSync, writeFileSync } from &#039;fs&#039;;
+import { unified } from &#039;unified&#039;;
+import markdown from &#039;remark-parse&#039;;
+import stringify from &#039;remark-stringify&#039;;
+import remarkFrontmatter from &#039;remark-frontmatter&#039;;
+import { load as loadYaml } from &#039;js-yaml&#039;;
+import { LinkFormater } from &#039;./link_formater.js&#039;;
+import { AssetFinder } from &#039;./asset_finder.js&#039;;
+import { hinter } from &#039;./hinter.js&#039;;
+import { cov2num, isArray, isDataObject, isNonEmptyString, isString, isStringArray, isUndefined } from &#039;./utils/index.js&#039;;
+import { DEF_LINK_TYPE_LIST, LINK_OPT_TYPES, FRONTMATTER, EMPTY_CONTENT_AST } from &#039;./constants/index.js&#039;;
+import { MdFrontmatter } from &#039;./md_frontmatter.js&#039;;
+import { AtLeastPropError, CtorParamDataObjectError, DataObjectError, FileNotExistError, NonArrayError, NonEmptyStringError, NonStringError } from &#039;./utils/error.js&#039;;
+var _ast = /*#__PURE__*/new WeakMap();
+var _filepath = /*#__PURE__*/new WeakMap();
+var _frontmatter = /*#__PURE__*/new WeakMap();
+var _remarkFrontmatterOpt = /*#__PURE__*/new WeakMap();
+var _stringifyOpt = /*#__PURE__*/new WeakMap();
+var _conf = /*#__PURE__*/new WeakMap();
+var _markdownText = /*#__PURE__*/new WeakMap();
+var _assetPathRelativeRepoSet = /*#__PURE__*/new WeakMap();
+var _setFilepath = /*#__PURE__*/new WeakSet();
+var _setConf = /*#__PURE__*/new WeakSet();
+var _setFrontmatter = /*#__PURE__*/new WeakSet();
+var _setMarkdownText = /*#__PURE__*/new WeakSet();
+var _readPost = /*#__PURE__*/new WeakSet();
+var _getAst = /*#__PURE__*/new WeakSet();
+var _formatAssetLinkHandler = /*#__PURE__*/new WeakSet();
+var _formatAssetLink = /*#__PURE__*/new WeakSet();
+var _addToAssetPathRelativeRepoSet = /*#__PURE__*/new WeakSet();
+export class PostParse {
+  /**
+   * parse a post
+   *
+   * @typedef {Object} PostParseCtorParam0
+   * @property {string} markdownText - markdown text
+   * @property {object} conf - isubo configuration
+   * @property {boolean} disable_immediate_formatAssetLink - disable immediate formatAssetLink
+   *
+   * @typedef {Object} PostParseCtorParam1
+   * @property {string} path - post file path
+   * @property {object} conf - isubo configuration
+   * @property {boolean} disable_immediate_formatAssetLink - disable immediate formatAssetLink
+   *
+   * @param {PostParseCtorParam0 | PostParseCtorParam1} param
+   */
+  constructor(param) {
+    _classPrivateMethodInitSpec(this, _addToAssetPathRelativeRepoSet);
+    _classPrivateMethodInitSpec(this, _formatAssetLink);
+    _classPrivateMethodInitSpec(this, _formatAssetLinkHandler);
+    _classPrivateMethodInitSpec(this, _getAst);
+    _classPrivateMethodInitSpec(this, _readPost);
+    _classPrivateMethodInitSpec(this, _setMarkdownText);
+    _classPrivateMethodInitSpec(this, _setFrontmatter);
+    _classPrivateMethodInitSpec(this, _setConf);
+    _classPrivateMethodInitSpec(this, _setFilepath);
+    _classPrivateFieldInitSpec(this, _ast, {
+      writable: true,
+      value: EMPTY_CONTENT_AST
+    });
+    _classPrivateFieldInitSpec(this, _filepath, {
+      writable: true,
+      value: &#039;&#039;
+    });
+    _classPrivateFieldInitSpec(this, _frontmatter, {
+      writable: true,
+      value: {
+        title: &#039;&#039;,
+        tags: [],
+        issue_number: 0
+      }
+    });
+    _classPrivateFieldInitSpec(this, _remarkFrontmatterOpt, {
+      writable: true,
+      value: {
+        type: FRONTMATTER,
+        marker: {
+          open: &#039;-&#039;,
+          close: &#039;-&#039;
+        }
+      }
+    });
+    _classPrivateFieldInitSpec(this, _stringifyOpt, {
+      writable: true,
+      value: {
+        bullet: &#039;-&#039;,
+        rule: &#039;-&#039;
+      }
+    });
+    _classPrivateFieldInitSpec(this, _conf, {
+      writable: true,
+      value: {
+        link_prefix: &#039;&#039;,
+        absolute_source_dir: &#039;&#039;,
+        types: DEF_LINK_TYPE_LIST,
+        disable_asset_find: false
+      }
+    });
+    _classPrivateFieldInitSpec(this, _markdownText, {
+      writable: true,
+      value: &#039;&#039;
+    });
+    _classPrivateFieldInitSpec(this, _assetPathRelativeRepoSet, {
+      writable: true,
+      value: new Set()
+    });
+    if (!isDataObject(param)) {
+      throw new CtorParamDataObjectError();
+    }
+    const {
+      conf: _conf2,
+      path: _filepath2,
+      markdownText: _markdownText2,
+      disable_immediate_formatAssetLink
+    } = param;
+    if (isUndefined(_markdownText2) &amp;&amp; isUndefined(_filepath2)) {
+      throw new AtLeastPropError(&#039;param.markdownText, param.path&#039;);
+    }
+    if (!isUndefined(_markdownText2)) {
+      _classPrivateMethodGet(this, _setConf, _setConf2).call(this, _conf2, {
+        disable_asset_find: true
+      });
+      _classPrivateMethodGet(this, _setMarkdownText, _setMarkdownText2).call(this, _markdownText2);
+    } else {
+      _classPrivateMethodGet(this, _setConf, _setConf2).call(this, _conf2);
+      _classPrivateMethodGet(this, _setFilepath, _setFilepath2).call(this, _filepath2);
+      _classPrivateMethodGet(this, _setMarkdownText, _setMarkdownText2).call(this);
+    }
+    _classPrivateFieldSet(this, _ast, _classPrivateMethodGet(this, _getAst, _getAst2).call(this, {
+      markdownText: _classPrivateFieldGet(this, _markdownText)
+    }));
+    const findFronmatterAstRefBy = ({
+      ast
+    }) =&gt; {
+      let ref = null;
+      for (let idx = 0; idx &lt; ast.children.length; idx += 1) {
+        const it = ast.children[idx];
+        if (it.type === FRONTMATTER) {
+          ref = it;
+          break;
+        }
+      }
+      return ref;
+    };
+    const getFrontmatterBy = ({
+      ast
+    }) =&gt; {
+      let ret = {};
+      const yamlRef = findFronmatterAstRefBy({
+        ast
+      });
+      if (!yamlRef) {
+        return ret;
+      }
+      ret = loadYaml(yamlRef === null || yamlRef === void 0 ? void 0 : yamlRef.value);
+      return ret;
+    };
+    const _frontmatter2 = getFrontmatterBy({
+      ast: _classPrivateFieldGet(this, _ast)
+    });
+    _classPrivateMethodGet(this, _setFrontmatter, _setFrontmatter2).call(this, _frontmatter2);
+    if (!disable_immediate_formatAssetLink) {
+      var _classPrivateFieldGet2;
+      _classPrivateMethodGet(this, _formatAssetLink, _formatAssetLink2).call(this, (_classPrivateFieldGet2 = _classPrivateFieldGet(this, _ast)) === null || _classPrivateFieldGet2 === void 0 ? void 0 : _classPrivateFieldGet2.children);
+    }
+  }
+  get linkTypes() {
+    return _classPrivateFieldGet(this, _conf).types;
+  }
+  get disableAssetFind() {
+    return _classPrivateFieldGet(this, _conf).disable_asset_find;
+  }
+  get assetPathsRelativeRepoArr() {
+    const ret = Array.from(_classPrivateFieldGet(this, _assetPathRelativeRepoSet)).map(it =&gt; path.relative(process.cwd(), it));
+    return ret;
+  }
+  getAst() {
+    return _classPrivateFieldGet(this, _ast);
+  }
+  getInputMarkdown() {
+    return _classPrivateFieldGet(this, _markdownText);
+  }
+  getFormatedMarkdown({
+    ast,
+    hide_frontmatter
+  } = {}) {
+    const lastHideFrontmatter = isUndefined(hide_frontmatter) ? _classPrivateFieldGet(this, _conf).hide_frontmatter : !!hide_frontmatter;
+    let lastAst = ast || _classPrivateFieldGet(this, _ast);
+    if (!isDataObject(lastAst)) {
+      return &#039;&#039;;
+    }
+    if (lastHideFrontmatter) {
+      const getNonFrontmatterAst = preAst =&gt; {
+        let frontmatterIdx = -1;
+        for (let idx = 0; idx &lt; preAst.children.length; idx += 1) {
+          const it = preAst.children[idx];
+          if (it.type === FRONTMATTER) {
+            frontmatterIdx = idx;
+            break;
+          }
+        }
+        const genAst = children =&gt; ({
+          ...preAst,
+          children
+        });
+        if (frontmatterIdx === 0) {
+          return genAst(preAst.children.slice(1));
+        }
+        if (frontmatterIdx === preAst.children.length - 1) {
+          return genAst(preAst.children.slice(0, frontmatterIdx));
+        }
+        return genAst([...preAst.children.slice(0, frontmatterIdx), ...preAst.children.slice(frontmatterIdx + 1)]);
+      };
+      lastAst = getNonFrontmatterAst(lastAst);
+    }
+    const data = unified().use(stringify, _classPrivateFieldGet(this, _stringifyOpt)).use(remarkFrontmatter, _classPrivateFieldGet(this, _remarkFrontmatterOpt)).stringify(lastAst);
+    return data;
+  }
+  getFrontmatter() {
+    return _classPrivateFieldGet(this, _frontmatter);
+  }
+
+  /**
+   * inject data to post frontamtter
+   *
+   * @param {{issue_number: number, title?: string}} param0
+   */
+  injectFrontmatter({
+    issue_number,
+    title
+  }) {
+    const destFrontmatter = {};
+    if (title) {
+      destFrontmatter.title = title;
+    }
+    destFrontmatter.issue_number = issue_number;
+    const mdFrontmatter = new MdFrontmatter({
+      markdownTxt: _classPrivateFieldGet(this, _markdownText).toString()
+    });
+    const lastMarkdownTxt = mdFrontmatter.inject(destFrontmatter);
+    writeFileSync(_classPrivateFieldGet(this, _filepath), lastMarkdownTxt);
+  }
+}
+function _setFilepath2(filepath) {
+  if (!existsSync(filepath)) {
+    throw new FileNotExistError(filepath);
+  }
+  _classPrivateFieldSet(this, _filepath, filepath);
+}
+function _setConf2(conf, preConf = {}) {
+  if (!isDataObject(conf)) {
+    throw new DataObjectError(&#039;conf&#039;);
+  }
+  const {
+    link_prefix,
+    absolute_source_dir,
+    disable_asset_find,
+    hide_frontmatter
+  } = {
+    ...conf,
+    ...preConf
+  };
+  const disableAssetFind = !!disable_asset_find;
+  if (!isNonEmptyString(link_prefix)) {
+    throw new NonEmptyStringError(&#039;conf.link_prefix&#039;);
+  }
+  if (!disableAssetFind) {
+    if (!isNonEmptyString(absolute_source_dir)) {
+      throw new NonEmptyStringError(&#039;conf.absolute_source_dir&#039;);
+    }
+    _classPrivateFieldGet(this, _conf).absolute_source_dir = absolute_source_dir;
+  }
+  _classPrivateFieldGet(this, _conf).link_prefix = link_prefix;
+  /**
+   *
+   * @param {{conf: object}} param0
+   * @returns {[]}
+   */
+  const checkAndGetTypesFrom = param0 =&gt; {
+    const {
+      types
+    } = param0.conf;
+    if (!types) {
+      return DEF_LINK_TYPE_LIST;
+    }
+    if (!isArray(types)) {
+      throw new NonArrayError(&#039;conf.types&#039;);
+    }
+    if (!types.length) {
+      return DEF_LINK_TYPE_LIST;
+    }
+    let lastTypes = [];
+    for (let idx = 0; idx &lt; types.length; idx += 1) {
+      const typeIt = types[idx];
+      if (!LINK_OPT_TYPES.includes(typeIt)) {
+        hinter.warnMsg(`${typeIt} in [${types.join()} invalid]`);
+      } else {
+        lastTypes.push(typeIt);
+      }
+    }
+    if (lastTypes.length === 0) {
+      hinter.warnMsg(`type items in [${types.join()}], use def types [${DEF_LINK_TYPE_LIST.join()}]`);
+      lastTypes = DEF_LINK_TYPE_LIST;
+    }
+    return lastTypes;
+  };
+  _classPrivateFieldGet(this, _conf).types = checkAndGetTypesFrom({
+    conf
+  });
+  // TODO: disable_asset_find ? disable Assets Push : enable
+  _classPrivateFieldGet(this, _conf).disable_asset_find = disableAssetFind;
+  _classPrivateFieldGet(this, _conf).hide_frontmatter = isUndefined(hide_frontmatter) ? true : !!hide_frontmatter;
+}
+function _setFrontmatter2(frontmatter) {
+  if (!isDataObject(frontmatter)) {
+    // hinter.warnMsg(&#039;frontmatter is not a Object&#039;);
+    // console.info(frontmatter);
+    return;
+  }
+  const {
+    title,
+    tags,
+    issue_number
+  } = frontmatter;
+  if (isNonEmptyString(title)) {
+    _classPrivateFieldGet(this, _frontmatter).title = title;
+  }
+  if (isStringArray(tags)) {
+    _classPrivateFieldGet(this, _frontmatter).tags = tags;
+  }
+  _classPrivateFieldGet(this, _frontmatter).issue_number = cov2num(issue_number);
+}
+function _setMarkdownText2(markdownText) {
+  if (!isUndefined(markdownText)) {
+    if (!isString(markdownText)) {
+      throw new NonStringError(&#039;markdownText&#039;);
+    }
+    _classPrivateFieldSet(this, _markdownText, markdownText);
+    return;
+  }
+  _classPrivateFieldSet(this, _markdownText, _classPrivateMethodGet(this, _readPost, _readPost2).call(this));
+}
+function _readPost2() {
+  const data = readFileSync(_classPrivateFieldGet(this, _filepath));
+  return data;
+}
+function _getAst2({
+  markdownText
+}) {
+  const ast = unified().use(markdown).use(remarkFrontmatter, _classPrivateFieldGet(this, _remarkFrontmatterOpt)).parse(markdownText);
+  return ast;
+}
+function _formatAssetLinkHandler2(ast) {
+  const conf = _classPrivateFieldGet(this, _conf);
+  let lastUrl = ast === null || ast === void 0 ? void 0 : ast.url;
+  if (!lastUrl) {
+    hinter.warnMsg(&#039;Exist empty link&#039;);
+    return;
+  }
+  if (conf.disable_asset_find) {
+    const formater = new LinkFormater(lastUrl, {
+      url_prefix: conf.link_prefix
+    });
+    // eslint-disable-next-line no-param-reassign
+    ast.url = formater.dest;
+    return;
+  }
+  const assetFinder = new AssetFinder({
+    assetPath: lastUrl,
+    postpath: _classPrivateFieldGet(this, _filepath),
+    sourceDirPath: conf.absolute_source_dir
+  });
+  lastUrl = assetFinder.getRelativeToSourceDir();
+  if (lastUrl) {
+    const assetpath = assetFinder.get();
+    _classPrivateMethodGet(this, _addToAssetPathRelativeRepoSet, _addToAssetPathRelativeRepoSet2).call(this, assetpath);
+    const formater = new LinkFormater(lastUrl, {
+      url_prefix: conf.link_prefix
+    });
+    // eslint-disable-next-line no-param-reassign
+    ast.url = formater.dest;
+  } else {
+    const sourceDirname = path.basename(conf.absolute_source_dir);
+    const assetname = path.basename(ast.url);
+    hinter.warnMsg(`[${assetname}] was not found in the recursive search of the [${sourceDirname}] directory`);
+  }
+}
+function _formatAssetLink2(astChildren) {
+  if (!astChildren || !astChildren.length) {
+    return;
+  }
+  const conf = _classPrivateFieldGet(this, _conf);
+  for (let idx = 0; idx &lt; astChildren.length; idx += 1) {
+    const child = astChildren[idx];
+    if (conf.types.includes(child.type) &amp;&amp; !/^(http|https):\/\/[^\s/$.?#].[^\s]*$/.test(child.url)) {
+      _classPrivateMethodGet(this, _formatAssetLinkHandler, _formatAssetLinkHandler2).call(this, child);
+    }
+    _classPrivateMethodGet(this, _formatAssetLink, _formatAssetLink2).call(this, child.children);
+  }
+}
+function _addToAssetPathRelativeRepoSet2(assetpath) {
+  _classPrivateFieldGet(this, _assetPathRelativeRepoSet).add(assetpath);
+}</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ cyclomatic }} <br>
+    Length : {{ halstead.length }} <br>
+    Difficulty : {{ halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - temp/dist/md_frontmatter.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>temp/dist/md_frontmatter.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">67.61</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">176</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">47.87</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">1.98</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
+function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedeclaration(obj, privateMap); privateMap.set(obj, value); }
+function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError(&quot;Cannot initialize the same private elements twice on an object&quot;); } }
+function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError(&quot;attempted to get private field on non-instance&quot;); } return fn; }
+function _classPrivateFieldGet(receiver, privateMap) { var descriptor = _classExtractFieldDescriptor(receiver, privateMap, &quot;get&quot;); return _classApplyDescriptorGet(receiver, descriptor); }
+function _classApplyDescriptorGet(receiver, descriptor) { if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
+function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = _classExtractFieldDescriptor(receiver, privateMap, &quot;set&quot;); _classApplyDescriptorSet(receiver, descriptor, value); return value; }
+function _classExtractFieldDescriptor(receiver, privateMap, action) { if (!privateMap.has(receiver)) { throw new TypeError(&quot;attempted to &quot; + action + &quot; private field on non-instance&quot;); } return privateMap.get(receiver); }
+function _classApplyDescriptorSet(receiver, descriptor, value) { if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError(&quot;attempted to set read only private field&quot;); } descriptor.value = value; } }
+import fs from &#039;fs&#039;;
+import { CORE_SCHEMA, load as loadYaml, dump as yamlDump } from &#039;js-yaml&#039;;
+import { CtorParamDataObjectError, FileNotExistError, DataObjectError, NonEmptyStringError, AtLeastPropError } from &#039;./utils/error.js&#039;;
+import { isDataObject, isNonEmptyString } from &#039;./utils/index.js&#039;;
+const DEF_MARK = {
+  open: &#039;-&#039;,
+  close: &#039;-&#039;
+};
+var _alreadyInit = /*#__PURE__*/new WeakMap();
+var _marker = /*#__PURE__*/new WeakMap();
+var _srcMarkdownTxt = /*#__PURE__*/new WeakMap();
+var _frontmatterTxt = /*#__PURE__*/new WeakMap();
+var _markdownContTxt = /*#__PURE__*/new WeakMap();
+var _frontmatterTxtWithFence = /*#__PURE__*/new WeakMap();
+var _frontmatterData = /*#__PURE__*/new WeakMap();
+var _getFence = /*#__PURE__*/new WeakSet();
+var _init = /*#__PURE__*/new WeakSet();
+export class MdFrontmatter {
+  /**
+   * parse post to get frontmatter, inject frontmatter
+   *
+   * @typedef {Object} MdFrontmatterCtorParam0
+   * @property {string} markdownTxt - markdown text
+   *
+   * @typedef {Object} MdFrontmatterCtorParam1
+   * @property {string} filepath - post file path
+   *
+   * @param {MdFrontmatterCtorParam0|MdFrontmatterCtorParam1} param
+   */
+  constructor(param) {
+    _classPrivateMethodInitSpec(this, _init);
+    _classPrivateMethodInitSpec(this, _getFence);
+    _classPrivateFieldInitSpec(this, _alreadyInit, {
+      writable: true,
+      value: false
+    });
+    _classPrivateFieldInitSpec(this, _marker, {
+      writable: true,
+      value: DEF_MARK
+    });
+    _classPrivateFieldInitSpec(this, _srcMarkdownTxt, {
+      writable: true,
+      value: &#039;&#039;
+    });
+    _classPrivateFieldInitSpec(this, _frontmatterTxt, {
+      writable: true,
+      value: &#039;&#039;
+    });
+    _classPrivateFieldInitSpec(this, _markdownContTxt, {
+      writable: true,
+      value: &#039;&#039;
+    });
+    _classPrivateFieldInitSpec(this, _frontmatterTxtWithFence, {
+      writable: true,
+      value: &#039;&#039;
+    });
+    _classPrivateFieldInitSpec(this, _frontmatterData, {
+      writable: true,
+      value: null
+    });
+    if (!isDataObject(param)) {
+      throw new CtorParamDataObjectError();
+    }
+    const {
+      markdownTxt,
+      filepath
+    } = param;
+    if (markdownTxt) {
+      if (!isNonEmptyString(markdownTxt)) {
+        throw new NonEmptyStringError(&#039;markdownTxt&#039;);
+      }
+      _classPrivateFieldSet(this, _srcMarkdownTxt, markdownTxt);
+    } else if (filepath) {
+      if (!isNonEmptyString(filepath)) {
+        throw new NonEmptyStringError(&#039;filepath&#039;);
+      }
+      if (!fs.existsSync(filepath)) {
+        throw new FileNotExistError(filepath);
+      }
+      _classPrivateFieldSet(this, _srcMarkdownTxt, fs.readFileSync(filepath, {
+        encoding: &#039;utf8&#039;
+      }));
+    } else {
+      throw new AtLeastPropError(&#039;markdownTxt, filepath&#039;);
+    }
+  }
+  get frontmatterTxt() {
+    if (!_classPrivateFieldGet(this, _alreadyInit)) {
+      _classPrivateMethodGet(this, _init, _init2).call(this);
+    }
+    return _classPrivateFieldGet(this, _frontmatterTxt);
+  }
+  get frontmatterTxtWithFence() {
+    if (!_classPrivateFieldGet(this, _alreadyInit)) {
+      _classPrivateMethodGet(this, _init, _init2).call(this);
+    }
+    return _classPrivateFieldGet(this, _frontmatterTxtWithFence);
+  }
+  get frontmatterData() {
+    if (!_classPrivateFieldGet(this, _alreadyInit)) {
+      _classPrivateMethodGet(this, _init, _init2).call(this);
+    }
+    return _classPrivateFieldGet(this, _frontmatterData);
+  }
+  get markdownContTxt() {
+    if (!_classPrivateFieldGet(this, _alreadyInit)) {
+      _classPrivateMethodGet(this, _init, _init2).call(this);
+    }
+    return _classPrivateFieldGet(this, _markdownContTxt);
+  }
+  genFrontmatterWithFence(frontmatterData) {
+    if (!isDataObject(frontmatterData)) {
+      throw new DataObjectError(&#039;frontmatterData&#039;);
+    }
+    const lastFrontmatterTxt = yamlDump(frontmatterData, {
+      schema: CORE_SCHEMA
+    });
+    const fence = _classPrivateMethodGet(this, _getFence, _getFence2).call(this);
+    return `${fence.start}\n${lastFrontmatterTxt}${fence.end}`;
+  }
+  inject(data) {
+    if (!isDataObject(data)) {
+      throw new DataObjectError(&#039;data&#039;);
+    }
+    const lastData = this.frontmatterData ? {
+      ...this.frontmatterData,
+      ...data
+    } : data;
+    const frontmatterWithFence = this.genFrontmatterWithFence(lastData);
+    const lastMarkdownContTxt = /^[\r\n]+/.test(this.markdownContTxt) ? this.markdownContTxt : `\n\n${this.markdownContTxt}`;
+    return `${frontmatterWithFence}${lastMarkdownContTxt}`;
+  }
+}
+function _getFence2() {
+  const get = s =&gt; new Array(3).fill(s).join(&#039;&#039;);
+  return {
+    start: get(_classPrivateFieldGet(this, _marker).open),
+    end: get(_classPrivateFieldGet(this, _marker).close)
+  };
+}
+function _init2() {
+  const fence = _classPrivateMethodGet(this, _getFence, _getFence2).call(this);
+  const regexStr = `^${fence.start}\n([\\s\\S]*?)\n${fence.end}$`;
+  const regex = new RegExp(regexStr, &#039;m&#039;);
+  const match = regex.exec(_classPrivateFieldGet(this, _srcMarkdownTxt));
+  if (!match) {
+    _classPrivateFieldSet(this, _markdownContTxt, _classPrivateFieldGet(this, _srcMarkdownTxt));
+    _classPrivateFieldSet(this, _alreadyInit, true);
+    return;
+  }
+  const otherTxtArr = _classPrivateFieldGet(this, _srcMarkdownTxt).split(match[0]);
+  if (otherTxtArr.length &gt; 1 &amp;&amp; otherTxtArr[0].replace(/[\r\n]+/g, &#039;&#039;)) {
+    _classPrivateFieldSet(this, _markdownContTxt, _classPrivateFieldGet(this, _srcMarkdownTxt));
+    _classPrivateFieldSet(this, _alreadyInit, true);
+    return;
+  }
+  const frontmatterTxt = match[1];
+  _classPrivateFieldSet(this, _frontmatterTxt, frontmatterTxt);
+  _classPrivateFieldSet(this, _frontmatterData, loadYaml(frontmatterTxt, {
+    schema: CORE_SCHEMA
+  }));
+  const frontmatterTxtWithFence = match[0];
+  _classPrivateFieldSet(this, _frontmatterTxtWithFence, frontmatterTxtWithFence);
+  const markdownContTxt = _classPrivateFieldGet(this, _srcMarkdownTxt).replace(frontmatterTxtWithFence, &#039;&#039;);
+  _classPrivateFieldSet(this, _markdownContTxt, markdownContTxt);
+  _classPrivateFieldSet(this, _alreadyInit, true);
+}</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ cyclomatic }} <br>
+    Length : {{ halstead.length }} <br>
+    Difficulty : {{ halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>
