@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - temp/dist/link_formater.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>temp/dist/link_formater.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">70.69</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">96</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">45.93</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">1.33</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
+function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedeclaration(obj, privateMap); privateMap.set(obj, value); }
+function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError(&quot;Cannot initialize the same private elements twice on an object&quot;); } }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, &quot;string&quot;); return typeof key === &quot;symbol&quot; ? key : String(key); }
+function _toPrimitive(input, hint) { if (typeof input !== &quot;object&quot; || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || &quot;default&quot;); if (typeof res !== &quot;object&quot;) return res; throw new TypeError(&quot;@@toPrimitive must return a primitive value.&quot;); } return (hint === &quot;string&quot; ? String : Number)(input); }
+function _classPrivateFieldGet(receiver, privateMap) { var descriptor = _classExtractFieldDescriptor(receiver, privateMap, &quot;get&quot;); return _classApplyDescriptorGet(receiver, descriptor); }
+function _classApplyDescriptorGet(receiver, descriptor) { if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
+function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = _classExtractFieldDescriptor(receiver, privateMap, &quot;set&quot;); _classApplyDescriptorSet(receiver, descriptor, value); return value; }
+function _classExtractFieldDescriptor(receiver, privateMap, action) { if (!privateMap.has(receiver)) { throw new TypeError(&quot;attempted to &quot; + action + &quot; private field on non-instance&quot;); } return privateMap.get(receiver); }
+function _classApplyDescriptorSet(receiver, descriptor, value) { if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError(&quot;attempted to set read only private field&quot;); } descriptor.value = value; } }
+function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError(&quot;attempted to get private field on non-instance&quot;); } return fn; }
+import path from &#039;path&#039;;
+import { URL } from &#039;url&#039;;
+import { isNonEmptyString } from &#039;./utils/index.js&#039;;
+import { NonEmptyStringError } from &#039;./utils/error.js&#039;;
+var _normalizeSrc = /*#__PURE__*/new WeakMap();
+var _conf = /*#__PURE__*/new WeakMap();
+var _dest = /*#__PURE__*/new WeakMap();
+var _setSrc = /*#__PURE__*/new WeakSet();
+var _setConf = /*#__PURE__*/new WeakSet();
+var _format = /*#__PURE__*/new WeakSet();
+export class LinkFormater {
+  /**
+   * format relatived asset link to url
+   *
+   * @typedef {Object} IsuboConfPartial
+   * @property {string} url_prefix
+   *
+   * @param {string} src - asset link, url or relative path
+   * @param {IsuboConfPartial} conf - isubo configuration
+   */
+  constructor(_src, conf) {
+    _classPrivateMethodInitSpec(this, _format);
+    _classPrivateMethodInitSpec(this, _setConf);
+    /**
+     * @param {string} [src]
+     */
+    _classPrivateMethodInitSpec(this, _setSrc);
+    _defineProperty(this, &quot;src&quot;, &#039;&#039;);
+    _classPrivateFieldInitSpec(this, _normalizeSrc, {
+      writable: true,
+      value: &#039;&#039;
+    });
+    _classPrivateFieldInitSpec(this, _conf, {
+      writable: true,
+      value: {
+        url_prefix: &#039;&#039;
+      }
+    });
+    _classPrivateFieldInitSpec(this, _dest, {
+      writable: true,
+      value: &#039;&#039;
+    });
+    if (!_src) {
+      return;
+    }
+    _classPrivateMethodGet(this, _setSrc, _setSrc2).call(this, _src);
+    _classPrivateMethodGet(this, _setConf, _setConf2).call(this, conf);
+    if (this.src.startsWith(&#039;http&#039;)) {
+      _classPrivateFieldSet(this, _dest, this.src);
+    } else {
+      _classPrivateFieldSet(this, _normalizeSrc, path.normalize(this.src));
+      _classPrivateMethodGet(this, _format, _format2).call(this);
+    }
+  }
+  get dest() {
+    return _classPrivateFieldGet(this, _dest);
+  }
+}
+function _setSrc2(src) {
+  if (!isNonEmptyString(src)) {
+    throw new NonEmptyStringError(&#039;src&#039;);
+  }
+  this.src = src;
+}
+function _setConf2({
+  url_prefix
+}) {
+  let lastUrlPrefix = url_prefix;
+  if (!isNonEmptyString(lastUrlPrefix)) {
+    throw new NonEmptyStringError(&#039;url_prefix&#039;);
+  }
+  if (!lastUrlPrefix.startsWith(&#039;http&#039;)) {
+    lastUrlPrefix = `https://${lastUrlPrefix}`;
+  }
+  const urlIns = new URL(lastUrlPrefix);
+  urlIns.pathname = path.join(urlIns.pathname, &#039;./&#039;);
+  _classPrivateFieldGet(this, _conf).url_prefix = urlIns.href;
+}
+function _format2() {
+  const {
+    url_prefix
+  } = _classPrivateFieldGet(this, _conf);
+  _classPrivateFieldSet(this, _dest, new URL(_classPrivateFieldGet(this, _normalizeSrc), url_prefix).href);
+}</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ cyclomatic }} <br>
+    Length : {{ halstead.length }} <br>
+    Difficulty : {{ halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

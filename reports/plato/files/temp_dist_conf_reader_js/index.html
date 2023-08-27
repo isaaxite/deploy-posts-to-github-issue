@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - temp/dist/conf_reader.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>temp/dist/conf_reader.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">71.45</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">192</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">49.31</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">2.22</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
+function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedeclaration(obj, privateMap); privateMap.set(obj, value); }
+function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError(&quot;Cannot initialize the same private elements twice on an object&quot;); } }
+function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = _classExtractFieldDescriptor(receiver, privateMap, &quot;set&quot;); _classApplyDescriptorSet(receiver, descriptor, value); return value; }
+function _classApplyDescriptorSet(receiver, descriptor, value) { if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError(&quot;attempted to set read only private field&quot;); } descriptor.value = value; } }
+function _classPrivateFieldGet(receiver, privateMap) { var descriptor = _classExtractFieldDescriptor(receiver, privateMap, &quot;get&quot;); return _classApplyDescriptorGet(receiver, descriptor); }
+function _classExtractFieldDescriptor(receiver, privateMap, action) { if (!privateMap.has(receiver)) { throw new TypeError(&quot;attempted to &quot; + action + &quot; private field on non-instance&quot;); } return privateMap.get(receiver); }
+function _classApplyDescriptorGet(receiver, descriptor) { if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
+function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError(&quot;attempted to get private field on non-instance&quot;); } return fn; }
+// import { fileURLToPath } from &#039;url&#039;;
+import { existsSync, readFileSync, writeFileSync } from &#039;fs&#039;;
+import { load as loadYaml } from &#039;js-yaml&#039;;
+import path from &#039;path&#039;;
+import { enumPushAssetType } from &#039;./constants/enum.js&#039;;
+import { isNonEmptyString, isTruthNaturalNum, isUndefined } from &#039;./utils/index.js&#039;;
+import { DEF_POST_TITLE_SEAT } from &#039;./constants/index.js&#039;;
+import { CONFIG_FILE_TEMPLATE } from &#039;./constants/asset.js&#039;;
+import { FileNotExistError, IsuboError, NonEmptyStringError } from &#039;./utils/error.js&#039;;
+import { hinter } from &#039;./hinter.js&#039;;
+
+// const __dirname = fileURLToPath(new URL(&#039;.&#039;, import.meta.url));
+var _confPath = /*#__PURE__*/new WeakMap();
+var _conf = /*#__PURE__*/new WeakMap();
+var _exts = /*#__PURE__*/new WeakMap();
+var _setConfPath = /*#__PURE__*/new WeakSet();
+var _read = /*#__PURE__*/new WeakSet();
+export class ConfReader {
+  /**
+   * @typedef {Object} ConfReaderCtorParam
+   * @property {string} path - Isubo config path
+   *
+   * @param {ConfReaderCtorParam} param
+   */
+  constructor(param) {
+    _classPrivateMethodInitSpec(this, _read);
+    _classPrivateMethodInitSpec(this, _setConfPath);
+    _classPrivateFieldInitSpec(this, _confPath, {
+      writable: true,
+      value: &#039;&#039;
+    });
+    _classPrivateFieldInitSpec(this, _conf, {
+      writable: true,
+      value: null
+    });
+    _classPrivateFieldInitSpec(this, _exts, {
+      writable: true,
+      value: [&#039;.yml&#039;, &#039;.yaml&#039;]
+    });
+    if (!isNonEmptyString(param === null || param === void 0 ? void 0 : param.path)) {
+      throw new NonEmptyStringError(&#039;param.path&#039;);
+    }
+    _classPrivateMethodGet(this, _setConfPath, _setConfPath2).call(this, param.path);
+  }
+  get exts() {
+    return [..._classPrivateFieldGet(this, _exts)];
+  }
+
+  /**
+   * @typedef {Object&lt;string, *&gt;} SrcConf
+   * @typedef {Object} FormatConf
+   * @property {string} branch
+   * @property {string} source_dir
+   * @property {string} absolute_source_dir
+   * @property {string} link_prefix
+   * @property {Array&lt;&#039;image&#039;|&#039;link&#039;&gt;} types
+   * @property {enumPushAssetType} push_asset
+   * @property {boolean} hide_frontmatter
+   * @property {number} post_title_seat
+   *
+   * @param {SrcConf} yamlConf
+   * @returns {FormatConf}
+   */
+  // eslint-disable-next-line class-methods-use-this
+  format(yamlConf) {
+    const lastConf = yamlConf;
+    if (lastConf.token.startsWith(&#039;$&#039;) &amp;&amp; lastConf.token.toUpperCase() === lastConf.token) {
+      lastConf.token = process.env[lastConf.token.slice(1)];
+    }
+    const formatBranch = conf =&gt; {
+      if (!conf.branch) {
+        // eslint-disable-next-line no-param-reassign
+        conf.branch = &#039;main&#039;;
+      }
+      return conf.branch;
+    };
+    const formatSource = conf =&gt; {
+      if (!conf.source_dir) {
+        // eslint-disable-next-line no-param-reassign
+        conf.source_dir = &#039;source&#039;;
+      }
+      return conf.source_dir;
+    };
+    const getAbsoluteSourceDirPath = source_dir =&gt; {
+      // TODO: add root dir manually to path.resolve that compatible diffence working dir.
+      // use `node --cwd /path/to/working/directory index.js` to achieve the above.
+      const absoluteSourceDirPath = path.resolve(process.cwd(), source_dir);
+
+      // if (!existsSync(absoluteSourceDirPath)) {
+      // eslint-disable-next-line max-len
+      //   throw new Error(`source_dir invalid, absolute source_dir path: ${absoluteSourceDirPath}`);
+      // }
+
+      return absoluteSourceDirPath;
+    };
+    const formatPrefix = conf =&gt; {
+      const {
+        link_prefix
+      } = conf;
+      let realPrefix = link_prefix || {};
+      if (Object.prototype.toString.call(realPrefix) === &#039;[object Object]&#039;) {
+        realPrefix = `https://raw.githubusercontent.com/${path.normalize([(link_prefix === null || link_prefix === void 0 ? void 0 : link_prefix.owner) || conf.owner, (link_prefix === null || link_prefix === void 0 ? void 0 : link_prefix.repo) || conf.repo, (link_prefix === null || link_prefix === void 0 ? void 0 : link_prefix.branch) || conf.branch, (link_prefix === null || link_prefix === void 0 ? void 0 : link_prefix.dir) || conf.source_dir].join(&#039;/&#039;))}`;
+      }
+      return realPrefix;
+    };
+    const formatTypes = conf =&gt; {
+      if (conf.types) {
+        return conf.types;
+      }
+      return [&#039;image&#039;];
+    };
+    /**
+     * @param {Object&lt;string, *&gt;} conf
+     * @returns {enumPushAssetType}
+     */
+    const formatPushAsset = conf =&gt; {
+      if (!conf.push_asset || !Array.from(Object.values(enumPushAssetType)).includes(conf.push_asset)) {
+        return enumPushAssetType.PROMPT;
+      }
+      return conf.push_asset;
+    };
+    const formatPostTitleSeat = post_title_seat =&gt; {
+      if (!isTruthNaturalNum(post_title_seat)) {
+        return DEF_POST_TITLE_SEAT;
+      }
+      return post_title_seat;
+    };
+    lastConf.branch = formatBranch(lastConf);
+    lastConf.source_dir = formatSource(lastConf);
+    lastConf.absolute_source_dir = getAbsoluteSourceDirPath(lastConf.source_dir);
+    lastConf.link_prefix = formatPrefix(lastConf);
+    lastConf.types = formatTypes(lastConf);
+    lastConf.push_asset = formatPushAsset(lastConf);
+    lastConf.hide_frontmatter = isUndefined(lastConf.hide_frontmatter) ? true : !!lastConf.hide_frontmatter;
+    lastConf.post_title_seat = formatPostTitleSeat(lastConf.post_title_seat);
+    return lastConf;
+  }
+  get() {
+    if (!_classPrivateFieldGet(this, _conf)) {
+      _classPrivateFieldSet(this, _conf, _classPrivateMethodGet(this, _read, _read2).call(this));
+    }
+    return _classPrivateFieldGet(this, _conf);
+  }
+  static initConf() {
+    // const templatePath = path.join(__dirname, &#039;../assets/conf.template.yml&#039;)
+    const destPath = &#039;isubo.conf.yml&#039;;
+    if (existsSync(destPath)) {
+      hinter.infoMsg(`${destPath} has existed!`);
+    }
+    // copySync(templatePath, destPath);
+    writeFileSync(destPath, CONFIG_FILE_TEMPLATE);
+  }
+}
+function _setConfPath2(confPath) {
+  if (!existsSync(confPath)) {
+    throw new FileNotExistError(confPath);
+  }
+  const {
+    ext
+  } = path.parse(confPath);
+  if (!_classPrivateFieldGet(this, _exts).includes(ext)) {
+    throw new IsuboError(`Only supports ${_classPrivateFieldGet(this, _exts).map(it =&gt; `[${it}]`).join(&#039;, &#039;)} files`);
+  }
+  _classPrivateFieldSet(this, _confPath, confPath);
+}
+function _read2() {
+  const confPath = _classPrivateFieldGet(this, _confPath);
+  const yamlConfStr = readFileSync(confPath, &#039;utf8&#039;);
+  const yamlConf = loadYaml(yamlConfStr);
+  const check = conf =&gt; {
+    if (!isNonEmptyString(conf.owner)) {
+      throw new NonEmptyStringError(&#039;conf.owner&#039;);
+    }
+    if (!isNonEmptyString(conf.repo)) {
+      throw new NonEmptyStringError(&#039;conf.repo&#039;);
+    }
+    if (!isNonEmptyString(conf.token)) {
+      throw new NonEmptyStringError(&#039;conf.token&#039;);
+    }
+  };
+  check(yamlConf);
+  return this.format(yamlConf);
+}</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ cyclomatic }} <br>
+    Length : {{ halstead.length }} <br>
+    Difficulty : {{ halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

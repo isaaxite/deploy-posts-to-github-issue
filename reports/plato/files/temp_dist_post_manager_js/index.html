@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - temp/dist/post_manager.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>temp/dist/post_manager.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">67.77</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">142</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">48.90</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">1.32</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
+function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedeclaration(obj, privateMap); privateMap.set(obj, value); }
+function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError(&quot;Cannot initialize the same private elements twice on an object&quot;); } }
+function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError(&quot;attempted to get private field on non-instance&quot;); } return fn; }
+function _classPrivateFieldGet(receiver, privateMap) { var descriptor = _classExtractFieldDescriptor(receiver, privateMap, &quot;get&quot;); return _classApplyDescriptorGet(receiver, descriptor); }
+function _classApplyDescriptorGet(receiver, descriptor) { if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
+function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = _classExtractFieldDescriptor(receiver, privateMap, &quot;set&quot;); _classApplyDescriptorSet(receiver, descriptor, value); return value; }
+function _classExtractFieldDescriptor(receiver, privateMap, action) { if (!privateMap.has(receiver)) { throw new TypeError(&quot;attempted to &quot; + action + &quot; private field on non-instance&quot;); } return privateMap.get(receiver); }
+function _classApplyDescriptorSet(receiver, descriptor, value) { if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError(&quot;attempted to set read only private field&quot;); } descriptor.value = value; } }
+import { Octokit } from &#039;octokit&#039;;
+import { isDataObject, isNonEmptyString, isNonEmptyStringItemArray, isTruthPositiveInt, isUndefined } from &#039;./utils/index.js&#039;;
+import { CtorParamDataObjectError, DataObjectError, NonEmptyStringError, NonEmptyStringItemArrayError, TruthPositiveIntError } from &#039;./utils/error.js&#039;;
+var _owner = /*#__PURE__*/new WeakMap();
+var _repo = /*#__PURE__*/new WeakMap();
+var _token = /*#__PURE__*/new WeakMap();
+var _octokit = /*#__PURE__*/new WeakMap();
+var _getBaseData = /*#__PURE__*/new WeakSet();
+var _updateOrCreate = /*#__PURE__*/new WeakSet();
+export class PostManager {
+  /**
+   * use to update, create, forceCreate...
+   * @typedef {Object} PostManagerCtorParam
+   * @property {string} owner - github owner
+   * @property {string} repo - github repo
+   * @property {string} token - github token
+   *
+   * @param {PostManagerCtorParam} param
+   */
+  constructor(param) {
+    _classPrivateMethodInitSpec(this, _updateOrCreate);
+    _classPrivateMethodInitSpec(this, _getBaseData);
+    _classPrivateFieldInitSpec(this, _owner, {
+      writable: true,
+      value: &#039;&#039;
+    });
+    _classPrivateFieldInitSpec(this, _repo, {
+      writable: true,
+      value: &#039;&#039;
+    });
+    _classPrivateFieldInitSpec(this, _token, {
+      writable: true,
+      value: &#039;&#039;
+    });
+    _classPrivateFieldInitSpec(this, _octokit, {
+      writable: true,
+      value: null
+    });
+    if (!isDataObject(param)) {
+      throw new CtorParamDataObjectError();
+    }
+    const {
+      owner,
+      repo,
+      token
+    } = param;
+    if (!isNonEmptyString(owner)) {
+      throw new NonEmptyStringError(&#039;owner&#039;);
+    }
+    if (!isNonEmptyString(repo)) {
+      throw new NonEmptyStringError(&#039;repo&#039;);
+    }
+    if (!isNonEmptyString(token)) {
+      throw new NonEmptyStringError(&#039;token&#039;);
+    }
+    _classPrivateFieldSet(this, _owner, owner);
+    _classPrivateFieldSet(this, _repo, repo);
+    _classPrivateFieldSet(this, _token, token);
+    _classPrivateFieldSet(this, _octokit, new Octokit({
+      auth: _classPrivateFieldGet(this, _token)
+    }));
+  }
+  async forceCreate(params) {
+    if (params !== null &amp;&amp; params !== void 0 &amp;&amp; params.issue_number) {
+      // eslint-disable-next-line no-param-reassign
+      params.issue_number = &#039;&#039;;
+    }
+    return _classPrivateMethodGet(this, _updateOrCreate, _updateOrCreate2).call(this, params);
+  }
+  async update(params) {
+    if (!isTruthPositiveInt(params === null || params === void 0 ? void 0 : params.issue_number)) {
+      throw new TruthPositiveIntError(&#039;params.issue_number&#039;);
+    }
+    return _classPrivateMethodGet(this, _updateOrCreate, _updateOrCreate2).call(this, params);
+  }
+}
+function _getBaseData2() {
+  return {
+    owner: _classPrivateFieldGet(this, _owner),
+    repo: _classPrivateFieldGet(this, _repo)
+  };
+}
+async function _updateOrCreate2(params) {
+  if (!isDataObject(params)) {
+    throw new DataObjectError(&#039;params&#039;);
+  }
+  const {
+    title,
+    body,
+    // assignees,
+    // milestone,
+    labels,
+    issue_number
+  } = params;
+  if (!isNonEmptyString(title)) {
+    throw new NonEmptyStringError(&#039;params.title&#039;);
+  }
+  if (!isNonEmptyString(body)) {
+    throw new NonEmptyStringError(&#039;params.body&#039;);
+  }
+  const lastParams = {
+    ..._classPrivateMethodGet(this, _getBaseData, _getBaseData2).call(this),
+    title,
+    body
+  };
+
+  // if (assignees &amp;&amp; assignees.length) {
+  //   lastParams.assignees = assignees;
+  // }
+
+  /*
+  allow empty arrary to remove all labels of post
+  */
+  if (!isUndefined(labels)) {
+    // disable emypt labels item
+    if (!isNonEmptyStringItemArray(labels)) {
+      throw new NonEmptyStringItemArrayError(&#039;params.labels&#039;);
+    }
+    lastParams.labels = labels;
+  }
+
+  // if (milestone) {
+  //   lastParams.milestone = milestone;
+  // }
+
+  if (issue_number) {
+    lastParams.issue_number = issue_number;
+    const resp = await _classPrivateFieldGet(this, _octokit).request(&#039;PATCH /repos/{owner}/{repo}/issues/{issue_number}&#039;, lastParams);
+    return resp;
+  }
+  const resp = await _classPrivateFieldGet(this, _octokit).request(&#039;POST /repos/{owner}/{repo}/issues&#039;, lastParams);
+  return resp;
+}</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ cyclomatic }} <br>
+    Length : {{ halstead.length }} <br>
+    Difficulty : {{ halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>
