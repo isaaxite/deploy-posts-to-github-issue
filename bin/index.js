@@ -11,6 +11,7 @@ const KEY_POSTS = 'posts';
 function formatArgv(argv) {
   const cliParams = {
     filename: argv[KEY_POSTS] ? argv.posts.split(',') : undefined,
+    onlyPrint: !!argv.onlyPrint
   };
 
   return cliParams;
@@ -41,7 +42,7 @@ async function wraper(cb) {
   process.exit(0);
 }
 
-yargs(process.argv.slice(2))
+export const cmder = yargs(process.argv.slice(2))
   .usage(
     `$0 [cmd] [${KEY_POSTS}]`,
     'Exec default cmd: \'isubo publish\' to select posts for publishing.',
@@ -99,12 +100,31 @@ yargs(process.argv.slice(2))
       process.exit(0);
     },
   })
+  .command({
+    command: 'clipboard',
+    describe: 'Writing the formatted markdown text to the clipboard',
+    builder(nestedYargs) {
+      return nestedYargs
+        .option('print', {
+          alias: 'p',
+          default: false,
+          type: 'boolean',
+          describe: 'Printing the formatted markdown text to the console'
+        })
+    },
+    handler(argv) {
+      wraper(async () => {
+        const isubo = getIsuboIns(argv);
+        await isubo.writeToClipboard({ print: argv.print });
+      });
+    }
+  })
   .example([
     ['$0', 'Select posts by prompt for publishing'],
     ['$0 publish | create | update', 'Select posts by prompt'],
     ['$0 publish "How to use license"', 'publish a post name "How to use license"'],
     ['$0 publish "How to use license","What is git"', 'publish several posts'],
   ])
-  .demandCommand(0)
-  // .demandCommand(2, 'You need at least one command before moving on')
-  .parse();
+  .demandCommand(0);
+
+cmder.parse();

@@ -50,6 +50,7 @@
   "homepage": "https://github.com/isaaxite/deploy-posts-to-github-issue#readme",
   "dependencies": {
     "chalk": "^5.2.0",
+    "clipboardy": "^3.0.0",
     "fast-glob": "^3.2.12",
     "figlet": "^1.6.0",
     "fs-extra": "^11.1.1",
