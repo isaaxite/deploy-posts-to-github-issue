@@ -1,4 +1,11 @@
 # Changelog
+### [0.0.12-alpha.1](https://github.com/isaaxite/deploy-posts-to-github-issue/compare/v0.0.12-alpha.0...v0.0.12-alpha.1) (2023-09-06)
+
+
+### Features
+
+* add cmd for writing markdown to clipboard ([db7796a](https://github.com/isaaxite/deploy-posts-to-github-issue/commit/db7796af7e819947282099800caf1f4853275c12))
+
 ### [0.0.12-alpha.0](https://github.com/isaaxite/deploy-posts-to-github-issue/compare/v0.0.11...v0.0.12-alpha.0) (2023-08-19)
 
 ### [0.0.11](https://github.com/isaaxite/deploy-posts-to-github-issue/compare/v0.0.11-beta.0...v0.0.11) (2023-08-09)
