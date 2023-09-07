@@ -1,4 +1,11 @@
 # Changelog
+### [0.0.12-alpha.2](https://github.com/isaaxite/deploy-posts-to-github-issue/compare/v0.0.12-alpha.1...v0.0.12-alpha.2) (2023-09-07)
+
+
+### Features
+
+* **post_parse:** inset back-to-top ([cc92ecc](https://github.com/isaaxite/deploy-posts-to-github-issue/commit/cc92eccb3d288aa5d8723f16bb7281aa3be814df))
+
 ### [0.0.12-alpha.1](https://github.com/isaaxite/deploy-posts-to-github-issue/compare/v0.0.12-alpha.0...v0.0.12-alpha.1) (2023-09-06)
 
 
