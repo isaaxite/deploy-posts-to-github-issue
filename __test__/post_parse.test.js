@@ -2,13 +2,32 @@ import path from 'path';
 import { writeFileSync } from 'fs';
 import { describe, test, expect } from '@jest/globals';
 import { PostParse } from '../lib/post_parse.js';
-import { TempRepo, copyTempPostWithoutFrontmatter, detectOnly, getTimestampKey } from './utils/index.js';
+import {
+  TempRepo,
+  copyTempPostWithoutFrontmatter,
+  detectOnly,
+  getTimestampKey,
+} from './utils/index.js';
 import { readdirSync } from 'fs';
-import { empty_parse_conf, get_ast_from_empty_md_file, get_hidden_frontmatter_formatedMarkdown, inject_yml_data_to_md_file_without_yml_data } from './test_cases/post_parse.js';
+import {
+  empty_parse_conf,
+  get_ast_from_empty_md_file,
+  get_formated_mdtxt_from_empty_md_file,
+  get_hidden_frontmatter_formatedMarkdown,
+  inject_yml_data_to_md_file_without_yml_data,
+} from './test_cases/post_parse.js';
 import { enumPushAssetType } from '../lib/constants/enum.js';
 import { DEF_LINK_TYPE_LIST } from '../lib/constants/index.js';
 import { removeSync, ensureDirSync } from 'fs-extra/esm';
-import { AtLeastPropError, CtorParamDataObjectError, DataObjectError, FileNotExistError, NonArrayError, NonEmptyStringError, NonStringError } from '../lib/utils/error.js';
+import {
+  AtLeastPropError,
+  CtorParamDataObjectError,
+  DataObjectError,
+  FileNotExistError,
+  NonArrayError,
+  NonEmptyStringError,
+  NonStringError,
+} from '../lib/utils/error.js';
 
 const TEST_CASE_FRONTMATTER = `---
 title: LICENSE的选择与生成
@@ -502,19 +521,7 @@ describe('Class PostParse, method test', () => {
   });
 
   test('get formated mdtxt from empty md file', () => {
-    const filepath = '__test__/temp/empty.md';
-    writeFileSync(filepath, '');
-    const postParse = new PostParse({
-      path: filepath,
-      conf: {
-        link_prefix: 'https://isaaxite.github.io/blog/resources/',
-        absolute_source_dir: path.resolve('source'),
-        types: ['non-enumLinkType']
-      }
-    });
-    removeSync(filepath)
-
-    const ret = postParse.getFormatedMarkdown();
+    const ret = get_formated_mdtxt_from_empty_md_file();
     expect(ret).toBe('');
   });
 

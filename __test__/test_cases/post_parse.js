@@ -142,3 +142,21 @@ export function parse_md_file_without_yml_data(cb) {
 
   return ret;
 }
+
+export function get_formated_mdtxt_from_empty_md_file() {
+  const filepath = '__test__/temp/empty.md';
+  writeFileSync(filepath, '');
+  const postParse = new PostParse({
+    path: filepath,
+    conf: {
+      link_prefix: 'https://isaaxite.github.io/blog/resources/',
+      absolute_source_dir: path.resolve('source'),
+      types: ['non-enumLinkType']
+    }
+  });
+  removeSync(filepath)
+
+  const ret = postParse.getFormatedMarkdown();
+
+  return ret;
+}

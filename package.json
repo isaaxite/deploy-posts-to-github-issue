@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "jest",
-    "esm-test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand",
+    "esm-test": "npx jest --clearCache && node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand",
     "only-test": "./jest.js",
     "update-test-reports": "npm run esm-test && (git add ./reports && git commit -m 'chore: update test reports') || git checkout ./reports",
     "build": "node ./scripts/build.js",

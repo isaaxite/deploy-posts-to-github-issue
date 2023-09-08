@@ -6,14 +6,22 @@ import path from 'path';
 
 const args = process.argv.slice(2);
 try {
-  execSync([
+  const prevCmd = [
     'node --experimental-vm-modules node_modules/jest/bin/jest.js',
     '--config=jest.dev.config.mjs',
     '--runInBand',
+  ].join(' ');
+
+  const cmd = [
+    'npx jest --clearCache &&',
+    prevCmd,
     ...args
-  ].join(' '), {
+  ].join(' ');
+
+  console.info(cmd);
+  execSync(cmd, {
     stdio: 'inherit'
-  }); 
+  });
 } catch (error) {}
 
 deleteTemp();
