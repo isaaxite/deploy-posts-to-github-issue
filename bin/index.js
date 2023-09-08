@@ -11,7 +11,8 @@ const KEY_POSTS = 'posts';
 function formatArgv(argv) {
   const cliParams = {
     filename: argv[KEY_POSTS] ? argv.posts.split(',') : undefined,
-    onlyPrint: !!argv.onlyPrint
+    onlyPrint: !!argv.onlyPrint,
+    disableBack2top: !!argv.disableBack2top
   };
 
   return cliParams;
@@ -118,6 +119,11 @@ export const cmder = yargs(process.argv.slice(2))
         await isubo.writeToClipboard({ print: argv.print });
       });
     }
+  })
+  .option('disable-back2top', {
+    default: false,
+    type: 'boolean',
+    describe: 'Disable the inserting back-to-top button'
   })
   .example([
     ['$0', 'Select posts by prompt for publishing'],
