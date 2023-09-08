@@ -1,4 +1,11 @@
 # Changelog
+### [0.0.12-alpha.6](https://github.com/isaaxite/deploy-posts-to-github-issue/compare/v0.0.12-alpha.5...v0.0.12-alpha.6) (2023-09-08)
+
+
+### Features
+
+* **back2top:** setting the back2top property in conf file ([ad33c22](https://github.com/isaaxite/deploy-posts-to-github-issue/commit/ad33c22c3e757d07a19150039679dbd4abd1a7b0))
+
 ### [0.0.12-alpha.5](https://github.com/isaaxite/deploy-posts-to-github-issue/compare/v0.0.12-alpha.4...v0.0.12-alpha.5) (2023-09-08)
 
 
