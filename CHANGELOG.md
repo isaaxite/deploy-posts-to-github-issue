@@ -1,4 +1,11 @@
 # Changelog
+### [0.0.12-alpha.4](https://github.com/isaaxite/deploy-posts-to-github-issue/compare/v0.0.12-alpha.3...v0.0.12-alpha.4) (2023-09-08)
+
+
+### Features
+
+* **post_parse:** insert source-statement ([c14821f](https://github.com/isaaxite/deploy-posts-to-github-issue/commit/c14821f8e182ba757e4b2e214c0c2c02e2b55fc7))
+
 ### [0.0.12-alpha.3](https://github.com/isaaxite/deploy-posts-to-github-issue/compare/v0.0.12-alpha.2...v0.0.12-alpha.3) (2023-09-08)
 
 
