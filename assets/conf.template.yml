@@ -108,3 +108,13 @@ hide_frontmatter: true
 ## 1: source
 ## 2: isubo-blog
 post_title_seat: 0
+
+source_statement:
+  enable: false
+  content: []
+
+back2top:
+  enable: true
+  text: ⬆ back to top
+  link: '#'
+  insert_depth: 3
