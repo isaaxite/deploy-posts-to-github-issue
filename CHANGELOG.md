@@ -1,4 +1,12 @@
 # Changelog
+### [0.0.12-alpha.3](https://github.com/isaaxite/deploy-posts-to-github-issue/compare/v0.0.12-alpha.2...v0.0.12-alpha.3) (2023-09-08)
+
+
+### Bug Fixes
+
+* **post_parse:** parse empty file ([71c4af5](https://github.com/isaaxite/deploy-posts-to-github-issue/commit/71c4af5c357cb94e9b90f805f7be7f4b46013e52))
+* **requestQueue:** fix request queue ([3299e09](https://github.com/isaaxite/deploy-posts-to-github-issue/commit/3299e097142343160ced4b5d50dc40cdff8f011f))
+
 ### [0.0.12-alpha.2](https://github.com/isaaxite/deploy-posts-to-github-issue/compare/v0.0.12-alpha.1...v0.0.12-alpha.2) (2023-09-07)
 
 
