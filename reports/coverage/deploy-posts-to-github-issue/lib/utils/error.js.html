@@ -266,7 +266,18 @@
 <a name='L201'></a><a href='#L201'>201</a>
 <a name='L202'></a><a href='#L202'>202</a>
 <a name='L203'></a><a href='#L203'>203</a>
-<a name='L204'></a><a href='#L204'>204</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L204'></a><a href='#L204'>204</a>
+<a name='L205'></a><a href='#L205'>205</a>
+<a name='L206'></a><a href='#L206'>206</a>
+<a name='L207'></a><a href='#L207'>207</a>
+<a name='L208'></a><a href='#L208'>208</a>
+<a name='L209'></a><a href='#L209'>209</a>
+<a name='L210'></a><a href='#L210'>210</a>
+<a name='L211'></a><a href='#L211'>211</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -286,6 +297,7 @@
 <span class="cline-any cline-yes">318x</span>
 <span class="cline-any cline-yes">318x</span>
 <span class="cline-any cline-yes">29x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">27x</span>
@@ -317,6 +329,7 @@
 <span class="cline-any cline-yes">246x</span>
 <span class="cline-any cline-yes">246x</span>
 <span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">246x</span>
@@ -332,7 +345,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">25x</span>
 <span class="cline-any cline-yes">25x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -353,6 +365,7 @@
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">16x</span>
@@ -386,6 +399,7 @@
 <span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">13x</span>
@@ -400,6 +414,7 @@
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
@@ -459,7 +474,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -469,7 +483,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { isDataObject, isNonEmptyString, isNullOrUndefined, isStringArray } from "./index.js";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* eslint max-classes-per-file: "off" */
+&nbsp;
+import {
+  isDataObject, isNonEmptyString, isNullOrUndefined, isStringArray,
+} from './index.js';
 &nbsp;
 /**
  * @typedef {string} IsuboErrorMessage
@@ -478,9 +496,9 @@
 &nbsp;
 export class IsuboError extends Error {
   /**
-   * 
-   * @param {IsuboErrorMessage} message 
-   * @param {IsuboErrorMetadata} metadata 
+   *
+   * @param {IsuboErrorMessage} message
+   * @param {IsuboErrorMetadata} metadata
    */
   constructor(message, metadata) {
     super(message);
@@ -489,6 +507,7 @@ export class IsuboError extends Error {
     let lastMetadata = null;
     if (!isNullOrUndefined(metadata)) {
       if (!isDataObject(metadata)) {
+        // eslint-disable-next-line no-use-before-define
         this.warning = new DataObjectError('metadata').message;
       } else {
         lastMetadata = metadata;
@@ -503,16 +522,16 @@ export class IsuboError extends Error {
  * @typedef {Object} Param
  * @property {string} name
  * @property {string} errMsg
- * 
+ *
  * @param {Param} param0
  */
 export function primitiveDataErrorFactory({
   name,
-  errMsg
+  errMsg,
 }) {
   return class extends IsuboError {
     /**
-     * @param {string} dataName 
+     * @param {string} dataName
      * @param {Object&lt;string, *&gt;} [metadata]
      */
     constructor(dataName, metadata) {
@@ -520,6 +539,7 @@ export function primitiveDataErrorFactory({
       let lastDataName = dataName;
       if (!isNonEmptyString(dataName)) {
         lastDataName = 'data';
+        // eslint-disable-next-line no-use-before-define
         warning = new NonEmptyStringError('data').message;
       }
       const lastErrMsg = errMsg.replace('%s', lastDataName);
@@ -527,13 +547,12 @@ export function primitiveDataErrorFactory({
       this.name = name;
       this.warning = warning;
     }
-  }  
+  };
 }
-&nbsp;
 &nbsp;
 export class CtorParamDataObjectError extends IsuboError {
   /**
-   * @param {Object&lt;string, *&gt;} [metadata] 
+   * @param {Object&lt;string, *&gt;} [metadata]
    */
   constructor(metadata) {
     super('Constructor param must be non-empty Object', metadata);
@@ -543,19 +562,20 @@ export class CtorParamDataObjectError extends IsuboError {
 &nbsp;
 export const DataObjectError = primitiveDataErrorFactory({
   name: 'DataObjectError',
-  errMsg: '%s must be non-empty Object'
+  errMsg: '%s must be non-empty Object',
 });
 &nbsp;
 export class AtLeastPropError extends IsuboError {
   /**
-   * @param {string} propListStr 
-   * @param {IsuboErrorMetadata} [metadata] 
+   * @param {string} propListStr
+   * @param {IsuboErrorMetadata} [metadata]
    */
   constructor(propListStr, metadata) {
     let warning = '';
     let lastPropListStr = propListStr;
     if (!isNonEmptyString(propListStr)) {
       lastPropListStr = 'propList';
+      // eslint-disable-next-line no-use-before-define
       warning = new NonEmptyStringError('propListStr').message;
     }
     super(`provide at least one of ${lastPropListStr}`, metadata);
@@ -566,17 +586,17 @@ export class AtLeastPropError extends IsuboError {
 &nbsp;
 export const NonEmptyStringError = primitiveDataErrorFactory({
   name: 'NonEmptyStringError',
-  errMsg: '%s must be a non-empty String'
+  errMsg: '%s must be a non-empty String',
 });
 &nbsp;
 export const StringArrayError = primitiveDataErrorFactory({
   name: 'StringArrayError',
-  errMsg: '%s must be a Array&lt;String&gt;'
+  errMsg: '%s must be a Array&lt;String&gt;',
 });
 &nbsp;
 export const NonEmptyStringItemArrayError = primitiveDataErrorFactory({
   name: 'NonEmptyStringItemArrayError',
-  errMsg: '%s must be a Array&lt;String&gt; and disable empty item'
+  errMsg: '%s must be a Array&lt;String&gt; and disable empty item',
 });
 &nbsp;
 export class FileNotExistError extends IsuboError {
@@ -589,6 +609,7 @@ export class FileNotExistError extends IsuboError {
     let lastFilepath = filepath;
     if (!isNonEmptyString(filepath)) {
       lastFilepath = 'file path';
+      // eslint-disable-next-line no-use-before-define
       warning = new NonEmptyError('filepath').message;
     }
     super(`${lastFilepath} not exist`, metadata);
@@ -603,6 +624,7 @@ export class DirNotExistError extends IsuboError {
     let lastDirpath = dirpath;
     if (!isNonEmptyString(dirpath)) {
       lastDirpath = 'dir path';
+      // eslint-disable-next-line no-use-before-define
       warning = new NonEmptyError('dirpath').message;
     }
     super(`${lastDirpath} not exist`, metadata);
@@ -613,12 +635,12 @@ export class DirNotExistError extends IsuboError {
 &nbsp;
 export const TruthPositiveIntError = primitiveDataErrorFactory({
   name: 'TruthPositiveIntError',
-  errMsg: '%s must be a positive integer'
+  errMsg: '%s must be a positive integer',
 });
 &nbsp;
 export const TruthNaturalNumError = primitiveDataErrorFactory({
   name: 'TruthNaturalNumError',
-  errMsg: '%s must be a natural number'
+  errMsg: '%s must be a natural number',
 });
 &nbsp;
 export class InvalidPatternListError extends IsuboError {
@@ -639,38 +661,37 @@ export class InvalidPatternListError extends IsuboError {
 &nbsp;
 export const NonEmptyError = primitiveDataErrorFactory({
   name: 'NonEmptyError',
-  errMsg: '%s can not be empty'
+  errMsg: '%s can not be empty',
 });
 &nbsp;
 export const NonEmptyStringOrNonEmptyStringItemArrayError = primitiveDataErrorFactory({
   name: 'NonEmptyStringOrNonEmptyStringItemArrayError',
-  errMsg: '%s must be non-empty string or non-empty string array'
+  errMsg: '%s must be non-empty string or non-empty string array',
 });
 &nbsp;
 export const TruthNumberError = primitiveDataErrorFactory({
   name: 'TruthNumberError',
-  errMsg: '%s must be a truth number'
+  errMsg: '%s must be a truth number',
 });
 &nbsp;
 export const NonArrayError = primitiveDataErrorFactory({
   name: 'NonArrayError',
-  errMsg: '%s must be a Array'
+  errMsg: '%s must be a Array',
 });
 &nbsp;
 export const NonStringError = primitiveDataErrorFactory({
   name: 'NonStringError',
-  errMsg: '%s must be a String'
+  errMsg: '%s must be a String',
 });
-&nbsp;
 &nbsp;
 export const NonEmptyAbsolutePathError = primitiveDataErrorFactory({
   name: 'NonEmptyAbsolutePathError',
-  errMsg: '%s must be non-empty absolute path'
+  errMsg: '%s must be non-empty absolute path',
 });
 &nbsp;
 export const NonEmptyAbsolutePathItemArrayError = primitiveDataErrorFactory({
   name: 'NonEmptyAbsolutePathItemArrayError',
-  errMsg: '%s must be Array&lt;AbsolutePath&gt;'
+  errMsg: '%s must be Array&lt;AbsolutePath&gt;',
 });
 &nbsp;</pre></td></tr></table></pre>
 
@@ -679,7 +700,7 @@ export const NonEmptyAbsolutePathItemArrayError = primitiveDataErrorFactory({
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-08-05T12:37:46.539Z
+                at 2023-09-08T09:38:32.980Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

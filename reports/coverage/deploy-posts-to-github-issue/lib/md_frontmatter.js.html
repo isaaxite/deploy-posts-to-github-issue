@@ -223,7 +223,24 @@
 <a name='L158'></a><a href='#L158'>158</a>
 <a name='L159'></a><a href='#L159'>159</a>
 <a name='L160'></a><a href='#L160'>160</a>
-<a name='L161'></a><a href='#L161'>161</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L161'></a><a href='#L161'>161</a>
+<a name='L162'></a><a href='#L162'>162</a>
+<a name='L163'></a><a href='#L163'>163</a>
+<a name='L164'></a><a href='#L164'>164</a>
+<a name='L165'></a><a href='#L165'>165</a>
+<a name='L166'></a><a href='#L166'>166</a>
+<a name='L167'></a><a href='#L167'>167</a>
+<a name='L168'></a><a href='#L168'>168</a>
+<a name='L169'></a><a href='#L169'>169</a>
+<a name='L170'></a><a href='#L170'>170</a>
+<a name='L171'></a><a href='#L171'>171</a>
+<a name='L172'></a><a href='#L172'>172</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -235,11 +252,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">36x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -277,7 +300,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -384,34 +406,46 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import fs from 'fs';
-import { CtorParamDataObjectError, FileNotExistError, DataObjectError, NonEmptyStringError, AtLeastPropError } from "./utils/error.js";
-import { isDataObject, isNonEmptyString } from "./utils/index.js";
 import { CORE_SCHEMA, load as loadYaml, dump as yamlDump } from 'js-yaml';
+import {
+  CtorParamDataObjectError,
+  FileNotExistError,
+  DataObjectError,
+  NonEmptyStringError,
+  AtLeastPropError,
+} from './utils/error.js';
+import { isDataObject, isNonEmptyString } from './utils/index.js';
 &nbsp;
 const DEF_MARK = {
   open: '-',
-  close: '-'
+  close: '-',
 };
 &nbsp;
 export class MdFrontmatter {
   #alreadyInit = false;
+&nbsp;
   #marker = DEF_MARK;
+&nbsp;
   #srcMarkdownTxt = '';
+&nbsp;
   #frontmatterTxt = '';
+&nbsp;
   #markdownContTxt = '';
+&nbsp;
   #frontmatterTxtWithFence = '';
+&nbsp;
   #frontmatterData = null;
-  
+&nbsp;
   /**
    * parse post to get frontmatter, inject frontmatter
-   * 
+   *
    * @typedef {Object} MdFrontmatterCtorParam0
    * @property {string} markdownTxt - markdown text
-   * 
+   *
    * @typedef {Object} MdFrontmatterCtorParam1
    * @property {string} filepath - post file path
-   * 
-   * @param {MdFrontmatterCtorParam0|MdFrontmatterCtorParam1} param 
+   *
+   * @param {MdFrontmatterCtorParam0|MdFrontmatterCtorParam1} param
    */
   constructor(param) {
     if (!isDataObject(param)) {
@@ -419,7 +453,7 @@ export class MdFrontmatter {
     }
     const {
       markdownTxt,
-      filepath
+      filepath,
     } = param;
 &nbsp;
     if (markdownTxt) {
@@ -431,14 +465,13 @@ export class MdFrontmatter {
       if (!isNonEmptyString(filepath)) {
         throw new NonEmptyStringError('filepath');
       }
-      
+&nbsp;
       if (!fs.existsSync(filepath)) {
         throw new FileNotExistError(filepath);
       }
 &nbsp;
       this.#srcMarkdownTxt = fs.readFileSync(filepath, { encoding: 'utf8' });
     } else {
-      
       throw new AtLeastPropError('markdownTxt, filepath');
     }
   }
@@ -458,7 +491,7 @@ export class MdFrontmatter {
 &nbsp;
     return this.#frontmatterTxtWithFence;
   }
-  
+&nbsp;
   get frontmatterData() {
     if (!this.#alreadyInit) {
       this.#init();
@@ -480,7 +513,7 @@ export class MdFrontmatter {
 &nbsp;
     return {
       start: get(this.#marker.open),
-      end: get(this.#marker.close)
+      end: get(this.#marker.close),
     };
   }
 &nbsp;
@@ -495,7 +528,7 @@ export class MdFrontmatter {
       return;
     }
 &nbsp;
-    let otherTxtArr = this.#srcMarkdownTxt.split(match[0]);
+    const otherTxtArr = this.#srcMarkdownTxt.split(match[0]);
     if (otherTxtArr.length &gt; 1 &amp;&amp; otherTxtArr[0].replace(/[\r\n]+/g, '')) {
       this.#markdownContTxt = this.#srcMarkdownTxt;
       this.#alreadyInit = true;
@@ -506,7 +539,7 @@ export class MdFrontmatter {
     this.#frontmatterTxt = frontmatterTxt;
 &nbsp;
     this.#frontmatterData = loadYaml(frontmatterTxt, {
-      schema: CORE_SCHEMA
+      schema: CORE_SCHEMA,
     });
 &nbsp;
     const frontmatterTxtWithFence = match[0];
@@ -534,7 +567,7 @@ export class MdFrontmatter {
 &nbsp;
     const lastData = this.frontmatterData ? {
       ...this.frontmatterData,
-      ...data
+      ...data,
     } : data;
 &nbsp;
     const frontmatterWithFence = this.genFrontmatterWithFence(lastData);
@@ -550,7 +583,7 @@ export class MdFrontmatter {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-08-05T12:37:46.539Z
+                at 2023-09-08T09:38:32.980Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
