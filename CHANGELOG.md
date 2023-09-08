@@ -1,4 +1,11 @@
 # Changelog
+### [0.0.12-alpha.5](https://github.com/isaaxite/deploy-posts-to-github-issue/compare/v0.0.12-alpha.4...v0.0.12-alpha.5) (2023-09-08)
+
+
+### Features
+
+* **back2top:** add cli-option to disable the inseting of back-to-top buttion ([1cdff42](https://github.com/isaaxite/deploy-posts-to-github-issue/commit/1cdff42f846bd8ac491b17327da9a2227b4451e3))
+
 ### [0.0.12-alpha.4](https://github.com/isaaxite/deploy-posts-to-github-issue/compare/v0.0.12-alpha.3...v0.0.12-alpha.4) (2023-09-08)
 
 
