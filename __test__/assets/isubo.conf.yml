@@ -110,4 +110,11 @@ back2top:
   enable: true
   text: ⬆ back to top
   link: '#'
-  insert_deep: 3
+  insert_depth: 3
+
+toc:
+  enable: true
+  title: Table Of Content
+  depth: 3
+  bullets: '-'
+

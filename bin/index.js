@@ -12,7 +12,8 @@ function formatArgv(argv) {
   const cliParams = {
     filename: argv[KEY_POSTS] ? argv.posts.split(',') : undefined,
     onlyPrint: !!argv.onlyPrint,
-    disableBack2top: !!argv.disableBack2top
+    disableBack2top: !!argv.disableBack2top,
+    disableToc: !!argv.disableToc
   };
 
   return cliParams;
@@ -123,7 +124,12 @@ export const cmder = yargs(process.argv.slice(2))
   .option('disable-back2top', {
     default: false,
     type: 'boolean',
-    describe: 'Disable the inserting back-to-top button'
+    describe: 'Disable the inserting of the back-to-top button'
+  })
+  .option('disable-toc', {
+    default: false,
+    type: 'boolean',
+    describe: 'Disable the inserting of the toc'
   })
   .example([
     ['$0', 'Select posts by prompt for publishing'],
