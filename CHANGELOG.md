@@ -1,4 +1,18 @@
 # Changelog
+### [0.0.12-alpha.7](https://github.com/isaaxite/deploy-posts-to-github-issue/compare/v0.0.12-alpha.6...v0.0.12-alpha.7) (2023-09-09)
+
+
+### Features
+
+* **toc:** add cli-option to disable the inseting of the toc ([8ffd5c4](https://github.com/isaaxite/deploy-posts-to-github-issue/commit/8ffd5c4b4ca9a9f9b2f4b9bb20e46c3945387ef2))
+* **toc:** insert the toc at the top of the post ([7c39c49](https://github.com/isaaxite/deploy-posts-to-github-issue/commit/7c39c4974a91b3a393e961bdaddbf353a74ed592))
+* **toc:** setting the toc property in conf file ([957e983](https://github.com/isaaxite/deploy-posts-to-github-issue/commit/957e983931a7f402bc3962d5a71cae9c1560458d))
+
+
+### Bug Fixes
+
+* **source-statement:** fix no wrap ([47bbbf2](https://github.com/isaaxite/deploy-posts-to-github-issue/commit/47bbbf272143fed1a5aca030753bb55b1344c071))
+
 ### [0.0.12-alpha.6](https://github.com/isaaxite/deploy-posts-to-github-issue/compare/v0.0.12-alpha.5...v0.0.12-alpha.6) (2023-09-08)
 
 
