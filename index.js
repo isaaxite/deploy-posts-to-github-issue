@@ -207,7 +207,8 @@ export class Isubo {
     const postParse = new PostParse({
       path: filepath,
       conf,
-      disableBack2top: !!this.#cliParams?.disableBack2top
+      disableBack2top: !!this.#cliParams?.disableBack2top,
+      disableToc: !!this.#cliParams?.disableToc
     });
     const inputMarkdown = postParse.getInputMarkdown();
     const frontmatter = postParse.getFrontmatter();
