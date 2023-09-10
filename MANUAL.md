@@ -386,6 +386,194 @@ As above example, default is set to `post_title_seat: 0`, so `license` will be r
 
 **📝Hint:** For more examples of this setup see [Appendix > Directory Struct](#directory-struct-1).
 
+## Enhance
+
+### source_statement
+
+Inserting a statement at the top of the post.By default, it is disable. If you want to use it, you can refer to the following example.
+
+#### enable
+
+Type: `boolean`
+
+Default: `false`
+
+Whether to enable this feature.
+
+```yml
+source_statement:
+  enable: false
+```
+
+#### content
+
+Type: `Array<string>`
+
+Default: `[]`
+
+The content configured by this property will be rendered as a reference.
+
+```yml
+source_statement:
+  enable: false
+  content:
+    - "Original source: This article was written on my personal blog, [Isaac Kam's Blog](https://isaaxite.github.io/blog/). Discussions are welcome!"
+    - "Power By: [Isubo](https://www.npmjs.com/package/isubo) | A lightweight issue-blog CLI."
+```
+
+The above will be compiled as:
+
+```md
+> Original source: This article was written on my personal blog, [Isaac Kam's Blog](https://isaaxite.github.io/blog/). Discussions are welcome!
+>
+> Power By: [Isubo](https://www.npmjs.com/package/isubo) | A lightweight issue-blog CLI.
+```
+
+> Original source: This article was written on my personal blog, [Isaac Kam's Blog](https://isaaxite.github.io/blog/). Discussions are welcome!
+>
+> Power By: [Isubo](https://www.npmjs.com/package/isubo) | A lightweight issue-blog CLI.
+
+
+### back2top
+
+Insert a "back-to-top" button at the bottom of a paragraph.
+
+#### enable
+
+State: `optional`
+
+Type: `boolean`
+
+Default: `true`
+
+Whether to enable this feature.
+
+```yml
+back2top:
+  enable: true
+```
+
+#### text
+
+State: `optional`
+
+Type: `string`
+
+Default: `⬆ back to top`
+
+The text of 'back-to-top' buttion, default='⬆ back to top'.
+
+```yml
+back2top:
+  enable: true
+  text: ⬆ back to top
+```
+
+#### link
+
+State: `optional`
+
+Type: `string`
+
+Default: `#`
+
+The link of the buttion, default='#'.
+
+```yml
+back2top:
+  enable: true
+  text: ⬆ back to top
+  link: "#"
+```
+
+#### insert_deep
+
+State: `optional`
+
+Type: `number`
+
+Default: 3
+
+The max inserting depth of paragraph(#=1,##=2), default=3.
+
+```yml
+back2top:
+  enable: true
+  text: ⬆ back to top
+  link: "#"
+  insert_deep: 3
+```
+
+### toc
+
+Insert table-of-content based on the content at the top of the post.
+
+#### enable
+
+State: `optional`
+
+Type: `boolean`
+
+Default: `true`
+
+Whether to enable this feature.
+
+```yml
+back2top:
+  enable: true
+```
+
+#### title
+
+State: `optional`
+
+Type: `string`
+
+Default: `Table Of Content`
+
+The text of table-of-content, default='Table Of Content'.
+
+```yml
+back2top:
+  enable: true
+  title: Table Of Content
+```
+
+#### depth
+
+State: `optional`
+
+Type: `number`
+
+Default: `3`
+
+The maximum depth of generated toc, default=3 (# => 1, ## => 2, ### => 3).
+
+```yml
+back2top:
+  enable: true
+  title: Table Of Content
+  depth: 3
+```
+
+#### bullets
+
+State: `optional`
+
+Type: `string`, one of '-', '*'
+
+Default: `-`
+
+The flag of list item, '-' | '*', default='-'.
+
+```yml
+back2top:
+  enable: true
+  title: Table Of Content
+  depth: 3
+  bullets: '-'
+```
+
 
 # Writing
 
