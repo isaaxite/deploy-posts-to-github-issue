@@ -490,7 +490,7 @@ back2top:
   link: "#"
 ```
 
-#### insert_deep
+#### insert_depth
 
 State: `optional`
 
@@ -505,7 +505,7 @@ back2top:
   enable: true
   text: ⬆ back to top
   link: "#"
-  insert_deep: 3
+  insert_depth: 3
 ```
 
 ### toc
