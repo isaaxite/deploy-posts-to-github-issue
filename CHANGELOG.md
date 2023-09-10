@@ -1,4 +1,6 @@
 # Changelog
+### [0.0.12-alpha.8](https://github.com/isaaxite/deploy-posts-to-github-issue/compare/v0.0.12-alpha.7...v0.0.12-alpha.8) (2023-09-10)
+
 ### [0.0.12-alpha.7](https://github.com/isaaxite/deploy-posts-to-github-issue/compare/v0.0.12-alpha.6...v0.0.12-alpha.7) (2023-09-09)
 
 
