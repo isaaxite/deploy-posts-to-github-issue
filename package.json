@@ -49,6 +49,7 @@
   },
   "homepage": "https://github.com/isaaxite/deploy-posts-to-github-issue#readme",
   "dependencies": {
+    "@isubo-org/init-conf": "^0.0.1",
     "chalk": "^5.2.0",
     "clipboardy": "^3.0.0",
     "fast-glob": "^3.2.12",
