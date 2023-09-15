@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@isubo-org/init-conf':
-    specifier: ^0.0.1
-    version: 0.0.1
+    specifier: 0.0.2-beta.0
+    version: 0.0.2-beta.0
   chalk:
     specifier: ^5.2.0
     version: 5.2.0
@@ -1819,10 +1819,11 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /@isubo-org/init-conf@0.0.1:
-    resolution: {integrity: sha512-fI74W0gVqmIzt9g79QJAiIkc33lmZ0O1MNZBcsOeYPLSrtJyrNYhyxyca88YySLVWZlVYQG8+67DZrDeWHai3w==}
+  /@isubo-org/init-conf@0.0.2-beta.0:
+    resolution: {integrity: sha512-I2G/vXr0bMRQaBty1kCWxBLXNqtCbEZmrVOGw+1EXg5KJor4GtmxKTCaArs1NfmYwroQYdGu8Ucdfs80Brb0bQ==}
     hasBin: true
     dependencies:
+      chalk: 5.3.0
       js-yaml: 4.1.0
       prompts: 2.4.2
       yargs: 17.7.2
@@ -3261,7 +3262,6 @@ packages:
   /chalk@5.3.0:
     resolution: {integrity: sha512-dLitG79d+GV1Nb/VYcCDFivJeK1hiukt9QjRNVOsUtTy1rR1YJsmpGGTZ3qJos+uw7WmWF4wUwBd9jxjocFC2w==}
     engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
-    dev: true
 
   /char-regex@1.0.2:
     resolution: {integrity: sha512-kWWXztvZ5SBQV+eRgKFeh8q5sLuZY2+8WUIzlxWVTg+oGwY14qylx1KbKzHd8P6ZYkAg0xyIDU9JMHhyJMZ1jw==}

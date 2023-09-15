@@ -87,11 +87,9 @@ You only need the following steps to achieve:
 
 - **Step 1:** Init a configuration file;
 
-- **Step 2:** Setting required properties in the configuration file just created;
+- **Step 2:** Write some posts at `<repo>/<source_dir>/`;
 
-- **Step 3:** Write some posts at `<repo>/source/`;
-
-- **Step 4:** Publish your posts by `isubo publish`.
+- **Step 3:** Publish your posts by `npx isubo`.
 
 
 ## 🛠️ Configuration
@@ -105,80 +103,25 @@ Then, you can write a post what you want 🎊.
 
 Create a github reposibility as your issue-blog, clone it at local environment
 
-Use the below `cmd` to init a configuration file. A file name `isubo.conf.yml` will be created at current directory.It contain several required setting and a lost of optional setting that have default.You can alter theme according to your situation.
+```shell
+git clone git@github.com:<owner>/<repo>.git
+```
+
+Init configuration file by `@isubo-org/init-conf` lib.
 
 ```shell
-isubo init-conf
+npx @isubo-org/init-conf
 
-npx isubo init-conf
+# ~ or ~
+pnpm add @isubo-org/init-conf
+npx isubo-init-conf
+
+# ~ or ~
+pnpm add @isubo-org/init-conf
+node ./node_modules/.bin/isubo-init-conf
 ```
 
-### Setting
-
-There are three required basic setting at the below.They are important info for publish your articles.
-
-#### ❗ owner
-
-Repository owner, Such as `isaaxite` in `isaaxite/blog`.
-
-```yml
-owner: <owner>
-
-# e.g.
-owner: isaaxite
-```
-
-#### ❗ repo
-
-Repository name, refer to `blog` in the example above.Please ensure that this repository has been manually created by you, it will be used to store posts resources, and posts will also be published to this repository's issue.
-
-```yml
-repo: <repo>
-
-# e.g.
-repo: blog
-```
-
-#### ❗ token
-
-Github Token, it will be used to invoked github api to publish posts, you can get it in https://github.com/settings/tokens.
-
-**⚠️ It is strongly recommended not to use plaintext to prevent others from stealing your token.**
-
-*You can try to use environment variables.*
-
-**📝Hint:** If you use an environment variable, please **start with `$`** and use **uppercase letters** for the remaining part to declare,  and isubo will automatically obtain this environment variable.
-
-```yml
-token: <token>
-
-# e.g.
-# use an environment variable. [strongly recommended]
-token: $GITHUB_TOKEN
-
-# use plaintext. [not recommended]
-token: ghp_CMg41ahiAAtNEN_xxxxxxx_sZctu2M5t6W
-```
-
-<details>
-  <summary><strong>How to set environment variables of token name <code>GITHUB_TOKEN</code>?</strong></summary>
-  <blockquote>
-    <br/>
-    <p>📣 The following is an example of setting an environment variable named <code>GITHUB_TOKEN</code></p>
-    <p><strong>View environment variables</strong></p>
-    <pre><code class="language-shell">echo $GITHUB_TOKEN</code></pre>
-    <p><strong>Temporary settings</strong></p>
-    <pre><code class="language-shell">export GITHUB_TOKEN=&quot;ghp_CMg41ahiAAtNEN_xxxxxxx_sZctu2M5t6W&quot;</code></pre>
-    <p><strong>Permanent setting</strong></p>
-    <p>❗ step 1: Open the configuration file(zsh: <code>~/.zshrc</code>, bash: <code>~/.bashrc</code>) of your shell tool.Let&#39;s take zsh as an example.</p>
-    <p>❗ step 2: Add the following statement at the bottom of the file content:</p>
-    <pre><code class="language-shell">export GITHUB_TOKEN=&quot;ghp_CMg41ahiAAtNEN_xxxxxxx_sZctu2M5t6W&quot;</code></pre>
-    <p>❗ step 3: Save (Press <code>ESC</code> and then press <code>:</code> then enter <code>wq</code>, and finally press <code>Enter</code>) and execute the following command to reload the configuration.</p>
-    <pre><code class="language-shell">source ~/.zshrc</code></pre>
-    <p>That all! 💪.</p>
-    <br/>
-  </blockquote>
-</details>
+![](./assets/init-conf.png)
 
 ## ✍️ Writing
 
@@ -224,10 +167,10 @@ Exec the below commands at your local reposibility directory, isubo will return 
 
 ```shell
 # global
-isubo publish
+isubo
 
 # partial
-npx isubo publish
+npx isubo
 ```
 
 Select posts and Submit, and wait it finish, that all 🌈!
