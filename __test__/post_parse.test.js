@@ -312,9 +312,9 @@ describe('Class PostParse, method test', () => {
     expect(ret2).not.toBeUndefined();
   });
 
-  test.only.each(detectOnly([
+  test.each(detectOnly([
     {
-      only: false,
+      // only: false,
       name: 'invoked with empty',
       param: {},
       getExpect: (ret) => {
