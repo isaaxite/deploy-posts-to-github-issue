@@ -1,4 +1,11 @@
 # Changelog
+### [0.0.12-beta.0](https://github.com/isaaxite/deploy-posts-to-github-issue/compare/v0.0.12-alpha.8...v0.0.12-beta.0) (2023-09-15)
+
+
+### Refactors
+
+* **init-conf:** use @isubo-org/init-conf to init conf file ([d3e8817](https://github.com/isaaxite/deploy-posts-to-github-issue/commit/d3e88176ebf52164359d68649d79f35230ef387b))
+
 ### [0.0.12-alpha.8](https://github.com/isaaxite/deploy-posts-to-github-issue/compare/v0.0.12-alpha.7...v0.0.12-alpha.8) (2023-09-10)
 
 ### [0.0.12-alpha.7](https://github.com/isaaxite/deploy-posts-to-github-issue/compare/v0.0.12-alpha.6...v0.0.12-alpha.7) (2023-09-09)
