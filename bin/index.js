@@ -4,8 +4,8 @@ import yargs from 'yargs';
 import figlet from 'figlet';
 import chalk from 'chalk';
 import { Isubo } from '../index.js';
-import { ConfReader } from '../lib/conf_reader.js';
 import { hinter } from '../lib/hinter.js';
+import { init as initConf } from '@isubo-org/init-conf';
 
 const KEY_POSTS = 'posts';
 function formatArgv(argv) {
@@ -98,7 +98,7 @@ export const cmder = yargs(process.argv.slice(2))
     command: 'init-conf',
     describe: 'Initialize the configuration file (isubo.conf.yml) in the current directory',
     async handler() {
-      ConfReader.initConf();
+      await initConf();
       process.exit(0);
     },
   })
