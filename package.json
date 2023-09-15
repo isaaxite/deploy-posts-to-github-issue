@@ -20,7 +20,8 @@
     "postversion": "git push && git push origin --tags",
     "plato-report": "node scripts/plato.report.js",
     "eslint-report": "rm -rf reports/eslint-report.html && npx eslint ./lib ./bin --format=html --output-file=reports/eslint-report.html",
-    "static-report": "npm run plato-report && npm run eslint-report"
+    "static-report": "npm run plato-report && npm run eslint-report",
+    "new-version": "git fetch origin main && git checkout main && git pull origin main && npx isubo-version"
   },
   "standard-version": {
     "scripts": {
