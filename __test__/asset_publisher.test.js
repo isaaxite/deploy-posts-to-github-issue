@@ -1,7 +1,7 @@
 import { describe, test, expect } from "@jest/globals";
 import { TempGitRepo, detectOnly, sleepFactory } from "./utils/index.js";
 import { AssetPublisher } from "../lib/asset_publisher.js";
-import { getInsWith, getIns_checkIsUnpushPostAndAssets, revert_as_err_occurred_after_backup_prev_staged, set_prev_staged_includes_a_post_will_be_pushed_then_check_reset_staged_after_pushed, set_prev_staged_then_push_a_post_and_relatived_assets } from "./test_cases/asset_publisher.js";
+import { getInsWith, getIns_checkIsUnpushPostAndAssets, revert_as_err_occurred_after_backup_prev_staged, set_prev_staged_includes_a_post_will_be_pushed_then_check_reset_staged_after_pushed, set_prev_staged_then_push_a_post_and_relatived_assets, without_prev_staged_push_a_post_and_relatived_assets } from "./test_cases/asset_publisher.js";
 import { CtorParamDataObjectError, NonArrayError, NonEmptyAbsolutePathError, NonEmptyAbsolutePathItemArrayError } from "../lib/utils/error.js";
 import { DEF_SIMPLE_GIT_OPT } from "../lib/constants/index.js";
 import { removeSync } from "fs-extra/esm";
@@ -95,19 +95,7 @@ describe('Class AssetPublisher, init instance', () => {
 describe('Class AssetPublisher, method test', () => {
   // const cachePath = await TempGitRepo.cache();
   sleepFactory(test)('Without prev staged, push a post and relatived assets', async () => {
-    const tempGitRepo = new TempGitRepo();
-
-    await tempGitRepo.init()
-    const licensePost = tempGitRepo.addNewPostSync('license');
-    // tempGitRepo.addNewPostSync("WSL的hosts文件被重置");
-    // tempGitRepo.touch();
-    const assetPublisher = new AssetPublisher({
-      assetRecords: [licensePost],
-      simpleGitOpt: tempGitRepo.simpleGitOpt
-    });
-
-    await assetPublisher.push();
-    removeSync(tempGitRepo.repoLocalPath);
+    await without_prev_staged_push_a_post_and_relatived_assets();
   }, 60 * 1000)
 
   sleepFactory(test)('set prev staged, then push a post and relatived assets', async () => {

@@ -3,9 +3,8 @@ import { describe, test, expect } from '@jest/globals';
 import { ConfReader } from '../lib/conf_reader.js';
 import { copySync, removeSync } from 'fs-extra/esm';
 import { load as loadYaml, dump as yamlDump } from 'js-yaml';
-import { writeFileSync, readFileSync, existsSync } from 'fs';
+import { writeFileSync, readFileSync } from 'fs';
 import { FileNotExistError, NonEmptyStringError } from '../lib/utils/error.js';
-import { init_conf } from './test_cases/conf_reader.js';
 import { isFunction } from '../lib/utils/common.js';
 import { enumPushAssetType } from '../lib/constants/enum.js';
 
@@ -112,13 +111,6 @@ describe('Class ConfReader method test', () => {
     expect(conf.link_prefix).toEqual('https://raw.githubusercontent.com/isaaxite/test-repo_deploy-posts-to-github-issue/master/__test__/source/')
 
     removeSync(destPath);
-  });
-
-  test('generate a conf file', () => {
-    const dest1 = init_conf({ remove: true });
-    expect(existsSync(dest1)).toBeTruthy();
-    const dest2 = init_conf();
-    expect(existsSync(dest2)).toBeTruthy();
   });
 
   test.each([

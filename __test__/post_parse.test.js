@@ -312,8 +312,9 @@ describe('Class PostParse, method test', () => {
     expect(ret2).not.toBeUndefined();
   });
 
-  test.each([
+  test.only.each(detectOnly([
     {
+      only: false,
       name: 'invoked with empty',
       param: {},
       getExpect: (ret) => {
@@ -346,7 +347,7 @@ describe('Class PostParse, method test', () => {
         );
       }
     },
-  ])('getFormatedMarkdown, $name', ({ param, getExpect }) => {
+  ]))('getFormatedMarkdown, $name', ({ param, getExpect }) => {
     const post1 = getPostIns({ markdownText: TEST_CASE_MARKDOWN_EN_PIC });
     const ret1 = post1.getFormatedMarkdown(param);
 

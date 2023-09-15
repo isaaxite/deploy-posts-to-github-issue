@@ -6,6 +6,7 @@ import { findImageFrom, getTimestampKey, makeTempConfFile } from '../utils/index
 import { ConfReader } from '../../lib/conf_reader.js';
 import { PostParse } from '../../lib/post_parse.js';
 import { writeFileSync } from 'fs';
+import { postPath } from '../../lib/post_path.js';
 
 export function multiLevelSearchForResources(cb) {
   const sourceDirPath = '__test__/temp/';
@@ -70,6 +71,7 @@ export function parse_a_md_file_and_find_nonrelative_path_asset(cb) {
   const confReader = new ConfReader({
     path: tempConfPath
   });
+  postPath.setConfBy({ confpath: tempConfPath });
   const conf = confReader.get();
   const postParse = new PostParse({
     path: path.join(tempSource, "WSL的hosts文件被重置.md"),

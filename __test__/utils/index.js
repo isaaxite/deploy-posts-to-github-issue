@@ -251,7 +251,7 @@ export class TempGitRepo {
       copySync(this.#repoLocalPath, TempGitRepo.#cachePath);
     }
     ret = await this.#git.checkout(['-b', this.#branch]);
-    updateConfFileSync(path.join(this.#repoLocalPath, 'isubo.conf.yml'), (preConf) => {
+    updateConfFileSync(this.#confPath, (preConf) => {
       preConf.source_dir = 'source/';
       preConf.branch = 'master';
       delete preConf.prefix;
@@ -259,6 +259,8 @@ export class TempGitRepo {
       preConfFn && preConfFn(preConf);
       return preConf;
     });
+
+    postPath.setConfBy({ confpath: this.#confPath });
 
     const confReader = new ConfReader({ path: this.#confPath });
     this.#conf = confReader.get();

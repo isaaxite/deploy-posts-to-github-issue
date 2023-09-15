@@ -193,3 +193,19 @@ export async function set_prev_staged_then_push_a_post_and_relatived_assets(cb) 
 
   return ret;
 }
+
+export async function without_prev_staged_push_a_post_and_relatived_assets() {
+  const tempGitRepo = new TempGitRepo();
+
+  await tempGitRepo.init()
+  const licensePost = tempGitRepo.addNewPostSync('license');
+  // tempGitRepo.addNewPostSync("WSL的hosts文件被重置");
+  // tempGitRepo.touch();
+  const assetPublisher = new AssetPublisher({
+    assetRecords: [licensePost],
+    simpleGitOpt: tempGitRepo.simpleGitOpt
+  });
+
+  await assetPublisher.push();
+  removeSync(tempGitRepo.repoLocalPath);
+}

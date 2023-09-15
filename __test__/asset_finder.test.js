@@ -1,11 +1,8 @@
-import path from 'path';
 import { describe, test, expect } from '@jest/globals';
 import { existsSync } from 'fs';
 import { asset_is_outside_the_source_dir, multiLevelSearchForResources, parse_a_md_file_and_find_nonrelative_path_asset } from './test_cases/asset_finder.js';
 import { AssetFinder } from '../lib/asset_finder.js';
 import { CtorParamDataObjectError, DirNotExistError, FileNotExistError, NonEmptyStringError } from '../lib/utils/error.js';
-import { getTimestampKey } from './utils/index.js';
-import { copySync, ensureDirSync, ensureFileSync, removeSync } from 'fs-extra/esm';
 
 describe('Class AssetFinder', () => {
   test('multi-level search for resources', () => {
