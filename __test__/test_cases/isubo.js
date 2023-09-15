@@ -1,9 +1,12 @@
 import path from 'path';
 import { Isubo } from "../../index.js";
 import { PostParse } from "../../lib/post_parse.js";
-import { TempGitRepo, TempRepo } from "../utils/index.js";
+import { TempGitRepo, TempRepo, getTimestampKey } from "../utils/index.js";
 import { enumPushAssetType } from '../../lib/constants/enum.js';
 import prompts from 'prompts';
+import { ensureDirSync, ensureFileSync } from 'fs-extra';
+import { writeFileSync } from 'fs';
+import clipboard from 'clipboardy';
 
 function createPostsFactory({
   injectSelectPosts,
@@ -201,5 +204,50 @@ export async function update_one_post(cb) {
 
   cb && cb(ret);
 
+  return ret;
+}
+
+export async function write_to_clipboard() {
+  const uniqueKey = getTimestampKey();
+  const tempGitRepo = new TempGitRepo();
+  await tempGitRepo.init({
+    preConf(conf) {
+      conf.source_statement.enable = false;
+    }
+  });
+  const delStartEndLastLines = (s) => s.split('\n').slice(1, -1).join('\n');
+  const ret = {
+    repoLocalPath: tempGitRepo.repoLocalPath,
+    postPath: path.join(tempGitRepo.sourceDir, `${uniqueKey}.md`),
+    postDir: path.join(tempGitRepo.sourceDir, uniqueKey),
+    srcPostContent: delStartEndLastLines(`
+![](./license/Snipaste_2023-05-30_17-47-09.png)
+    `),
+    destPostContent: delStartEndLastLines(`
+![](https://raw.githubusercontent.com/isaaxite/test-repo_deploy-posts-to-github-issue/master/source/license/Snipaste_2023-05-30_17-47-09.png)
+    `),
+    formatedPostContent: '',
+  };
+  
+  ensureDirSync(ret.postDir);
+  ensureFileSync(ret.postPath);
+
+  writeFileSync(ret.postPath, ret.srcPostContent);
+
+  const cwd = process.cwd();
+  process.chdir(tempGitRepo.repoLocalPath);
+
+  const isubo = new Isubo({
+    cliParams: {
+      filename: path.basename(ret.postPath)
+    },
+    confPath: tempGitRepo.confPath,
+    selectPosts: false,
+  });
+
+  await isubo.writeToClipboard({ print: true });
+
+  ret.formatedPostContent = clipboard.readSync().replace('\n', '');
+  process.chdir(cwd);
   return ret;
 }

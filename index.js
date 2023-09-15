@@ -486,6 +486,12 @@ export class Isubo {
 
       hinter.streamlog('tags:');
       hinter.streamlog(frontmatter.tags.join(' ') + '\n');
+
+      return {
+        title,
+        frontmatter,
+        formatedMarkdown,
+      };
     };
 
     const filepathArr = await this.#getFilepaths();
@@ -494,6 +500,6 @@ export class Isubo {
       return;
     }
 
-    writeToClipboardOneBy({ filepath: filepathArr[0] });
+    return writeToClipboardOneBy({ filepath: filepathArr[0] });
   }
 }
