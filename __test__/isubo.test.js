@@ -146,7 +146,7 @@ describe('Class Isubo, method test', () => {
     await isubo.publish();
   }, 60 * 1000);
 
-  test.only('write to clipboard', async () => {
+  test('write to clipboard', async () => {
     const {
       destPostContent,
       formatedPostContent,
