@@ -141,8 +141,6 @@ export async function getInsWith({
 
   await tempGitRepo.init();
   const licensePost = tempGitRepo.addNewPostSync('license_88526298164');
-  await tempGitRepo.git.add('./*');
-  await tempGitRepo.git.commit('init tempGitRepo');
 
   let assetRecords = [licensePost];
 

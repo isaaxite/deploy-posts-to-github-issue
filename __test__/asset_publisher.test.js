@@ -277,7 +277,7 @@ describe('Class AssetPublisher, method test', () => {
     }
   }, 60 * 1000);
 
-  test('push a post that without assets', async () => {
+  sleepFactory(test)('push a post that without assets', async () => {
     const {
       assetPublisher,
     } = await getInsWith({
@@ -287,16 +287,16 @@ describe('Class AssetPublisher, method test', () => {
       }
     });
     await assetPublisher.push();
-  });
+  }, 60 * 1000);
 
-  test('without', async () => {
+  sleepFactory(test)('without', async () => {
     const {
       assetPublisher,
     } = await getInsWith();
     await assetPublisher.push();
-  });
+  }, 60 * 1000);
 
-  test('push post and assets timeout', async () => {
+  sleepFactory(test)('push post and assets timeout', async () => {
     const {
       assetPublisher
     } = await getInsWith({

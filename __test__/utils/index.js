@@ -265,9 +265,10 @@ export class TempGitRepo {
     const confReader = new ConfReader({ path: this.#confPath });
     this.#conf = confReader.get();
 
-    execSync(`cd ${this.#repoLocalPath} && pnpm add ${cwd()}`);
-
-    await this.#git.add('./*').commit('TempGitRepo init');
+    const cwd = process.cwd();
+    process.chdir(this.#repoLocalPath);
+    execSync(`pnpm add ${cwd} && git add . && git commit -m "chore: tempGitRepo init"`);
+    process.chdir(cwd);
 
     return ret;
   }
